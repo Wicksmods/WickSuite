@@ -23,6 +23,9 @@ This repo holds the **brand assets** for the Wick addon suite — not a WoW addo
 | **Wick's Travel Form** | [repo](https://github.com/Wicksmods/WicksTravelForm) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-travel-form) |
 | **Wick's Ledger** | [repo](https://github.com/Wicksmods/WicksLedger) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-ledger) |
 | **Wick's Wardrobe** | [repo](https://github.com/Wicksmods/WicksWardrobe) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-wardrobe) |
+| **Wick's Concession Stand** | [repo](https://github.com/Wicksmods/WicksConcessionStand) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-concession-stand) |
+| **Wick's Bones** | [repo](https://github.com/Wicksmods/WicksBones) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-bones) |
+| **Wick's Survivors** | [repo](https://github.com/Wicksmods/WicksSurvivors) | [CurseForge](https://www.curseforge.com/wow/addons/wicks-survivors) |
 
 **Community:** [Discord](https://discord.gg/GWGTMhYBZY)
 <!-- wick:suite-table:end -->
