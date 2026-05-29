@@ -199,7 +199,7 @@ function sanitizeMarkdownForFB(s) {
 function composeFBCaption(addon, version, changelogBody) {
   const cfUrl = `https://www.curseforge.com/wow/addons/${addon.cf_slug}`;
   const lines = [];
-  lines.push(`${addon.title} ${version} is live on CurseForge.`);
+  lines.push(`${addon.title} v${version} is out now.`);
   lines.push("");
   if (addon.tagline) {
     lines.push(addon.tagline);
@@ -208,8 +208,7 @@ function composeFBCaption(addon, version, changelogBody) {
   if (changelogBody) {
     const cleaned = sanitizeMarkdownForFB(changelogBody);
     if (cleaned) {
-      lines.push("What's new");
-      // Trim to ~1500 chars to keep the post readable; FB allows much more but no one reads it.
+      lines.push("What's new:");
       const trimmed = cleaned.length > 1500
         ? cleaned.slice(0, 1500).replace(/\s+\S*$/, "") + "..."
         : cleaned;
@@ -217,7 +216,7 @@ function composeFBCaption(addon, version, changelogBody) {
       lines.push("");
     }
   }
-  lines.push(`Download: ${cfUrl}`);
+  lines.push(`Download on CurseForge: ${cfUrl}`);
   return lines.join("\n");
 }
 
@@ -357,7 +356,7 @@ function composeDiscordEmbed(addon, version, changelogBody) {
   const colorHex = (addon.accent || "#4FC778").replace(/^#/, "");
   const color = parseInt(colorHex, 16);
   return {
-    title: `${addon.title} ${version} is live`,
+    title: `${addon.title} v${version} is out now`,
     description: descLines.join("\n") || undefined,
     color,
     url: cfUrl,
@@ -729,7 +728,9 @@ async function cmdRelease(folder, newVer, ...flags) {
     log(`  working tree clean — skipping release commit`);
   }
   gitIn(dir, "tag", `v${newVer}`);
-  gitIn(dir, "push", "origin", "main");
+  // Detect branch: WicksSurvivors uses 'master'; all others use 'main'.
+  const currentBranch = runCapture(`git -C "${dir}" rev-parse --abbrev-ref HEAD`).trim();
+  gitIn(dir, "push", "origin", currentBranch);
   gitIn(dir, "push", "origin", `v${newVer}`);
   ok(`git: tagged v${newVer} and pushed`);
 
