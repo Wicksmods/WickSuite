@@ -267,6 +267,87 @@
         "Save and replay named outfits"
       ],
       "repo": "WicksWardrobe"
+    },
+    {
+      "folder": "WicksConcessionStand",
+      "title": "Wick's Concession Stand",
+      "short": "Concession Stand",
+      "slash": "/wcs",
+      "tagline": "Quick-use consumable bar for TBC Classic. Highest food, water, pots, bandages, and healthstone always one click away. Toggleable buff tray for elixirs, flasks, and equipped trinkets.",
+      "short_tagline": "Quick-use consumable bar with buff tray",
+      "accent": "#4FC778",
+      "accent_name": "fel-green",
+      "cf_slug": "wicks-concession-stand",
+      "cf_project_id": null,
+      "key": "cs",
+      "icon": "cs",
+      "features": [
+        "Auto-detects best food, water, pots, bandage, healthstone",
+        "Toggleable buff tray: elixirs, flasks, trinkets",
+        "Shrinks to fit, horizontal or vertical"
+      ],
+      "repo": "WicksConcessionStand"
+    },
+    {
+      "folder": "WicksBones",
+      "title": "Wick's Bones",
+      "short": "Bones",
+      "slash": "/wbones",
+      "tagline": "Dice game for between-raid downtime. High-roll or low-roll, ante in gold, auto-tracks IOUs so you can settle up after.",
+      "short_tagline": "Dice game for raid downtime",
+      "accent": "#4FC778",
+      "accent_name": "fel-green",
+      "cf_slug": "wicks-bones",
+      "cf_project_id": null,
+      "key": "bones",
+      "icon": "bo",
+      "features": [
+        "Server-verified /roll parsing",
+        "High-roll or low-roll modes",
+        "IOU ledger for gold ante"
+      ],
+      "repo": "WicksBones"
+    },
+    {
+      "folder": "WicksSurvivors",
+      "title": "Wick's Survivors",
+      "short": "Survivors",
+      "slash": "/survivors",
+      "tagline": "Vampire Survivors-style wave survival minigame for TBC Classic Anniversary. Survive endless undead waves, level up weapons and passives, and fight iconic bosses.",
+      "short_tagline": "Vampire Survivors-style wave survival minigame",
+      "accent": "#4FC778",
+      "accent_name": "fel-green",
+      "cf_slug": "wicks-survivors",
+      "cf_project_id": 1557237,
+      "key": "survivors",
+      "icon": "sv",
+      "features": [
+        "5 auto-firing weapons",
+        "4 scaling bosses every 6 waves",
+        "Obsidian Glass skin"
+      ],
+      "repo": "WicksSurvivors"
+    },
+    {
+      "benched": true,
+      "folder": "WicksRaidBoard",
+      "title": "Wick's Raid Board",
+      "short": "Raid Board",
+      "slash": "/wrb",
+      "tagline": "Raid-assignment board for TBC Classic. Tanks, heals, kicks, CC, and encounter-specific roles. Broadcast to the raid on demand.",
+      "short_tagline": "Raid-assignment board for TBC raids",
+      "accent": "#4FC778",
+      "accent_name": "fel-green",
+      "cf_slug": "wicks-raid-board",
+      "cf_project_id": null,
+      "key": "raidboard",
+      "icon": "rb",
+      "features": [
+        "Tank, heal, kick, CC assignments",
+        "Encounter-specific role presets",
+        "Broadcast to the raid on demand"
+      ],
+      "repo": "WicksRaidBoard"
     }
   ],
   "retired": [
