@@ -778,14 +778,17 @@ async function cmdRelease(folder, newVer, ...flags) {
   // Buffer.from ensures BOM-free UTF-8 — a bare writeFileSync on some Node/PS combos emits a BOM
   // which CF returns as errorCode 1002 "Invalid JSON" with no hint it's a BOM issue.
   fs.writeFileSync(metaPath, Buffer.from(metadata, "utf8"));
-  const uploadCmd = [
-    `curl -s -X POST`,
-    `-H "X-Api-Token: ${token}"`,
-    `--form-string "metadata=$(cat '${metaPath.replace(/'/g, "'\\''")}')"`,
-    `-F "file=@${zipPath}"`,
-    `"${config.cf_api_base}/api/projects/${addon.cf_project_id}/upload-file"`,
-  ].join(" ");
-  let resp = runCapture(uploadCmd);
+  // Use spawnSync so metadata is passed as a literal arg — avoids shell quoting
+  // issues with $(cat ...) on cmd.exe and single-quote escaping on bash.
+  const curlArgs = [
+    "-s", "-X", "POST",
+    "-H", `X-Api-Token: ${token}`,
+    "--form-string", `metadata=${metadata}`,
+    "-F", `file=@${zipPath}`,
+    `${config.cf_api_base}/api/projects/${addon.cf_project_id}/upload-file`,
+  ];
+  const curlResult = spawnSync("curl", curlArgs, { encoding: "utf8" });
+  let resp = ((curlResult.stdout || "") + (curlResult.stderr || "")).trim();
   try { fs.rmSync(metaPath); } catch (_) {}
   log(resp);
   let parsed = null;
