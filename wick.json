@@ -322,9 +322,9 @@
       "key": "survivors",
       "icon": "sv",
       "features": [
-        "5 auto-firing weapons",
-        "4 scaling bosses every 6 waves",
-        "Obsidian Glass skin"
+        "8 auto-firing weapons with stacking ranks",
+        "4 rotating biomes with themed enemies",
+        "4 bosses with specials and empowered phases"
       ],
       "repo": "WicksSurvivors"
     },
