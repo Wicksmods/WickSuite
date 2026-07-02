@@ -360,7 +360,7 @@ function composeDiscordEmbed(addon, version, changelogBody) {
     description: descLines.join("\n") || undefined,
     color,
     url: cfUrl,
-    footer: { text: "Wick's Mods · wicksmods.io" },
+    footer: { text: "Wick's Mods · wicksmods.com" },
   };
 }
 

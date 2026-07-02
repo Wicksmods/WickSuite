@@ -83,7 +83,7 @@ async function discord(method, route, body) {
     headers: {
       Authorization: `Bot ${TOKEN}`,
       "Content-Type": "application/json",
-      "User-Agent": "WickSuite-DiscordSetup (https://wicksmods.io, 1.0)",
+      "User-Agent": "WickSuite-DiscordSetup (https://wicksmods.com, 1.0)",
     },
   };
   if (body !== undefined) init.body = JSON.stringify(body);
@@ -175,7 +175,7 @@ const PLAN = {
       name: "Information",
       channels: [
         { name: "welcome",       type: T.TEXT,  readOnly: true,
-          topic: "Welcome to Wick's Mods. Pinned: suite roster + landing page (https://wicksmods.io)." },
+          topic: "Welcome to Wick's Mods. Pinned: suite roster + landing page (https://wicksmods.com)." },
         { name: "announcements", type: T.TEXT,  readOnly: true,
           topic: "New addon releases, brand updates, suite-wide news. Members read-only." },
       ],
@@ -472,7 +472,7 @@ console.log("  2. Wire up auto-role-on-join via Discord's built-in Onboarding:")
 console.log("       Server Settings → Enable Community → walk the wizard.");
 console.log("       Then Server Settings → Onboarding → set @Member as the role assigned");
 console.log("       on completion. Free, no bot needed at runtime.");
-console.log("  3. Pin a welcome message in #welcome with the suite roster + https://wicksmods.io.");
+console.log("  3. Pin a welcome message in #welcome with the suite roster + https://wicksmods.com.");
 console.log("  4. Create a vanity / non-expiring invite (Server Settings → Invites) and add it");
 console.log("     to wick.json under social.discord_invite so wick.mjs can surface it in CF");
 console.log("     descriptions, READMEs, and the landing site.");
