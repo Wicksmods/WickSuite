@@ -112,42 +112,67 @@ function deriveSlash(title) {
 // Resolve a Page Access Token for the configured FB page.
 // Order of resolution:
 //   1. FB_WICKS_MODS_PAGE_TOKEN env var (if set, use directly)
-//   2. Read user token from C:\Users\jspli\OneDrive\Documents\keys.txt FB block,
-//      call /me/accounts via curl, extract the access_token for the configured page id
-// Returns null if neither path works (caller logs and continues).
+//   2. fb_page_token from Wicksmodsinfo.txt (the canonical secrets file) — this is
+//      already a Page token, so it posts directly with no Graph round-trip
+//   3. fb_user_token from Wicksmodsinfo.txt, exchanged via /me/accounts for the
+//      Page token matching social.fb_page_id
+//   4. Legacy: an EA-prefixed user token under an `FB` header in keys.txt
+// Returns null if no path works (caller logs and continues).
+//
+// Note: this used to read keys.txt only, but keys.txt has no Facebook section at
+// all — the FB credentials live in Wicksmodsinfo.txt, which is what the header
+// comment on this file has always claimed. That mismatch made every release skip
+// the FB announce with "no page token available".
 function resolveFBPageToken(config) {
   const fromEnv = process.env.FB_WICKS_MODS_PAGE_TOKEN;
   if (fromEnv) return fromEnv;
 
-  const keysPath = "C:/Users/jspli/OneDrive/Documents/keys.txt";
-  if (!fs.existsSync(keysPath)) return null;
-  // Normalize CRLF (Windows) so regex anchors and slicing behave predictably.
-  const keys = fs.readFileSync(keysPath, "utf8").replace(/\r/g, "");
-  // Find the FB header and the first long EA-prefixed token after it.
-  // Graph user tokens start with "EA" and are 200+ chars. The next section
-  // headers in the file use simple ALL-CAPS-ish names like "WORKERS" — but
-  // we don't need a hard stop because no other section uses an EA-prefixed
-  // value, so the first EA hit after the FB header is unambiguously the FB
-  // user token.
-  const m = keys.match(/^FB[\s\S]*?(EA[A-Za-z0-9_-]{100,})/m);
-  const userToken = m ? m[1] : null;
-  if (!userToken) return null;
-
   const v = config.social?.fb_graph_version || "v21.0";
   const pageId = config.social?.fb_page_id;
-  if (!pageId) return null;
-  let resp;
-  try {
-    resp = runCapture(
-      `curl -s "https://graph.facebook.com/${v}/me/accounts?fields=id,access_token&access_token=${userToken}"`
-    );
-  } catch (_) {
-    return null;
+
+  const readFile = (p) => {
+    try { return fs.existsSync(p) ? fs.readFileSync(p, "utf8").replace(/\r/g, "") : null; }
+    catch (_) { return null; }
+  };
+
+  // Exchange a user token for the Page token of the configured page.
+  const derivePageToken = (userToken) => {
+    if (!userToken || !pageId) return null;
+    let resp;
+    try {
+      resp = runCapture(
+        `curl -s "https://graph.facebook.com/${v}/me/accounts?fields=id,access_token&access_token=${userToken}"`
+      );
+    } catch (_) { return null; }
+    let parsed;
+    try { parsed = JSON.parse(resp); } catch (_) { return null; }
+    const page = (parsed.data || []).find(p => p.id === pageId);
+    return page?.access_token || null;
+  };
+
+  // 2 + 3: canonical secrets file.
+  const info = readFile("C:/Users/jspli/OneDrive/Documents/Wicksmodsinfo.txt");
+  if (info) {
+    const direct = info.match(/^\s*fb_page_token\s*=\s*(EA[A-Za-z0-9_-]{50,})/m);
+    if (direct) return direct[1];
+    const user = info.match(/^\s*fb_user_token\s*=\s*(EA[A-Za-z0-9_-]{50,})/m);
+    if (user) {
+      const derived = derivePageToken(user[1]);
+      if (derived) return derived;
+    }
   }
-  let parsed;
-  try { parsed = JSON.parse(resp); } catch (_) { return null; }
-  const page = (parsed.data || []).find(p => p.id === pageId);
-  return page?.access_token || null;
+
+  // 4: legacy keys.txt FB block (kept so older setups keep working).
+  const keys = readFile("C:/Users/jspli/OneDrive/Documents/keys.txt");
+  if (keys) {
+    const m = keys.match(/^FB[\s\S]*?(EA[A-Za-z0-9_-]{100,})/m);
+    if (m) {
+      const derived = derivePageToken(m[1]);
+      if (derived) return derived;
+    }
+  }
+
+  return null;
 }
 
 // Pull the body of a single CHANGELOG version section.
