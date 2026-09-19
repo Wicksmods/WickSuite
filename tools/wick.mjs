@@ -793,7 +793,9 @@ async function cmdRelease(folder, newVer, ...flags) {
   setProgress(cmd, 5, TOTAL, "uploading to CurseForge");
   log(`\nUploading to CurseForge project ${addon.cf_project_id} ...`);
   const metadata = JSON.stringify({
-    gameVersions: [config.cf_game_version_id],
+    // An addon that ships one package for several clients lists them all
+    // in cf_game_versions; everything else takes the suite default.
+    gameVersions: addon.cf_game_versions || [config.cf_game_version_id],
     releaseType: "release",
     changelog: `Release ${newVer}. See CHANGELOG.md for details.`,
     changelogType: "markdown",

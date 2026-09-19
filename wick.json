@@ -326,7 +326,11 @@
         "4 rotating biomes with themed enemies",
         "4 bosses with specials and empowered phases"
       ],
-      "repo": "WicksSurvivors"
+      "repo": "WicksSurvivors",
+      "cf_game_versions": [
+        14300,
+        17053
+      ]
     },
     {
       "benched": true,
