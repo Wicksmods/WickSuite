@@ -1,0 +1,66 @@
+"""Offline load tests for WickCore and the products built on it.
+
+    python WickSuite/tools/core-harness/run.py                 # WickCore, Forever-shaped stub client
+    python WickSuite/tools/core-harness/run.py --legacy        # WickCore, TBC-shaped stub client
+    python WickSuite/tools/core-harness/run.py --both          # WickCore, both
+    python WickSuite/tools/core-harness/run.py --bags --both   # Wick's Bags on WickCore, both
+    python WickSuite/tools/core-harness/run.py --kits --both   # Totems, Demons, Forms kits, both
+
+Exits non-zero on any failed check.
+"""
+
+import argparse
+import os
+import sys
+
+try:
+    import lupa
+except ImportError:
+    sys.exit("lupa is not installed. pip install lupa")
+
+BETA_ADDONS = r"C:/Program Files (x86)/World of Warcraft/_classic_beta_/Interface/AddOns"
+HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
+
+
+def run(harness, mode, *args):
+    lua = lupa.LuaRuntime(unpack_returned_tuples=True)
+    runner = lua.eval(
+        "function(harness, ...)"
+        "  local f = assert(loadfile(harness))"
+        "  return f(...)"
+        "end"
+    )
+    try:
+        runner(harness, *args)
+        return True
+    except lupa.LuaError as e:
+        print(f"harness failed ({mode}):\n{e}")
+        return False
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--core", default=BETA_ADDONS + "/WickCore")
+    ap.add_argument("--bags-dir", default=BETA_ADDONS + "/WicksBags")
+    ap.add_argument("--bags", action="store_true", help="run the Wick's Bags product harness")
+    ap.add_argument("--kits", action="store_true", help="run the class kits harness (Totems, Demons, Forms)")
+    ap.add_argument("--legacy", action="store_true")
+    ap.add_argument("--both", action="store_true")
+    args = ap.parse_args()
+
+    stub = HERE + "/stubclient.lua"
+    modes = ["modern", "legacy"] if args.both else (["legacy"] if args.legacy else ["modern"])
+    ok = True
+    for mode in modes:
+        if args.bags:
+            ok = run(HERE + "/bags-harness.lua", mode, args.core, args.bags_dir, mode, stub) and ok
+        elif args.kits:
+            ok = run(HERE + "/kits-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
+        else:
+            ok = run(HERE + "/harness.lua", mode, args.core, mode, stub) and ok
+        print()
+    sys.exit(0 if ok else 1)
+
+
+if __name__ == "__main__":
+    main()
