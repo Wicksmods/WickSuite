@@ -155,8 +155,8 @@
       "title": "Wick's Layers",
       "short": "Layers",
       "slash": "/wl",
-      "tagline": "Layer detection for TBC Classic Anniversary. Fingerprints NPC GUIDs to track which layer you are on, scrapes AutoLayer call-outs, and broadcasts to the WicksLayer channel.",
-      "short_tagline": "Layer detection via NPC GUID fingerprinting",
+      "tagline": "Layer detection for World of Warcraft: Forever. Tells one layer from another by the spawn identifier inside creature GUIDs, and listens to layer call-outs. Needs no other addon.",
+      "short_tagline": "Layer detection by creature GUID fingerprinting",
       "accent": "#4FC778",
       "accent_name": "fel-green",
       "cf_slug": "wicks-layers",
@@ -164,11 +164,12 @@
       "key": "layers",
       "icon": "la",
       "features": [
-        "GUID fingerprinting (works alone)",
-        "AutoLayer channel interop",
-        "WicksLayer broadcast channel"
+        "GUID fingerprinting, no other addon needed",
+        "Crowd NPCs set aside automatically",
+        "Listens to layer call-out channels"
       ],
-      "repo": "WicksLayers"
+      "repo": "WicksLayers",
+      "forever": true
     },
     {
       "folder": "WicksTotemsAndThings",
