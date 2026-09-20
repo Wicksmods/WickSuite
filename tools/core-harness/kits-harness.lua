@@ -189,7 +189,9 @@ check(#S.CHAT >= 3, "/wft debug prints")
 
 io.write("== Beasts and Things ==\n")
 CLASS = "HUNTER"
-S.loadAddon(ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings", { "Core.lua", "Pet.lua", "Ammo.lua", "UI.lua" })
+S.PET_FAMILY = "Wolf"
+S.PET_SPELLS = { { "Bite", "active" }, { "Growl", "active" }, { "Furious Howl", "active" }, { "Avoidance", "passive" } }
+local BNS = S.loadAddon(ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings", { "Core.lua", "Pet.lua", "Ammo.lua", "Beasts.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksBeastsAndThings")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -248,6 +250,38 @@ if BADDON then
         check(crows[3].state == "unknown", "pet fed unknown in combat (secret happiness): " .. tostring(crows[3].state))
         COMBAT = false
     end
+
+    -- The beast atlas. Nothing in the client joins family to abilities,
+    -- so it learns by reading the pet spell book whenever a pet is out.
+    local function special(family)
+        local list = BNS.beasts:Known(family)
+        return list and table.concat(list, ", ") or "nothing"
+    end
+    local fams = BADDON.db.global.families
+    check(fams and fams.Wolf ~= nil, "the wolf out at login was filed")
+    check(fams.Wolf.abilities["Furious Howl"] == "active", "with its active abilities")
+    check(fams.Wolf.abilities["Avoidance"] == "passive", "and its passive ones marked as passive")
+
+    S.PET_FAMILY = "Hyena"
+    S.PET_SPELLS = { { "Bite", "active" }, { "Growl", "active" }, { "Tendon Rip", "active" } }
+    S.fire("UNIT_PET", "player")
+    check(BADDON.db.global.families.Hyena ~= nil, "a second family files on its own")
+    check(special("Hyena"):find("Tendon Rip") ~= nil, "hyena keeps Tendon Rip: " .. special("Hyena"))
+
+    -- A third family makes Bite and Growl ordinary, three being the point
+    -- at which an ability stops being a reason to tame anything.
+    S.PET_FAMILY = "Boar"
+    S.PET_SPELLS = { { "Bite", "active" }, { "Growl", "active" }, { "Charge", "active" } }
+    S.fire("UNIT_PET", "player")
+    check(special("Hyena") == "Tendon Rip",
+        "with three families sharing Bite and Growl, only Tendon Rip stands out: " .. special("Hyena"))
+    check(special("Boar") == "Charge", "and only Charge for the boar: " .. special("Boar"))
+
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSBEASTSANDTHINGS("beasts")
+    local blist = table.concat(S.CHAT, " | ")
+    check(blist:find("Hyena") ~= nil and blist:find("Tendon Rip") ~= nil and blist:find("Boar") ~= nil,
+        "/wbt beasts lists them: " .. blist:sub(1, 80))
 end
 
 io.write("== Poisons and Things ==\n")

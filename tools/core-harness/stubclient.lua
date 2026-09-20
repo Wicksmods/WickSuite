@@ -272,7 +272,29 @@ local CLASS_NAMES = { SHAMAN = { "Shaman", 7 }, WARLOCK = { "Warlock", 9 }, DRUI
 function UnitClass() local c = CLASS_NAMES[CLASS] or { CLASS, 0 } return c[1], CLASS, c[2] end
 function UnitRace() return "Orc", "Orc", 2 end
 function UnitExists(u) return u == "player" or u == "pet" end
-function UnitCreatureFamily() return CLASS == "HUNTER" and "Wolf" or "Imp" end
+function UnitCreatureFamily(unit)
+    if unit == "target" then return S.TARGET_FAMILY end
+    return S.PET_FAMILY or (CLASS == "HUNTER" and "Wolf" or "Imp")
+end
+function HasPetSpells()
+    local list = S.PET_SPELLS
+    if not list then return nil end
+    return #list, "PET"
+end
+function GetSpellBookItemName(i, book)
+    if book ~= "pet" then return nil end
+    local e = S.PET_SPELLS and S.PET_SPELLS[i]
+    return e and e[1] or nil
+end
+function IsPassiveSpell(i, book)
+    if book ~= "pet" then return false end
+    local e = S.PET_SPELLS and S.PET_SPELLS[i]
+    return e ~= nil and e[2] == "passive"
+end
+function UnitCreatureType(unit)
+    if unit == "target" then return S.TARGET_TYPE or "Beast" end
+    return "Beast"
+end
 function UnitIsDead() return false end
 function HasPetUI() return true, CLASS == "HUNTER" end
 -- Hunter pet reads. Modern: C_PetInfo. Legacy: the old globals.
@@ -436,7 +458,8 @@ if MODERN then
                      CharacterBankTab_1 = 6, CharacterBankTab_2 = 7, CharacterBankTab_3 = 8 },
         BankType = { Character = 0, Guild = 1, Account = 2 },
         ItemConsumableSubclass = { Bandage = 7, Itemenhancement = 8, ItemenhancementTemporary = 9 },
-        TooltipDataType = { Item = 0 },
+        TooltipDataType = { Item = 0, Unit = 2 },
+        SpellBookSpellBank = { Player = 0, Pet = 1 },
         PowerType = { Mana = 0, Rage = 1, Focus = 2, Energy = 3, ComboPoints = 4, SoulShards = 7 },
     }
     C_RestrictedActions = { IsAddOnRestrictionActive = function(v) return v == 0 and COMBAT end }
@@ -545,6 +568,17 @@ if MODERN then
         return id ~= 33943 and id ~= 40120 and id ~= 6229
     end
     C_SpellBook.GetNumSpellBookSkillLines = function() return 2 end
+    C_SpellBook.HasPetSpells = function()
+        local list = S.PET_SPELLS
+        if not list then return nil end
+        return #list, "PET"
+    end
+    C_SpellBook.GetSpellBookItemInfo = function(i, bank)
+        if bank ~= 1 then return nil end
+        local e = S.PET_SPELLS and S.PET_SPELLS[i]
+        if not e then return nil end
+        return { name = e[1], isPassive = e[2] == "passive" }
+    end
     C_Spell.GetSpellInfo = function(idOrName)
         local names = { [133] = "Fireball", [783] = "Travel Form", [768] = "Cat Form", [1066] = "Aquatic Form", [16864] = "Omen of Clarity" }
         local name = type(idOrName) == "string" and idOrName or (names[idOrName] or ("Spell " .. tostring(idOrName)))
@@ -635,7 +669,15 @@ else
     function GetTalentTabInfo(i) return "Tab" .. i, "x", i == 1 and 31 or 10 end
     function GetNumSpellTabs() return 1 end
     function GetSpellTabInfo() return "General", "x", 0, 2 end
-    function GetSpellBookItemName(i) return i == 1 and "Flight Form" or "Cat Form" end
+    -- The druid forms, but only for the player book: this also answers
+    -- for "pet", and swallowing that argument hid the pet list entirely.
+    function GetSpellBookItemName(i, book)
+        if book == "pet" then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            return e and e[1] or nil
+        end
+        return i == 1 and "Flight Form" or "Cat Form"
+    end
     -- Druid forms, hunter pet and aspect spells: a levelled character.
     local KNOWN = { [33943]=1, [133]=1, [883]=1, [6991]=1, [13163]=1, [1066]=1, [783]=1, [768]=1 }
     function IsSpellKnown(id)
