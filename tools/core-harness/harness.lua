@@ -268,9 +268,18 @@ local page = A:RegisterOptions(function(body, addon)
     local O = Core.Options
     local y = O:Heading(body, "General", 0)
     y = O:Check(body, "Lock", function() return addon.db.profile.locked end, function(v) addon.db.profile.locked = v end, y)
-    y = O:Note(body, "note text", y)
+    -- A note long enough to wrap several times. Reporting one line of
+    -- height here is what put the client-errors note underneath the
+    -- Profiles heading in game.
+    local LONG = string.rep("a note that has to wrap because it is long. ", 6)
+    body:SetWidth(520)
+    local beforeNote = y
+    y = O:Note(body, LONG, y)
+    local noteSpan = beforeNote - y
     y = O:ProfileSection(body, addon, y)
     check(y < -100, "layout helpers advance y")
+    check(noteSpan > 40, "a wrapping note reports its real height, not one line")
+    check(body.__extent ~= nil and body.__extent <= y, "the page records how far its content reached")
 end)
 check(page ~= nil and Core.Options.pages.WicksTest, "options page registered")
 page:Show()
@@ -282,6 +291,22 @@ A:OpenOptions()
 check(OPENED ~= nil, "OpenOptions")
 Core.Options:ShowExport(A, "WICK1:abc")
 check(Core.Options.exportPanel and Core.Options.exportPanel.editBox:GetText() == "WICK1:abc", "ShowExport")
+
+-- The page scrolls: content taller than the frame must not simply be cut off.
+local sc = page.scroll
+check(sc ~= nil and sc:GetScrollChild() == page.body, "the page body is a scroll child")
+sc:SetHeight(200)
+page.body:SetHeight(600)
+sc:Refresh()
+check(sc.thumb:IsShown() == true, "the scroll indicator appears when content overflows")
+sc:GetScript("OnMouseWheel")(sc, -1)
+check((sc:GetVerticalScroll() or 0) > 0, "the wheel scrolls down")
+sc:GetScript("OnMouseWheel")(sc, 1)
+check((sc:GetVerticalScroll() or 0) == 0, "and back up, clamped at the top")
+page.body:SetHeight(50)
+sc:Refresh()
+check(sc:GetVerticalScroll() == 0, "short pages reset to the top")
+check(sc.thumb:IsShown() == false, "and the indicator goes away again")
 
 -- ---------- launcher ------------------------------------------------------
 io.write("== launcher ==\n")

@@ -105,6 +105,19 @@ local function newMock(kind, name)
             end
         elseif k == "GetText" then return function() return t.__text end
         elseif k == "GetStringWidth" then return function() return #tostring(t.__text) * 6 end
+        -- Height has to account for wrapping, because that is the part
+        -- layout code gets wrong: a note that wraps to three lines but
+        -- reports one line of height lands under whatever follows it.
+        elseif k == "GetStringHeight" then
+            return function()
+                local txt = tostring(t.__text or "")
+                local perLine = math.max(1, math.floor((t.__w or 300) / 5.5))
+                local lines = 0
+                for chunk in (txt .. "\n"):gmatch("([^\n]*)\n") do
+                    lines = lines + math.max(1, math.ceil(#chunk / perLine))
+                end
+                return math.max(1, lines) * 13
+            end
         elseif k == "GetName" then return function() return t.__name end
         elseif k == "GetObjectType" then return function() return t.__kind end
         elseif k == "GetParent" then return function() return t.__parent end
@@ -137,6 +150,8 @@ local function newMock(kind, name)
         elseif k == "SetValueStep" then return function(_, v) t.__step = v end
         elseif k == "GetValueStep" then return function() return t.__step or 1 end
         -- ScrollFrame
+        elseif k == "SetScrollChild" then return function(_, c) t.__scrollChild = c end
+        elseif k == "GetScrollChild" then return function() return t.__scrollChild end
         elseif k == "GetVerticalScroll" then return function() return t.__scroll or 0 end
         elseif k == "SetVerticalScroll" then return function(_, v) t.__scroll = v end
         elseif k == "GetVerticalScrollRange" then return function() return 0 end
