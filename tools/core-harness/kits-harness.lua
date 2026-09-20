@@ -315,6 +315,11 @@ S.fire("PLAYER_TARGET_CHANGED")
 S.HAS_TARGET = false
 S.fire("PLAYER_TARGET_CHANGED")
 check(not combo:IsShown(), "losing the target hides it again")
+S.CHAT = {}
+SlashCmdList.WICK_WICKSPOISONSANDTHINGS("combo")
+local creport = table.concat(S.CHAT, " | ")
+check(creport:find("power secret") ~= nil and creport:find("GetComboPoints") ~= nil,
+    "/wpt combo says whether the client will answer: " .. creport:sub(1, 70))
 
 try("poison panel", function() WicksPoisonsAndThings_Toggle() end)
 S.CHAT = {}
