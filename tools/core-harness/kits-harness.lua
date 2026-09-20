@@ -282,6 +282,31 @@ if BADDON then
     local blist = table.concat(S.CHAT, " | ")
     check(blist:find("Hyena") ~= nil and blist:find("Tendon Rip") ~= nil and blist:find("Boar") ~= nil,
         "/wbt beasts lists them: " .. blist:sub(1, 80))
+
+    -- The Beasts tab, contributed by the kit rather than built into the
+    -- core, since WickCore has no business knowing what a hunter keeps.
+    local kit = BADDON.kit
+    check(kit.tabs.beasts ~= nil, "the kit grew a Beasts tab")
+    check(kit.panes.beasts ~= nil, "with a pane behind it")
+    kit:Select("beasts")
+    check(kit.panes.beasts:IsShown(), "selecting it shows the pane")
+    check(kit.panes.talents:IsShown() == false, "and puts the others away")
+    local prows = BNS.beasts.pane.rows
+    local shown = 0
+    for _, r in ipairs(prows) do if r:IsShown() then shown = shown + 1 end end
+    check(shown == 3, "a row per recorded family, got " .. shown)
+    local texts = {}
+    for _, r in ipairs(prows) do texts[#texts + 1] = r.family:GetText() .. "=" .. r.abilities:GetText() end
+    local joined = table.concat(texts, " | ")
+    check(joined:find("Hyena=Tendon Rip") ~= nil, "the pane leads with what sets a family apart: " .. joined:sub(1, 70))
+    check(joined:find("%(") ~= nil, "and brackets the ones they all share")
+
+    BNS.beasts:Forget()
+    BNS.beasts:RefreshPane()
+    shown = 0
+    for _, r in ipairs(prows) do if r:IsShown() then shown = shown + 1 end end
+    check(shown == 0, "forget all empties the pane")
+    kit:Select("talents")
 end
 
 io.write("== Poisons and Things ==\n")
