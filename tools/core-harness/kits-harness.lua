@@ -252,7 +252,7 @@ end
 
 io.write("== Poisons and Things ==\n")
 CLASS = "ROGUE"
-S.loadAddon(ADDONS_DIR .. "/WicksPoisonsAndThings", "WicksPoisonsAndThings", { "Core.lua", "Poisons.lua", "UI.lua" })
+S.loadAddon(ADDONS_DIR .. "/WicksPoisonsAndThings", "WicksPoisonsAndThings", { "Core.lua", "Poisons.lua", "Combo.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksPoisonsAndThings")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -278,6 +278,44 @@ if MODERN then
     check(pline:find("coated true") ~= nil, "main hand reads as coated from the temporary enchantment")
     check(pline:find("minutes 30") ~= nil, "time left read: " .. pline:sub(1, 90))
 end
+-- Combo points over the target's nameplate. The point of the design is
+-- that it never compares the value, so the same code has to survive the
+-- number arriving secret. Run it both ways.
+local combo = _G.WicksPoisonsComboRow
+check(combo ~= nil, "combo row built for a rogue")
+check(not combo:IsShown(), "and stays hidden with no target")
+S.HAS_TARGET = true
+S.COMBO = 3
+S.fire("PLAYER_TARGET_CHANGED")
+check(combo:IsShown(), "it appears once the target has a nameplate")
+local plate = C_NamePlate.GetNamePlateForUnit("target")
+check(combo:GetParent() == plate, "parented to the target's plate")
+check(combo.count == 5, "five pips")
+check(combo.pips[1].__min == 0 and combo.pips[1].__max == 1, "each pip covers one point of the range")
+check(combo.pips[4].__min == 3 and combo.pips[4].__max == 4, "the fourth pip covers three to four")
+S.fire("UNIT_POWER_UPDATE", "player", "COMBO_POINTS")
+check(combo.pips[1]:GetValue() == 3, "the raw count goes into every pip")
+
+-- Now with the client refusing to say. Nothing may compare, and nothing
+-- may error; the pips just take the secret.
+S.POWER_SECRET = true
+local okSecret = pcall(function()
+    S.fire("UNIT_MAXPOWER", "player", "COMBO_POINTS")
+    S.fire("UNIT_POWER_UPDATE", "player", "COMBO_POINTS")
+end)
+check(okSecret, "a secret combo count does not throw")
+check(combo.count == 5, "and falls back to five pips when the maximum is secret too")
+S.POWER_SECRET = false
+
+PA.db.profile.comboOnPlate = false
+S.fire("PLAYER_TARGET_CHANGED")
+check(not combo:IsShown(), "switching it off hides the row")
+PA.db.profile.comboOnPlate = true
+S.fire("PLAYER_TARGET_CHANGED")
+S.HAS_TARGET = false
+S.fire("PLAYER_TARGET_CHANGED")
+check(not combo:IsShown(), "losing the target hides it again")
+
 try("poison panel", function() WicksPoisonsAndThings_Toggle() end)
 S.CHAT = {}
 SlashCmdList.WICK_WICKSPOISONSANDTHINGS("warn 12")

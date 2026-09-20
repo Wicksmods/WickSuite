@@ -280,7 +280,29 @@ local PET = { happiness = 2, damage = 100, rate = 1, loyalty = "Best Friend", to
 S.PET = PET
 local function petHappiness() if COMBAT and MODERN then return SECRET, SECRET, SECRET end return PET.happiness, PET.damage, PET.rate end
 function UnitPowerType() return 0 end
-function UnitPowerMax() return 1000 end
+-- Nameplates. One plate, handed out for whichever unit is asked about,
+-- which is enough to check that something attaches to the right anchor.
+S.NAMEPLATE = nil
+C_NamePlate = {
+    GetNamePlateForUnit = function(unit)
+        if unit ~= "target" or not S.HAS_TARGET then return nil end
+        if not S.NAMEPLATE then
+            local plate = S.newMock("NamePlate")
+            plate.UnitFrame = S.newMock("Frame")
+            plate.UnitFrame.HealthBarsContainer = S.newMock("Frame")
+        S.NAMEPLATE = plate
+        end
+        return S.NAMEPLATE
+    end,
+    GetNamePlates = function() return {} end,
+}
+
+function UnitPowerMax(_, powerType)
+    if powerType == 4 then return S.POWER_SECRET and SECRET or 5 end
+    return 1000
+end
+function GetComboPoints() return S.POWER_SECRET and SECRET or (S.COMBO or 0) end
+function UnitIsUnit(a, b) return a == b or (S.HAS_TARGET and a == "nameplate1" and b == "target") end
 function UnitHealthMax() return 500 end
 function GetShapeshiftForm() return 0 end
 function GetShapeshiftFormInfo() return nil end
@@ -411,6 +433,7 @@ if MODERN then
         BankType = { Character = 0, Guild = 1, Account = 2 },
         ItemConsumableSubclass = { Bandage = 7, Itemenhancement = 8, ItemenhancementTemporary = 9 },
         TooltipDataType = { Item = 0 },
+        PowerType = { Mana = 0, Rage = 1, Focus = 2, Energy = 3, ComboPoints = 4, SoulShards = 7 },
     }
     C_RestrictedActions = { IsAddOnRestrictionActive = function(v) return v == 0 and COMBAT end }
     C_PetInfo = {
@@ -429,7 +452,10 @@ if MODERN then
             return { type = "Frame", width = 0, height = 0 }
         end,
     }
-    C_Secrets = { HasSecretRestrictions = function() return true end, ShouldCooldownsBeSecret = function() return COMBAT end }
+    C_Secrets = { HasSecretRestrictions = function() return true end, ShouldCooldownsBeSecret = function() return COMBAT end,
+        ShouldUnitPowerBeSecret = function() return S.POWER_SECRET end,
+        ShouldUnitPowerMaxBeSecret = function() return S.POWER_SECRET end }
+
     C_GameRules = { GetActiveGameMode = function() return 3 end, IsHardcoreActive = function() return false end, IsSelfFoundAllowed = function() return false end }
     C_Item = {
         GetItemInfo = function(id)
