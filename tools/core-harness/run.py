@@ -5,6 +5,7 @@
     python WickSuite/tools/core-harness/run.py --both          # WickCore, both
     python WickSuite/tools/core-harness/run.py --bags --both   # Wick's Bags on WickCore, both
     python WickSuite/tools/core-harness/run.py --kits --both   # Totems, Demons, Forms kits, both
+    python WickSuite/tools/core-harness/run.py --layers         # Wick's Layers
 
 Exits non-zero on any failed check.
 """
@@ -44,6 +45,7 @@ def main():
     ap.add_argument("--bags-dir", default=BETA_ADDONS + "/WicksBags")
     ap.add_argument("--bags", action="store_true", help="run the Wick's Bags product harness")
     ap.add_argument("--kits", action="store_true", help="run the class kits harness (Totems, Demons, Forms)")
+    ap.add_argument("--layers", action="store_true", help="run the Wick's Layers harness")
     ap.add_argument("--legacy", action="store_true")
     ap.add_argument("--both", action="store_true")
     args = ap.parse_args()
@@ -56,6 +58,8 @@ def main():
             ok = run(HERE + "/bags-harness.lua", mode, args.core, args.bags_dir, mode, stub) and ok
         elif args.kits:
             ok = run(HERE + "/kits-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
+        elif args.layers:
+            ok = run(HERE + "/layers-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
         else:
             ok = run(HERE + "/harness.lua", mode, args.core, mode, stub) and ok
         print()

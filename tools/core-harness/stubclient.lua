@@ -291,6 +291,35 @@ function IsPassiveSpell(i, book)
     local e = S.PET_SPELLS and S.PET_SPELLS[i]
     return e ~= nil and e[2] == "passive"
 end
+-- Unit identity. Not restricted on this client, which is what makes layer
+-- fingerprinting possible at all, so the GUID comes back as a plain string.
+function UnitGUID(unit)
+    if unit == "player" then return "Player-4619-006648E8" end
+    return S.GUIDS and S.GUIDS[unit] or nil
+end
+
+-- Chat channels.
+S.CHANNELS = S.CHANNELS or {}
+function GetChannelList()
+    local out = {}
+    for i, c in ipairs(S.CHANNELS) do
+        out[#out + 1] = i
+        out[#out + 1] = c
+        out[#out + 1] = false
+    end
+    return unpack(out)
+end
+function GetChannelName(name)
+    for i, c in ipairs(S.CHANNELS) do
+        if c:lower() == tostring(name):lower() then return i, c end
+    end
+    return 0
+end
+function JoinChannelByName(name)
+    S.CHANNELS[#S.CHANNELS + 1] = name
+    return true
+end
+
 function UnitCreatureType(unit)
     if unit == "target" then return S.TARGET_TYPE or "Beast" end
     return "Beast"
