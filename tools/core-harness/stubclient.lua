@@ -553,7 +553,9 @@ if MODERN then
         SortBank = function() S.SORTED_BANK = (S.SORTED_BANK or 0) + 1 end,
     }
     C_Bank = {
-        FetchNumPurchasedBankTabs = function() return 2 end,
+        -- Swappable, so a test can be a character who has never been
+        -- granted the free first tab.
+        FetchNumPurchasedBankTabs = function() return S.BANK_TABS or 2 end,
         FetchMaxNumBankTabs = function() return 9 end,
         FetchPurchasedBankTabData = function() return { { ID = 6, name = "Consumables", icon = 133633 }, { ID = 7, name = "Gear", icon = 133634 } } end,
         FetchNextPurchasableBankTabData = function() return { tabCost = 100000 } end,

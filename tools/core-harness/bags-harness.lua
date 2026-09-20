@@ -110,6 +110,33 @@ if MODERN then
 else
     check(S.LAST_POPUP == "CONFIRM_BUY_BANK_SLOT", "buy slot opens Blizzard confirmation")
 end
+
+if MODERN then
+    -- A character who has never been granted the free first tab. Blizzard
+    -- grants it inside SetTab -> PurchaseFirstSlot -> PurchaseBankTab, and
+    -- that call is restricted, so it only works while their frame is
+    -- untainted. Touching it at all in this state costs the tab for good.
+    S.fire("BANKFRAME_CLOSED")
+    -- A fresh frame, because the earlier scenario left a hook on the old
+    -- one and a new character would not have it.
+    _G.BankFrame = S.newMock("Frame", "BankFrame")
+    S.BANK_TABS = 0
+    BankFrame:Show()   -- the real one is up while you stand at the banker
+    S.fire("BANKFRAME_OPENED")
+    check(BankFrame._wicksHooked == nil, "with no tabs yet, Blizzard's bank frame is not hooked")
+    check(BankFrame:GetAlpha() == 1, "and not hidden")
+    check(BankFrame._wicksAnchor == nil, "and not moved")
+    check(WB.Bank.GrantPending() == true, "the addon knows the grant is still pending")
+
+    -- The grant lands. Now it is safe, and we take over without making
+    -- them close and reopen the bank.
+    S.BANK_TABS = 1
+    S.fire("BANK_TABS_CHANGED")
+    check(BankFrame._wicksHooked == true, "once the tab is granted the frame is taken over")
+    check(BankFrame:GetAlpha() == 0, "and put out of the way")
+    check(WB.Bank.GrantPending() == false, "and the grant is no longer pending")
+    S.BANK_TABS = nil
+end
 -- Tab/bag slot tooltip
 local botBar = WB.Bank.panel._botBar
 local slot1 = botBar and botBar._slots and botBar._slots[1]
