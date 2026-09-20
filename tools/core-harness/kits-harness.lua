@@ -290,6 +290,13 @@ S.fire("PLAYER_TARGET_CHANGED")
 check(combo:IsShown(), "it appears once the target has a nameplate")
 local plate = C_NamePlate.GetNamePlateForUnit("target")
 check(combo:GetParent() == plate, "parented to the target's plate")
+check(combo.anchoredToName == false, "sits under the health bar, off the name above it")
+PA.db.profile.comboAbove = true
+S.fire("PLAYER_TARGET_CHANGED")
+check(combo.anchoredToName == true, "the option lifts it above the name, clear of the cast bar")
+PA.db.profile.comboAbove = false
+S.fire("PLAYER_TARGET_CHANGED")
+check(combo.anchoredToName == false, "and back under the health bar")
 check(combo.count == 5, "five pips")
 check(combo.pips[1].__min == 0 and combo.pips[1].__max == 1, "each pip covers one point of the range")
 check(combo.pips[4].__min == 3 and combo.pips[4].__max == 4, "the fourth pip covers three to four")

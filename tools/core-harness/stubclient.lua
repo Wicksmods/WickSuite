@@ -290,6 +290,10 @@ C_NamePlate = {
             local plate = S.newMock("NamePlate")
             plate.UnitFrame = S.newMock("Frame")
             plate.UnitFrame.HealthBarsContainer = S.newMock("Frame")
+            -- Lowercase, so the mock's capitalised-key rule will not
+            -- invent it. The real plate has one and it is the anchor
+            -- the combo pips prefer.
+            plate.UnitFrame.name = S.newMock("FontString")
         S.NAMEPLATE = plate
         end
         return S.NAMEPLATE
