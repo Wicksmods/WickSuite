@@ -126,6 +126,8 @@ def tidy(row):
         "quality": QUALITY.get(row.get("quality"), str(row.get("quality"))),
         "slot": SLOTS.get(slot),
         "slotId": slot,
+        "itemClass": row.get("classs"),
+        "itemSubclass": row.get("subclass"),
         "dps": row.get("dps") or None,
         "speed": row.get("speed") or None,
         "droppedBy": sources,
@@ -140,6 +142,18 @@ def main():
     targets = [d for d in DUNGEONS if d[0] == args.one] if args.one else DUNGEONS
     if not targets:
         sys.exit("No dungeon with that zone id in the list.")
+
+    # Keep any stats already fetched: re-running the roster should not
+    # silently undo three minutes of tooltip requests.
+    known = {}
+    existing_path = os.path.normpath(os.path.join(OUT_DIR, "dungeon-loot.json"))
+    if os.path.exists(existing_path):
+        prev = json.loads(io.open(existing_path, encoding="utf-8").read())
+        for dung in prev.get("dungeons", {}).values():
+            for bucket in ("drops", "questRewards", "items"):
+                for it in dung.get(bucket, []):
+                    if it.get("id") and it.get("stats"):
+                        known[it["id"]] = it["stats"]
 
     out, total, equippable = {}, 0, 0
     for i, (zone, name, levels) in enumerate(targets):
@@ -158,6 +172,11 @@ def main():
                  if i["slot"] and i["quality"] in ("uncommon", "rare", "epic", "legendary")]
             g.sort(key=lambda i: (i["slot"], -(i["ilvl"] or 0)))
             return g
+
+        for lst in (drops, quests):
+            for it in lst:
+                if it["id"] in known:
+                    it["stats"] = known[it["id"]]
 
         d, q = gear_only(drops), gear_only(quests)
         out[name] = { "zoneId": zone, "levels": levels, "drops": d, "questRewards": q }

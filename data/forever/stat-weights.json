@@ -1,0 +1,407 @@
+{
+  "_readme": [
+    "Stat weights for LEVELLING on World of Warcraft: Forever. A first pass,",
+    "meant to be argued with and tuned, not treated as settled.",
+    "",
+    "The thing that makes these different from raid weights is the cost",
+    "function. At 60 in a raid you are maximising damage over a fight you",
+    "will repeat. While levelling you are minimising time to the next level,",
+    "and the biggest drain on that is downtime: drinking, dying, running",
+    "back. So Stamina and Spirit carry far more weight here than any endgame",
+    "list would give them, and that is deliberate rather than sloppy.",
+    "",
+    "Weights are per point, scaled so the class's primary stat is 1.0. They",
+    "are linear on purpose. At these levels there are no meaningful caps or",
+    "proc interactions to model, which is exactly why a weighted score is",
+    "honest here and a simulation would be false precision.",
+    "",
+    "Weapons are NOT scored against armour. Their damage per second swamps",
+    "any stat line, so mixing them into one ranking produces a list that",
+    "says 'your best helm is a sword'. They are ranked separately."
+  ],
+  "version": 1,
+  "basis": "levelling, roughly level 15 to 55",
+  "weights": {
+    "WARRIOR": {
+      "_note": "Arms or Fury while levelling. Strength is damage, Stamina is uptime.",
+      "strength": 1.0,
+      "agility": 0.5,
+      "stamina": 0.65,
+      "intellect": 0.0,
+      "spirit": 0.05,
+      "armor": 0.01
+    },
+    "WARRIOR_PROT": {
+      "_note": "Only if you are actually tanking instances. Staying alive outranks damage.",
+      "stamina": 1.0,
+      "strength": 0.55,
+      "agility": 0.7,
+      "intellect": 0.0,
+      "spirit": 0.05,
+      "armor": 0.03
+    },
+    "PALADIN": {
+      "_note": "Retribution. Some Intellect earns its place because heals and seals cost mana.",
+      "strength": 1.0,
+      "agility": 0.4,
+      "stamina": 0.6,
+      "intellect": 0.3,
+      "spirit": 0.2,
+      "armor": 0.015
+    },
+    "PALADIN_HOLY": {
+      "intellect": 1.0,
+      "spirit": 0.7,
+      "stamina": 0.5,
+      "strength": 0.15,
+      "agility": 0.1,
+      "armor": 0.01
+    },
+    "HUNTER": {
+      "_note": "Agility is damage, crit and armour at once. Intellect only to keep stings up.",
+      "agility": 1.0,
+      "stamina": 0.4,
+      "intellect": 0.25,
+      "strength": 0.1,
+      "spirit": 0.1,
+      "armor": 0.01
+    },
+    "ROGUE": {
+      "_note": "No mana, no downtime beyond eating, so Stamina matters less than for most.",
+      "agility": 1.0,
+      "strength": 0.5,
+      "stamina": 0.45,
+      "intellect": 0.0,
+      "spirit": 0.05,
+      "armor": 0.01
+    },
+    "PRIEST": {
+      "_note": "Shadow or Discipline. Spirit is the levelling stat: it decides how often you sit.",
+      "intellect": 1.0,
+      "spirit": 0.85,
+      "stamina": 0.5,
+      "strength": 0.0,
+      "agility": 0.05,
+      "armor": 0.005
+    },
+    "SHAMAN": {
+      "_note": "Enhancement. Agility and Strength both pull, and mana still matters.",
+      "agility": 1.0,
+      "strength": 0.9,
+      "stamina": 0.6,
+      "intellect": 0.4,
+      "spirit": 0.3,
+      "armor": 0.01
+    },
+    "SHAMAN_CASTER": {
+      "intellect": 1.0,
+      "spirit": 0.7,
+      "stamina": 0.55,
+      "agility": 0.15,
+      "strength": 0.1,
+      "armor": 0.005
+    },
+    "MAGE": {
+      "_note": "Cloth and no escape beyond Blink, so Stamina is not the throwaway it is at 60.",
+      "intellect": 1.0,
+      "spirit": 0.6,
+      "stamina": 0.5,
+      "strength": 0.0,
+      "agility": 0.05,
+      "armor": 0.005
+    },
+    "WARLOCK": {
+      "_note": "Stamina is higher than the other casters: it feeds Life Tap and the pet tanks.",
+      "intellect": 1.0,
+      "stamina": 0.75,
+      "spirit": 0.5,
+      "strength": 0.0,
+      "agility": 0.05,
+      "armor": 0.005
+    },
+    "DRUID": {
+      "_note": "Feral. Agility leads, Strength close behind, and you still want some mana to shift.",
+      "agility": 1.0,
+      "strength": 0.8,
+      "stamina": 0.6,
+      "intellect": 0.25,
+      "spirit": 0.2,
+      "armor": 0.01
+    },
+    "DRUID_CASTER": {
+      "intellect": 1.0,
+      "spirit": 0.75,
+      "stamina": 0.5,
+      "agility": 0.15,
+      "strength": 0.1,
+      "armor": 0.005
+    }
+  },
+  "weapons": {
+    "_note": [
+      "Weapons are ranked by damage per second first, with stats as a",
+      "tiebreak. The exchange rate below says how many points of the",
+      "primary stat one point of DPS is worth, which is a rough figure and",
+      "the first thing to revisit once anything can be measured in game.",
+      "Casters are the exception: their weapon is a stat stick, so DPS",
+      "hardly matters and the stats do."
+    ],
+    "dpsPerPrimaryPoint": {
+      "melee": 6.0,
+      "hunter": 8.0,
+      "caster": 0.5
+    }
+  },
+  "proficiency": {
+    "_note": [
+      "What each class may actually equip, by Wowhead's item class and",
+      "subclass numbers. Without this a ranker cheerfully hands a rogue a",
+      "two-handed mace, which is how you can tell a gear list was never",
+      "used by anyone.",
+      "Armour: 0 misc (rings, necks, trinkets), 1 cloth, 2 leather,",
+      "3 mail, 4 plate, 6 shield, 7 libram, 8 idol, 9 totem.",
+      "Weapons: 0 axe1h, 1 axe2h, 2 bow, 3 gun, 4 mace1h, 5 mace2h,",
+      "6 polearm, 7 sword1h, 8 sword2h, 10 staff, 13 fist, 15 dagger,",
+      "16 thrown, 18 crossbow, 19 wand.",
+      "Plate and mail are listed where a class gets them at 40; below",
+      "that level the ranker's own level filter keeps them out anyway."
+    ],
+    "WARRIOR": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "weapon": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        13,
+        15,
+        16,
+        18
+      ]
+    },
+    "WARRIOR_PROT": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "weapon": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        13,
+        15,
+        16,
+        18
+      ]
+    },
+    "PALADIN": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "weapon": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "PALADIN_HOLY": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "weapon": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "HUNTER": {
+      "armor": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "weapon": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7,
+        8,
+        10,
+        13,
+        15,
+        18
+      ]
+    },
+    "ROGUE": {
+      "armor": [
+        0,
+        1,
+        2
+      ],
+      "weapon": [
+        0,
+        2,
+        3,
+        4,
+        7,
+        13,
+        15,
+        16,
+        18
+      ]
+    },
+    "PRIEST": {
+      "armor": [
+        0,
+        1
+      ],
+      "weapon": [
+        4,
+        10,
+        15,
+        19
+      ]
+    },
+    "SHAMAN": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9
+      ],
+      "weapon": [
+        0,
+        1,
+        4,
+        5,
+        10,
+        13,
+        15
+      ]
+    },
+    "SHAMAN_CASTER": {
+      "armor": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9
+      ],
+      "weapon": [
+        0,
+        1,
+        4,
+        5,
+        10,
+        13,
+        15
+      ]
+    },
+    "MAGE": {
+      "armor": [
+        0,
+        1
+      ],
+      "weapon": [
+        7,
+        10,
+        15,
+        19
+      ]
+    },
+    "WARLOCK": {
+      "armor": [
+        0,
+        1
+      ],
+      "weapon": [
+        7,
+        10,
+        15,
+        19
+      ]
+    },
+    "DRUID": {
+      "armor": [
+        0,
+        1,
+        2,
+        8
+      ],
+      "weapon": [
+        4,
+        5,
+        6,
+        10,
+        13,
+        15
+      ]
+    },
+    "DRUID_CASTER": {
+      "armor": [
+        0,
+        1,
+        2,
+        8
+      ],
+      "weapon": [
+        4,
+        5,
+        6,
+        10,
+        13,
+        15
+      ]
+    }
+  }
+}

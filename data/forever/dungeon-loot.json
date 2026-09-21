@@ -15,11 +15,17 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Taragaman the Hungerer"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "armor": 17
+          }
         },
         {
           "id": 14150,
@@ -29,11 +35,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Jergosh the Invoker"
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 4,
+            "spirit": 5,
+            "armor": 35
+          }
         },
         {
           "id": 14145,
@@ -43,11 +57,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 12.36,
           "speed": 2.3,
           "droppedBy": [
             "Taragaman the Hungerer"
-          ]
+          ],
+          "stats": {
+            "minDamage": 19,
+            "maxDamage": 37,
+            "speed": 2.3,
+            "dps": 12.17
+          }
         },
         {
           "id": 14151,
@@ -57,11 +79,21 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 12.32,
           "speed": 1.5,
           "droppedBy": [
             "Jergosh the Invoker"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "stamina": 2,
+            "minDamage": 12,
+            "maxDamage": 24,
+            "speed": 1.5,
+            "dps": 12.0
+          }
         },
         {
           "id": 14147,
@@ -71,11 +103,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Jergosh the Invoker"
-          ]
+          ],
+          "stats": {
+            "strength": 2,
+            "stamina": 3,
+            "armor": 78
+          }
         },
         {
           "id": 14148,
@@ -85,11 +124,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Taragaman the Hungerer"
-          ]
+          ],
+          "stats": {
+            "intellect": 2,
+            "spirit": 3,
+            "armor": 15
+          }
         }
       ],
       "questRewards": [
@@ -101,11 +147,19 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Power to Destroy..."
-          ]
+          ],
+          "stats": {
+            "agility": 4,
+            "stamina": 4,
+            "spirit": 4,
+            "armor": 72
+          }
         },
         {
           "id": 15451,
@@ -115,11 +169,19 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Power to Destroy..."
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 5,
+            "spirit": 3,
+            "armor": 155
+          }
         },
         {
           "id": 15449,
@@ -129,11 +191,18 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Power to Destroy..."
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 5,
+            "armor": 31
+          }
         },
         {
           "id": 15452,
@@ -143,11 +212,17 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Returning the Lost Satchel"
-          ]
+          ],
+          "stats": {
+            "intellect": 5,
+            "armor": 15
+          }
         },
         {
           "id": 270003,
@@ -157,11 +232,17 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Returning the Lost Satchel"
-          ]
+          ],
+          "stats": {
+            "spirit": 5,
+            "armor": 78
+          }
         },
         {
           "id": 15453,
@@ -171,11 +252,17 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Returning the Lost Satchel"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "armor": 36
+          }
         }
       ]
     },
@@ -191,11 +278,18 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Edwin VanCleef"
-          ]
+          ],
+          "stats": {
+            "agility": 5,
+            "stamina": 3,
+            "armor": 21
+          }
         },
         {
           "id": 5444,
@@ -205,11 +299,17 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Miner Johnson"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "armor": 20
+          }
         },
         {
           "id": 1930,
@@ -219,11 +319,17 @@
           "quality": "uncommon",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Defias Miner"
-          ]
+          ],
+          "stats": {
+            "stamina": 3,
+            "armor": 16
+          }
         },
         {
           "id": 5202,
@@ -233,11 +339,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Edwin VanCleef"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "spirit": 8,
+            "armor": 40
+          }
         },
         {
           "id": 10399,
@@ -247,11 +360,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Edwin VanCleef"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "agility": 3,
+            "stamina": 10,
+            "armor": 89
+          }
         },
         {
           "id": 10402,
@@ -261,11 +382,18 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Defias Strip Miner"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 4,
+            "armor": 59
+          }
         },
         {
           "id": 1156,
@@ -275,11 +403,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Gilnid"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "intellect": 6
+          }
         },
         {
           "id": 5195,
@@ -289,11 +423,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Sneed"
-          ]
+          ],
+          "stats": {
+            "strength": 7,
+            "armor": 25,
+            "fireRes": 5
+          }
         },
         {
           "id": 10401,
@@ -303,9 +444,16 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 6,
+            "stamina": 2,
+            "armor": 52
+          }
         },
         {
           "id": 1944,
@@ -315,11 +463,18 @@
           "quality": "uncommon",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Goblin Craftsman"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 1,
+            "armor": 46
+          }
         },
         {
           "id": 1945,
@@ -329,11 +484,18 @@
           "quality": "uncommon",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Goblin Woodcarver"
-          ]
+          ],
+          "stats": {
+            "intellect": 3,
+            "spirit": 2,
+            "armor": 46
+          }
         },
         {
           "id": 5199,
@@ -343,11 +505,21 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Gilnid"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "spirit": 5,
+            "armor": 76,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 1934,
@@ -357,11 +529,18 @@
           "quality": "uncommon",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Defias Blackguard"
-          ]
+          ],
+          "stats": {
+            "agility": 4,
+            "spirit": 4,
+            "armor": 68
+          }
         },
         {
           "id": 1943,
@@ -371,11 +550,18 @@
           "quality": "uncommon",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Goblin Shipbuilder"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 3,
+            "armor": 144
+          }
         },
         {
           "id": 10400,
@@ -385,9 +571,16 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 6,
+            "agility": 6,
+            "armor": 73
+          }
         },
         {
           "id": 1929,
@@ -397,9 +590,15 @@
           "quality": "uncommon",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 3,
+            "armor": 28
+          }
         },
         {
           "id": 2169,
@@ -409,11 +608,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 14.28,
           "speed": 1.5,
           "droppedBy": [
             "Sneed's Shredder"
-          ]
+          ],
+          "stats": {
+            "minDamage": 14,
+            "maxDamage": 28,
+            "speed": 1.5,
+            "dps": 14.0
+          }
         },
         {
           "id": 1925,
@@ -423,11 +630,20 @@
           "quality": "uncommon",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 8.21,
           "speed": 1.6,
           "droppedBy": [
             "Defias Watchman"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "minDamage": 9,
+            "maxDamage": 17,
+            "speed": 1.6,
+            "dps": 8.13
+          }
         },
         {
           "id": 5191,
@@ -437,11 +653,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 15.69,
           "speed": 2.8,
           "droppedBy": [
             "Edwin VanCleef"
-          ]
+          ],
+          "stats": {
+            "minDamage": 30,
+            "maxDamage": 57,
+            "speed": 2.8,
+            "dps": 15.54
+          }
         },
         {
           "id": 1937,
@@ -451,11 +675,21 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 15.33,
           "speed": 2.3,
           "droppedBy": [
             "Sneed's Shredder"
-          ]
+          ],
+          "stats": {
+            "agility": 3,
+            "stamina": 3,
+            "minDamage": 24,
+            "maxDamage": 46,
+            "speed": 2.3,
+            "dps": 15.22
+          }
         },
         {
           "id": 5192,
@@ -465,11 +699,23 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 14.56,
           "speed": 1.7,
           "droppedBy": [
             "Mr. Smite"
-          ]
+          ],
+          "stats": {
+            "agility": 4,
+            "minDamage": 17,
+            "maxDamage": 32,
+            "speed": 1.7,
+            "dps": 14.41,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 5196,
@@ -479,11 +725,22 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 14.16,
           "speed": 1.9,
           "droppedBy": [
             "Mr. Smite"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 2,
+            "spirit": 2,
+            "minDamage": 18,
+            "maxDamage": 35,
+            "speed": 1.9,
+            "dps": 13.95
+          }
         },
         {
           "id": 5197,
@@ -493,11 +750,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 14.05,
           "speed": 2.8,
           "droppedBy": [
             "Cookie"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "minDamage": 27,
+            "maxDamage": 51,
+            "speed": 2.8,
+            "dps": 13.93
+          }
         },
         {
           "id": 1951,
@@ -507,9 +773,18 @@
           "quality": "uncommon",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 9.69,
           "speed": 1.9,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 2,
+            "minDamage": 12,
+            "maxDamage": 24,
+            "speed": 1.9,
+            "dps": 9.47
+          }
         },
         {
           "id": 1936,
@@ -519,11 +794,20 @@
           "quality": "uncommon",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 9.28,
           "speed": 1.4,
           "droppedBy": [
             "Goblin Engineer"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "minDamage": 8,
+            "maxDamage": 17,
+            "speed": 1.4,
+            "dps": 8.93
+          }
         },
         {
           "id": 5198,
@@ -533,11 +817,18 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
           "dps": 14.76,
           "speed": 1.3,
           "droppedBy": [
             "Cookie"
-          ]
+          ],
+          "stats": {
+            "fireRes": 3,
+            "speed": 1.3,
+            "dps": 14.62
+          }
         },
         {
           "id": 5443,
@@ -547,11 +838,21 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Miner Johnson"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "stamina": 5,
+            "armor": 509,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 872,
@@ -561,11 +862,20 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 19.74,
           "speed": 3.3,
           "droppedBy": [
             "Rhahk'Zor"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "minDamage": 52,
+            "maxDamage": 78,
+            "speed": 3.3,
+            "dps": 19.7
+          }
         },
         {
           "id": 5194,
@@ -575,11 +885,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 19.78,
           "speed": 2.7,
           "droppedBy": [
             "Sneed"
-          ]
+          ],
+          "stats": {
+            "stamina": 8,
+            "spirit": 8,
+            "minDamage": 42,
+            "maxDamage": 64,
+            "speed": 2.7,
+            "dps": 19.63
+          }
         },
         {
           "id": 7230,
@@ -589,11 +909,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 19.78,
           "speed": 3.5,
           "droppedBy": [
             "Mr. Smite"
-          ]
+          ],
+          "stats": {
+            "strength": 11,
+            "agility": 4,
+            "minDamage": 55,
+            "maxDamage": 83,
+            "speed": 3.5,
+            "dps": 19.71
+          }
         },
         {
           "id": 5200,
@@ -603,11 +933,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
           "dps": 19.1,
           "speed": 2.4,
           "droppedBy": [
             "Captain Greenskin"
-          ]
+          ],
+          "stats": {
+            "agility": 9,
+            "intellect": 5,
+            "minDamage": 36,
+            "maxDamage": 55,
+            "speed": 2.4,
+            "dps": 18.96
+          }
         },
         {
           "id": 5201,
@@ -617,11 +957,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 19.14,
           "speed": 3,
           "droppedBy": [
             "Captain Greenskin"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "spirit": 5,
+            "fireRes": 8,
+            "minDamage": 45,
+            "maxDamage": 69,
+            "speed": 3.0,
+            "dps": 19.0
+          }
         },
         {
           "id": 5187,
@@ -631,11 +982,20 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 18.44,
           "speed": 3.2,
           "droppedBy": [
             "Rhahk'Zor"
-          ]
+          ],
+          "stats": {
+            "stamina": 8,
+            "minDamage": 47,
+            "maxDamage": 71,
+            "speed": 3.2,
+            "dps": 18.44
+          }
         },
         {
           "id": 10403,
@@ -645,11 +1005,16 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Captain Greenskin"
-          ]
+          ],
+          "stats": {
+            "armor": 50
+          }
         }
       ],
       "questRewards": []
@@ -666,11 +1031,18 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Skum"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "spirit": 2,
+            "armor": 20
+          }
         },
         {
           "id": 6629,
@@ -680,11 +1052,20 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Verdan the Everliving"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "armor": 20,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 6632,
@@ -694,11 +1075,17 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Deviate Faerie Dragon"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "armor": 19
+          }
         },
         {
           "id": 6473,
@@ -708,11 +1095,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Pythas"
-          ]
+          ],
+          "stats": {
+            "strength": 6,
+            "stamina": 4,
+            "spirit": 7,
+            "armor": 91
+          }
         },
         {
           "id": 6627,
@@ -722,11 +1117,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mutanus the Devourer"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 4,
+            "armor": 194
+          }
         },
         {
           "id": 6465,
@@ -736,11 +1138,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Cobrahn"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "spirit": 10,
+            "armor": 40
+          }
         },
         {
           "id": 6459,
@@ -750,11 +1159,17 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Serpentis"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "armor": 134
+          }
         },
         {
           "id": 10411,
@@ -764,11 +1179,18 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Serpentis"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 6,
+            "armor": 61
+          }
         },
         {
           "id": 6463,
@@ -778,11 +1200,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mutanus the Devourer"
-          ]
+          ],
+          "stats": {
+            "stamina": 3,
+            "spirit": 5
+          }
         },
         {
           "id": 5970,
@@ -792,11 +1220,17 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Serpentis"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "armor": 25
+          }
         },
         {
           "id": 10413,
@@ -806,11 +1240,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Druid of the Fang"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "agility": 6,
+            "armor": 52
+          }
         },
         {
           "id": 10410,
@@ -820,11 +1261,19 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Cobrahn"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "agility": 9,
+            "stamina": 4,
+            "armor": 78
+          }
         },
         {
           "id": 6472,
@@ -834,11 +1283,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 15.69,
           "speed": 2.8,
           "droppedBy": [
             "Lord Pythas"
-          ]
+          ],
+          "stats": {
+            "minDamage": 30,
+            "maxDamage": 57,
+            "speed": 2.8,
+            "dps": 15.54
+          }
         },
         {
           "id": 6448,
@@ -848,11 +1305,21 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 14.11,
           "speed": 1.8,
           "droppedBy": [
             "Skum"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "agility": 3,
+            "minDamage": 17,
+            "maxDamage": 33,
+            "speed": 1.8,
+            "dps": 13.89
+          }
         },
         {
           "id": 6469,
@@ -862,11 +1329,19 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
           "dps": 20.5,
           "speed": 2.4,
           "droppedBy": [
             "Lord Serpentis"
-          ]
+          ],
+          "stats": {
+            "minDamage": 34,
+            "maxDamage": 64,
+            "speed": 2.4,
+            "dps": 20.42
+          }
         },
         {
           "id": 5243,
@@ -876,11 +1351,20 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
           "dps": 15.33,
           "speed": 1.7,
           "droppedBy": [
             "Deviate Faerie Dragon"
-          ]
+          ],
+          "stats": {
+            "speed": 1.7,
+            "dps": 15.29,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 6630,
@@ -890,11 +1374,17 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Verdan the Everliving"
-          ]
+          ],
+          "stats": {
+            "armor": 547,
+            "natureRes": 5
+          }
         },
         {
           "id": 13245,
@@ -904,11 +1394,16 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Kresh"
-          ]
+          ],
+          "stats": {
+            "armor": 528
+          }
         },
         {
           "id": 6447,
@@ -918,11 +1413,16 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Kresh"
-          ]
+          ],
+          "stats": {
+            "armor": 490
+          }
         },
         {
           "id": 6461,
@@ -932,11 +1432,16 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mutanus the Devourer"
-          ]
+          ],
+          "stats": {
+            "armor": 32
+          }
         },
         {
           "id": 5404,
@@ -946,11 +1451,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lady Anacondra"
-          ]
+          ],
+          "stats": {
+            "agility": 5,
+            "armor": 68
+          }
         },
         {
           "id": 6631,
@@ -960,11 +1471,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 19.82,
           "speed": 2.9,
           "droppedBy": [
             "Verdan the Everliving"
-          ]
+          ],
+          "stats": {
+            "stamina": 2,
+            "spirit": 5,
+            "natureRes": 9,
+            "minDamage": 45,
+            "maxDamage": 69,
+            "speed": 2.9,
+            "dps": 19.66
+          }
         },
         {
           "id": 6460,
@@ -974,11 +1496,18 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Cobrahn"
-          ]
+          ],
+          "stats": {
+            "strength": 7,
+            "agility": 3,
+            "armor": 107
+          }
         },
         {
           "id": 10412,
@@ -988,11 +1517,18 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lady Anacondra"
-          ]
+          ],
+          "stats": {
+            "agility": 3,
+            "stamina": 5,
+            "armor": 49
+          }
         }
       ],
       "questRewards": []
@@ -1009,9 +1545,15 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 5,
+            "stamina": 5
+          }
         },
         {
           "id": 2941,
@@ -1021,11 +1563,21 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 17.88,
           "speed": 1.8,
           "droppedBy": [
             "Bruegal Ironknuckle"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 2,
+            "minDamage": 22,
+            "maxDamage": 42,
+            "speed": 1.8,
+            "dps": 17.78
+          }
         },
         {
           "id": 2942,
@@ -1035,11 +1587,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 13,
           "dps": 17.68,
           "speed": 1.7,
           "droppedBy": [
             "Bruegal Ironknuckle"
-          ]
+          ],
+          "stats": {
+            "minDamage": 21,
+            "maxDamage": 39,
+            "speed": 1.7,
+            "dps": 17.65
+          }
         },
         {
           "id": 2280,
@@ -1049,11 +1609,24 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 23.83,
           "speed": 2.8,
           "droppedBy": [
             "Kam Deepfury"
-          ]
+          ],
+          "stats": {
+            "agility": 10,
+            "intellect": 3,
+            "minDamage": 53,
+            "maxDamage": 80,
+            "speed": 2.8,
+            "dps": 23.75,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 3228,
@@ -1063,11 +1636,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Bruegal Ironknuckle"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 8,
+            "armor": 92
+          }
         }
       ],
       "questRewards": [
@@ -1079,11 +1659,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Crime and Punishment"
-          ]
+          ],
+          "stats": {
+            "agility": 5,
+            "stamina": 8,
+            "spirit": 6,
+            "armor": 68
+          }
         },
         {
           "id": 270029,
@@ -1093,11 +1681,17 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Crime and Punishment"
-          ]
+          ],
+          "stats": {
+            "intellect": 11,
+            "armor": 29
+          }
         },
         {
           "id": 2906,
@@ -1107,11 +1701,18 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Crime and Punishment"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "spirit": 10,
+            "armor": 185
+          }
         },
         {
           "id": 3400,
@@ -1121,11 +1722,21 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 17.23,
           "speed": 2.5,
           "droppedBy": [
             "What Comes Around..."
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "spirit": 4,
+            "minDamage": 30,
+            "maxDamage": 56,
+            "speed": 2.5,
+            "dps": 17.2
+          }
         },
         {
           "id": 1264,
@@ -1135,11 +1746,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 23.89,
           "speed": 2.3,
           "droppedBy": [
             "The Fury Runs Deep"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 5,
+            "intellect": 9,
+            "minDamage": 43,
+            "maxDamage": 66,
+            "speed": 2.3,
+            "dps": 23.7
+          }
         },
         {
           "id": 1317,
@@ -1149,11 +1771,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 22.44,
           "speed": 3.3,
           "droppedBy": [
             "What Comes Around..."
-          ]
+          ],
+          "stats": {
+            "strength": 2,
+            "spirit": 13,
+            "minDamage": 59,
+            "maxDamage": 89,
+            "speed": 3.3,
+            "dps": 22.42
+          }
         },
         {
           "id": 270027,
@@ -1163,11 +1795,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 22.39,
           "speed": 3.2,
           "droppedBy": [
             "What Comes Around..."
-          ]
+          ],
+          "stats": {
+            "agility": 8,
+            "intellect": 7,
+            "spirit": 8,
+            "minDamage": 57,
+            "maxDamage": 86,
+            "speed": 3.2,
+            "dps": 22.34
+          }
         },
         {
           "id": 3562,
@@ -1177,11 +1820,18 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Fury Runs Deep"
-          ]
+          ],
+          "stats": {
+            "agility": 7,
+            "stamina": 3,
+            "armor": 57
+          }
         }
       ]
     },
@@ -1197,11 +1847,17 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Wolf Master Nandos"
-          ]
+          ],
+          "stats": {
+            "stamina": 3,
+            "armor": 22
+          }
         },
         {
           "id": 6340,
@@ -1211,11 +1867,18 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Fenrus the Devourer"
-          ]
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 3,
+            "armor": 22
+          }
         },
         {
           "id": 6324,
@@ -1225,11 +1888,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Archmage Arugal"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "spirit": 6,
+            "armor": 46,
+            "shadowRes": 8
+          }
         },
         {
           "id": 6642,
@@ -1239,11 +1910,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Deathsworn Captain"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 12,
+            "spirit": 5,
+            "armor": 208
+          }
         },
         {
           "id": 1489,
@@ -1253,9 +1932,20 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "stamina": 8,
+            "spirit": 8,
+            "armor": 94,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 2292,
@@ -1265,9 +1955,17 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 3,
+            "intellect": 5,
+            "armor": 43,
+            "shadowRes": 5
+          }
         },
         {
           "id": 6226,
@@ -1277,11 +1975,17 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Razorclaw the Butcher"
-          ]
+          ],
+          "stats": {
+            "stamina": 9,
+            "armor": 42
+          }
         },
         {
           "id": 6321,
@@ -1291,11 +1995,20 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Baron Silverlaine"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "stamina": 2,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 6341,
@@ -1305,9 +2018,15 @@
           "quality": "rare",
           "slot": "Held in Off-hand",
           "slotId": 23,
+          "itemClass": 4,
+          "itemSubclass": -5,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 4,
+            "shadowRes": 4
+          }
         },
         {
           "id": 23173,
@@ -1317,11 +2036,18 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Sever"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 8,
+            "armor": 37
+          }
         },
         {
           "id": 6323,
@@ -1331,11 +2057,24 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 16.69,
           "speed": 2.4,
           "droppedBy": [
             "Baron Silverlaine"
-          ]
+          ],
+          "stats": {
+            "strength": 2,
+            "stamina": 3,
+            "minDamage": 28,
+            "maxDamage": 52,
+            "speed": 2.4,
+            "dps": 16.67,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 1482,
@@ -1345,9 +2084,17 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 15.7,
           "speed": 2.7,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 29,
+            "maxDamage": 55,
+            "speed": 2.7,
+            "dps": 15.56
+          }
         },
         {
           "id": 2807,
@@ -1357,9 +2104,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 15.15,
           "speed": 2.7,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 3,
+            "agility": 3,
+            "minDamage": 28,
+            "maxDamage": 53,
+            "speed": 2.7,
+            "dps": 15.0
+          }
         },
         {
           "id": 6220,
@@ -1369,11 +2126,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 17.88,
           "speed": 1.8,
           "droppedBy": [
             "Archmage Arugal"
-          ]
+          ],
+          "stats": {
+            "fireRes": 3,
+            "minDamage": 22,
+            "maxDamage": 42,
+            "speed": 1.8,
+            "dps": 17.78
+          }
         },
         {
           "id": 1292,
@@ -1383,11 +2149,21 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 16.28,
           "speed": 1.7,
           "droppedBy": [
             "Razorclaw the Butcher"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "agility": 2,
+            "minDamage": 19,
+            "maxDamage": 36,
+            "speed": 1.7,
+            "dps": 16.18
+          }
         },
         {
           "id": 1935,
@@ -1397,9 +2173,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 15.78,
           "speed": 1.9,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 3,
+            "agility": 4,
+            "minDamage": 20,
+            "maxDamage": 39,
+            "speed": 1.9,
+            "dps": 15.53
+          }
         },
         {
           "id": 6633,
@@ -1409,11 +2195,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 15.16,
           "speed": 2.9,
           "droppedBy": [
             "Razorclaw the Butcher"
-          ]
+          ],
+          "stats": {
+            "stamina": 3,
+            "minDamage": 30,
+            "maxDamage": 57,
+            "speed": 2.9,
+            "dps": 15.0
+          }
         },
         {
           "id": 1483,
@@ -1423,9 +2218,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 14.18,
           "speed": 2.6,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 3,
+            "stamina": 3,
+            "minDamage": 25,
+            "maxDamage": 48,
+            "speed": 2.6,
+            "dps": 14.04
+          }
         },
         {
           "id": 6320,
@@ -1435,11 +2240,18 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Commander Springvale"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "stamina": 3,
+            "armor": 585
+          }
         },
         {
           "id": 3748,
@@ -1449,11 +2261,21 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Wolf Master Nandos"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "intellect": 8,
+            "armor": 34,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 5254,
@@ -1463,11 +2285,21 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Rethilgore"
-          ]
+          ],
+          "stats": {
+            "armor": 67,
+            "arcaneRes": 2,
+            "fireRes": 2,
+            "natureRes": 2,
+            "frostRes": 2,
+            "shadowRes": 2
+          }
         },
         {
           "id": 6641,
@@ -1477,11 +2309,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 8,
           "dps": 22.37,
           "speed": 3.8,
           "droppedBy": [
             "Deathsworn Captain"
-          ]
+          ],
+          "stats": {
+            "minDamage": 68,
+            "maxDamage": 102,
+            "speed": 3.8,
+            "dps": 22.37
+          }
         },
         {
           "id": 3191,
@@ -1491,11 +2331,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 21.73,
           "speed": 3.3,
           "droppedBy": [
             "Commander Springvale"
-          ]
+          ],
+          "stats": {
+            "strength": 9,
+            "stamina": 9,
+            "minDamage": 57,
+            "maxDamage": 86,
+            "speed": 3.3,
+            "dps": 21.67
+          }
         },
         {
           "id": 6318,
@@ -1505,11 +2355,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 21.81,
           "speed": 2.9,
           "droppedBy": [
             "Odo the Blindwatcher"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "spirit": 12,
+            "minDamage": 50,
+            "maxDamage": 76,
+            "speed": 2.9,
+            "dps": 21.72
+          }
         },
         {
           "id": 2205,
@@ -1519,9 +2379,17 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 8,
           "dps": 21.1,
           "speed": 3.4,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 57,
+            "maxDamage": 86,
+            "speed": 3.4,
+            "dps": 21.03
+          }
         },
         {
           "id": 1318,
@@ -1531,9 +2399,17 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 19.74,
           "speed": 3.3,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 52,
+            "maxDamage": 78,
+            "speed": 3.3,
+            "dps": 19.7
+          }
         },
         {
           "id": 1484,
@@ -1543,9 +2419,20 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 19.17,
           "speed": 3.6,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 6,
+            "intellect": 5,
+            "shadowRes": 8,
+            "minDamage": 55,
+            "maxDamage": 83,
+            "speed": 3.6,
+            "dps": 19.17
+          }
         },
         {
           "id": 3194,
@@ -1555,9 +2442,18 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 18.41,
           "speed": 3.3,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "shadowRes": 2,
+            "minDamage": 48,
+            "maxDamage": 73,
+            "speed": 3.3,
+            "dps": 18.33
+          }
         },
         {
           "id": 6392,
@@ -1567,11 +2463,19 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Archmage Arugal"
-          ]
+          ],
+          "stats": {
+            "agility": 2,
+            "intellect": 3,
+            "spirit": 5,
+            "armor": 26
+          }
         },
         {
           "id": 6319,
@@ -1581,11 +2485,21 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Odo the Blindwatcher"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "intellect": 3,
+            "armor": 54,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 3230,
@@ -1595,11 +2509,17 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Fenrus the Devourer"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "armor": 43
+          }
         },
         {
           "id": 5943,
@@ -1609,11 +2529,17 @@
           "quality": "uncommon",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Arugal's Voidwalker"
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "armor": 80
+          }
         },
         {
           "id": 1974,
@@ -1623,9 +2549,16 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 1,
+            "intellect": 5,
+            "armor": 17
+          }
         }
       ],
       "questRewards": [
@@ -1637,11 +2570,18 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Book of Ur"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 11,
+            "armor": 68
+          }
         },
         {
           "id": 6414,
@@ -1651,11 +2591,16 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Arugal Must Die"
-          ]
+          ],
+          "stats": {
+            "stamina": 8
+          }
         },
         {
           "id": 270030,
@@ -1665,11 +2610,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Book of Ur"
-          ]
+          ],
+          "stats": {
+            "stamina": 8,
+            "spirit": 6,
+            "armor": 29
+          }
         },
         {
           "id": 270024,
@@ -1679,11 +2631,18 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Deathstalkers in Shadowfang"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "spirit": 8,
+            "armor": 156
+          }
         },
         {
           "id": 3324,
@@ -1693,11 +2652,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Deathstalkers in Shadowfang"
-          ]
+          ],
+          "stats": {
+            "spirit": 9,
+            "armor": 34
+          }
         },
         {
           "id": 270023,
@@ -1707,11 +2672,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Deathstalkers in Shadowfang"
-          ]
+          ],
+          "stats": {
+            "stamina": 9,
+            "armor": 73
+          }
         },
         {
           "id": 4534,
@@ -1721,11 +2692,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Book of Ur"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "spirit": 6,
+            "armor": 92
+          }
         }
       ]
     },
@@ -1741,11 +2719,17 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Old Serra'kis"
-          ]
+          ],
+          "stats": {
+            "spirit": 8,
+            "armor": 23
+          }
         },
         {
           "id": 6907,
@@ -1755,11 +2739,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ghamoo-ra"
-          ]
+          ],
+          "stats": {
+            "armor": 208,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 2034,
@@ -1769,9 +2761,15 @@
           "quality": "uncommon",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "spirit": 8,
+            "armor": 39
+          }
         },
         {
           "id": 6906,
@@ -1781,11 +2779,19 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Gelihast"
-          ]
+          ],
+          "stats": {
+            "strength": 8,
+            "stamina": 4,
+            "armor": 132,
+            "natureRes": 4
+          }
         },
         {
           "id": 888,
@@ -1795,11 +2801,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lady Sarevess"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 4,
+            "armor": 61
+          }
         },
         {
           "id": 6910,
@@ -1809,11 +2822,17 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Aku'mai"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "armor": 41
+          }
         },
         {
           "id": 6903,
@@ -1823,11 +2842,17 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Twilight Lord Kelris"
-          ]
+          ],
+          "stats": {
+            "spirit": 9,
+            "armor": 40
+          }
         },
         {
           "id": 11121,
@@ -1837,11 +2862,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 17.16,
           "speed": 2.2,
           "droppedBy": [
             "Lady Sarevess"
-          ]
+          ],
+          "stats": {
+            "minDamage": 26,
+            "maxDamage": 49,
+            "speed": 2.2,
+            "dps": 17.05
+          }
         },
         {
           "id": 1454,
@@ -1851,9 +2884,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 18.35,
           "speed": 2.6,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "stamina": 4,
+            "minDamage": 33,
+            "maxDamage": 62,
+            "speed": 2.6,
+            "dps": 18.27
+          }
         },
         {
           "id": 6904,
@@ -1863,11 +2906,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 17.75,
           "speed": 1.3,
           "droppedBy": [
             "Old Serra'kis"
-          ]
+          ],
+          "stats": {
+            "natureRes": 2,
+            "minDamage": 16,
+            "maxDamage": 30,
+            "speed": 1.3,
+            "dps": 17.69
+          }
         },
         {
           "id": 3078,
@@ -1877,11 +2929,19 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
           "dps": 22.42,
           "speed": 2.4,
           "droppedBy": [
             "Lady Sarevess"
-          ]
+          ],
+          "stats": {
+            "minDamage": 37,
+            "maxDamage": 70,
+            "speed": 2.4,
+            "dps": 22.29
+          }
         },
         {
           "id": 6909,
@@ -1891,11 +2951,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 8,
           "dps": 25.74,
           "speed": 3.3,
           "droppedBy": [
             "Aku'mai"
-          ]
+          ],
+          "stats": {
+            "minDamage": 67,
+            "maxDamage": 102,
+            "speed": 3.3,
+            "dps": 25.61
+          }
         },
         {
           "id": 1155,
@@ -1905,11 +2973,23 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 23.83,
           "speed": 2.8,
           "droppedBy": [
             "Twilight Lord Kelris"
-          ]
+          ],
+          "stats": {
+            "spirit": 11,
+            "minDamage": 53,
+            "maxDamage": 80,
+            "speed": 2.8,
+            "dps": 23.75,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 6905,
@@ -1919,11 +2999,20 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 22.44,
           "speed": 3.3,
           "droppedBy": [
             "Gelihast"
-          ]
+          ],
+          "stats": {
+            "strength": 8,
+            "minDamage": 59,
+            "maxDamage": 89,
+            "speed": 3.3,
+            "dps": 22.42
+          }
         },
         {
           "id": 6911,
@@ -1933,11 +3022,17 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Aku'mai"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "armor": 58
+          }
         },
         {
           "id": 6908,
@@ -1947,11 +3042,17 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ghamoo-ra"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "armor": 25
+          }
         },
         {
           "id": 6902,
@@ -1961,11 +3062,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Old Serra'kis"
-          ]
+          ],
+          "stats": {
+            "strength": 6,
+            "stamina": 3,
+            "armor": 43
+          }
         }
       ],
       "questRewards": []
@@ -1982,11 +3090,17 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Crowd Pummeler 9-60"
-          ]
+          ],
+          "stats": {
+            "stamina": 12,
+            "armor": 76
+          }
         },
         {
           "id": 9454,
@@ -1996,11 +3110,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Viscous Fallout"
-          ]
+          ],
+          "stats": {
+            "intellect": 8,
+            "spirit": 4,
+            "armor": 34,
+            "natureRes": 5
+          }
         },
         {
           "id": 9510,
@@ -2010,9 +3132,16 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 4,
+            "stamina": 10,
+            "armor": 154
+          }
         },
         {
           "id": 9461,
@@ -2022,11 +3151,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mekgineer Thermaplugg"
-          ]
+          ],
+          "stats": {
+            "arcaneRes": 5,
+            "natureRes": 5
+          }
         },
         {
           "id": 9447,
@@ -2036,11 +3171,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Electrocutioner 6000"
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "spirit": 7
+          }
         },
         {
           "id": 9445,
@@ -2050,11 +3191,19 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Grubbis"
-          ]
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 5,
+            "spirit": 9,
+            "armor": 144
+          }
         },
         {
           "id": 9491,
@@ -2064,9 +3213,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 4,
+            "stamina": 5,
+            "intellect": 8,
+            "spirit": 5,
+            "armor": 31
+          }
         },
         {
           "id": 9446,
@@ -2076,11 +3234,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 22.22,
           "speed": 1.7,
           "droppedBy": [
             "Electrocutioner 6000"
-          ]
+          ],
+          "stats": {
+            "minDamage": 26,
+            "maxDamage": 49,
+            "speed": 1.7,
+            "dps": 22.06
+          }
         },
         {
           "id": 9453,
@@ -2090,11 +3256,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 20.63,
           "speed": 1.9,
           "droppedBy": [
             "Viscous Fallout"
-          ]
+          ],
+          "stats": {
+            "minDamage": 27,
+            "maxDamage": 51,
+            "speed": 1.9,
+            "dps": 20.53
+          }
         },
         {
           "id": 9458,
@@ -2104,11 +3278,20 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mekgineer Thermaplugg"
-          ]
+          ],
+          "stats": {
+            "spirit": 3,
+            "armor": 776,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 9449,
@@ -2118,9 +3301,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 29.1,
           "speed": 2,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 16,
+            "agility": 5,
+            "minDamage": 46,
+            "maxDamage": 70,
+            "speed": 2.0,
+            "dps": 29.0
+          }
         },
         {
           "id": 9452,
@@ -2130,11 +3323,23 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 26.78,
           "speed": 2.8,
           "droppedBy": [
             "Viscous Fallout"
-          ]
+          ],
+          "stats": {
+            "frostRes": 15,
+            "minDamage": 59,
+            "maxDamage": 90,
+            "speed": 2.8,
+            "dps": 26.61,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 9448,
@@ -2144,11 +3349,16 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Electrocutioner 6000"
-          ]
+          ],
+          "stats": {
+            "armor": 22
+          }
         }
       ],
       "questRewards": []
@@ -2165,11 +3375,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Death Speaker Jargba"
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 11,
+            "armor": 48
+          }
         },
         {
           "id": 1978,
@@ -2179,9 +3396,17 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "agility": 6,
+            "stamina": 6,
+            "armor": 61
+          }
         },
         {
           "id": 6686,
@@ -2191,11 +3416,17 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Overlord Ramtusk"
-          ]
+          ],
+          "stats": {
+            "strength": 13,
+            "armor": 188
+          }
         },
         {
           "id": 6688,
@@ -2205,11 +3436,19 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Earthcaller Halmgar"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "intellect": 10,
+            "spirit": 10,
+            "armor": 86
+          }
         },
         {
           "id": 6690,
@@ -2219,11 +3458,17 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Agathelos the Raging"
-          ]
+          ],
+          "stats": {
+            "intellect": 12,
+            "armor": 96
+          }
         },
         {
           "id": 6691,
@@ -2233,11 +3478,21 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 23.12,
           "speed": 1.5,
           "droppedBy": [
             "Agathelos the Raging"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "spirit": 4,
+            "minDamage": 24,
+            "maxDamage": 45,
+            "speed": 1.5,
+            "dps": 23.0
+          }
         },
         {
           "id": 2816,
@@ -2247,11 +3502,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 21.43,
           "speed": 2.8,
           "droppedBy": [
             "Death Speaker Jargba"
-          ]
+          ],
+          "stats": {
+            "minDamage": 42,
+            "maxDamage": 78,
+            "speed": 2.8,
+            "dps": 21.43
+          }
         },
         {
           "id": 6695,
@@ -2261,11 +3524,16 @@
           "quality": "rare",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Blind Hunter"
-          ]
+          ],
+          "stats": {
+            "stamina": 4
+          }
         },
         {
           "id": 6692,
@@ -2275,11 +3543,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 23.12,
           "speed": 2.4,
           "droppedBy": [
             "Charlga Razorflank"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "minDamage": 38,
+            "maxDamage": 72,
+            "speed": 2.4,
+            "dps": 22.92
+          }
         },
         {
           "id": 6681,
@@ -2289,11 +3566,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 20.74,
           "speed": 1.7,
           "droppedBy": [
             "Aggem Thorncurse"
-          ]
+          ],
+          "stats": {
+            "minDamage": 24,
+            "maxDamage": 46,
+            "speed": 1.7,
+            "dps": 20.59
+          }
         },
         {
           "id": 6696,
@@ -2303,11 +3588,21 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
           "dps": 28.98,
           "speed": 1.7,
           "droppedBy": [
             "Blind Hunter"
-          ]
+          ],
+          "stats": {
+            "agility": 3,
+            "shadowRes": 5,
+            "minDamage": 34,
+            "maxDamage": 64,
+            "speed": 1.7,
+            "dps": 28.82
+          }
         },
         {
           "id": 6697,
@@ -2317,11 +3612,19 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Blind Hunter"
-          ]
+          ],
+          "stats": {
+            "agility": 3,
+            "intellect": 11,
+            "spirit": 5,
+            "armor": 38
+          }
         },
         {
           "id": 6685,
@@ -2331,11 +3634,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Death Speaker Jargba"
-          ]
+          ],
+          "stats": {
+            "intellect": 11,
+            "armor": 37
+          }
         },
         {
           "id": 2264,
@@ -2345,9 +3654,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 10,
+            "stamina": 4,
+            "spirit": 3,
+            "armor": 77
+          }
         },
         {
           "id": 6687,
@@ -2357,11 +3674,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 28.97,
           "speed": 3.8,
           "droppedBy": [
             "Overlord Ramtusk"
-          ]
+          ],
+          "stats": {
+            "strength": 15,
+            "stamina": 8,
+            "minDamage": 88,
+            "maxDamage": 132,
+            "speed": 3.8,
+            "dps": 28.95
+          }
         },
         {
           "id": 1976,
@@ -2371,9 +3698,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 23.83,
           "speed": 2.8,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 11,
+            "stamina": 10,
+            "minDamage": 53,
+            "maxDamage": 80,
+            "speed": 2.8,
+            "dps": 23.75
+          }
         },
         {
           "id": 6679,
@@ -2383,11 +3720,20 @@
           "quality": "uncommon",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
           "dps": 19.85,
           "speed": 2.6,
           "droppedBy": [
             "Razorfen Spearhide"
-          ]
+          ],
+          "stats": {
+            "agility": 11,
+            "minDamage": 41,
+            "maxDamage": 62,
+            "speed": 2.6,
+            "dps": 19.81
+          }
         },
         {
           "id": 2549,
@@ -2397,9 +3743,18 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 22.42,
           "speed": 2.6,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 15,
+            "minDamage": 46,
+            "maxDamage": 70,
+            "speed": 2.6,
+            "dps": 22.31
+          }
         },
         {
           "id": 4438,
@@ -2409,9 +3764,16 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 8,
+            "stamina": 3,
+            "armor": 95
+          }
         }
       ],
       "questRewards": [
@@ -2423,11 +3785,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mortality Wanes"
-          ]
+          ],
+          "stats": {
+            "agility": 7,
+            "stamina": 8,
+            "spirit": 6,
+            "armor": 73
+          }
         },
         {
           "id": 6748,
@@ -2437,11 +3807,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Willix the Importer"
-          ]
+          ],
+          "stats": {
+            "agility": 7,
+            "spirit": 7
+          }
         },
         {
           "id": 6750,
@@ -2451,11 +3827,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Willix the Importer"
-          ]
+          ],
+          "stats": {
+            "intellect": 7,
+            "spirit": 7
+          }
         },
         {
           "id": 3041,
@@ -2465,11 +3847,20 @@
           "quality": "uncommon",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 3,
           "dps": 21.15,
           "speed": 2.8,
           "droppedBy": [
             "The Crone of the Kraul"
-          ]
+          ],
+          "stats": {
+            "agility": 4,
+            "minDamage": 41,
+            "maxDamage": 77,
+            "speed": 2.8,
+            "dps": 21.07
+          }
         },
         {
           "id": 6725,
@@ -2479,9 +3870,18 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "agility": 5,
+            "stamina": 5,
+            "spirit": 5,
+            "armor": 776
+          }
         },
         {
           "id": 4197,
@@ -2491,9 +3891,16 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 5,
+            "intellect": 10,
+            "armor": 39
+          }
         },
         {
           "id": 6742,
@@ -2503,9 +3910,16 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 6,
+            "stamina": 5,
+            "armor": 134
+          }
         }
       ]
     },
@@ -2521,11 +3935,18 @@
           "quality": "uncommon",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Arcanist Doan"
-          ]
+          ],
+          "stats": {
+            "stamina": 4,
+            "spirit": 8,
+            "armor": 52
+          }
         },
         {
           "id": 10328,
@@ -2535,11 +3956,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Scarlet Champion"
-          ]
+          ],
+          "stats": {
+            "strength": 8,
+            "stamina": 19,
+            "armor": 250
+          }
         },
         {
           "id": 7688,
@@ -2549,11 +3977,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ironspine"
-          ]
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 3,
+            "stamina": 17,
+            "armor": 235
+          }
         },
         {
           "id": 19509,
@@ -2563,11 +3999,17 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "High Inquisitor Fairbanks"
-          ]
+          ],
+          "stats": {
+            "stamina": 14,
+            "armor": 180
+          }
         },
         {
           "id": 10332,
@@ -2577,9 +4019,16 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 5,
+            "stamina": 12,
+            "armor": 161
+          }
         },
         {
           "id": 7686,
@@ -2589,11 +4038,17 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ironspine"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "agility": 9
+          }
         },
         {
           "id": 7724,
@@ -2603,11 +4058,17 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Scarlet Commander Mograine"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "armor": 168
+          }
         },
         {
           "id": 10331,
@@ -2617,11 +4078,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Scarlet Centurion"
-          ]
+          ],
+          "stats": {
+            "strength": 12,
+            "agility": 10,
+            "armor": 153
+          }
         },
         {
           "id": 7690,
@@ -2631,11 +4099,19 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Fallen Champion"
-          ]
+          ],
+          "stats": {
+            "strength": 4,
+            "agility": 6,
+            "stamina": 8,
+            "armor": 70
+          }
         },
         {
           "id": 7719,
@@ -2645,11 +4121,18 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Herod"
-          ]
+          ],
+          "stats": {
+            "strength": 13,
+            "stamina": 8,
+            "armor": 213
+          }
         },
         {
           "id": 7691,
@@ -2659,11 +4142,18 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Fallen Champion"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "spirit": 12,
+            "armor": 42
+          }
         },
         {
           "id": 7685,
@@ -2673,6 +4163,8 @@
           "quality": "rare",
           "slot": "Held in Off-hand",
           "slotId": 23,
+          "itemClass": 4,
+          "itemSubclass": -5,
           "dps": null,
           "speed": null,
           "droppedBy": [
@@ -2687,9 +4179,16 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 21,
+            "stamina": 10,
+            "armor": 236
+          }
         },
         {
           "id": 7709,
@@ -2699,11 +4198,17 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Azshir the Sleepless"
-          ]
+          ],
+          "stats": {
+            "spirit": 14,
+            "armor": 45
+          }
         },
         {
           "id": 7721,
@@ -2713,11 +4218,21 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 29.91,
           "speed": 2.7,
           "droppedBy": [
             "High Inquisitor Whitemane"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "spirit": 8,
+            "minDamage": 56,
+            "maxDamage": 105,
+            "speed": 2.7,
+            "dps": 29.81
+          }
         },
         {
           "id": 7714,
@@ -2727,11 +4242,21 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 26.86,
           "speed": 1.4,
           "droppedBy": [
             "Arcanist Doan"
-          ]
+          ],
+          "stats": {
+            "intellect": 8,
+            "spirit": 3,
+            "minDamage": 26,
+            "maxDamage": 49,
+            "speed": 1.4,
+            "dps": 26.79
+          }
         },
         {
           "id": 7731,
@@ -2741,11 +4266,16 @@
           "quality": "rare",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Azshir the Sleepless"
-          ]
+          ],
+          "stats": {
+            "stamina": 9
+          }
         },
         {
           "id": 23169,
@@ -2755,11 +4285,17 @@
           "quality": "rare",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Scorn"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "intellect": 6
+          }
         },
         {
           "id": 7687,
@@ -2769,11 +4305,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 23.12,
           "speed": 2.4,
           "droppedBy": [
             "Ironspine"
-          ]
+          ],
+          "stats": {
+            "strength": 7,
+            "minDamage": 38,
+            "maxDamage": 72,
+            "speed": 2.4,
+            "dps": 22.92
+          }
         },
         {
           "id": 7682,
@@ -2783,11 +4328,22 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 22.22,
           "speed": 1.7,
           "droppedBy": [
             "Interrogator Vishas"
-          ]
+          ],
+          "stats": {
+            "minDamage": 26,
+            "maxDamage": 49,
+            "speed": 1.7,
+            "dps": 22.06,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 7708,
@@ -2797,11 +4353,18 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
           "dps": 23.12,
           "speed": 1.4,
           "droppedBy": [
             "Azshir the Sleepless"
-          ]
+          ],
+          "stats": {
+            "shadowRes": 4,
+            "speed": 1.4,
+            "dps": 22.86
+          }
         },
         {
           "id": 7726,
@@ -2811,11 +4374,21 @@
           "quality": "rare",
           "slot": "Shield",
           "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Scarlet Commander Mograine"
-          ]
+          ],
+          "stats": {
+            "strength": 7,
+            "stamina": 8,
+            "armor": 1548,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 19507,
@@ -2825,11 +4398,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "High Inquisitor Fairbanks"
-          ]
+          ],
+          "stats": {
+            "intellect": 13,
+            "armor": 46
+          }
         },
         {
           "id": 7684,
@@ -2839,11 +4418,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Bloodmage Thalnos"
-          ]
+          ],
+          "stats": {
+            "intellect": 9,
+            "armor": 38
+          }
         },
         {
           "id": 7723,
@@ -2853,11 +4438,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 38.93,
           "speed": 3.4,
           "droppedBy": [
             "Scarlet Commander Mograine"
-          ]
+          ],
+          "stats": {
+            "strength": 8,
+            "stamina": 14,
+            "intellect": 16,
+            "minDamage": 105,
+            "maxDamage": 159,
+            "speed": 3.4,
+            "dps": 38.82
+          }
         },
         {
           "id": 7717,
@@ -2867,11 +4463,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 37.36,
           "speed": 3.5,
           "droppedBy": [
             "Herod"
-          ]
+          ],
+          "stats": {
+            "minDamage": 104,
+            "maxDamage": 157,
+            "speed": 3.5,
+            "dps": 37.29
+          }
         },
         {
           "id": 7713,
@@ -2881,11 +4485,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 34.78,
           "speed": 3.4,
           "droppedBy": [
             "Arcanist Doan"
-          ]
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 6,
+            "spirit": 7,
+            "minDamage": 94,
+            "maxDamage": 142,
+            "speed": 3.4,
+            "dps": 34.71
+          }
         },
         {
           "id": 7757,
@@ -2895,9 +4510,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 32.54,
           "speed": 3.1,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 8,
+            "intellect": 15,
+            "minDamage": 80,
+            "maxDamage": 121,
+            "speed": 3.1,
+            "dps": 32.42
+          }
         },
         {
           "id": 7710,
@@ -2907,11 +4532,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 31.42,
           "speed": 3.1,
           "droppedBy": [
             "Houndmaster Loksey"
-          ]
+          ],
+          "stats": {
+            "minDamage": 77,
+            "maxDamage": 117,
+            "speed": 3.1,
+            "dps": 31.29
+          }
         },
         {
           "id": 7689,
@@ -2921,11 +4554,21 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 8,
           "dps": 30.17,
           "speed": 2.9,
           "droppedBy": [
             "Fallen Champion"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 15,
+            "minDamage": 70,
+            "maxDamage": 105,
+            "speed": 2.9,
+            "dps": 30.17
+          }
         },
         {
           "id": 10329,
@@ -2935,9 +4578,16 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 12,
+            "stamina": 10,
+            "armor": 136
+          }
         },
         {
           "id": 19508,
@@ -2947,11 +4597,17 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "High Inquisitor Fairbanks"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "armor": 55
+          }
         },
         {
           "id": 10333,
@@ -2961,9 +4617,15 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 11,
+            "armor": 104
+          }
         }
       ],
       "questRewards": [
@@ -2975,9 +4637,15 @@
           "quality": "uncommon",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 4,
+            "spirit": 6
+          }
         }
       ]
     },
@@ -2993,11 +4661,17 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Amnennar the Coldbringer"
-          ]
+          ],
+          "stats": {
+            "stamina": 20,
+            "armor": 62
+          }
         },
         {
           "id": 10764,
@@ -3007,11 +4681,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Amnennar the Coldbringer"
-          ]
+          ],
+          "stats": {
+            "stamina": 3,
+            "intellect": 9,
+            "spirit": 15,
+            "armor": 266
+          }
         },
         {
           "id": 10775,
@@ -3021,11 +4703,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Tuten'kash"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "agility": 8,
+            "stamina": 15,
+            "armor": 373
+          }
         },
         {
           "id": 10765,
@@ -3035,11 +4725,18 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Amnennar the Coldbringer"
-          ]
+          ],
+          "stats": {
+            "stamina": 9,
+            "intellect": 9,
+            "armor": 81
+          }
         },
         {
           "id": 10763,
@@ -3049,11 +4746,20 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Amnennar the Coldbringer"
-          ]
+          ],
+          "stats": {
+            "strength": 14,
+            "stamina": 10,
+            "spirit": 7,
+            "armor": 341,
+            "frostRes": 10
+          }
         },
         {
           "id": 10761,
@@ -3063,11 +4769,20 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 29.26,
           "speed": 1.5,
           "droppedBy": [
             "Amnennar the Coldbringer"
-          ]
+          ],
+          "stats": {
+            "frostRes": 3,
+            "minDamage": 30,
+            "maxDamage": 57,
+            "speed": 1.5,
+            "dps": 29.0
+          }
         },
         {
           "id": 10772,
@@ -3077,11 +4792,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
           "dps": 28.8,
           "speed": 2,
           "droppedBy": [
             "Glutton"
-          ]
+          ],
+          "stats": {
+            "minDamage": 40,
+            "maxDamage": 75,
+            "speed": 2.0,
+            "dps": 28.75
+          }
         },
         {
           "id": 10774,
@@ -3091,11 +4814,19 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Glutton"
-          ]
+          ],
+          "stats": {
+            "strength": 5,
+            "agility": 6,
+            "stamina": 15,
+            "armor": 95
+          }
         },
         {
           "id": 10771,
@@ -3105,11 +4836,17 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Mordresh Fire Eye"
-          ]
+          ],
+          "stats": {
+            "intellect": 15,
+            "armor": 33
+          }
         }
       ],
       "questRewards": [
@@ -3121,9 +4858,15 @@
           "quality": "uncommon",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 4,
+            "spirit": 6
+          }
         }
       ]
     },
@@ -3139,11 +4882,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Grimlok"
-          ]
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 5,
+            "spirit": 14,
+            "armor": 68
+          }
         },
         {
           "id": 9390,
@@ -3153,11 +4904,16 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Revelosh"
-          ]
+          ],
+          "stats": {
+            "armor": 38
+          }
         },
         {
           "id": 9414,
@@ -3167,11 +4923,18 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Grimlok"
-          ]
+          ],
+          "stats": {
+            "agility": 18,
+            "spirit": 17,
+            "armor": 122
+          }
         },
         {
           "id": 9407,
@@ -3181,11 +4944,19 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ironaya"
-          ]
+          ],
+          "stats": {
+            "stamina": 9,
+            "intellect": 8,
+            "spirit": 12,
+            "armor": 53
+          }
         },
         {
           "id": 9411,
@@ -3195,11 +4966,19 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Ancient Stone Keeper"
-          ]
+          ],
+          "stats": {
+            "strength": 3,
+            "intellect": 13,
+            "spirit": 6,
+            "armor": 209
+          }
         },
         {
           "id": 9389,
@@ -3209,11 +4988,16 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Revelosh"
-          ]
+          ],
+          "stats": {
+            "armor": 95
+          }
         },
         {
           "id": 9416,
@@ -3223,11 +5007,22 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
           "dps": 41.11,
           "speed": 2.7,
           "droppedBy": [
             "Grimlok"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "agility": 15,
+            "stamina": 15,
+            "minDamage": 88,
+            "maxDamage": 133,
+            "speed": 2.7,
+            "dps": 40.93
+          }
         }
       ],
       "questRewards": [
@@ -3239,9 +5034,15 @@
           "quality": "uncommon",
           "slot": "Neck",
           "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "stamina": 4,
+            "spirit": 6
+          }
         }
       ]
     },
@@ -3257,11 +5058,19 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Shadowpriest Sezz'ziz"
-          ]
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 20,
+            "spirit": 8,
+            "armor": 144
+          }
         },
         {
           "id": 9469,
@@ -3271,11 +5080,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Gahz'rilla"
-          ]
+          ],
+          "stats": {
+            "stamina": 10,
+            "spirit": 16,
+            "armor": 290
+          }
         },
         {
           "id": 12470,
@@ -3285,11 +5101,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Zerillis"
-          ]
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 17,
+            "spirit": 3,
+            "armor": 95
+          }
         },
         {
           "id": 9640,
@@ -3299,11 +5123,16 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Antu'sul"
-          ]
+          ],
+          "stats": {
+            "armor": 330
+          }
         },
         {
           "id": 9470,
@@ -3313,11 +5142,17 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Shadowpriest Sezz'ziz"
-          ]
+          ],
+          "stats": {
+            "intellect": 21,
+            "armor": 57
+          }
         },
         {
           "id": 9474,
@@ -3327,11 +5162,18 @@
           "quality": "rare",
           "slot": "Legs",
           "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Shadowpriest Sezz'ziz"
-          ]
+          ],
+          "stats": {
+            "intellect": 10,
+            "spirit": 19,
+            "armor": 126
+          }
         },
         {
           "id": 9639,
@@ -3341,11 +5183,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 33.38,
           "speed": 2.7,
           "droppedBy": [
             "Antu'sul"
-          ]
+          ],
+          "stats": {
+            "minDamage": 63,
+            "maxDamage": 117,
+            "speed": 2.7,
+            "dps": 33.33
+          }
         },
         {
           "id": 11086,
@@ -3355,11 +5205,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 33.56,
           "speed": 1.9,
           "droppedBy": [
             "Chief Ukorz Sandscalp"
-          ]
+          ],
+          "stats": {
+            "minDamage": 44,
+            "maxDamage": 83,
+            "speed": 1.9,
+            "dps": 33.42
+          }
         },
         {
           "id": 9379,
@@ -3369,11 +5227,19 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 33.48,
           "speed": 1.7,
           "droppedBy": [
             "Antu'sul"
-          ]
+          ],
+          "stats": {
+            "minDamage": 39,
+            "maxDamage": 74,
+            "speed": 1.7,
+            "dps": 33.24
+          }
         },
         {
           "id": 9467,
@@ -3383,11 +5249,22 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 32.41,
           "speed": 1.8,
           "droppedBy": [
             "Gahz'rilla"
-          ]
+          ],
+          "stats": {
+            "minDamage": 40,
+            "maxDamage": 76,
+            "speed": 1.8,
+            "dps": 32.22,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 9476,
@@ -3397,11 +5274,18 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Chief Ukorz Sandscalp"
-          ]
+          ],
+          "stats": {
+            "strength": 12,
+            "stamina": 12,
+            "armor": 396
+          }
         },
         {
           "id": 9477,
@@ -3411,11 +5295,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 43.58,
           "speed": 3.4,
           "droppedBy": [
             "Chief Ukorz Sandscalp"
-          ]
+          ],
+          "stats": {
+            "minDamage": 118,
+            "maxDamage": 178,
+            "speed": 3.4,
+            "dps": 43.53
+          }
         },
         {
           "id": 9475,
@@ -3425,11 +5317,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
           "dps": 42.79,
           "speed": 2.9,
           "droppedBy": [
             "Shadowpriest Sezz'ziz"
-          ]
+          ],
+          "stats": {
+            "minDamage": 99,
+            "maxDamage": 149,
+            "speed": 2.9,
+            "dps": 42.76
+          }
         },
         {
           "id": 18082,
@@ -3439,11 +5339,24 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 41.97,
           "speed": 2.7,
           "droppedBy": [
             "Witch Doctor Zum'rah"
-          ]
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 10,
+            "minDamage": 90,
+            "maxDamage": 136,
+            "speed": 2.7,
+            "dps": 41.85,
+            "equip": [
+              "Equip:"
+            ]
+          }
         }
       ],
       "questRewards": []
@@ -3460,11 +5373,21 @@
           "quality": "rare",
           "slot": "Back",
           "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Celebras the Cursed"
-          ]
+          ],
+          "stats": {
+            "stamina": 12,
+            "armor": 37,
+            "natureRes": 10,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 17741,
@@ -3474,11 +5397,16 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Meshlok the Harvester"
-          ]
+          ],
+          "stats": {
+            "armor": 73
+          }
         },
         {
           "id": 17728,
@@ -3488,11 +5416,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Rotgrip"
-          ]
+          ],
+          "stats": {
+            "agility": 20,
+            "stamina": 5,
+            "armor": 105,
+            "natureRes": 6
+          }
         },
         {
           "id": 17748,
@@ -3502,11 +5438,19 @@
           "quality": "rare",
           "slot": "Feet",
           "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Razorlash"
-          ]
+          ],
+          "stats": {
+            "intellect": 9,
+            "spirit": 10,
+            "armor": 50,
+            "natureRes": 12
+          }
         },
         {
           "id": 17713,
@@ -3516,11 +5460,16 @@
           "quality": "rare",
           "slot": "Finger",
           "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Princess Theradras"
-          ]
+          ],
+          "stats": {
+            "stamina": 6
+          }
         },
         {
           "id": 17715,
@@ -3530,11 +5479,19 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Princess Theradras"
-          ]
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 19,
+            "spirit": 10,
+            "armor": 63
+          }
         },
         {
           "id": 17740,
@@ -3544,11 +5501,19 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Celebras the Cursed"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 15,
+            "spirit": 8,
+            "armor": 122
+          }
         },
         {
           "id": 17710,
@@ -3558,11 +5523,20 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 15,
           "dps": 36,
           "speed": 1.6,
           "droppedBy": [
             "Princess Theradras"
-          ]
+          ],
+          "stats": {
+            "intellect": 11,
+            "minDamage": 40,
+            "maxDamage": 75,
+            "speed": 1.6,
+            "dps": 35.94
+          }
         },
         {
           "id": 17719,
@@ -3572,11 +5546,19 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 35.3,
           "speed": 2.2,
           "droppedBy": [
             "Tinkerer Gizlock"
-          ]
+          ],
+          "stats": {
+            "minDamage": 54,
+            "maxDamage": 101,
+            "speed": 2.2,
+            "dps": 35.23
+          }
         },
         {
           "id": 17943,
@@ -3586,11 +5568,22 @@
           "quality": "rare",
           "slot": "Main Hand",
           "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
           "dps": 35.4,
           "speed": 1.8,
           "droppedBy": [
             "Landslide"
-          ]
+          ],
+          "stats": {
+            "minDamage": 44,
+            "maxDamage": 83,
+            "speed": 1.8,
+            "dps": 35.28,
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 17738,
@@ -3600,11 +5593,19 @@
           "quality": "rare",
           "slot": "Off Hand",
           "slotId": 22,
+          "itemClass": 2,
+          "itemSubclass": 13,
           "dps": 34.64,
           "speed": 1.8,
           "droppedBy": [
             "Celebras the Cursed"
-          ]
+          ],
+          "stats": {
+            "minDamage": 43,
+            "maxDamage": 81,
+            "speed": 1.8,
+            "dps": 34.44
+          }
         },
         {
           "id": 17717,
@@ -3614,11 +5615,20 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 3,
           "dps": 45.85,
           "speed": 2.5,
           "droppedBy": [
             "Tinkerer Gizlock"
-          ]
+          ],
+          "stats": {
+            "arcaneRes": 5,
+            "minDamage": 80,
+            "maxDamage": 149,
+            "speed": 2.5,
+            "dps": 45.8
+          }
         },
         {
           "id": 17745,
@@ -3628,11 +5638,19 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
           "dps": 34.11,
           "speed": 1.6,
           "droppedBy": [
             "Noxxion"
-          ]
+          ],
+          "stats": {
+            "stamina": 5,
+            "natureRes": 5,
+            "speed": 1.6,
+            "dps": 34.06
+          }
         },
         {
           "id": 17732,
@@ -3642,11 +5660,17 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Rotgrip"
-          ]
+          ],
+          "stats": {
+            "intellect": 18,
+            "armor": 57
+          }
         },
         {
           "id": 17766,
@@ -3656,11 +5680,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
           "dps": 46.6,
           "speed": 3.4,
           "droppedBy": [
             "Princess Theradras"
-          ]
+          ],
+          "stats": {
+            "minDamage": 126,
+            "maxDamage": 190,
+            "speed": 3.4,
+            "dps": 46.47
+          }
         },
         {
           "id": 17730,
@@ -3670,11 +5702,19 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
           "dps": 45.84,
           "speed": 3.2,
           "droppedBy": [
             "Rotgrip"
-          ]
+          ],
+          "stats": {
+            "minDamage": 117,
+            "maxDamage": 176,
+            "speed": 3.2,
+            "dps": 45.78
+          }
         },
         {
           "id": 17755,
@@ -3684,11 +5724,19 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Lord Vyletongue"
-          ]
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 10,
+            "armor": 40,
+            "shadowRes": 10
+          }
         },
         {
           "id": 17714,
@@ -3698,11 +5746,18 @@
           "quality": "rare",
           "slot": "Wrist",
           "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Princess Theradras"
-          ]
+          ],
+          "stats": {
+            "stamina": 6,
+            "intellect": 5,
+            "armor": 141
+          }
         }
       ],
       "questRewards": [
@@ -3714,11 +5769,17 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Twisted Evils"
-          ]
+          ],
+          "stats": {
+            "intellect": 20,
+            "armor": 70
+          }
         },
         {
           "id": 17777,
@@ -3728,11 +5789,18 @@
           "quality": "rare",
           "slot": "Chest",
           "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Twisted Evils"
-          ]
+          ],
+          "stats": {
+            "stamina": 14,
+            "intellect": 14,
+            "armor": 295
+          }
         },
         {
           "id": 17770,
@@ -3742,9 +5810,16 @@
           "quality": "rare",
           "slot": "Hands",
           "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "strength": 12,
+            "stamina": 7,
+            "armor": 324
+          }
         },
         {
           "id": 17776,
@@ -3754,11 +5829,18 @@
           "quality": "rare",
           "slot": "Head",
           "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Twisted Evils"
-          ]
+          ],
+          "stats": {
+            "agility": 15,
+            "stamina": 21,
+            "armor": 117
+          }
         },
         {
           "id": 17705,
@@ -3768,9 +5850,17 @@
           "quality": "rare",
           "slot": "One-Hand",
           "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
           "dps": 35.31,
           "speed": 2.7,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 66,
+            "maxDamage": 124,
+            "speed": 2.7,
+            "dps": 35.19
+          }
         },
         {
           "id": 17753,
@@ -3780,9 +5870,17 @@
           "quality": "rare",
           "slot": "Ranged",
           "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
           "dps": 45.87,
           "speed": 2.8,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 89,
+            "maxDamage": 167,
+            "speed": 2.8,
+            "dps": 45.71
+          }
         },
         {
           "id": 17779,
@@ -3792,11 +5890,18 @@
           "quality": "rare",
           "slot": "Shoulder",
           "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Twisted Evils"
-          ]
+          ],
+          "stats": {
+            "strength": 7,
+            "stamina": 18,
+            "armor": 389
+          }
         },
         {
           "id": 17774,
@@ -3806,11 +5911,18 @@
           "quality": "uncommon",
           "slot": "Trinket",
           "slotId": 12,
+          "itemClass": 4,
+          "itemSubclass": -4,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "The Pariah's Instructions"
-          ]
+          ],
+          "stats": {
+            "equip": [
+              "Equip:"
+            ]
+          }
         },
         {
           "id": 17743,
@@ -3820,9 +5932,17 @@
           "quality": "rare",
           "slot": "Two-Hand",
           "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
           "dps": 45.84,
           "speed": 3.8,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "minDamage": 139,
+            "maxDamage": 209,
+            "speed": 3.8,
+            "dps": 45.79
+          }
         },
         {
           "id": 17778,
@@ -3832,9 +5952,16 @@
           "quality": "rare",
           "slot": "Waist",
           "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
           "dps": null,
           "speed": null,
-          "droppedBy": []
+          "droppedBy": [],
+          "stats": {
+            "agility": 15,
+            "intellect": 12,
+            "armor": 81
+          }
         }
       ]
     },
@@ -3850,12 +5977,19 @@
           "quality": "rare",
           "slot": "Relic",
           "slotId": 28,
+          "itemClass": 4,
+          "itemSubclass": 8,
           "dps": null,
           "speed": null,
           "droppedBy": [
             "Idol of the Dream",
             "Hazzas"
-          ]
+          ],
+          "stats": {
+            "equip": [
+              "Equip:"
+            ]
+          }
         }
       ],
       "questRewards": []
