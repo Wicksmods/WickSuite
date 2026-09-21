@@ -1,0 +1,10 @@
+## Interface: 20505, 16001
+## Title: |cffD4C8A1Wick's|r |cff4FC778Profile|r
+## Notes: A baked copy of the suite's settings, put back at load. Works around the beta client writing saved variables and never reading them. Regenerate with WickSuite/tools/make-profile.py after changing settings. Throw away once the client is fixed.
+## Author: Wick
+## Version: 0.1.0
+## X-Website: https://wicksmods.com
+## X-Category: Utility
+
+Profile.lua
+Loader.lua
