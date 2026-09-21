@@ -88,11 +88,93 @@ def globals_in(path):
     return re.findall(r"^([A-Za-z_][A-Za-z0-9_]*) = ", text, re.MULTILINE), text
 
 
+def newest_write():
+    """When the game last wrote any of the files we care about."""
+    latest = 0.0
+    for path in saved_files():
+        try:
+            latest = max(latest, os.path.getmtime(path))
+        except OSError:
+            pass
+    return latest
+
+
+def parses(path):
+    """Refuse to ship a Profile.lua that will not load.
+
+    The game rewrites these files in place, so a bake taken mid-write can
+    catch a half-finished table. Cheap to check, and the alternative is an
+    addon that errors at load.
+    """
+    try:
+        import lupa
+    except ImportError:
+        return True     # no checker available; the bake is no worse than before
+    try:
+        lupa.LuaRuntime().execute(io.open(path, encoding="utf-8").read())
+        return True
+    except Exception as exc:
+        print("  generated file does not load, keeping the previous one:", exc)
+        return False
+
+
+def watch():
+    """Re-bake whenever the game writes, so the snapshot never goes stale.
+
+    The game writes its saved variables at logout and at every reload. A
+    stale bake does not merely miss changes, it puts the old values back
+    over them, so keeping this running is the difference between the
+    profile helping and fighting.
+    """
+    import shutil
+    target = TARGET + "/Profile.lua"
+    print("Watching for settings the game writes. Ctrl-C to stop.")
+    last = newest_write()
+    print("  current bake is %s" % (time.strftime("%H:%M:%S", time.localtime(
+        os.path.getmtime(target))) if os.path.exists(target) else "missing"))
+    while True:
+        time.sleep(2)
+        now = newest_write()
+        if now <= last:
+            continue
+        # Let the client finish. A write that is still moving is not done.
+        settle = now
+        while True:
+            time.sleep(1.5)
+            again = newest_write()
+            if again == settle:
+                break
+            settle = again
+        last = settle
+        backup = target + ".prev"
+        if os.path.exists(target):
+            shutil.copyfile(target, backup)
+        try:
+            bake(quiet=True)
+        except Exception as exc:
+            print("  bake failed:", exc)
+            continue
+        if not parses(target) and os.path.exists(backup):
+            shutil.copyfile(backup, target)
+            continue
+        print("  re-baked at %s" % time.strftime("%H:%M:%S"))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true", help="show what would be baked and stop")
+    ap.add_argument("--watch", action="store_true",
+                    help="stay running and re-bake whenever the game writes new settings")
     args = ap.parse_args()
 
+    if args.watch:
+        watch()
+        return
+
+    bake(list_only=args.list)
+
+
+def bake(list_only=False, quiet=False):
     files = saved_files()
     if not files:
         sys.exit("Nothing found. Log out at least once so the game writes its files.")
@@ -122,7 +204,7 @@ def main():
         chunks.append("-- from %s\n%s" % (os.path.basename(path), body.rstrip()))
         taken.extend(keep)
 
-    if args.list:
+    if list_only:
         print("Would bake %d globals from %d files:" % (len(taken), len(chunks)))
         for n in sorted(taken):
             print("   ", n)
@@ -153,6 +235,8 @@ def main():
     io.open(TARGET + "/Profile.lua", "w", encoding="utf-8", newline="\n").write(
         header + "\n\n".join(chunks) + "\n")
 
+    if quiet:
+        return
     print("Baked %d globals from %d files into %s/Profile.lua"
           % (len(taken), len(chunks), TARGET))
     for n in sorted(taken):
