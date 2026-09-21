@@ -320,6 +320,35 @@ function JoinChannelByName(name)
     return true
 end
 
+-- Character sheet numbers, and the conversions the sheet itself uses.
+-- These take a stat value as an argument, which is what lets a paperdoll
+-- ask what a piece would do without anyone reimplementing the formulas.
+S.STATS = S.STATS or { 20, 35, 40, 20, 40 }   -- str, agi, sta, int, spi
+function UnitStat(_, index)
+    local v = S.STATS[index] or 0
+    return v, v, 0, 0
+end
+function UnitArmor() return 0, S.ARMOR or 200, 0, 0, 0 end
+function GetAttackPowerForStat(index, value)
+    if index == 1 then return value * 2 end   -- strength
+    if index == 2 then return value * 1 end   -- agility
+    return 0
+end
+function GetRangedAttackPowerForStat(index, value)
+    if index == 2 then return value * 2 end
+    return 0
+end
+function GetCritChanceFromStat(index, value)
+    if index == 2 then return value / 330 end
+    return 0
+end
+function GetSpellCritChanceFromStat(index, value) return value / 600 end
+function UnitHPPerStamina() return 10 end
+STAMINA_BREAK = 20
+INTELLECT_BREAK = 20
+MANA_PER_INTELLECT = 15
+ARMOR_PER_AGILITY = 2
+
 function UnitCreatureType(unit)
     if unit == "target" then return S.TARGET_TYPE or "Beast" end
     return "Beast"
@@ -515,6 +544,11 @@ if MODERN then
     C_GameRules = { GetActiveGameMode = function() return 3 end, IsHardcoreActive = function() return false end, IsSelfFoundAllowed = function() return false end }
     C_Item = {
         GetItemInfo = function(id)
+            if type(id) == "number" and S.ITEMS and S.ITEMS[id] then
+                local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[item %d]|h|r"):format(id, id)
+                return ("item %d"):format(id), link, 3, 1, 0, "Armor", "", 1, "", 134414,
+                       0, 4, 2, 1, 0, nil, false, true
+            end
             local name = CLASS == "MAGE" and "Conjured Spring Water" or "Hearthstone"
             return name, ITEM_LINK, 1, 1, 0, "Consumable", "Food & Drink", 20, "", 134414, 0, 15, 0, 1, 0, nil, false, true
         end,
@@ -530,7 +564,10 @@ if MODERN then
         GetItemCount = function(id) return id == 17030 and 0 or 1 end,
         GetItemIconByID = function() return 134414 end,
         GetItemStats = function(link)
-            local id = S.LINK_TO_ID and S.LINK_TO_ID[link]
+            -- Read the id out of the link the way the real one does,
+            -- falling back to whatever the test mapped by hand.
+            local id = tonumber(tostring(link):match("item:(%d+)"))
+                or (S.LINK_TO_ID and S.LINK_TO_ID[link])
             local e = id and S.ITEMS and S.ITEMS[id]
             if e and e.stats then return e.stats end
             return { ITEM_MOD_STAMINA_SHORT = 10 }

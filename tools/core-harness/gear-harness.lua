@@ -41,7 +41,7 @@ S.UNCACHED = { [7719] = true, [6463] = true, [7717] = true }
 S.REQUESTED = 0
 
 local ns = S.loadAddon(ADDONS_DIR .. "/WicksGear", "WicksGear",
-    { "Data.lua", "Score.lua", "Core.lua", "UI.lua" })
+    { "Data.lua", "Score.lua", "Core.lua", "Doll.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksGear")
 S.fire("PLAYER_LOGIN")
 
@@ -130,6 +130,45 @@ for _, r in ipairs(ns.UI.panes.browse.rows or {}) do
 end
 check(lit > 0, "usable items stay lit, " .. lit .. " of them")
 check(dim > 0, "and the ones a rogue cannot wear are dimmed, " .. dim .. " of them")
+
+-- ---- the paperdoll ----------------------------------------------
+-- Wearing leggings worth 4 agility, trying on a pair worth 9. The
+-- interesting number is the difference, and what the difference does to
+-- the character sheet.
+S.EQUIPPED = { [7] = "|Hitem:old|h" }
+S.LINK_TO_ID["|Hitem:old|h"] = 8888
+S.ITEMS[8888] = { equipLoc = "INVTYPE_LEGS", classID = 4, subClassID = 2,
+                  stats = { ITEM_MOD_AGILITY_SHORT = 4 } }
+
+ns.UI:Select("compare")
+check(ns.Doll.pane ~= nil, "the paperdoll builds")
+local slots = 0
+for _ in pairs(ns.Doll.slots) do slots = slots + 1 end
+check(slots == 15, "a button per equipment slot, got " .. slots)
+
+check(ns.Doll:TryOn(7719), "a piece can be tried on")
+check(ns.Doll.trying[7] ~= nil, "it lands in the slot it belongs to")
+check(ns.Doll.slots[7].mark:IsShown(), "and the slot is marked as borrowed")
+
+local d = ns.Doll:Deltas()
+check(d.agi == 5, "agility delta is the difference, not the whole item: " .. tostring(d.agi))
+check(d.sta == 4, "and stamina counts too, the old pair had none: " .. tostring(d.sta))
+
+-- Derived numbers come from the client's own conversions rather than
+-- formulas of ours, so they have to move with the stats.
+ns.Doll:RefreshStats()
+local text = ns.Doll.derived:GetText() or ""
+check(text:find("Attack power") ~= nil, "attack power is derived: " .. text:gsub("\n", " | "):sub(1, 60))
+check(text:find("Health") ~= nil, "and health, from the client's stamina conversion")
+check(text:find("%+5") ~= nil or text:find("Attack power %+5") ~= nil,
+    "five agility is five attack power at this stub's rate")
+
+-- A class that cannot use it is refused rather than silently accepted.
+check(not ns.Doll:TryOn(6463), "mail is refused for a rogue")
+
+ns.Doll:Clear(7)
+check(ns.Doll.trying[7] == nil, "right-click puts it back")
+check(next(ns.Doll:Deltas()) == nil, "and the deltas go with it")
 
 S.CHAT = {}
 SlashCmdList.WICKSGEAR("browse")
