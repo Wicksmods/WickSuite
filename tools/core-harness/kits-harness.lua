@@ -516,6 +516,29 @@ if CA then
     _G.ShowUIPanel = function(f) S.SHOWN_PANEL = f end
     check(frames:OpenEditMode(), "the Edit Mode button opens Blizzard's own")
     check(S.SHOWN_PANEL == _G.EditModeManagerFrame, "and opens the right frame")
+    -- Health is secret on this client. Blizzard's own code may compare
+    -- one; ours may not, and anything we call inherits our taint. Asking
+    -- their update to redraw a bar threw inside their text formatter,
+    -- blaming us. So our repaint must never go through their function.
+    local called = 0
+    local realUpdate = UnitFrameHealthBar_Update
+    UnitFrameHealthBar_Update = function(...) called = called + 1 return realUpdate(...) end
+    _G.PlayerFrame = S.newMock("Frame")
+    _G.PlayerFrame.healthbar = S.newMock("StatusBar")
+    _G.PlayerFrame.healthbar.unit = "player"
+    frames:Apply()
+    UnitFrameHealthBar_Update = realUpdate
+    check(called == 0, "repainting never calls Blizzard's update, which would run tainted")
+    check(_G.PlayerFrame.healthbar.__color ~= nil, "but the bar is still coloured")
+
+    -- The player frame's bar is permanently lockColor, so honouring that
+    -- would mean never colouring the frame you look at most.
+    _G.PlayerFrame.healthbar.lockColor = true
+    _G.PlayerFrame.healthbar:SetStatusBarColor(0, 1, 0)
+    frames:Repaint()
+    check(_G.PlayerFrame.healthbar.__color[1] ~= 0, "lockColor does not stop us: "
+        .. tostring(_G.PlayerFrame.healthbar.__color[1]))
+
     db.classColorHealth = false
     check(Minimap.__maskTex == nil, "the minimap is untouched until asked")
 
