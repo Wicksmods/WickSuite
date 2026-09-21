@@ -442,6 +442,23 @@ check(#S.CHAT >= 3, "/wcj status prints")
 if MODERN then
     check(cline:find("rations %d") ~= nil, "conjured rations counted from the bags: " .. cline:sub(1, 70))
     check(tostring(_G.WicksConjuresWaterButton:GetAttribute("spell")) ~= "", "the water key carries a spell")
+    check(tostring(_G.WicksConjuresFoodButton:GetAttribute("spell")):find("Food") ~= nil,
+        "and the food key carries the food one: " .. tostring(_G.WicksConjuresFoodButton:GetAttribute("spell")))
+
+    -- The strip has one Rations segment standing for both halves of the
+    -- job, and it used to conjure drink whichever half you were short of.
+    local rations
+    for _, fr in ipairs(S.frames) do
+        local a = fr.__attr
+        if a and a.spell2 and tostring(a.spell1):find("Water") then rations = fr end
+    end
+    check(rations ~= nil, "found the rations segment")
+    if rations then
+        check(tostring(rations:GetAttribute("spell1")):find("Water") ~= nil,
+            "left-click conjures drink: " .. tostring(rations:GetAttribute("spell1")))
+        check(tostring(rations:GetAttribute("spell2")):find("Food") ~= nil,
+            "right-click conjures food: " .. tostring(rations:GetAttribute("spell2")))
+    end
 end
 try("conjures panel", function() WicksConjuresAndThings_Toggle() end)
 try("conjures kit", function() SlashCmdList.WICK_WICKSCONJURESANDTHINGS("kit") end)
