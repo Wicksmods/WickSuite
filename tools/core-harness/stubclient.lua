@@ -567,6 +567,13 @@ if MODERN then
         end,
         GetItemCount = function(id) return id == 17030 and 0 or 1 end,
         GetItemIconByID = function() return 134414 end,
+        -- Answered from the client's own files, so it works for an item
+        -- that has never arrived from the server.
+        GetItemNameByID = function(id)
+            local e = S.ITEMS and S.ITEMS[id]
+            if e then return e.name or ("item " .. tostring(id)) end
+            return nil
+        end,
         GetItemStats = function(link)
             -- Read the id out of the link the way the real one does,
             -- falling back to whatever the test mapped by hand.

@@ -81,6 +81,13 @@ S.REQUESTED = 0
 ns.Score:Want({ 7719, 6463 })
 check(S.REQUESTED == 0, "known items are not requested, got " .. S.REQUESTED)
 
+-- A name and a usable link without the server having answered, which is
+-- the state a lot of items are actually in on this beta.
+S.UNCACHED = { [7719] = true }
+check(ns.Score:NameFor(7719) ~= nil, "a name comes from the client even when the item has not loaded")
+check(ns.Score:LinkFor(7719) == "item:7719", "and a link can be built from the id: " .. ns.Score:LinkFor(7719))
+check(ns.Score:Value("item:7719") > 0, "which is enough to read stats from")
+
 S.UNCACHED = {}   -- they have arrived now; the rest of the run assumes so
 
 -- Proficiency. A rogue in mail, or holding a two-handed mace, is how you
