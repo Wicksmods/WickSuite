@@ -88,6 +88,30 @@ check(ns.Score:NameFor(7719) ~= nil, "a name comes from the client even when the
 check(ns.Score:LinkFor(7719) == "item:7719", "and a link can be built from the id: " .. ns.Score:LinkFor(7719))
 check(ns.Score:Value("item:7719") > 0, "which is enough to read stats from")
 
+-- The client cannot name an item the character has never met: of the
+-- thirteen things in Gnomeregan it knew three. So the data file carries
+-- a name and a stat line to fall back on, used only when the client has
+-- nothing of its own to say.
+S.UNCACHED = {}
+S.UNKNOWN = { [9454] = true }   -- the client has never heard of this one
+check(ns.ENTRY[9454] ~= nil, "the shipped entry is indexed by id")
+check(ns.Score:NameFor(9454) == "Acidic Walkers",
+    "an unknown item still has a name: " .. tostring(ns.Score:NameFor(9454)))
+local fb = ns.Score:StatsOf(9454)
+check(fb.int == 8 and fb.spi == 4, "and a stat line: int " .. tostring(fb.int))
+check(ns.Score:Value(nil, 9454) > 0, "which is enough to score it")
+
+-- The client's answer wins wherever it has one, because it is the one
+-- this server is using.
+S.UNKNOWN = {}
+S.ITEMS[9454] = { equipLoc = "INVTYPE_FEET", classID = 4, subClassID = 2,
+                  name = "Whatever The Client Says",
+                  stats = { ITEM_MOD_AGILITY_SHORT = 99 } }
+check(ns.Score:NameFor(9454) == "Whatever The Client Says",
+    "the client overrides the shipped name")
+local live = ns.Score:StatsOf(9454)
+check(live.agi == 99 and live.int == nil, "and the shipped stats are not mixed in")
+
 S.UNCACHED = {}   -- they have arrived now; the rest of the run assumes so
 
 -- Proficiency. A rogue in mail, or holding a two-handed mace, is how you

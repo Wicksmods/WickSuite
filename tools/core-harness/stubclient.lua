@@ -547,6 +547,7 @@ if MODERN then
             -- The real one returns nothing until the item has arrived
             -- from the server, which is the whole reason the addon has
             -- a queue and a redraw.
+            if type(id) == "number" and S.UNKNOWN and S.UNKNOWN[id] then return nil end
             if type(id) == "number" and S.UNCACHED and S.UNCACHED[id] then return nil end
             if type(id) == "number" and S.ITEMS and S.ITEMS[id] then
                 local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[item %d]|h|r"):format(id, id)
@@ -570,6 +571,7 @@ if MODERN then
         -- Answered from the client's own files, so it works for an item
         -- that has never arrived from the server.
         GetItemNameByID = function(id)
+            if S.UNKNOWN and S.UNKNOWN[id] then return nil end
             local e = S.ITEMS and S.ITEMS[id]
             if e then return e.name or ("item " .. tostring(id)) end
             return nil
@@ -579,6 +581,7 @@ if MODERN then
             -- falling back to whatever the test mapped by hand.
             local id = tonumber(tostring(link):match("item:(%d+)"))
                 or (S.LINK_TO_ID and S.LINK_TO_ID[link])
+            if id and S.UNKNOWN and S.UNKNOWN[id] then return nil end
             local e = id and S.ITEMS and S.ITEMS[id]
             if e and e.stats then return e.stats end
             return { ITEM_MOD_STAMINA_SHORT = 10 }
