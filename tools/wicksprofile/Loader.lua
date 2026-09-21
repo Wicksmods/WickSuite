@@ -13,8 +13,11 @@
 -- WTF the last time you logged out.
 --
 -- It never overwrites a global that already has something in it, so a
--- client that starts loading saved variables properly wins, and so does
--- WickKeeper, which loads first and restores from macros.
+-- client that starts loading saved variables properly wins.
+--
+-- The snapshot is only as new as the last bake. An old one does not
+-- merely miss changes, it puts the old values back over them, so the
+-- login line says when it was taken.
 --
 -- Throw the whole thing away once Blizzard fixes the client.
 
@@ -63,8 +66,9 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
     if applied > 0 then
-        out(("put back %d saved variable%s. Regenerate after changing settings: make-profile.py")
-            :format(applied, applied == 1 and "" or "s"))
+        local stamp = rawget(_G, "WicksProfileStamp")
+        out(("put back %d saved variable%s, as of %s. Settings you change now last until the next reload, so re-bake when you are happy with them.")
+            :format(applied, applied == 1 and "" or "s", stamp or "an unknown date"))
     elseif #Profile.skipped > 0 then
         out("nothing to do, the client supplied its own settings. This addon can go.")
     end
