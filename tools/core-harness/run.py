@@ -44,6 +44,7 @@ def main():
     ap.add_argument("--bags-dir", default=BETA_ADDONS + "/WicksBags")
     ap.add_argument("--bags", action="store_true", help="run the Wick's Bags product harness")
     ap.add_argument("--kits", action="store_true", help="run the class kits harness (Totems, Demons, Forms)")
+    ap.add_argument("--gear", action="store_true", help="run the Wick's Gear harness")
     ap.add_argument("--legacy", action="store_true")
     ap.add_argument("--both", action="store_true")
     args = ap.parse_args()
@@ -56,6 +57,8 @@ def main():
             ok = run(HERE + "/bags-harness.lua", mode, args.core, args.bags_dir, mode, stub) and ok
         elif args.kits:
             ok = run(HERE + "/kits-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
+        elif args.gear:
+            ok = run(HERE + "/gear-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
         else:
             ok = run(HERE + "/harness.lua", mode, args.core, mode, stub) and ok
         print()

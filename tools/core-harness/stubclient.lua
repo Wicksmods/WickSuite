@@ -405,7 +405,7 @@ INVSLOT_MAINHAND, INVSLOT_OFFHAND = 16, 17
 -- Temporary weapon enchantments. Main hand coated, off hand bare.
 S.TEMPENCH = { [16] = { remainingTimeMs = 1800000, chargesRemaining = 40, enchantID = 603 } }
 function GetInventoryItemTexture(unit, inv) return inv and inv >= 20 and inv <= 23 and 133633 or nil end
-function GetInventoryItemLink() return nil end
+function GetInventoryItemLink(_, slot) return S.EQUIPPED and S.EQUIPPED[slot] or nil end
 function GetInventorySlotInfo() return 20 end
 function PickupBagFromSlot() end
 function PutItemInBag() end
@@ -518,10 +518,33 @@ if MODERN then
             local name = CLASS == "MAGE" and "Conjured Spring Water" or "Hearthstone"
             return name, ITEM_LINK, 1, 1, 0, "Consumable", "Food & Drink", 20, "", 134414, 0, 15, 0, 1, 0, nil, false, true
         end,
-        GetItemInfoInstant = function(id) if CLASS == "ROGUE" then return 6948, "Consumable", "Item Enhancement", "", 134414, 0, 9 end return 6948, "Miscellaneous", "Junk", "", 134414, 15, 0 end,
+        GetItemInfoInstant = function(id)
+            local e = S.ITEMS and S.ITEMS[id]
+            if e then
+                return id, e.type or "Armor", e.sub or "", e.equipLoc or "", 134414,
+                       e.classID or 4, e.subClassID or 2
+            end
+            if CLASS == "ROGUE" then return 6948, "Consumable", "Item Enhancement", "", 134414, 0, 9 end
+            return 6948, "Miscellaneous", "Junk", "", 134414, 15, 0
+        end,
         GetItemCount = function(id) return id == 17030 and 0 or 1 end,
         GetItemIconByID = function() return 134414 end,
-        GetItemStats = function(link) return { ITEM_MOD_STAMINA_SHORT = 10 } end,
+        GetItemStats = function(link)
+            local id = S.LINK_TO_ID and S.LINK_TO_ID[link]
+            local e = id and S.ITEMS and S.ITEMS[id]
+            if e and e.stats then return e.stats end
+            return { ITEM_MOD_STAMINA_SHORT = 10 }
+        end,
+        -- Item data is not in memory until asked for, which is the whole
+        -- reason the gear panel has a loading step.
+        IsItemDataCachedByID = function(id)
+            if S.UNCACHED and S.UNCACHED[id] then return false end
+            return true
+        end,
+        RequestLoadItemDataByID = function(id)
+            if S.UNCACHED then S.UNCACHED[id] = nil end
+            S.REQUESTED = (S.REQUESTED or 0) + 1
+        end,
         GetItemSpell = function() return "Hearth", 8690 end,
         GetItemQualityColor = function(q) return 1, 1, 1, "|cffffffff" end,
         GetItemCooldown = function() return 0, 0, 1 end,
