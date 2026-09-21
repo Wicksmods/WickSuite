@@ -1,0 +1,3864 @@
+{
+  "source": "wowhead.com/forever, zone drop listviews",
+  "collected": "2026-09-21",
+  "note": "Roster only; stat values live on each item's tooltip and need a second pass. Coverage is uneven, because Wowhead's Forever data grows from what players actually see: the early dungeons are well filled in and the later ones are thin. Re-run as the beta goes on.",
+  "dungeons": {
+    "Ragefire Chasm": {
+      "zoneId": 2437,
+      "levels": "13-18",
+      "drops": [
+        {
+          "id": 14149,
+          "name": "Subterranean Cape",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Taragaman the Hungerer"
+          ]
+        },
+        {
+          "id": 14150,
+          "name": "Robe of Evocation",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Jergosh the Invoker"
+          ]
+        },
+        {
+          "id": 14145,
+          "name": "Cursed Felblade",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 12.36,
+          "speed": 2.3,
+          "droppedBy": [
+            "Taragaman the Hungerer"
+          ]
+        },
+        {
+          "id": 14151,
+          "name": "Chanting Blade",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 12.32,
+          "speed": 1.5,
+          "droppedBy": [
+            "Jergosh the Invoker"
+          ]
+        },
+        {
+          "id": 14147,
+          "name": "Cavedweller Bracers",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Jergosh the Invoker"
+          ]
+        },
+        {
+          "id": 14148,
+          "name": "Crystalline Cuffs",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Taragaman the Hungerer"
+          ]
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 15450,
+          "name": "Dredgemire Leggings",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Power to Destroy..."
+          ]
+        },
+        {
+          "id": 15451,
+          "name": "Gargoyle Leggings",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Power to Destroy..."
+          ]
+        },
+        {
+          "id": 15449,
+          "name": "Ghastly Trousers",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Power to Destroy..."
+          ]
+        },
+        {
+          "id": 15452,
+          "name": "Featherbead Bracers",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Returning the Lost Satchel"
+          ]
+        },
+        {
+          "id": 270003,
+          "name": "Garrison Cuffs",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Returning the Lost Satchel"
+          ]
+        },
+        {
+          "id": 15453,
+          "name": "Savannah Bracers",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Returning the Lost Satchel"
+          ]
+        }
+      ]
+    },
+    "The Deadmines": {
+      "zoneId": 1581,
+      "levels": "15-21",
+      "drops": [
+        {
+          "id": 5193,
+          "name": "Cape of the Brotherhood",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Edwin VanCleef"
+          ]
+        },
+        {
+          "id": 5444,
+          "name": "Miner's Cape",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Miner Johnson"
+          ]
+        },
+        {
+          "id": 1930,
+          "name": "Stonemason Cloak",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "uncommon",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Defias Miner"
+          ]
+        },
+        {
+          "id": 5202,
+          "name": "Corsair's Overshirt",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Edwin VanCleef"
+          ]
+        },
+        {
+          "id": 10399,
+          "name": "Blackened Defias Armor",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Edwin VanCleef"
+          ]
+        },
+        {
+          "id": 10402,
+          "name": "Blackened Defias Boots",
+          "ilvl": 20,
+          "reqLevel": 15,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Defias Strip Miner"
+          ]
+        },
+        {
+          "id": 1156,
+          "name": "Lavishly Jeweled Ring",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gilnid"
+          ]
+        },
+        {
+          "id": 5195,
+          "name": "Gold-flecked Gloves",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Sneed"
+          ]
+        },
+        {
+          "id": 10401,
+          "name": "Blackened Defias Gloves",
+          "ilvl": 19,
+          "reqLevel": 14,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 1944,
+          "name": "Metalworking Gloves",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "uncommon",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Goblin Craftsman"
+          ]
+        },
+        {
+          "id": 1945,
+          "name": "Woodworking Gloves",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "uncommon",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Goblin Woodcarver"
+          ]
+        },
+        {
+          "id": 5199,
+          "name": "Smelting Pants",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gilnid"
+          ]
+        },
+        {
+          "id": 1934,
+          "name": "Stonemason Trousers",
+          "ilvl": 20,
+          "reqLevel": 15,
+          "quality": "uncommon",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Defias Blackguard"
+          ]
+        },
+        {
+          "id": 1943,
+          "name": "Goblin Mail Leggings",
+          "ilvl": 19,
+          "reqLevel": 14,
+          "quality": "uncommon",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Goblin Shipbuilder"
+          ]
+        },
+        {
+          "id": 10400,
+          "name": "Blackened Defias Leggings",
+          "ilvl": 19,
+          "reqLevel": 14,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 1929,
+          "name": "Silk-threaded Trousers",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "uncommon",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 2169,
+          "name": "Buzzer Blade",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 14.28,
+          "speed": 1.5,
+          "droppedBy": [
+            "Sneed's Shredder"
+          ]
+        },
+        {
+          "id": 1925,
+          "name": "Defias Rapier",
+          "ilvl": 16,
+          "reqLevel": 11,
+          "quality": "uncommon",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 8.21,
+          "speed": 1.6,
+          "droppedBy": [
+            "Defias Watchman"
+          ]
+        },
+        {
+          "id": 5191,
+          "name": "Cruel Barb",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 15.69,
+          "speed": 2.8,
+          "droppedBy": [
+            "Edwin VanCleef"
+          ]
+        },
+        {
+          "id": 1937,
+          "name": "Buzz Saw",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 15.33,
+          "speed": 2.3,
+          "droppedBy": [
+            "Sneed's Shredder"
+          ]
+        },
+        {
+          "id": 5192,
+          "name": "Thief's Blade",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 14.56,
+          "speed": 1.7,
+          "droppedBy": [
+            "Mr. Smite"
+          ]
+        },
+        {
+          "id": 5196,
+          "name": "Smite's Reaver",
+          "ilvl": 21,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 14.16,
+          "speed": 1.9,
+          "droppedBy": [
+            "Mr. Smite"
+          ]
+        },
+        {
+          "id": 5197,
+          "name": "Cookie's Tenderizer",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 14.05,
+          "speed": 2.8,
+          "droppedBy": [
+            "Cookie"
+          ]
+        },
+        {
+          "id": 1951,
+          "name": "Blackwater Cutlass",
+          "ilvl": 19,
+          "reqLevel": 14,
+          "quality": "uncommon",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 9.69,
+          "speed": 1.9,
+          "droppedBy": []
+        },
+        {
+          "id": 1936,
+          "name": "Goblin Screwdriver",
+          "ilvl": 18,
+          "reqLevel": 13,
+          "quality": "uncommon",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 9.28,
+          "speed": 1.4,
+          "droppedBy": [
+            "Goblin Engineer"
+          ]
+        },
+        {
+          "id": 5198,
+          "name": "Cookie's Stirring Rod",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 14.76,
+          "speed": 1.3,
+          "droppedBy": [
+            "Cookie"
+          ]
+        },
+        {
+          "id": 5443,
+          "name": "Gold-plated Buckler",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Miner Johnson"
+          ]
+        },
+        {
+          "id": 872,
+          "name": "Rockslicer",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.74,
+          "speed": 3.3,
+          "droppedBy": [
+            "Rhahk'Zor"
+          ]
+        },
+        {
+          "id": 5194,
+          "name": "Taskmaster Axe",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.78,
+          "speed": 2.7,
+          "droppedBy": [
+            "Sneed"
+          ]
+        },
+        {
+          "id": 7230,
+          "name": "Smite's Mighty Hammer",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.78,
+          "speed": 3.5,
+          "droppedBy": [
+            "Mr. Smite"
+          ]
+        },
+        {
+          "id": 5200,
+          "name": "Impaling Harpoon",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.1,
+          "speed": 2.4,
+          "droppedBy": [
+            "Captain Greenskin"
+          ]
+        },
+        {
+          "id": 5201,
+          "name": "Emberstone Staff",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.14,
+          "speed": 3,
+          "droppedBy": [
+            "Captain Greenskin"
+          ]
+        },
+        {
+          "id": 5187,
+          "name": "Rhahk'Zor's Hammer",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 18.44,
+          "speed": 3.2,
+          "droppedBy": [
+            "Rhahk'Zor"
+          ]
+        },
+        {
+          "id": 10403,
+          "name": "Blackened Defias Belt",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Captain Greenskin"
+          ]
+        }
+      ],
+      "questRewards": []
+    },
+    "Wailing Caverns": {
+      "zoneId": 718,
+      "levels": "15-21",
+      "drops": [
+        {
+          "id": 6449,
+          "name": "Glowing Lizardscale Cloak",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Skum"
+          ]
+        },
+        {
+          "id": 6629,
+          "name": "Sporid Cape",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Verdan the Everliving"
+          ]
+        },
+        {
+          "id": 6632,
+          "name": "Feyscale Cloak",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Deviate Faerie Dragon"
+          ]
+        },
+        {
+          "id": 6473,
+          "name": "Armor of the Fang",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Pythas"
+          ]
+        },
+        {
+          "id": 6627,
+          "name": "Mutant Scale Breastplate",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mutanus the Devourer"
+          ]
+        },
+        {
+          "id": 6465,
+          "name": "Robe of the Moccasin",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Cobrahn"
+          ]
+        },
+        {
+          "id": 6459,
+          "name": "Savage Trodders",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Serpentis"
+          ]
+        },
+        {
+          "id": 10411,
+          "name": "Footpads of the Fang",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Serpentis"
+          ]
+        },
+        {
+          "id": 6463,
+          "name": "Deep Fathom Ring",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mutanus the Devourer"
+          ]
+        },
+        {
+          "id": 5970,
+          "name": "Serpent Gloves",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Serpentis"
+          ]
+        },
+        {
+          "id": 10413,
+          "name": "Gloves of the Fang",
+          "ilvl": 19,
+          "reqLevel": 14,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Druid of the Fang"
+          ]
+        },
+        {
+          "id": 10410,
+          "name": "Leggings of the Fang",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Cobrahn"
+          ]
+        },
+        {
+          "id": 6472,
+          "name": "Stinging Viper",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 15.69,
+          "speed": 2.8,
+          "droppedBy": [
+            "Lord Pythas"
+          ]
+        },
+        {
+          "id": 6448,
+          "name": "Tail Spike",
+          "ilvl": 21,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 14.11,
+          "speed": 1.8,
+          "droppedBy": [
+            "Skum"
+          ]
+        },
+        {
+          "id": 6469,
+          "name": "Venomstrike",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 20.5,
+          "speed": 2.4,
+          "droppedBy": [
+            "Lord Serpentis"
+          ]
+        },
+        {
+          "id": 5243,
+          "name": "Firebelcher",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 15.33,
+          "speed": 1.7,
+          "droppedBy": [
+            "Deviate Faerie Dragon"
+          ]
+        },
+        {
+          "id": 6630,
+          "name": "Seedcloud Buckler",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Verdan the Everliving"
+          ]
+        },
+        {
+          "id": 13245,
+          "name": "Kresh's Back",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Kresh"
+          ]
+        },
+        {
+          "id": 6447,
+          "name": "Worn Turtle Shell Shield",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Kresh"
+          ]
+        },
+        {
+          "id": 6461,
+          "name": "Slime-encrusted Pads",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mutanus the Devourer"
+          ]
+        },
+        {
+          "id": 5404,
+          "name": "Serpent's Shoulders",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lady Anacondra"
+          ]
+        },
+        {
+          "id": 6631,
+          "name": "Living Root",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.82,
+          "speed": 2.9,
+          "droppedBy": [
+            "Verdan the Everliving"
+          ]
+        },
+        {
+          "id": 6460,
+          "name": "Cobrahn's Grasp",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Cobrahn"
+          ]
+        },
+        {
+          "id": 10412,
+          "name": "Belt of the Fang",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lady Anacondra"
+          ]
+        }
+      ],
+      "questRewards": []
+    },
+    "The Stockade": {
+      "zoneId": 717,
+      "levels": "22-30",
+      "drops": [
+        {
+          "id": 1076,
+          "name": "Defias Renegade Ring",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 2941,
+          "name": "Prison Shank",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 17.88,
+          "speed": 1.8,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ]
+        },
+        {
+          "id": 2942,
+          "name": "Iron Knuckles",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 17.68,
+          "speed": 1.7,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ]
+        },
+        {
+          "id": 2280,
+          "name": "Kam's Walking Stick",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 23.83,
+          "speed": 2.8,
+          "droppedBy": [
+            "Kam Deepfury"
+          ]
+        },
+        {
+          "id": 3228,
+          "name": "Jimmied Handcuffs",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ]
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 2033,
+          "name": "Ambassador's Boots",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ]
+        },
+        {
+          "id": 270029,
+          "name": "Town Clerk's Mittens",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ]
+        },
+        {
+          "id": 2906,
+          "name": "Darkshire Mail Leggings",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ]
+        },
+        {
+          "id": 3400,
+          "name": "Lucine Longsword",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 17.23,
+          "speed": 2.5,
+          "droppedBy": [
+            "What Comes Around..."
+          ]
+        },
+        {
+          "id": 1264,
+          "name": "Headbasher",
+          "ilvl": 29,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 23.89,
+          "speed": 2.3,
+          "droppedBy": [
+            "The Fury Runs Deep"
+          ]
+        },
+        {
+          "id": 1317,
+          "name": "Hardened Root Staff",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 22.44,
+          "speed": 3.3,
+          "droppedBy": [
+            "What Comes Around..."
+          ]
+        },
+        {
+          "id": 270027,
+          "name": "Ursine Hammer",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 22.39,
+          "speed": 3.2,
+          "droppedBy": [
+            "What Comes Around..."
+          ]
+        },
+        {
+          "id": 3562,
+          "name": "Belt of Vindication",
+          "ilvl": 29,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Fury Runs Deep"
+          ]
+        }
+      ]
+    },
+    "Shadowfang Keep": {
+      "zoneId": 209,
+      "levels": "22-30",
+      "drops": [
+        {
+          "id": 6314,
+          "name": "Wolfmaster Cape",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Wolf Master Nandos"
+          ]
+        },
+        {
+          "id": 6340,
+          "name": "Fenrus' Hide",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Fenrus the Devourer"
+          ]
+        },
+        {
+          "id": 6324,
+          "name": "Robes of Arugal",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Archmage Arugal"
+          ]
+        },
+        {
+          "id": 6642,
+          "name": "Phantom Armor",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Deathsworn Captain"
+          ]
+        },
+        {
+          "id": 1489,
+          "name": "Gloomshroud Armor",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 2292,
+          "name": "Necrology Robes",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 6226,
+          "name": "Bloody Apron",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Razorclaw the Butcher"
+          ]
+        },
+        {
+          "id": 6321,
+          "name": "Silverlaine's Family Seal",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Silverlaine"
+          ]
+        },
+        {
+          "id": 6341,
+          "name": "Eerie Stable Lantern",
+          "ilvl": 21,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Held in Off-hand",
+          "slotId": 23,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 23173,
+          "name": "Abomination Skin Leggings",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Sever"
+          ]
+        },
+        {
+          "id": 6323,
+          "name": "Baron's Scepter",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 16.69,
+          "speed": 2.4,
+          "droppedBy": [
+            "Baron Silverlaine"
+          ]
+        },
+        {
+          "id": 1482,
+          "name": "Shadowfang",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 15.7,
+          "speed": 2.7,
+          "droppedBy": []
+        },
+        {
+          "id": 2807,
+          "name": "Guillotine Axe",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 15.15,
+          "speed": 2.7,
+          "droppedBy": []
+        },
+        {
+          "id": 6220,
+          "name": "Meteor Shard",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 17.88,
+          "speed": 1.8,
+          "droppedBy": [
+            "Archmage Arugal"
+          ]
+        },
+        {
+          "id": 1292,
+          "name": "Butcher's Cleaver",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 16.28,
+          "speed": 1.7,
+          "droppedBy": [
+            "Razorclaw the Butcher"
+          ]
+        },
+        {
+          "id": 1935,
+          "name": "Assassin's Blade",
+          "ilvl": 24,
+          "reqLevel": 19,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 15.78,
+          "speed": 1.9,
+          "droppedBy": []
+        },
+        {
+          "id": 6633,
+          "name": "Butcher's Slicer",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 15.16,
+          "speed": 2.9,
+          "droppedBy": [
+            "Razorclaw the Butcher"
+          ]
+        },
+        {
+          "id": 1483,
+          "name": "Face Smasher",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 14.18,
+          "speed": 2.6,
+          "droppedBy": []
+        },
+        {
+          "id": 6320,
+          "name": "Commander's Crest",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Commander Springvale"
+          ]
+        },
+        {
+          "id": 3748,
+          "name": "Feline Mantle",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Wolf Master Nandos"
+          ]
+        },
+        {
+          "id": 5254,
+          "name": "Rugged Spaulders",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Rethilgore"
+          ]
+        },
+        {
+          "id": 6641,
+          "name": "Haunting Blade",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 22.37,
+          "speed": 3.8,
+          "droppedBy": [
+            "Deathsworn Captain"
+          ]
+        },
+        {
+          "id": 3191,
+          "name": "Arced War Axe",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 21.73,
+          "speed": 3.3,
+          "droppedBy": [
+            "Commander Springvale"
+          ]
+        },
+        {
+          "id": 6318,
+          "name": "Odo's Ley Staff",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 21.81,
+          "speed": 2.9,
+          "droppedBy": [
+            "Odo the Blindwatcher"
+          ]
+        },
+        {
+          "id": 2205,
+          "name": "Duskbringer",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 21.1,
+          "speed": 3.4,
+          "droppedBy": []
+        },
+        {
+          "id": 1318,
+          "name": "Night Reaver",
+          "ilvl": 23,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.74,
+          "speed": 3.3,
+          "droppedBy": []
+        },
+        {
+          "id": 1484,
+          "name": "Witching Stave",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.17,
+          "speed": 3.6,
+          "droppedBy": []
+        },
+        {
+          "id": 3194,
+          "name": "Black Malice",
+          "ilvl": 21,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 18.41,
+          "speed": 3.3,
+          "droppedBy": []
+        },
+        {
+          "id": 6392,
+          "name": "Belt of Arugal",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Archmage Arugal"
+          ]
+        },
+        {
+          "id": 6319,
+          "name": "Girdle of the Blindwatcher",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Odo the Blindwatcher"
+          ]
+        },
+        {
+          "id": 3230,
+          "name": "Black Wolf Bracers",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Fenrus the Devourer"
+          ]
+        },
+        {
+          "id": 5943,
+          "name": "Rift Bracers",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "uncommon",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Arugal's Voidwalker"
+          ]
+        },
+        {
+          "id": 1974,
+          "name": "Mindthrust Bracers",
+          "ilvl": 22,
+          "reqLevel": 17,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 6335,
+          "name": "Grizzled Boots",
+          "ilvl": 28,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Book of Ur"
+          ]
+        },
+        {
+          "id": 6414,
+          "name": "Seal of Sylvanas",
+          "ilvl": 29,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Arugal Must Die"
+          ]
+        },
+        {
+          "id": 270030,
+          "name": "Tattered Mittens",
+          "ilvl": 28,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Book of Ur"
+          ]
+        },
+        {
+          "id": 270024,
+          "name": "Bronzed Shoulderguards",
+          "ilvl": 27,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Deathstalkers in Shadowfang"
+          ]
+        },
+        {
+          "id": 3324,
+          "name": "Ghostly Mantle",
+          "ilvl": 27,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Deathstalkers in Shadowfang"
+          ]
+        },
+        {
+          "id": 270023,
+          "name": "Tanned Shoulderpads",
+          "ilvl": 27,
+          "reqLevel": 18,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Deathstalkers in Shadowfang"
+          ]
+        },
+        {
+          "id": 4534,
+          "name": "Steel-clasped Bracers",
+          "ilvl": 28,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Book of Ur"
+          ]
+        }
+      ]
+    },
+    "Blackfathom Deeps": {
+      "zoneId": 719,
+      "levels": "24-32",
+      "drops": [
+        {
+          "id": 6901,
+          "name": "Glowing Thresher Cape",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Old Serra'kis"
+          ]
+        },
+        {
+          "id": 6907,
+          "name": "Tortoise Armor",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ghamoo-ra"
+          ]
+        },
+        {
+          "id": 2034,
+          "name": "Scholarly Robes",
+          "ilvl": 25,
+          "reqLevel": 20,
+          "quality": "uncommon",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 6906,
+          "name": "Algae Fists",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gelihast"
+          ]
+        },
+        {
+          "id": 888,
+          "name": "Naga Battle Gloves",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lady Sarevess"
+          ]
+        },
+        {
+          "id": 6910,
+          "name": "Leech Pants",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Aku'mai"
+          ]
+        },
+        {
+          "id": 6903,
+          "name": "Gaze Dreamer Pants",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Twilight Lord Kelris"
+          ]
+        },
+        {
+          "id": 11121,
+          "name": "Darkwater Talwar",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 17.16,
+          "speed": 2.2,
+          "droppedBy": [
+            "Lady Sarevess"
+          ]
+        },
+        {
+          "id": 1454,
+          "name": "Axe of the Enforcer",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 18.35,
+          "speed": 2.6,
+          "droppedBy": []
+        },
+        {
+          "id": 6904,
+          "name": "Bite of Serra'kis",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 17.75,
+          "speed": 1.3,
+          "droppedBy": [
+            "Old Serra'kis"
+          ]
+        },
+        {
+          "id": 3078,
+          "name": "Naga Heartpiercer",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 22.42,
+          "speed": 2.4,
+          "droppedBy": [
+            "Lady Sarevess"
+          ]
+        },
+        {
+          "id": 6909,
+          "name": "Strike of the Hydra",
+          "ilvl": 31,
+          "reqLevel": 26,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 25.74,
+          "speed": 3.3,
+          "droppedBy": [
+            "Aku'mai"
+          ]
+        },
+        {
+          "id": 1155,
+          "name": "Rod of the Sleepwalker",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 23.83,
+          "speed": 2.8,
+          "droppedBy": [
+            "Twilight Lord Kelris"
+          ]
+        },
+        {
+          "id": 6905,
+          "name": "Reef Axe",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 22.44,
+          "speed": 3.3,
+          "droppedBy": [
+            "Gelihast"
+          ]
+        },
+        {
+          "id": 6911,
+          "name": "Moss Cinch",
+          "ilvl": 30,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Aku'mai"
+          ]
+        },
+        {
+          "id": 6908,
+          "name": "Ghamoo-ra's Bind",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ghamoo-ra"
+          ]
+        },
+        {
+          "id": 6902,
+          "name": "Bands of Serra'kis",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Old Serra'kis"
+          ]
+        }
+      ],
+      "questRewards": []
+    },
+    "Gnomeregan": {
+      "zoneId": 721,
+      "levels": "29-38",
+      "drops": [
+        {
+          "id": 9450,
+          "name": "Gnomebot Operating Boots",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crowd Pummeler 9-60"
+          ]
+        },
+        {
+          "id": 9454,
+          "name": "Acidic Walkers",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Viscous Fallout"
+          ]
+        },
+        {
+          "id": 9510,
+          "name": "Caverndeep Trudgers",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 9461,
+          "name": "Charged Gear",
+          "ilvl": 36,
+          "reqLevel": 31,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mekgineer Thermaplugg"
+          ]
+        },
+        {
+          "id": 9447,
+          "name": "Electrocutioner Lagnut",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Electrocutioner 6000"
+          ]
+        },
+        {
+          "id": 9445,
+          "name": "Grubbis Paws",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Grubbis"
+          ]
+        },
+        {
+          "id": 9491,
+          "name": "Hotshot Pilot's Gloves",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 9446,
+          "name": "Electrocutioner Leg",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 22.22,
+          "speed": 1.7,
+          "droppedBy": [
+            "Electrocutioner 6000"
+          ]
+        },
+        {
+          "id": 9453,
+          "name": "Toxic Revenger",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 20.63,
+          "speed": 1.9,
+          "droppedBy": [
+            "Viscous Fallout"
+          ]
+        },
+        {
+          "id": 9458,
+          "name": "Thermaplugg's Central Core",
+          "ilvl": 36,
+          "reqLevel": 31,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mekgineer Thermaplugg"
+          ]
+        },
+        {
+          "id": 9449,
+          "name": "Manual Crowd Pummeler",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 29.1,
+          "speed": 2,
+          "droppedBy": []
+        },
+        {
+          "id": 9452,
+          "name": "Hydrocane",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 26.78,
+          "speed": 2.8,
+          "droppedBy": [
+            "Viscous Fallout"
+          ]
+        },
+        {
+          "id": 9448,
+          "name": "Spidertank Oilrag",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Electrocutioner 6000"
+          ]
+        }
+      ],
+      "questRewards": []
+    },
+    "Razorfen Kraul": {
+      "zoneId": 491,
+      "levels": "29-38",
+      "drops": [
+        {
+          "id": 6682,
+          "name": "Death Speaker Robes",
+          "ilvl": 31,
+          "reqLevel": 26,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ]
+        },
+        {
+          "id": 1978,
+          "name": "Wolfclaw Gloves",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 6686,
+          "name": "Tusken Helm",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Overlord Ramtusk"
+          ]
+        },
+        {
+          "id": 6688,
+          "name": "Whisperwind Headdress",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Earthcaller Halmgar"
+          ]
+        },
+        {
+          "id": 6690,
+          "name": "Ferine Leggings",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Agathelos the Raging"
+          ]
+        },
+        {
+          "id": 6691,
+          "name": "Swinetusk Shank",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 23.12,
+          "speed": 1.5,
+          "droppedBy": [
+            "Agathelos the Raging"
+          ]
+        },
+        {
+          "id": 2816,
+          "name": "Death Speaker Scepter",
+          "ilvl": 33,
+          "reqLevel": 28,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 21.43,
+          "speed": 2.8,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ]
+        },
+        {
+          "id": 6695,
+          "name": "Stygian Bone Amulet",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Blind Hunter"
+          ]
+        },
+        {
+          "id": 6692,
+          "name": "Pronged Reaver",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 23.12,
+          "speed": 2.4,
+          "droppedBy": [
+            "Charlga Razorflank"
+          ]
+        },
+        {
+          "id": 6681,
+          "name": "Thornspike",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 20.74,
+          "speed": 1.7,
+          "droppedBy": [
+            "Aggem Thorncurse"
+          ]
+        },
+        {
+          "id": 6696,
+          "name": "Nightstalker Bow",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 28.98,
+          "speed": 1.7,
+          "droppedBy": [
+            "Blind Hunter"
+          ]
+        },
+        {
+          "id": 6697,
+          "name": "Batwing Mantle",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Blind Hunter"
+          ]
+        },
+        {
+          "id": 6685,
+          "name": "Death Speaker Mantle",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ]
+        },
+        {
+          "id": 2264,
+          "name": "Mantle of Thieves",
+          "ilvl": 30,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 6687,
+          "name": "Corpsemaker",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 28.97,
+          "speed": 3.8,
+          "droppedBy": [
+            "Overlord Ramtusk"
+          ]
+        },
+        {
+          "id": 1976,
+          "name": "Slaghammer",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 23.83,
+          "speed": 2.8,
+          "droppedBy": []
+        },
+        {
+          "id": 6679,
+          "name": "Armor Piercer",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "uncommon",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 19.85,
+          "speed": 2.6,
+          "droppedBy": [
+            "Razorfen Spearhide"
+          ]
+        },
+        {
+          "id": 2549,
+          "name": "Staff of the Shade",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 22.42,
+          "speed": 2.6,
+          "droppedBy": []
+        },
+        {
+          "id": 4438,
+          "name": "Pugilist Bracers",
+          "ilvl": 30,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 6752,
+          "name": "Lancer Boots",
+          "ilvl": 32,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mortality Wanes"
+          ]
+        },
+        {
+          "id": 6748,
+          "name": "Monkey Ring",
+          "ilvl": 32,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Willix the Importer"
+          ]
+        },
+        {
+          "id": 6750,
+          "name": "Snake Hoop",
+          "ilvl": 32,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Willix the Importer"
+          ]
+        },
+        {
+          "id": 3041,
+          "name": "\"Mage-Eye\" Blunderbuss",
+          "ilvl": 31,
+          "reqLevel": 26,
+          "quality": "uncommon",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 21.15,
+          "speed": 2.8,
+          "droppedBy": [
+            "The Crone of the Kraul"
+          ]
+        },
+        {
+          "id": 6725,
+          "name": "Marbled Buckler",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 4197,
+          "name": "Berylline Pads",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 6742,
+          "name": "Stonefist Girdle",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ]
+    },
+    "Scarlet Monastery": {
+      "zoneId": 796,
+      "levels": "34-45",
+      "drops": [
+        {
+          "id": 7711,
+          "name": "Robe of Doan",
+          "ilvl": 39,
+          "reqLevel": 34,
+          "quality": "uncommon",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Arcanist Doan"
+          ]
+        },
+        {
+          "id": 10328,
+          "name": "Scarlet Chestpiece",
+          "ilvl": 39,
+          "reqLevel": 34,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Scarlet Champion"
+          ]
+        },
+        {
+          "id": 7688,
+          "name": "Ironspine's Ribcage",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ironspine"
+          ]
+        },
+        {
+          "id": 19509,
+          "name": "Dusty Mail Boots",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "High Inquisitor Fairbanks"
+          ]
+        },
+        {
+          "id": 10332,
+          "name": "Scarlet Boots",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 7686,
+          "name": "Ironspine's Eye",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ironspine"
+          ]
+        },
+        {
+          "id": 7724,
+          "name": "Gauntlets of Divinity",
+          "ilvl": 44,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Scarlet Commander Mograine"
+          ]
+        },
+        {
+          "id": 10331,
+          "name": "Scarlet Gauntlets",
+          "ilvl": 38,
+          "reqLevel": 33,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Scarlet Centurion"
+          ]
+        },
+        {
+          "id": 7690,
+          "name": "Ebon Vise",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Fallen Champion"
+          ]
+        },
+        {
+          "id": 7719,
+          "name": "Raging Berserker's Helm",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Herod"
+          ]
+        },
+        {
+          "id": 7691,
+          "name": "Embalmed Shroud",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Fallen Champion"
+          ]
+        },
+        {
+          "id": 7685,
+          "name": "Orb of the Forgotten Seer",
+          "ilvl": 37,
+          "reqLevel": 32,
+          "quality": "rare",
+          "slot": "Held in Off-hand",
+          "slotId": 23,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bloodmage Thalnos"
+          ]
+        },
+        {
+          "id": 10330,
+          "name": "Scarlet Leggings",
+          "ilvl": 44,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 7709,
+          "name": "Blighted Leggings",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Azshir the Sleepless"
+          ]
+        },
+        {
+          "id": 7721,
+          "name": "Hand of Righteousness",
+          "ilvl": 44,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 29.91,
+          "speed": 2.7,
+          "droppedBy": [
+            "High Inquisitor Whitemane"
+          ]
+        },
+        {
+          "id": 7714,
+          "name": "Hypnotic Blade",
+          "ilvl": 39,
+          "reqLevel": 34,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 26.86,
+          "speed": 1.4,
+          "droppedBy": [
+            "Arcanist Doan"
+          ]
+        },
+        {
+          "id": 7731,
+          "name": "Ghostshard Talisman",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Azshir the Sleepless"
+          ]
+        },
+        {
+          "id": 23169,
+          "name": "Scorn's Icy Choker",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Scorn"
+          ]
+        },
+        {
+          "id": 7687,
+          "name": "Ironspine's Fist",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 23.12,
+          "speed": 2.4,
+          "droppedBy": [
+            "Ironspine"
+          ]
+        },
+        {
+          "id": 7682,
+          "name": "Torturing Poker",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 22.22,
+          "speed": 1.7,
+          "droppedBy": [
+            "Interrogator Vishas"
+          ]
+        },
+        {
+          "id": 7708,
+          "name": "Necrotic Wand",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 23.12,
+          "speed": 1.4,
+          "droppedBy": [
+            "Azshir the Sleepless"
+          ]
+        },
+        {
+          "id": 7726,
+          "name": "Aegis of the Scarlet Commander",
+          "ilvl": 44,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Scarlet Commander Mograine"
+          ]
+        },
+        {
+          "id": 19507,
+          "name": "Inquisitor's Shawl",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "High Inquisitor Fairbanks"
+          ]
+        },
+        {
+          "id": 7684,
+          "name": "Bloodmage Mantle",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bloodmage Thalnos"
+          ]
+        },
+        {
+          "id": 7723,
+          "name": "Mograine's Might",
+          "ilvl": 44,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 38.93,
+          "speed": 3.4,
+          "droppedBy": [
+            "Scarlet Commander Mograine"
+          ]
+        },
+        {
+          "id": 7717,
+          "name": "Ravager",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 37.36,
+          "speed": 3.5,
+          "droppedBy": [
+            "Herod"
+          ]
+        },
+        {
+          "id": 7713,
+          "name": "Illusionary Rod",
+          "ilvl": 39,
+          "reqLevel": 34,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 34.78,
+          "speed": 3.4,
+          "droppedBy": [
+            "Arcanist Doan"
+          ]
+        },
+        {
+          "id": 7757,
+          "name": "Windweaver Staff",
+          "ilvl": 37,
+          "reqLevel": 32,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 32.54,
+          "speed": 3.1,
+          "droppedBy": []
+        },
+        {
+          "id": 7710,
+          "name": "Loksey's Training Stick",
+          "ilvl": 36,
+          "reqLevel": 31,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 31.42,
+          "speed": 3.1,
+          "droppedBy": [
+            "Houndmaster Loksey"
+          ]
+        },
+        {
+          "id": 7689,
+          "name": "Morbid Dawn",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 30.17,
+          "speed": 2.9,
+          "droppedBy": [
+            "Fallen Champion"
+          ]
+        },
+        {
+          "id": 10329,
+          "name": "Scarlet Belt",
+          "ilvl": 37,
+          "reqLevel": 32,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 19508,
+          "name": "Branded Leather Bracers",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "High Inquisitor Fairbanks"
+          ]
+        },
+        {
+          "id": 10333,
+          "name": "Scarlet Wristguards",
+          "ilvl": 36,
+          "reqLevel": 31,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 4614,
+          "name": "Pendant of Myzrael",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "uncommon",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ]
+    },
+    "Razorfen Downs": {
+      "zoneId": 722,
+      "levels": "37-46",
+      "drops": [
+        {
+          "id": 10762,
+          "name": "Robes of the Lich",
+          "ilvl": 43,
+          "reqLevel": 38,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Amnennar the Coldbringer"
+          ]
+        },
+        {
+          "id": 10764,
+          "name": "Deathchill Armor",
+          "ilvl": 43,
+          "reqLevel": 39,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Amnennar the Coldbringer"
+          ]
+        },
+        {
+          "id": 10775,
+          "name": "Carapace of Tuten'kash",
+          "ilvl": 42,
+          "reqLevel": 40,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Tuten'kash"
+          ]
+        },
+        {
+          "id": 10765,
+          "name": "Bonefingers",
+          "ilvl": 43,
+          "reqLevel": 38,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Amnennar the Coldbringer"
+          ]
+        },
+        {
+          "id": 10763,
+          "name": "Icemetal Barbute",
+          "ilvl": 43,
+          "reqLevel": 40,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Amnennar the Coldbringer"
+          ]
+        },
+        {
+          "id": 10761,
+          "name": "Coldrage Dagger",
+          "ilvl": 43,
+          "reqLevel": 38,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 29.26,
+          "speed": 1.5,
+          "droppedBy": [
+            "Amnennar the Coldbringer"
+          ]
+        },
+        {
+          "id": 10772,
+          "name": "Glutton's Cleaver",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 28.8,
+          "speed": 2,
+          "droppedBy": [
+            "Glutton"
+          ]
+        },
+        {
+          "id": 10774,
+          "name": "Fleshhide Shoulders",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Glutton"
+          ]
+        },
+        {
+          "id": 10771,
+          "name": "Deathmage Sash",
+          "ilvl": 41,
+          "reqLevel": 36,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mordresh Fire Eye"
+          ]
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 4614,
+          "name": "Pendant of Myzrael",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "uncommon",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ]
+    },
+    "Uldaman": {
+      "zoneId": 1337,
+      "levels": "41-51",
+      "drops": [
+        {
+          "id": 9415,
+          "name": "Grimlok's Tribal Vestments",
+          "ilvl": 47,
+          "reqLevel": 42,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Grimlok"
+          ]
+        },
+        {
+          "id": 9390,
+          "name": "Revelosh's Gloves",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Revelosh"
+          ]
+        },
+        {
+          "id": 9414,
+          "name": "Oilskin Leggings",
+          "ilvl": 47,
+          "reqLevel": 42,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Grimlok"
+          ]
+        },
+        {
+          "id": 9407,
+          "name": "Stoneweaver Leggings",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ironaya"
+          ]
+        },
+        {
+          "id": 9411,
+          "name": "Rockshard Pauldrons",
+          "ilvl": 46,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ancient Stone Keeper"
+          ]
+        },
+        {
+          "id": 9389,
+          "name": "Revelosh's Spaulders",
+          "ilvl": 42,
+          "reqLevel": 37,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Revelosh"
+          ]
+        },
+        {
+          "id": 9416,
+          "name": "Grimlok's Charge",
+          "ilvl": 47,
+          "reqLevel": 42,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 41.11,
+          "speed": 2.7,
+          "droppedBy": [
+            "Grimlok"
+          ]
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 4614,
+          "name": "Pendant of Myzrael",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "uncommon",
+          "slot": "Neck",
+          "slotId": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ]
+    },
+    "Zul'Farrak": {
+      "zoneId": 978,
+      "levels": "44-54",
+      "drops": [
+        {
+          "id": 9473,
+          "name": "Jinxed Hoodoo Skin",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ]
+        },
+        {
+          "id": 9469,
+          "name": "Gahz'rilla Scale Armor",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gahz'rilla"
+          ]
+        },
+        {
+          "id": 12470,
+          "name": "Sandstalker Ankleguards",
+          "ilvl": 47,
+          "reqLevel": 42,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Zerillis"
+          ]
+        },
+        {
+          "id": 9640,
+          "name": "Vice Grips",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Antu'sul"
+          ]
+        },
+        {
+          "id": 9470,
+          "name": "Bad Mojo Mask",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ]
+        },
+        {
+          "id": 9474,
+          "name": "Jinxed Hoodoo Kilt",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ]
+        },
+        {
+          "id": 9639,
+          "name": "The Hand of Antu'sul",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 33.38,
+          "speed": 2.7,
+          "droppedBy": [
+            "Antu'sul"
+          ]
+        },
+        {
+          "id": 11086,
+          "name": "Jang'thraze the Protector",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 33.56,
+          "speed": 1.9,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ]
+        },
+        {
+          "id": 9379,
+          "name": "Sang'thraze the Deflector",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 33.48,
+          "speed": 1.7,
+          "droppedBy": [
+            "Antu'sul"
+          ]
+        },
+        {
+          "id": 9467,
+          "name": "Gahz'rilla Fang",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 32.41,
+          "speed": 1.8,
+          "droppedBy": [
+            "Gahz'rilla"
+          ]
+        },
+        {
+          "id": 9476,
+          "name": "Big Bad Pauldrons",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ]
+        },
+        {
+          "id": 9477,
+          "name": "The Chief's Enforcer",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 43.58,
+          "speed": 3.4,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ]
+        },
+        {
+          "id": 9475,
+          "name": "Diabolic Skiver",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 42.79,
+          "speed": 2.9,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ]
+        },
+        {
+          "id": 18082,
+          "name": "Zum'rah's Vexing Cane",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 41.97,
+          "speed": 2.7,
+          "droppedBy": [
+            "Witch Doctor Zum'rah"
+          ]
+        }
+      ],
+      "questRewards": []
+    },
+    "Maraudon": {
+      "zoneId": 2100,
+      "levels": "46-55",
+      "drops": [
+        {
+          "id": 17739,
+          "name": "Grovekeeper's Drape",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Celebras the Cursed"
+          ]
+        },
+        {
+          "id": 17741,
+          "name": "Nature's Embrace",
+          "ilvl": 51,
+          "reqLevel": 46,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Meshlok the Harvester"
+          ]
+        },
+        {
+          "id": 17728,
+          "name": "Albino Crocscale Boots",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Rotgrip"
+          ]
+        },
+        {
+          "id": 17748,
+          "name": "Vinerot Sandals",
+          "ilvl": 51,
+          "reqLevel": 46,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Razorlash"
+          ]
+        },
+        {
+          "id": 17713,
+          "name": "Blackstone Ring",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Princess Theradras"
+          ]
+        },
+        {
+          "id": 17715,
+          "name": "Eye of Theradras",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Princess Theradras"
+          ]
+        },
+        {
+          "id": 17740,
+          "name": "Soothsayer's Headdress",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Celebras the Cursed"
+          ]
+        },
+        {
+          "id": 17710,
+          "name": "Charstone Dirk",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 36,
+          "speed": 1.6,
+          "droppedBy": [
+            "Princess Theradras"
+          ]
+        },
+        {
+          "id": 17719,
+          "name": "Inventor's Focal Sword",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 35.3,
+          "speed": 2.2,
+          "droppedBy": [
+            "Tinkerer Gizlock"
+          ]
+        },
+        {
+          "id": 17943,
+          "name": "Fist of Stone",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "dps": 35.4,
+          "speed": 1.8,
+          "droppedBy": [
+            "Landslide"
+          ]
+        },
+        {
+          "id": 17738,
+          "name": "Claw of Celebras",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Off Hand",
+          "slotId": 22,
+          "dps": 34.64,
+          "speed": 1.8,
+          "droppedBy": [
+            "Celebras the Cursed"
+          ]
+        },
+        {
+          "id": 17717,
+          "name": "Megashot Rifle",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 45.85,
+          "speed": 2.5,
+          "droppedBy": [
+            "Tinkerer Gizlock"
+          ]
+        },
+        {
+          "id": 17745,
+          "name": "Noxious Shooter",
+          "ilvl": 51,
+          "reqLevel": 46,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 34.11,
+          "speed": 1.6,
+          "droppedBy": [
+            "Noxxion"
+          ]
+        },
+        {
+          "id": 17732,
+          "name": "Rotgrip Mantle",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Rotgrip"
+          ]
+        },
+        {
+          "id": 17766,
+          "name": "Princess Theradras' Scepter",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 46.6,
+          "speed": 3.4,
+          "droppedBy": [
+            "Princess Theradras"
+          ]
+        },
+        {
+          "id": 17730,
+          "name": "Gatorbite Axe",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 45.84,
+          "speed": 3.2,
+          "droppedBy": [
+            "Rotgrip"
+          ]
+        },
+        {
+          "id": 17755,
+          "name": "Satyrmane Sash",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Vyletongue"
+          ]
+        },
+        {
+          "id": 17714,
+          "name": "Bracers of the Stone Princess",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Princess Theradras"
+          ]
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 17775,
+          "name": "Acumen Robes",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Twisted Evils"
+          ]
+        },
+        {
+          "id": 17777,
+          "name": "Relentless Chain",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Twisted Evils"
+          ]
+        },
+        {
+          "id": 17770,
+          "name": "Branchclaw Gauntlets",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        },
+        {
+          "id": 17776,
+          "name": "Sprightring Helm",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Twisted Evils"
+          ]
+        },
+        {
+          "id": 17705,
+          "name": "Thrash Blade",
+          "ilvl": 53,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "dps": 35.31,
+          "speed": 2.7,
+          "droppedBy": []
+        },
+        {
+          "id": 17753,
+          "name": "Verdant Keeper's Aim",
+          "ilvl": 53,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "dps": 45.87,
+          "speed": 2.8,
+          "droppedBy": []
+        },
+        {
+          "id": 17779,
+          "name": "Hulkstone Pauldrons",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Twisted Evils"
+          ]
+        },
+        {
+          "id": 17774,
+          "name": "Mark of the Chosen",
+          "ilvl": 48,
+          "reqLevel": 39,
+          "quality": "uncommon",
+          "slot": "Trinket",
+          "slotId": 12,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Pariah's Instructions"
+          ]
+        },
+        {
+          "id": 17743,
+          "name": "Resurgence Rod",
+          "ilvl": 53,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "dps": 45.84,
+          "speed": 3.8,
+          "droppedBy": []
+        },
+        {
+          "id": 17778,
+          "name": "Sagebrush Girdle",
+          "ilvl": 49,
+          "reqLevel": 41,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": []
+        }
+      ]
+    },
+    "Temple of Atal'Hakkar": {
+      "zoneId": 1477,
+      "levels": "50-60",
+      "drops": [
+        {
+          "id": 220606,
+          "name": "Idol of the Dream",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Relic",
+          "slotId": 28,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Idol of the Dream",
+            "Hazzas"
+          ]
+        }
+      ],
+      "questRewards": []
+    }
+  }
+}
