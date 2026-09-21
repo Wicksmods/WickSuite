@@ -528,44 +528,93 @@ if CA then
     check(_G.LFGWhoListFrame ~= nil and _G.LFGWhoListFrame.wicksStub, "the missing group finder frame is stood in for")
 
     local frames = CNS.modules.frames
-    S.UNITS = { target = true }
+    S.UNITS = { target = true, player = true }
 
-    -- Health bars. Hooking UnitFrameHealthBar_Update looked right and
-    -- did nothing in game, because Blizzard's callers reach it through a
-    -- local. Their update skips a bar whose lockColor is set, so that is
-    -- the door, and it is the one the target frame proved we needed.
+    -- Health bars. Two earlier attempts are encoded here as things that
+    -- must not happen again. Hooking UnitFrameHealthBar_Update never
+    -- fired, because Blizzard reaches it through a local. Setting their
+    -- lockColor did fire, and put a tainted value in their table, which
+    -- made their own status text formatter illegal the next time it
+    -- compared secret health: every target change threw, blaming us.
+    --
+    -- So the test is not "is the bar green or blue". It is "did we leave
+    -- their frame exactly as we found it, and is there a bar of ours on
+    -- top carrying the colour".
     CLASS = "PALADIN"
     _G.TargetFrame = S.newMock("Frame")
-    _G.TargetFrame.healthbar = S.newMock("StatusBar")
-    _G.TargetFrame.healthbar.unit = "target"
-    _G.TargetFrame.healthbar:SetStatusBarColor(0, 1, 0)
+    local theirs = S.newMock("StatusBar")
+    theirs.unit = "target"
+    theirs:SetStatusBarColor(0, 1, 0)
+    theirs:SetMinMaxValues(0, 100)
+    theirs:SetValue(70)
+    theirs:Show()
+    _G.TargetFrame.healthbar = theirs
+
+    -- Anything we write into their table is a tainted value waiting for
+    -- their code to read it, so record what is in there to begin with.
+    local before = {}
+    for k, v in pairs(theirs) do before[k] = v end
 
     db.classColorHealth = false
-    frames:Repaint()
-    check(_G.TargetFrame.healthbar.__color[2] == 1 and _G.TargetFrame.healthbar.__color[1] == 0,
-        "off by default, a paladin target stays Blizzard's green")
+    frames:Apply()
+    check(theirs.__color[1] == 0 and theirs.__color[2] == 1,
+        "off by default, their bar is left the green they painted it")
 
     db.classColorHealth = true
-    frames:Repaint()
+    frames:Apply()
     local pal = RAID_CLASS_COLORS.PALADIN
-    check(math.abs(_G.TargetFrame.healthbar.__color[1] - pal.r) < 0.01,
-        "switched on, the bar takes the class colour")
-    check(_G.TargetFrame.healthbar.lockColor == true,
-        "and is locked so their own update will not paint over it")
+    local ov = frames.OverlayFor(theirs)
+    check(ov ~= nil and ov:IsShown(), "switched on, a bar of ours appears over theirs")
+    check(math.abs(ov.__color[1] - pal.r) < 0.01,
+        "and it carries the class colour: " .. tostring(ov.__color[1]))
+    check(theirs.__color[1] == 0 and theirs.__color[2] == 1,
+        "while their own bar is still the green it always was")
 
-    -- Turning it off has to hand the bar back as it was found.
-    db.classColorHealth = false
-    frames:Repaint()
-    check(not _G.TargetFrame.healthbar.lockColor, "off again releases the lock")
-    check(_G.TargetFrame.healthbar.__color[2] == 1, "and puts the green back")
-    db.classColorHealth = true
+    -- The whole point. One new field on their frame is enough to throw
+    -- inside TextStatusBar the next time it formats secret health.
+    -- Looking a method up on the mock leaves a stand-in behind, which a
+    -- real widget does not do, so those do not count. Anything else
+    -- appearing is a value of ours sitting in their table waiting to
+    -- taint the next thing that reads it.
+    local function lookupArtifact(k, v)
+        if type(v) == "function" then return true end
+        return type(v) == "table" and rawget(v, "__parent") == theirs
+    end
+    local added = {}
+    for k, v in pairs(theirs) do
+        if before[k] == nil and not lookupArtifact(k, v) then added[#added + 1] = tostring(k) end
+    end
+    check(#added == 0, "and nothing of ours was written into their table: "
+        .. table.concat(added, ", "))
 
-    -- A creature has no class, so nothing is touched.
+    -- Ours has to track theirs, and the numbers involved are secret, so
+    -- they are passed across without ever being looked at.
+    theirs:SetValue(30)
+    frames:Tick()
+    check(ov.__value == 30, "ours follows theirs when the health moves: " .. tostring(ov.__value))
+    theirs:SetMinMaxValues(0, 250)
+    frames:Tick()
+    check(ov.__max == 250, "and follows the scale as well")
+
+    -- A creature has no class, so there is nothing of ours to show.
     S.IS_PLAYER = { target = false }
-    _G.TargetFrame.healthbar:SetStatusBarColor(0, 1, 0)
-    frames:Repaint()
-    check(_G.TargetFrame.healthbar.__color[2] == 1, "a creature is left alone")
+    frames:Apply()
+    check(not ov:IsShown(), "a creature gets no overlay")
     S.IS_PLAYER = nil
+
+    db.classColorHealth = false
+    frames:Apply()
+    check(not ov:IsShown(), "and switching off takes ours away")
+    check(theirs.__color[2] == 1, "leaving theirs exactly as it was")
+
+    -- Nothing coloured means nothing to poll.
+    check(frames.driver ~= nil and not frames.driver:IsShown(),
+        "with nothing to follow, the ticker stops")
+    db.classColorHealth = true
+    frames:Apply()
+    check(frames.driver:IsShown(), "and runs again when there is")
+    db.classColorHealth = false
+    frames:Apply()
 
     -- Moving frames is Edit Mode's job, not ours.
     _G.EditModeManagerFrame = S.newMock("Frame")
@@ -573,34 +622,19 @@ if CA then
     _G.ShowUIPanel = function(f) S.SHOWN_PANEL = f end
     check(frames:OpenEditMode(), "the Edit Mode button opens Blizzard's own")
     check(S.SHOWN_PANEL == _G.EditModeManagerFrame, "and opens the right frame")
-    -- Health is secret on this client. Blizzard's own code may compare
-    -- one; ours may not, and anything we call inherits our taint. Asking
-    -- their update to redraw a bar threw inside their text formatter,
-    -- blaming us. So our repaint must never go through their function.
-    S.UNITS = { target = true, player = true }
+
+    -- Never their update. Health is secret and their formatter compares
+    -- it, so asking them to redraw throws in our name.
     local called = 0
     local realUpdate = UnitFrameHealthBar_Update
     UnitFrameHealthBar_Update = function(...) called = called + 1 return realUpdate(...) end
-    _G.PlayerFrame = S.newMock("Frame")
-    _G.PlayerFrame.healthbar = S.newMock("StatusBar")
-    _G.PlayerFrame.healthbar.unit = "player"
-    -- The player's own bar is permanently lockColor, so honouring a lock
-    -- we did not set would mean never colouring the frame you look at most.
-    _G.PlayerFrame.healthbar.lockColor = true
-    _G.PlayerFrame.healthbar:SetStatusBarColor(0, 1, 0)
+    db.classColorHealth = true
     frames:Apply()
+    frames:Tick()
     UnitFrameHealthBar_Update = realUpdate
     check(called == 0, "repainting never calls Blizzard's update, which would run tainted")
-    check(math.abs((_G.PlayerFrame.healthbar.__color[1] or 0) - pal.r) < 0.01,
-        "a lock we did not set does not stop us colouring the player frame")
-
-    -- Switching off has to hand back the lock it came with, not ours.
     db.classColorHealth = false
-    frames:Repaint()
-    check(_G.PlayerFrame.healthbar.lockColor == true,
-        "off again leaves a pre-existing lock exactly as it was found")
-
-    db.classColorHealth = false
+    frames:Apply()
 
     -- ---- Quests -------------------------------------------------
     local quests = CNS.modules.quests
