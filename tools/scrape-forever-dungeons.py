@@ -62,11 +62,14 @@ SLOTS = {
 QUALITY = { 0: "poor", 1: "common", 2: "uncommon", 3: "rare", 4: "epic", 5: "legendary" }
 
 
-def fetch(zone_id):
-    url = "https://www.wowhead.com/forever/zone=%d" % zone_id
+def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=30) as r:
         return r.read().decode("utf-8", "replace")
+
+
+def fetch(zone_id):
+    return get("https://www.wowhead.com/forever/zone=%d" % zone_id)
 
 
 def extract_json_array(text, start):
@@ -112,6 +115,19 @@ def listview(html, want):
     return []
 
 
+# Walking each creature's own page was tried and is not worth it. The
+# zone page carries a curated list; a creature page carries everything it
+# has ever been seen to drop, which is overwhelmingly world drops. For
+# Uldaman that turned seven items into five hundred, and filtering out
+# Wowhead's commondrop flag and anything under a one percent rate still
+# left forty-five, of which two were actually Uldaman loot. The rest were
+# world greens: Hibernal, Chromite, Gothic Plate, Champion's.
+#
+# A thin dungeon here means the data has not been recorded yet, not that
+# the zone page is hiding it. Archaedas lists sixty-three drops and none
+# of them are his real table. Re-run this later instead.
+
+
 def tidy(row):
     slot = row.get("slot") or 0
     sources = []
@@ -136,20 +152,27 @@ def tidy(row):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--only", help="comma-separated zone ids; the rest of the file is left alone")
     ap.add_argument("--one", type=int, help="a single zone id, for a quick check")
     args = ap.parse_args()
 
-    targets = [d for d in DUNGEONS if d[0] == args.one] if args.one else DUNGEONS
+    wanted = None
+    if args.only:
+        wanted = {int(z.strip()) for z in args.only.split(",") if z.strip()}
+    elif args.one:
+        wanted = {args.one}
+    targets = [d for d in DUNGEONS if d[0] in wanted] if wanted else DUNGEONS
     if not targets:
-        sys.exit("No dungeon with that zone id in the list.")
+        sys.exit("No dungeon in the list with that zone id.")
 
     # Keep any stats already fetched: re-running the roster should not
     # silently undo three minutes of tooltip requests.
-    known = {}
+    known, previous = {}, {}
     existing_path = os.path.normpath(os.path.join(OUT_DIR, "dungeon-loot.json"))
     if os.path.exists(existing_path):
         prev = json.loads(io.open(existing_path, encoding="utf-8").read())
-        for dung in prev.get("dungeons", {}).values():
+        previous = prev.get("dungeons", {})
+        for dung in previous.values():
             for bucket in ("drops", "questRewards", "items"):
                 for it in dung.get(bucket, []):
                     if it.get("id") and it.get("stats"):
@@ -183,6 +206,14 @@ def main():
         total += len(drops) + len(quests)
         equippable += len(d) + len(q)
         print("  %-24s %3d dropped, %3d from quests" % (name, len(d), len(q)))
+
+    if wanted:
+        # Only some were asked for, so keep what was already on file for
+        # the rest. Writing just the scraped ones would quietly delete
+        # the other thirteen dungeons.
+        merged = dict(previous)
+        merged.update(out)
+        out = merged
 
     os.makedirs(OUT_DIR, exist_ok=True)
     path = os.path.normpath(os.path.join(OUT_DIR, "dungeon-loot.json"))

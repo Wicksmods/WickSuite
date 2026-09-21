@@ -1,0 +1,669 @@
+==================================================================
+ Wick's Probe 0.1.0 - client and API surface report
+ generated 2026-09-17 17:05:22
+==================================================================
+
+[CLIENT]
+  version                1.60.1
+  build                  69893
+  build date             Sep 16 2026
+  interface (TOC)        16001
+  GetBuildInfo returns   6
+  locale                 enUS
+  realm                  Classic Beta PvP
+  WOW_PROJECT_ID         1
+  matches constant       WOW_PROJECT_MAINLINE
+    WOW_PROJECT_CLASSIC  2
+    WOW_PROJECT_MAINLINE 1
+
+[FEATURE FLAGS]
+  PRESENT issecretvalue                                  Secret Values (retail 12.0)
+  PRESENT C_Secrets.HasSecretRestrictions                Secret Values control API
+  PRESENT C_RestrictedActions.IsAddOnRestrictionActive   AddOn restriction state (12.0)
+  PRESENT C_RestrictedActions.GetAddOnRestrictionState   AddOn restriction query (12.0)
+  absent  C_StringUtil.Format                            Secret-safe string utils (12.0)
+  PRESENT C_DurationUtil.CreateDuration                  Duration objects (12.0)
+  PRESENT UnitHealthPercent                              Secret-safe health percent (12.0)
+  PRESENT GetTotemInfo                                   Totem info
+  PRESENT C_GameRules.IsGameRuleActive                   Game rules / ruleset detection
+  PRESENT C_Container.GetContainerNumSlots               C_Container namespace
+  PRESENT C_UnitAuras.GetAuraDataByIndex                 C_UnitAuras namespace
+  PRESENT C_Item.GetItemInfo                             C_Item namespace
+  PRESENT C_Spell.GetSpellInfo                           C_Spell namespace
+  PRESENT C_AddOns.GetAddOnMetadata                      C_AddOns namespace
+  PRESENT C_ChatInfo.SendAddonMessage                    C_ChatInfo addon messaging
+  absent  C_Transmog.GetSlotInfo                         Transmog API
+  PRESENT C_TransmogCollection.GetAppearanceSources      Transmog collection
+  absent  C_Engraving.IsEngravingEnabled                 Engraving (SoD)
+  absent  C_Seasons.GetActiveSeason                      Seasons API
+  PRESENT C_TradeSkillUI.GetAllRecipeIDs                 Modern tradeskill API
+  absent  GetNumSockets                                  Item sockets
+  PRESENT GetCombatRating                                Combat rating system
+  PRESENT GetSpellHitModifier                            Separate spell hit
+  PRESENT IsFlyableArea                                  Flying
+  PRESENT IsActiveBattlefieldArena                       Arena
+  absent  CombatLogGetCurrentEventInfo                   Modern CLEU accessor
+
+[GLOBALS  146 present / 73 missing]
+  MISSING  AddQuestWatch                          WicksUI
+  MISSING  BankButtonIDToInvSlotID                WicksBags
+  MISSING  CloseBankFrame                         WicksBags
+  MISSING  CombatLogGetCurrentEventInfo           WicksCDTracker,WicksCombatLog,WicksDungeonMaps,WicksLayers,WicksTotemsAndThings
+  MISSING  EquipItemByName                        WickidsTBCBISTracker
+  MISSING  GetAbandonQuestName                    WicksUI
+  MISSING  GetAddOnMetadata                       (probe question)
+  MISSING  GetArenaCurrency                       WicksBags
+  MISSING  GetArenaTeam                           (probe question)
+  MISSING  GetBankSlotCost                        WicksBags
+  MISSING  GetCoinTextureString                   (probe question)
+  MISSING  GetContainerItemInfo                   WicksBags
+  MISSING  GetContainerItemLink                   (probe question)
+  MISSING  GetContainerNumFreeSlots               (probe question)
+  MISSING  GetContainerNumSlots                   (probe question)
+  MISSING  GetCraftDisplaySkillLine               (probe question)
+  MISSING  GetDetailedItemLevelInfo               (probe question)
+  MISSING  GetExistingSocketInfo                  (probe question)
+  MISSING  GetHonorCurrency                       WicksBags
+  MISSING  GetItemCount                           WickidsTBCBISTracker,WicksBags,WicksDemonsAndThings,WicksQuestKey,WicksTotemsAndThings
+  MISSING  GetItemIcon                            WickidsTBCBISTracker
+  MISSING  GetItemInfo                            WickidsTBCBISTracker,WicksBags,WicksConcessionStand,WicksLedger,WicksQuestKey,WicksTotemsAndThings,WicksTradeHall,WicksUI,WicksWardrobe
+  MISSING  GetItemInfoInstant                     WickidsTBCBISTracker,WicksBags,WicksTradeHall
+  MISSING  GetItemQualityColor                    WickidsTBCBISTracker
+  MISSING  GetItemSpell                           WicksConcessionStand
+  MISSING  GetItemStats                           (probe question)
+  MISSING  GetMaxQuestWatches                     WicksUI
+  MISSING  GetNumArenaTeamMembers                 (probe question)
+  MISSING  GetNumBankSlots                        WicksBags
+  MISSING  GetNumCrafts                           (probe question)
+  MISSING  GetNumPartyMembers                     (probe question)
+  MISSING  GetNumQuestLogEntries                  WickidsTBCBISTracker,WicksQuestKey,WicksUI
+  MISSING  GetNumRaidMembers                      WicksTotemsAndThings
+  MISSING  GetNumSockets                          (probe question)
+  MISSING  GetNumTalentTabs                       WicksDemonsAndThings,WicksStats,WicksTotemsAndThings
+  MISSING  GetNumTalents                          WicksTotemsAndThings
+  MISSING  GetNumTradeSkills                      (probe question)
+  MISSING  GetQuestLogTitle                       WickidsTBCBISTracker,WicksQuestKey,WicksUI
+  MISSING  GetSocketItemInfo                      (probe question)
+  MISSING  GetSocketTypes                         (probe question)
+  MISSING  GetSpellCooldown                       WicksDemonsAndThings,WicksTotemsAndThings
+  MISSING  GetSpellInfo                           (probe question)
+  MISSING  GetSpellLink                           (probe question)
+  MISSING  GetSpellTexture                        WicksDemonsAndThings,WicksTotemsAndThings
+  MISSING  GetTalentInfo                          WicksTotemsAndThings
+  MISSING  GetTalentTabInfo                       WicksDemonsAndThings,WicksStats,WicksTotemsAndThings
+  MISSING  GetTradeSkillInfo                      (probe question)
+  MISSING  GetTradeSkillLine                      (probe question)
+  MISSING  GetTradeSkillNumReagents               (probe question)
+  MISSING  GetTransmogrifyItemInfo                (probe question)
+  MISSING  IsAddOnLoaded                          (probe question)
+  MISSING  IsQuestWatched                         WicksUI
+  MISSING  MouseIsOver                            WickidsTBCBISTracker,WicksTotemsAndThings
+  MISSING  PickupBankItem                         WicksBags
+  MISSING  PopulateHistory                        WicksLedger
+  MISSING  PopulatePanel                          WicksLedger
+  MISSING  PurchaseSlot                           WicksBags
+  MISSING  RegisterAddonMessagePrefix             (probe question)
+  MISSING  ReleaseAllConsumableRows               WickidsTBCBISTracker
+  MISSING  ReleaseAllEnchantRows                  WickidsTBCBISTracker
+  MISSING  ReleaseAllGemRows                      WickidsTBCBISTracker
+  MISSING  RemoveQuestWatch                       WicksUI
+  MISSING  RunMacroText                           WicksUI
+  MISSING  SelectQuestLogEntry                    WicksUI
+  MISSING  SendAddonMessage                       (probe question)
+  MISSING  SetAbandonQuest                        WicksUI
+  MISSING  UnitAttackBothHands                    WicksStats
+  MISSING  UnitAura                               (probe question)
+  MISSING  UnitBuff                               WicksDemonsAndThings,WicksStats,WicksTotemsAndThings
+  MISSING  UnitDebuff                             (probe question)
+  MISSING  UnitDefense                            WicksStats
+  MISSING  UnitStandState                         WicksSurvivors
+  MISSING  UseContainerItem                       WicksBags
+
+[NAMESPACED  76 present / 8 missing]
+  MISSING  C_CombatLog.GetCurrentEventInfo        (probe question)
+  MISSING  C_DamageMeter.GetCombatSessionType     (probe question)
+  MISSING  C_Engraving.IsEngravingEnabled         (probe question)
+  MISSING  C_QuestLog.PushQuest                   WicksUI
+  MISSING  C_RestrictedActions.IsInRestrictedEnvironment (probe question)
+  MISSING  C_Seasons.GetActiveSeason              (probe question)
+  MISSING  C_TradeSkillUI.GetTradeSkillLine       (probe question)
+  MISSING  C_Transmog.GetSlotInfo                 (probe question)
+
+[EVENTS  62 valid / 2 invalid]
+  INVALID  LEARNED_SPELL_IN_TAB                   WicksBones,WicksTotemsAndThings
+  INVALID  TRADE_SKILL_UPDATE                     (probe question)
+
+[UNCONFIRMED EVENT CANDIDATES  31 valid / 40 invalid]
+  (scanned from bare string literals; invalid here is usually
+   just an internal message name, not a real regression)
+  VALID    AUCTION_HOUSE_CLOSED                   WicksBags
+  VALID    AUCTION_HOUSE_SHOW                     WicksBags
+  VALID    BAG_UPDATE_COOLDOWN                    WicksBags
+  VALID    BANKFRAME_CLOSED                       WicksBags
+  VALID    BANKFRAME_OPENED                       WicksBags
+  VALID    CHAT_MSG_LOOT                          WicksLedger
+  VALID    COMBAT_TEXT_UPDATE                     WicksLedger
+  VALID    GLOBAL_MOUSE_DOWN                      WicksTotemsAndThings
+  VALID    ITEM_LOCK_CHANGED                      WicksBags
+  VALID    MAIL_CLOSED                            WicksBags
+  VALID    MAIL_SHOW                              WicksBags
+  VALID    MERCHANT_CLOSED                        WicksBags
+  VALID    NAME_PLATE_UNIT_ADDED                  WicksLayers
+  VALID    PARTY_LEADER_CHANGED                   WicksRaidBoard
+  VALID    PLAYERBANKSLOTS_CHANGED                WicksBags
+  VALID    PLAYER_DAMAGE_DONE_MODS                WicksStats
+  VALID    PLAYER_XP_UPDATE                       WicksLedger
+  VALID    SPELL_POWER_CHANGED                    WicksStats
+  VALID    TRADE_SKILL_CLOSE                      WicksBags
+  VALID    UNIT_ATTACK_POWER                      WicksStats
+  VALID    UNIT_DAMAGE                            WicksStats
+  VALID    UNIT_DEFENSE                           WicksStats
+  VALID    UNIT_DIED                              WicksDungeonMaps
+  VALID    UNIT_MAXHEALTH                         WicksStats
+  VALID    UNIT_MAXPOWER                          WicksTravelForm
+  VALID    UNIT_POWER_UPDATE                      WicksTravelForm
+  VALID    UNIT_RANGED_ATTACK_POWER               WicksStats
+  VALID    UNIT_RESISTANCES                       WicksStats
+  VALID    UNIT_STATS                             WicksStats
+  VALID    UPDATE_MOUSEOVER_UNIT                  WicksLayers
+  VALID    ZONE_CHANGED_INDOORS                   WicksTravelForm
+
+[COMBAT RATING CONSTANTS (CR_*)]
+  CR_ARMOR_PENETRATION   25
+  CR_AVOIDANCE           21
+  CR_AVOIDANCE_TOOLTIP   Reduces damage taken from area of effect attacks.
+
+Avoidance: %s [+%....
+  CR_BLOCK               5
+  CR_BLOCK_TOOLTIP       Blocking reduces damage of an attack by %0.2f%%.
+|cff888888(Against a...
+  CR_CORRUPTION          12
+  CR_CORRUPTION_RESISTANCE 13
+  CR_CRIT_MELEE          9
+  CR_CRIT_MELEE_TOOLTIP  Chance of attacks doing extra damage.
+Crit %s (+%.2f%% crit chance)
+  CR_CRIT_PARRY_RATING_TOOLTIP Chance for extra effectiveness on attacks and heals.
+
+Critical Strike...
+  CR_CRIT_RANGED         10
+  CR_CRIT_RANGED_TOOLTIP Chance of attacks doing extra damage.
+Crit %s (+%.2f%% crit chance)
+  CR_CRIT_SPELL          11
+  CR_CRIT_SPELL_TOOLTIP  Chance of spells doing extra damage.
+Crit %s (+%.2f%% crit chance)
+  CR_CRIT_TOOLTIP        Increases chance for extra effectiveness on |cFFFFFFFFAttacks|r, |cFF...
+  CR_DEFAULT_HIT_CAP_TOOLTIP 
+|cffBCBCBCTo never miss|r |cFFFF5A5ARaid Bosses|r|cffBCBCBC:
+  8.00%...
+  CR_DEFENSE_SKILL       2
+  CR_DODGE               3
+  CR_DODGE_BASE_STAT_TOOLTIP Increases chance to |cFFFFFFFFDodge|r by %.2f%%
+
+Increased by |cFFFFF...
+  CR_DODGE_TOOLTIP       Dodge of %d adds %.2f%% Dodge
+|cff888888(Before diminishing returns)|r
+  CR_EXPERTISE           24
+  CR_EXPERTISE_TOOLTIP   Increase the chance |cFFFFFFFFMelee|r attacks are not |cFFFFFFFFDodge...
+  CR_HASTE_MELEE         18
+  CR_HASTE_MELEE_TOOLTIP Increases |cFFFFFFFFMelee|r attack speed by %.2f%%
+  CR_HASTE_RANGED        19
+  CR_HASTE_RANGED_TOOLTIP Increases |cFFFFFFFFRanged|r attack speed by %.2f%%
+  CR_HASTE_RATING_RANGED_TOOLTIP Increases the speed of |cFFFFFFFFMelee|r attacks, |cFFFFFFFFRanged|r ...
+  CR_HASTE_RATING_TOOLTIP Increases the speed of |cFFFFFFFFMelee|r attacks and |cFFFFFFFFSpell|...
+  CR_HASTE_SPELL         20
+  CR_HASTE_SPELL_TOOLTIP Increases |cFFFFFFFFSpell|r casting speed by %.2f%%
+  CR_HIT_MELEE           6
+  CR_HIT_MELEE_TOOLTIP   Increases |cFFFFFFFFMelee|r hit chance by %.2f%%
+  CR_HIT_OFFHAND_MELEE_TOOLTIP Increases |cFFFFFFFFOff-hand Melee|r hit chance by %.2f%%
+  CR_HIT_RANGED          7
+  CR_HIT_RANGED_TOOLTIP  Increases |cFFFFFFFFRanged|r hit chance by %.2f%%
+  CR_HIT_SPELL           8
+  CR_HIT_SPELL_TOOLTIP   Increases |cFFFFFFFFSpell|r hit chance by %.2f%%
+  CR_HUNTER_HIT_CAP_TOOLTIP 
+|cffBCBCBCTo never miss|r |cFFFF5A5ARaid Bosses|r|cffBCBCBC:
+  8.00%...
+  CR_LIFESTEAL           17
+  CR_LIFESTEAL_TOOLTIP   Returns a portion of your damage and healing as healing to you.
+
+Leec...
+  CR_MASTERY             26
+  CR_MULTISTRIKE_TOOLTIP Grants two %.2f%% chances to deliver extra attacks or heals for %.0f%...
+  CR_PARRY               4
+  CR_PARRY_BASE_STAT_TOOLTIP Increases chance to |cFFFFFFFFParry|r by %.2f%%
+
+Increased by |cFFFFF...
+  CR_PARRY_TOOLTIP       Parry of %d adds %.2f%% Parry
+|cff888888(Before diminishing returns)|r
+  CR_RANGED_EXPERTISE_TOOLTIP Increases the chance |cFFFFFFFFMelee|r attacks are not |cFFFFFFFFDodg...
+  CR_ROGUE_CRIT_TOOLTIP  Increases chance for extra effectiveness on |cFFFFFFFFAttacks|r, |cFF...
+  CR_ROGUE_HIT_CAP_TOOLTIP 
+|cffBCBCBCTo never miss|r |cFFFF5A5ARaid Bosses|r|cffBCBCBC:
+  8.00%...
+  CR_SPEED               14
+  CR_SPEED_TOOLTIP       |cFFBCBCBCBase Speeds (In Yards Per Second):
+7.0 yd/s Running
+4.7 yd/...
+  CR_STURDINESS_TOOLTIP  Prevents durability loss on items.
+  CR_UNUSED_1            1
+  CR_UNUSED_2            22
+  CR_UNUSED_3            27
+  CR_UNUSED_4            28
+  CR_VERSATILITY_DAMAGE_DONE 29
+  CR_VERSATILITY_DAMAGE_TAKEN 31
+  CR_VERSATILITY_TOOLTIP Increases damage and healing done by %.2f%% and decreases damage take...
+  CR_WARRIOR_CRIT_TOOLTIP Increases chance for extra effectiveness on |cFFFFFFFFAttacks|r, |cFF...
+  CR_WARRIOR_HIT_CAP_TOOLTIP 
+|cffBCBCBCTo never miss|r |cFFFF5A5ARaid Bosses|r|cffBCBCBC:
+  8.00%...
+  CR_WEAPON_SKILL_RANGED 23
+
+[STAT VOCABULARY (ITEM_MOD_*)]
+  ITEM_MOD_AGILITY       %c%s Agility
+  ITEM_MOD_AGILITY_OR_INTELLECT_SHORT Agility or Intellect
+  ITEM_MOD_AGILITY_OR_STRENGTH_OR_INTELLECT_SHORT Agility or Strength or Intellect
+  ITEM_MOD_AGILITY_OR_STRENGTH_SHORT Agility or Strength
+  ITEM_MOD_AGILITY_SHORT Agility
+  ITEM_MOD_ALCHEMY       Increases alchemy skill by %s.
+  ITEM_MOD_ALCHEMY_SHORT Alchemy Skill
+  ITEM_MOD_ARCANE_DAMAGE_DONE Increases arcane damage done by up to %s.
+  ITEM_MOD_ARCANE_DAMAGE_DONE_SHORT Arcane Damage
+  ITEM_MOD_ARCANE_PENETRATION Increases arcane piercing by %s.
+  ITEM_MOD_ARCANE_PENETRATION_SHORT Arcane Piercing
+  ITEM_MOD_ARMOR_PENETRATION_RATING Increases your armor piercing by %s.
+  ITEM_MOD_ARMOR_PENETRATION_RATING_SHORT Armor Piercing
+  ITEM_MOD_ATTACK_POWER  Increases attack power by %s.
+  ITEM_MOD_ATTACK_POWER_SHORT Attack Power
+  ITEM_MOD_ATTACK_POWER_VS_BEAST_SHORT Attack Power Vs Beasts
+  ITEM_MOD_ATTACK_POWER_VS_DEMON_SHORT Attack Power Vs Demons
+  ITEM_MOD_ATTACK_POWER_VS_DRAGONKIN_SHORT Attack Power Vs Dragonkin
+  ITEM_MOD_ATTACK_POWER_VS_ELEMENTAL_SHORT Attack Power Vs Elementals
+  ITEM_MOD_ATTACK_POWER_VS_GIANT_SHORT Attack Power Vs Giants
+  ITEM_MOD_ATTACK_POWER_VS_HUMANOID_SHORT Attack Power Vs Humanoids
+  ITEM_MOD_ATTACK_POWER_VS_MECHANICAL_SHORT Attack Power Vs Mechanical
+  ITEM_MOD_ATTACK_POWER_VS_UNDEAD_SHORT Attack Power Vs Undead
+  ITEM_MOD_AXES          Increases axes skill by %s.
+  ITEM_MOD_AXES_SHORT    Axes Skill
+  ITEM_MOD_BLACKSMITHING Increases blacksmithing skill by %s.
+  ITEM_MOD_BLACKSMITHING_SHORT Blacksmithing Skill
+  ITEM_MOD_BLOCK_RATING  Increases your shield block by %s.
+  ITEM_MOD_BLOCK_RATING_SHORT Block
+  ITEM_MOD_BLOCK_VALUE   Increases the block value of your shield by %s.
+  ITEM_MOD_BLOCK_VALUE_SHORT Block Value
+  ITEM_MOD_BOWS          Increases bows skill by %s.
+  ITEM_MOD_BOWS_SHORT    Bows Skill
+  ITEM_MOD_COOKING       Increases cooking skill by %s.
+  ITEM_MOD_COOKING_SHORT Cooking Skill
+  ITEM_MOD_CORRUPTION    Corruption
+  ITEM_MOD_CORRUPTION_RESISTANCE Corruption Resistance
+  ITEM_MOD_CRAFTING_SPEED_SHORT Crafting Speed
+  ITEM_MOD_CRIT_MELEE_RATING Improves melee critical strike by %s.
+  ITEM_MOD_CRIT_MELEE_RATING_SHORT Critical Strike (Melee)
+  ITEM_MOD_CRIT_RANGED_RATING Improves ranged critical strike by %s.
+  ITEM_MOD_CRIT_RANGED_RATING_SHORT Critical Strike (Ranged)
+  ITEM_MOD_CRIT_RATING   Increases your critical strike by %s.
+  ITEM_MOD_CRIT_RATING_SHORT Critical Strike
+  ITEM_MOD_CRIT_SPELL_RATING Improves spell critical strike by %s.
+  ITEM_MOD_CRIT_SPELL_RATING_SHORT Critical Strike (Spell)
+  ITEM_MOD_CRIT_TAKEN_MELEE_RATING Improves melee critical avoidance by %s.
+  ITEM_MOD_CRIT_TAKEN_MELEE_RATING_SHORT Critical Strike Avoidance (Melee)
+  ITEM_MOD_CRIT_TAKEN_RANGED_RATING Improves ranged critical avoidance by %s.
+  ITEM_MOD_CRIT_TAKEN_RANGED_RATING_SHORT Critical Strike Avoidance (Ranged)
+  ITEM_MOD_CRIT_TAKEN_RATING Improves critical avoidance by %s.
+  ITEM_MOD_CRIT_TAKEN_RATING_SHORT Critical Strike Avoidance
+  ITEM_MOD_CRIT_TAKEN_SPELL_RATING Improves spell critical avoidance by %s.
+  ITEM_MOD_CRIT_TAKEN_SPELL_RATING_SHORT Critical Strike Avoidance (Spell)
+  ITEM_MOD_CROSSBOWS     Increases crossbows skill by %s.
+  ITEM_MOD_CROSSBOWS_SHORT Crossbows Skill
+  ITEM_MOD_CR_AVOIDANCE_SHORT Avoidance
+  ITEM_MOD_CR_LIFESTEAL_SHORT Leech
+  ITEM_MOD_CR_MULTISTRIKE_SHORT Multistrike
+  ITEM_MOD_CR_SPEED_SHORT Speed
+  ITEM_MOD_CR_STURDINESS_SHORT Indestructible
+  ITEM_MOD_CR_UNUSED_10_SHORT Unused 10
+  ITEM_MOD_CR_UNUSED_11_SHORT Unused 11
+  ITEM_MOD_CR_UNUSED_12_SHORT Unused 12
+  ITEM_MOD_CR_UNUSED_1_SHORT Multi-Strike
+  ITEM_MOD_CR_UNUSED_3_SHORT Speed
+  ITEM_MOD_CR_UNUSED_4_SHORT Leech
+  ITEM_MOD_CR_UNUSED_5_SHORT Avoidance
+  ITEM_MOD_CR_UNUSED_6_SHORT Indestructible
+  ITEM_MOD_CR_UNUSED_7_SHORT Unused 7
+  ITEM_MOD_CR_UNUSED_9_SHORT Versatility
+  ITEM_MOD_DAGGERS       Increases daggers skill by %s.
+  ITEM_MOD_DAGGERS_SHORT Daggers Skill
+  ITEM_MOD_DAMAGE_PER_SECOND_SHORT damage per second
+  ITEM_MOD_DEFENSE_SKILL_RATING Increases defense skill by %s.
+  ITEM_MOD_DEFENSE_SKILL_RATING_SHORT Defense
+  ITEM_MOD_DEFTNESS_SHORT Deftness
+  ITEM_MOD_DODGE_RATING  Increases your dodge by %s.
+  ITEM_MOD_DODGE_RATING_SHORT Dodge
+  ITEM_MOD_DUAL_WIELD    Increases dual wield skill by %s.
+  ITEM_MOD_DUAL_WIELD_SHORT Dual Wield Skill
+  ITEM_MOD_ENCHANTING    Increases enchanting skill by %s.
+  ITEM_MOD_ENCHANTING_SHORT Enchanting Skill
+  ITEM_MOD_ENGINEERING   Increases engineering skill by %s.
+  ITEM_MOD_ENGINEERING_SHORT Engineering Skill
+  ITEM_MOD_EXPERTISE_RATING Increases your expertise by %s.
+  ITEM_MOD_EXPERTISE_RATING_SHORT Expertise
+  ITEM_MOD_EXTRA_ARMOR   Increases your armor by %s.
+  ITEM_MOD_EXTRA_ARMOR_SHORT Bonus Armor
+  ITEM_MOD_FERAL_ATTACK_POWER Increases attack power by %s in Cat, Bear, Dire Bear, and Moonkin for...
+  ITEM_MOD_FERAL_ATTACK_POWER_SHORT Attack Power In Forms
+  ITEM_MOD_FINESSE_SHORT Finesse
+  ITEM_MOD_FIRE_DAMAGE_DONE Increases fire damage done by up to %s.
+  ITEM_MOD_FIRE_DAMAGE_DONE_SHORT Fire Damage
+  ITEM_MOD_FIRE_PENETRATION Increases fire piercing by %s.
+  ITEM_MOD_FIRE_PENETRATION_SHORT Fire Piercing
+  ITEM_MOD_FIRST_AID     Increases first aid skill by %s.
+  ITEM_MOD_FIRST_AID_SHORT First Aid Skill
+  ITEM_MOD_FISHING       Increases fishing skill by %s.
+  ITEM_MOD_FISHING_SHORT Fishing Skill
+  ITEM_MOD_FIST_WEAPONS  Increases fist weapons skill by %s.
+  ITEM_MOD_FIST_WEAPONS_SHORT Fist Weapons Skill
+  ITEM_MOD_FROST_DAMAGE_DONE Increases frost damage done by up to %s.
+  ITEM_MOD_FROST_DAMAGE_DONE_SHORT Frost Damage
+  ITEM_MOD_FROST_PENETRATION Increases frost piercing by %s.
+  ITEM_MOD_FROST_PENETRATION_SHORT Frost Piercing
+  ITEM_MOD_GUNS          Increases guns skill by %s.
+  ITEM_MOD_GUNS_SHORT    Guns Skill
+  ITEM_MOD_HASTE_RATING  Increases your haste by %s.
+  ITEM_MOD_HASTE_RATING_SHORT Haste
+  ITEM_MOD_HEALTH        %c%s Health
+  ITEM_MOD_HEALTH_REGEN  Restores %s health per 5 sec.
+  ITEM_MOD_HEALTH_REGENERATION Restores %s health per 5 sec.
+  ITEM_MOD_HEALTH_REGENERATION_SHORT Health Regeneration
+  ITEM_MOD_HEALTH_REGEN_SHORT Health Per 5 Sec.
+  ITEM_MOD_HEALTH_SHORT  Health
+  ITEM_MOD_HERBALISM     Increases herbalism skill by %s.
+  ITEM_MOD_HERBALISM_SHORT Herbalism Skill
+  ITEM_MOD_HIT_MELEE_RATING Improves melee hit by %s.
+  ITEM_MOD_HIT_MELEE_RATING_SHORT Hit (Melee)
+  ITEM_MOD_HIT_RANGED_RATING Improves ranged hit by %s.
+  ITEM_MOD_HIT_RANGED_RATING_SHORT Hit (Ranged)
+  ITEM_MOD_HIT_RATING    Increases your hit by %s.
+  ITEM_MOD_HIT_RATING_SHORT Hit
+  ITEM_MOD_HIT_SPELL_RATING Improves spell hit by %s.
+  ITEM_MOD_HIT_SPELL_RATING_SHORT Hit (Spell)
+  ITEM_MOD_HIT_TAKEN_MELEE_RATING Improves melee hit avoidance by %s.
+  ITEM_MOD_HIT_TAKEN_MELEE_RATING_SHORT Hit Avoidance (Melee)
+  ITEM_MOD_HIT_TAKEN_RANGED_RATING Improves ranged hit avoidance by %s.
+  ITEM_MOD_HIT_TAKEN_RANGED_RATING_SHORT Hit Avoidance (Ranged)
+  ITEM_MOD_HIT_TAKEN_RATING Improves hit avoidance by %s.
+  ITEM_MOD_HIT_TAKEN_RATING_SHORT Hit Avoidance
+  ITEM_MOD_HIT_TAKEN_SPELL_RATING Improves spell hit avoidance by %s.
+  ITEM_MOD_HIT_TAKEN_SPELL_RATING_SHORT Hit Avoidance (Spell)
+  ITEM_MOD_HOLY_DAMAGE_DONE Increases holy damage done by up to %s.
+  ITEM_MOD_HOLY_DAMAGE_DONE_SHORT Holy Damage
+  ITEM_MOD_INGENUITY_SHORT Ingenuity
+  ITEM_MOD_INSPIRATION_SHORT Inspiration
+  ITEM_MOD_INTELLECT     %c%s Intellect
+  ITEM_MOD_INTELLECT_SHORT Intellect
+  ITEM_MOD_JEWELCRAFTING Increases jewelcrafting skill by %s.
+  ITEM_MOD_JEWELCRAFTING_SHORT Jewelcrafting Skill
+  ITEM_MOD_LEATHERWORKING Increases leatherworking skill by %s.
+  ITEM_MOD_LEATHERWORKING_SHORT Leatherworking Skill
+  ITEM_MOD_MACES         Increases maces skill by %s.
+  ITEM_MOD_MACES_SHORT   Maces Skill
+  ITEM_MOD_MANA          %c%s Mana
+  ITEM_MOD_MANA_REGENERATION Restores %s mana per 5 sec.
+  ITEM_MOD_MANA_REGENERATION_SHORT Mana Regeneration
+  ITEM_MOD_MANA_SHORT    Mana
+  ITEM_MOD_MASTERY_RATING Increases your mastery by %s.
+  ITEM_MOD_MASTERY_RATING_SHORT Mastery
+  ITEM_MOD_MASTERY_RATING_SPELL (%s)
+  ITEM_MOD_MASTERY_RATING_TWO_SPELLS (%s/%s)
+  ITEM_MOD_MELEE_ATTACK_POWER_SHORT Melee Attack Power
+  ITEM_MOD_MINING        Increases mining skill by %s.
+  ITEM_MOD_MINING_SHORT  Mining Skill
+  ITEM_MOD_MODIFIED_CRAFTING_STAT_1 Random Stat 1
+  ITEM_MOD_MODIFIED_CRAFTING_STAT_2 Random Stat 2
+  ITEM_MOD_MULTICRAFT_SHORT Multicraft
+  ITEM_MOD_NATURE_DAMAGE_DONE Increases nature damage done by up to %s.
+  ITEM_MOD_NATURE_DAMAGE_DONE_SHORT Nature Damage
+  ITEM_MOD_NATURE_PENETRATION Increases nature piercing by %s.
+  ITEM_MOD_NATURE_PENETRATION_SHORT Nature Piercing
+  ITEM_MOD_PARRY_RATING  Increases your parry by %s.
+  ITEM_MOD_PARRY_RATING_SHORT Parry
+  ITEM_MOD_PERCEPTION_SHORT Perception
+  ITEM_MOD_PHYSICAL_DAMAGE_DONE Increases physical damage done by up to %s.
+  ITEM_MOD_PHYSICAL_DAMAGE_DONE_SHORT Physical Damage
+  ITEM_MOD_POLEARMS      Increases polearms skill by %s.
+  ITEM_MOD_POLEARMS_SHORT Polearms Skill
+  ITEM_MOD_POWER_REGEN0_SHORT Mana Per 5 Sec.
+  ITEM_MOD_POWER_REGEN1_SHORT Rage Per 5 Sec.
+  ITEM_MOD_POWER_REGEN2_SHORT Focus Per 5 Sec.
+  ITEM_MOD_POWER_REGEN3_SHORT Energy Per 5 Sec.
+  ITEM_MOD_POWER_REGEN4_SHORT Happiness Per 5 Sec.
+  ITEM_MOD_POWER_REGEN5_SHORT Runes Per 5 Sec.
+  ITEM_MOD_POWER_REGEN6_SHORT Runic Power Per 5 Sec.
+  ITEM_MOD_PVP_POWER     Increases your PvP power by %s.
+  ITEM_MOD_PVP_POWER_SHORT PvP Power
+  ITEM_MOD_PVP_PRIMARY_STAT_SHORT PvP Power
+  ITEM_MOD_RANGED_ATTACK_POWER Increases ranged attack power by %s.
+  ITEM_MOD_RANGED_ATTACK_POWER_SHORT Ranged Attack Power
+  ITEM_MOD_RESILIENCE_RATING Increases your PvP resilience by %s.
+  ITEM_MOD_RESILIENCE_RATING_SHORT PvP Resilience
+  ITEM_MOD_RESOURCEFULNESS_SHORT Resourcefulness
+  ITEM_MOD_SHADOW_DAMAGE_DONE Increases shadow damage done by up to %s.
+  ITEM_MOD_SHADOW_DAMAGE_DONE_SHORT Shadow Damage
+  ITEM_MOD_SHADOW_PENETRATION Increases shadow piercing by %s.
+  ITEM_MOD_SHADOW_PENETRATION_SHORT Shadow Piercing
+  ITEM_MOD_SKINNING      Increases skinning skill by %s.
+  ITEM_MOD_SKINNING_SHORT Skinning Skill
+  ITEM_MOD_SPELL_DAMAGE_DONE Increases damage done by magical spells and effects by up to %s.
+  ITEM_MOD_SPELL_DAMAGE_DONE_SHORT Spell Damage
+  ITEM_MOD_SPELL_DAMAGE_VS_BEAST_SHORT Spell Damage Vs Beasts
+  ITEM_MOD_SPELL_DAMAGE_VS_DEMON_SHORT Spell Damage Vs Demons
+  ITEM_MOD_SPELL_DAMAGE_VS_DRAGONKIN_SHORT Spell Damage Vs Dragonkin
+  ITEM_MOD_SPELL_DAMAGE_VS_ELEMENTAL_SHORT Spell Damage Vs Elementals
+  ITEM_MOD_SPELL_DAMAGE_VS_GIANT_SHORT Spell Damage Vs Giants
+  ITEM_MOD_SPELL_DAMAGE_VS_HUMANOID_SHORT Spell Damage Vs Humanoids
+  ITEM_MOD_SPELL_DAMAGE_VS_MECHANICAL_SHORT Spell Damage Vs Mechanical
+  ITEM_MOD_SPELL_DAMAGE_VS_UNDEAD_SHORT Spell Damage Vs Undead
+  ITEM_MOD_SPELL_HEALING_DONE Increases healing done by magical spells and effects by up to %s.
+  ITEM_MOD_SPELL_HEALING_DONE_SHORT Spell Healing
+  ITEM_MOD_SPELL_PENETRATION Increases spell piercing by %s.
+  ITEM_MOD_SPELL_PENETRATION_SHORT Spell Piercing
+  ITEM_MOD_SPELL_POWER   Increases spell power by %s.
+  ITEM_MOD_SPELL_POWER_SHORT Spell Power
+  ITEM_MOD_SPELL_RESISTANCE_ALL_SCHOOLS Increases spell resistance by %s.
+  ITEM_MOD_SPELL_RESISTANCE_ALL_SCHOOLS_SHORT Spell Resistance
+  ITEM_MOD_SPIRIT        %c%s Spirit
+  ITEM_MOD_SPIRIT_SHORT  Spirit
+  ITEM_MOD_STAMINA       %c%s Stamina
+  ITEM_MOD_STAMINA_SHORT Stamina
+  ITEM_MOD_STAVES        Increases staves skill by %s.
+  ITEM_MOD_STAVES_SHORT  Staves Skill
+  ITEM_MOD_STRENGTH      %c%s Strength
+  ITEM_MOD_STRENGTH_OR_INTELLECT_SHORT Strength or Intellect
+  ITEM_MOD_STRENGTH_SHORT Strength
+  ITEM_MOD_SWORDS        Increases swords skill by %s.
+  ITEM_MOD_SWORDS_SHORT  Swords Skill
+  ITEM_MOD_TAILORING     Increases tailoring skill by %s.
+  ITEM_MOD_TAILORING_SHORT Tailoring Skill
+  ITEM_MOD_THROWN        Increases thrown skill by %s.
+  ITEM_MOD_THROWN_SHORT  Thrown Skill
+  ITEM_MOD_TWOHANDED_AXES Increases two-handed axes skill by %s.
+  ITEM_MOD_TWOHANDED_AXES_SHORT Two-Handed Axes Skill
+  ITEM_MOD_TWOHANDED_MACES Increases two-handed maces skill by %s.
+  ITEM_MOD_TWOHANDED_MACES_SHORT Two-Handed Maces Skill
+  ITEM_MOD_TWOHANDED_SWORDS Increases two-handed swords skill by %s.
+  ITEM_MOD_TWOHANDED_SWORDS_SHORT Two-Handed Swords Skill
+  ITEM_MOD_VERSATILITY   Versatility
+  ITEM_MOD_WANDS         Increases wands skill by %s.
+  ITEM_MOD_WANDS_SHORT   Wands Skill
+
+[ADDON RESTRICTION TYPES (Enum.AddOnRestrictionType)]
+  ChallengeMode          2
+  Chat                   5
+  Combat                 0
+  Encounter              1
+  Map                    4
+  PvPMatch               3
+
+[LIVE CALLS]
+  OK       build info
+           GetBuildInfo -> 6 value(s)
+           types: string, string, string, number, string, string
+           value: 1.60.1 | 69893 | Sep 16 2026 | 16001 |  |  
+  OK       player class
+           UnitClass -> 3 value(s)
+           types: string, string, number
+           value: Hunter | HUNTER | 3
+  OK       player race
+           UnitRace -> 3 value(s)
+           types: string, string, number
+           value: Windshaper Skyborne | Skyborne | 96
+  OK       player level
+           UnitLevel -> 1 value(s)
+           types: number
+           value: 1
+  OK       realm (normalized)
+           GetNormalizedRealmName -> 1 value(s)
+           types: string
+           value: ClassicBetaPvP
+  MISSING  bag slots (legacy)                           GetContainerNumSlots
+  OK       bag slots (C_Container)
+           C_Container.GetContainerNumSlots -> 1 value(s)
+           types: number
+           value: 20
+  MISSING  bag item (legacy)                            GetContainerItemInfo
+  OK       bag item (C_Container)
+           C_Container.GetContainerItemInfo -> 1 value(s)
+           types: table
+           value: table: 000001DA7EDCEDC0
+  MISSING  aura (legacy)                                UnitAura
+  ERROR    aura (C_UnitAuras)                           C_UnitAuras.GetAuraDataByIndex
+           GetAuraDataByIndex(): Auras cannot be accessed when secret while tain...
+  MISSING  item info (legacy)                           GetItemInfo
+  OK       item info (C_Item)
+           C_Item.GetItemInfo -> 18 value(s)
+           types: string, string, number, number, number, string, string, number, string, number, number, number, number, number, number, nil, boolean, string
+           value: Hearthstone | |cnIQ1:|Hitem:6948::::::::1:1485:::::::::|h[Hearthstone]|h|r | 1 | 1 | 0 | Miscellaneous | Junk | 1 | INVTYPE_NON_EQUIP_IGNORE | 134414 | 0 | 15 | 0 | 1 | 0 | nil | false | 
+  MISSING  spell info (legacy)                          GetSpellInfo
+  OK       spell info (C_Spell)
+           C_Spell.GetSpellInfo -> 1 value(s)
+           types: table
+           value: table: 000001DA7EDD12E0
+  MISSING  item stats: equipped chest                   GetItemStats
+  MISSING  item stats: known TBC socketed item          GetItemStats
+  MISSING  socket count on cursor item                  GetNumSockets
+  SECRET   melee crit
+           GetCritChance -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   ranged crit
+           GetRangedCritChance -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   spell crit (school 2)
+           GetSpellCritChance -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   spell hit modifier
+           GetSpellHitModifier -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   melee hit modifier
+           GetHitModifier -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   expertise
+           GetExpertise -> 3 value(s)
+           types: number, number, number
+           value: <secret> | <secret> | <secret>
+  MISSING  talent tab count                             GetNumTalentTabs
+  MISSING  talent tab 1                                 GetTalentTabInfo
+  MISSING  talent 1,1                                   GetTalentInfo
+  MISSING  quest log entries                            GetNumQuestLogEntries
+  OK       quest special item 1
+           GetQuestLogSpecialItemInfo -> 0 value(s)
+           types: 
+  MISSING  trade skill line                             GetTradeSkillLine
+  OK       shapeshift form count
+           GetNumShapeshiftForms -> 1 value(s)
+           types: number
+           value: 0
+  OK       group members
+           GetNumGroupMembers -> 1 value(s)
+           types: number
+           value: 0
+  OK       in raid
+           IsInRaid -> 1 value(s)
+           types: boolean
+           value: false
+  OK       secret restrictions
+           C_Secrets.HasSecretRestrictions -> 1 value(s)
+           types: boolean
+           value: true
+  OK       cooldowns secret
+           C_Secrets.ShouldCooldownsBeSecret -> 1 value(s)
+           types: boolean
+           value: true
+  OK       chat messaging lockdown
+           C_ChatInfo.InChatMessagingLockdown -> 1 value(s)
+           types: boolean
+           value: false
+  OK       in combat
+           InCombatLockdown -> 1 value(s)
+           types: boolean
+           value: true
+  OK       restriction active: Map
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: false
+  OK       restriction active: Combat
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: true
+  OK       restriction active: Encounter
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: false
+  OK       restriction active: Chat
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: false
+  OK       restriction active: ChallengeMode
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: false
+  OK       restriction active: PvPMatch
+           C_RestrictedActions.IsAddOnRestrictionActive -> 1 value(s)
+           types: boolean
+           value: false
+  SECRET   player health
+           UnitHealth -> 1 value(s)
+           types: number
+           value: <secret>
+  OK       player health max
+           UnitHealthMax -> 1 value(s)
+           types: number
+           value: 46
+  SECRET   player power
+           UnitPower -> 1 value(s)
+           types: number
+           value: <secret>
+  SECRET   player health pct
+           UnitHealthPercent -> 1 value(s)
+           types: number
+           value: <secret>
+  ERROR    player buff 1 (C_UnitAuras)                  C_UnitAuras.GetBuffDataByIndex
+           GetBuffDataByIndex(): Auras cannot be accessed when secret while tain...
+  MISSING  spell cooldown (legacy)                      GetSpellCooldown
+  OK       spell cooldown (C_Spell)
+           C_Spell.GetSpellCooldown -> 1 value(s)
+           types: table
+           value: table: 000001DA7EDD3E50
+  SECRET   totem 1
+           GetTotemInfo -> 7 value(s)
+           types: boolean, string, number, number, nil, number, number
+           value: <secret> | <secret> | <secret> | <secret> | nil | <secret> | <secret>
+  OK       soul shard count (secondary resource)
+           UnitPower -> 1 value(s)
+           types: number
+           value: 0
+
+==================================================================
+ end of report
+==================================================================

@@ -1,7 +1,7 @@
 {
   "source": "wowhead.com/forever, zone drop listviews",
   "collected": "2026-09-21",
-  "note": "Roster only; stat values live on each item's tooltip and need a second pass. Coverage is uneven, because Wowhead's Forever data grows from what players actually see: the early dungeons are well filled in and the later ones are thin. Re-run as the beta goes on.",
+  "note": "Coverage is uneven, because Wowhead's Forever data grows from what players actually see: the early dungeons are well filled in and the later ones are thin. Re-run as the beta goes on.",
   "dungeons": {
     "Ragefire Chasm": {
       "zoneId": 2437,
@@ -4169,7 +4169,8 @@
           "speed": null,
           "droppedBy": [
             "Bloodmage Thalnos"
-          ]
+          ],
+          "stats": {}
         },
         {
           "id": 10330,
@@ -5994,5 +5995,6 @@
       ],
       "questRewards": []
     }
-  }
+  },
+  "statsCollected": "2026-09-21"
 }
