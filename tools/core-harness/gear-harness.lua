@@ -223,6 +223,36 @@ check(text:find("Health") ~= nil, "and health, from the client's stamina convers
 check(text:find("%+5") ~= nil or text:find("Attack power %+5") ~= nil,
     "five agility is five attack power at this stub's rate")
 
+-- This client hands some unit values back as secrets: they can be shown
+-- but not added to, and the addition throws in our name. That is exactly
+-- what UNIT_STATS did in game. With the totals out of reach the deltas
+-- are still entirely ours, so the panel has to keep working on them.
+local realStat, realArmor = UnitStat, UnitArmor
+local secret = setmetatable({}, {
+    __add = function() error("attempt to perform arithmetic on a secret number value") end,
+    __sub = function() error("attempt to perform arithmetic on a secret number value") end,
+})
+UnitStat = function() return secret, secret, 0, 0 end
+UnitArmor = function() return secret, secret, 0, 0, 0 end
+local okSecret, errSecret = pcall(ns.Doll.RefreshStats, ns.Doll)
+check(okSecret, "secret stats do not throw: " .. tostring(errSecret))
+local stext = ns.Doll.derived:GetText() or ""
+check(stext:find("Attack power") ~= nil,
+    "and the derived change still comes out, from the delta alone: "
+    .. stext:gsub("\n", " | "):sub(1, 60))
+check(stext:find("Attack power %+5") ~= nil,
+    "with the same answer the readable path gave")
+local shown
+for i, key in ipairs(ns.Score.STAT_ORDER) do
+    if key == "agi" then shown = ns.Doll.statRows[i] end
+end
+check(shown and shown.delta:GetText() == "+5",
+    "the change is still shown even though the total cannot be")
+check(shown and not (shown.value:GetText() or ""):find("table"),
+    "and no raw table leaks into the total: " .. tostring(shown and shown.value:GetText()))
+UnitStat, UnitArmor = realStat, realArmor
+ns.Doll:RefreshStats()
+
 -- A class that cannot use it is refused rather than silently accepted.
 check(not ns.Doll:TryOn(6463), "mail is refused for a rogue")
 

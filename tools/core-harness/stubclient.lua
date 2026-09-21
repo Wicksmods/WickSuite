@@ -486,6 +486,42 @@ C_CVar = {
 }
 function GetCVar(n) return S.CVARS[n] end
 function SetCVar(n, v) S.CVARS[n] = tostring(v) end
+
+-- Some numeric variables have a ceiling the client silently clamps to.
+-- Addons that want "as far as this build allows" have to discover it by
+-- setting and reading back, so the stub has to clamp the same way.
+S.CVAR_CEILING = S.CVAR_CEILING or {}
+local rawSetCVar = SetCVar
+local function clampingSet(n, v)
+    local cap = S.CVAR_CEILING[n]
+    local num = tonumber(v)
+    if cap and num and num > cap then v = cap end
+    return rawSetCVar(n, v)
+end
+SetCVar = clampingSet
+C_CVar.SetCVar = function(n, v) return clampingSet(n, v) end
+
+-- Quest handing. Every call records what it was asked to do so a test
+-- can tell an automatic accept from a player one.
+S.QUEST = S.QUEST or {}
+function AcceptQuest() S.QUEST.accepted = (S.QUEST.accepted or 0) + 1 end
+function ConfirmAcceptQuest() S.QUEST.confirmed = (S.QUEST.confirmed or 0) + 1 end
+function IsQuestCompletable() return S.QUEST.completable ~= false end
+function CompleteQuest() S.QUEST.completeAsked = (S.QUEST.completeAsked or 0) + 1 end
+function GetNumQuestChoices() return S.QUEST.choices or 0 end
+function GetQuestReward(index) S.QUEST.rewarded = index or -1 end
+
+C_GossipInfo = {
+    GetAvailableQuests = function() return S.QUEST.available or {} end,
+    GetActiveQuests    = function() return S.QUEST.active or {} end,
+    SelectAvailableQuest = function(id) S.QUEST.pickedAvailable = id end,
+    SelectActiveQuest    = function(id) S.QUEST.pickedActive = id end,
+}
+
+-- The proc glow overlay.
+S.GLOW = S.GLOW or {}
+function ActionButton_ShowOverlayGlow(b) S.GLOW[b] = true end
+function ActionButton_HideOverlayGlow(b) S.GLOW[b] = false end
 -- A handful of Blizzard addons the client really does register, so code
 -- that asks "is this present?" gets a truthful answer instead of always no.
 local INSTALLED = {
@@ -811,7 +847,27 @@ else
 end
 
 -- Load a list of files as one addon, passing (addonName, ns) like the client.
+-- The list of Lua files an addon's own toc asks the game to load, in
+-- order. Reading it means a harness cannot quietly fall behind a new
+-- file the way a hand-kept list does.
+function S.tocFiles(dir, name)
+    local fh = io.open(dir .. "/" .. name .. ".toc", "r")
+    if not fh then return nil end
+    local files = {}
+    for raw in fh:lines() do
+        local line = raw:gsub("\r", "")
+        line = line:gsub("^%s+", ""):gsub("%s+$", "")
+        if line:match("%.lua$") and not line:match("^#") then
+            files[#files + 1] = line
+        end
+    end
+    fh:close()
+    return files
+end
+
 function S.loadAddon(dir, name, files)
+    files = files or S.tocFiles(dir, name)
+        or error("no file list and no readable toc for " .. name, 0)
     local ns = {}
     for _, f in ipairs(files) do
         local chunk, err = loadfile(dir .. "/" .. f)

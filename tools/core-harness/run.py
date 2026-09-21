@@ -51,6 +51,11 @@ def main():
 
     stub = HERE + "/stubclient.lua"
     modes = ["modern", "legacy"] if args.both else (["legacy"] if args.legacy else ["modern"])
+    # Wick's Gear is Forever only. It reads C_Item and WickCore's modern
+    # dialect throughout, so a legacy pass would only ever fail on the
+    # first line that asks the client for an item.
+    if args.gear:
+        modes = ["modern"]
     ok = True
     for mode in modes:
         if args.bags:

@@ -470,8 +470,9 @@ end
 
 io.write("== Comforts ==\n")
 
-local CNS = S.loadAddon(ADDONS_DIR .. "/WicksComforts", "WicksComforts",
-    { "Core.lua", "Minimap.lua", "Tooltips.lua", "Loot.lua", "Vendor.lua", "Fixes.lua", "Frames.lua" })
+-- Straight off the toc, so a module added to the addon is tested here
+-- without anyone remembering to add it twice.
+local CNS = S.loadAddon(ADDONS_DIR .. "/WicksComforts", "WicksComforts")
 S.fire("ADDON_LOADED", "WicksComforts")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -562,6 +563,102 @@ if CA then
         "off again leaves a pre-existing lock exactly as it was found")
 
     db.classColorHealth = false
+
+    -- ---- Quests -------------------------------------------------
+    local quests = CNS.modules.quests
+    S.QUEST = {}
+    quests:Accept()
+    check((S.QUEST.accepted or 0) == 0, "a quest is not accepted for you until you ask")
+
+    db.autoAcceptQuests = true
+    quests:Accept()
+    check(S.QUEST.accepted == 1, "switched on, the quest is accepted")
+
+    -- Shift is the escape hatch: whatever is on, the dialogs come back.
+    local realShift = IsShiftKeyDown
+    IsShiftKeyDown = function() return true end
+    quests:Accept()
+    check(S.QUEST.accepted == 1, "holding shift hands the dialog back")
+    IsShiftKeyDown = realShift
+
+    db.autoTurnInQuests = true
+    S.QUEST.completable = false
+    quests:Progress()
+    check((S.QUEST.completeAsked or 0) == 0, "a quest you have not finished is left alone")
+    S.QUEST.completable = true
+    quests:Progress()
+    check(S.QUEST.completeAsked == 1, "one you have finished asks for the reward screen")
+
+    -- The one thing that must never be automatic.
+    S.QUEST.choices = 3
+    quests:Complete()
+    check(S.QUEST.rewarded == nil, "a choice of rewards is never picked for you")
+    S.QUEST.choices = 1
+    quests:Complete()
+    check(S.QUEST.rewarded == 1, "a single reward is taken")
+    S.QUEST.choices = 0
+    S.QUEST.rewarded = nil
+    quests:Complete()
+    check(S.QUEST.rewarded == 0, "and no reward at all still hands the quest in")
+
+    -- Gossip npcs hide the quest behind a line of dialogue.
+    S.QUEST.available = { { questID = 4242 } }
+    quests:Gossip()
+    check(S.QUEST.pickedAvailable == 4242, "the one quest on offer is picked out of the gossip")
+    S.QUEST.available = { { questID = 1 }, { questID = 2 } }
+    S.QUEST.pickedAvailable = nil
+    quests:Gossip()
+    check(S.QUEST.pickedAvailable == nil, "but two on offer is a decision, so nothing is picked")
+    S.QUEST.available = {}
+    S.QUEST.active = { { questID = 7, isComplete = false }, { questID = 8, isComplete = true } }
+    quests:Gossip()
+    check(S.QUEST.pickedActive == 8, "and the finished one is the one handed in")
+    db.autoAcceptQuests = false
+    db.autoTurnInQuests = false
+
+    -- ---- Camera and client settings -----------------------------
+    local client = CNS.modules.client
+    S.CVAR_CEILING["cameraDistanceMaxZoomFactor"] = 2.6
+    S.CVARS["cameraDistanceMaxZoomFactor"] = "1"
+    client:Apply()
+    check(S.CVARS["cameraDistanceMaxZoomFactor"] == "1",
+        "the camera is left where it was until asked")
+
+    db.maxCameraZoom = true
+    client:Apply()
+    check(tonumber(S.CVARS["cameraDistanceMaxZoomFactor"]) == 2.6,
+        "asked, it finds this build's ceiling rather than guessing: "
+        .. tostring(S.CVARS["cameraDistanceMaxZoomFactor"]))
+
+    db.maxCameraZoom = false
+    client:Apply()
+    check(S.CVARS["cameraDistanceMaxZoomFactor"] == "1", "and off puts it back")
+
+    check(S.CVARS["Sound_EnableSoundWhenGameIsInBG"] ~= "1", "background sound is off until asked")
+    db.soundInBackground = true
+    client:Apply()
+    check(S.CVARS["Sound_EnableSoundWhenGameIsInBG"] == "1", "and on when it is")
+    db.soundInBackground = false
+
+    -- ---- Proc glow ----------------------------------------------
+    local glow = CNS.modules.glow
+    local button = {}
+    glow:Apply()
+    ActionButton_ShowOverlayGlow(button)
+    check(S.GLOW[button] == true, "the proc glow still works until asked to go")
+
+    db.hideProcGlow = true
+    glow:Apply()
+    ActionButton_ShowOverlayGlow(button)
+    check(S.GLOW[button] == false, "switched on, a glow is hidden instead of shown")
+
+    -- Off has to give the game back exactly what it had.
+    db.hideProcGlow = false
+    glow:Apply()
+    ActionButton_ShowOverlayGlow(button)
+    check(S.GLOW[button] == true, "and off gives the game its own glow back")
+    check(next(glow.wrapped) == nil, "with nothing of ours left wrapped around it")
+
     check(Minimap.__maskTex == nil, "the minimap is untouched until asked")
 
     db.squareMinimap = true
