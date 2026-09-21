@@ -30,25 +30,63 @@ OUT_DIR = os.path.join(HERE, "..", "data", "forever")
 UA = "Wicksmods BIS data collector (https://github.com/Wicksmods)"
 PAUSE = 1.5      # be a good guest; this is someone else's bandwidth
 
-# The levelling run, in the order you would actually do it. Sunken Temple
-# is the cut: past it you are in Blackrock and no longer levelling through
-# dungeons so much as gearing for them.
+# Every five-player dungeon Forever has, from
+# wowhead.com/forever/zones/instances. That page is rendered by script so
+# it cannot be fetched here; it was read once in a browser and the ids
+# written down. Re-read it when the beta adds dungeons, which it does:
+# this list was hand-written from Classic knowledge to begin with and was
+# missing Ruins of Lordaeron, the Hall of Thanes, Karazhan Crypts, and
+# all four of Dire Maul, Stratholme, Scholomance and Blackrock Depths.
+#
+# Level ranges are Forever's own, not Classic's; several have been
+# retuned. None means Wowhead does not give one yet, and a range is
+# worked out from what the loot requires instead.
+#
+# Zones with nothing in them are kept on purpose. Wowhead's Forever data
+# is crowdsourced, so an empty dungeon today is a filled one later, and
+# the emitter drops anything still empty.
 DUNGEONS = [
-    (2437, "Ragefire Chasm",        "13-18"),
-    (1581, "The Deadmines",         "15-21"),
-    (718,  "Wailing Caverns",       "15-21"),
-    (717,  "The Stockade",          "22-30"),
-    (209,  "Shadowfang Keep",       "22-30"),
-    (719,  "Blackfathom Deeps",     "24-32"),
-    (721,  "Gnomeregan",            "29-38"),
-    (491,  "Razorfen Kraul",        "29-38"),
-    (796,  "Scarlet Monastery",     "34-45"),
-    (722,  "Razorfen Downs",        "37-46"),
-    (1337, "Uldaman",               "41-51"),
-    (978,  "Zul'Farrak",            "44-54"),
-    (2100, "Maraudon",              "46-55"),
-    (1477, "Temple of Atal'Hakkar", "50-60"),
+    (2437,  "Ragefire Chasm",          "15-25"),
+    (1581,  "The Deadmines",           "15-25"),
+    (718,   "Wailing Caverns",         "17-27"),
+    (209,   "Shadowfang Keep",         "22-30"),
+    (719,   "Blackfathom Deeps",       "22-32"),
+    (717,   "The Stockade",            "22-32"),
+    (721,   "Gnomeregan",              "26-36"),
+    (796,   "Scarlet Monastery",       "26-45"),
+    (491,   "Razorfen Kraul",          "32-42"),
+    (722,   "Razorfen Downs",          "37-47"),
+    (1337,  "Uldaman",                 "42-52"),
+    (2100,  "Maraudon",                "42-52"),
+    (2557,  "Dire Maul",               "44-54"),
+    (1176,  "Zul'Farrak",              "46-56"),
+    (2017,  "Stratholme",              "48-58"),
+    (1417,  "Temple of Atal'Hakkar",   "50-60"),
+    (1584,  "Blackrock Depths",        "52-60"),
+    (1583,  "Blackrock Spire",         "55-60"),
+    (2057,  "Scholomance",             "55-60"),
+    # New in Forever. No level range published yet.
+    (16611, "Ruins of Lordaeron",      None),
+    (16919, "The Hall of Thanes",      None),
+    (16074, "Karazhan Crypts",         None),
+    (16732, "Excavation Site: Wetlands", None),
+    (15828, "The Burning of Andorhal", None),
+    (17191, "Manor Mistmantle",        None),
+    (16632, "Half-Pint Tavern",        None),
+    (16295, "The Scarab Dais",         None),
+    (16544, "City of Dalaran",         None),
 ]
+
+# Sort key for "the order you would actually run them": the bottom of the
+# level range, and anything without one last.
+def level_key(levels):
+    if not levels:
+        return (1, 0)
+    try:
+        return (0, int(str(levels).split("-")[0]))
+    except ValueError:
+        return (1, 0)
+
 
 # Wowhead's slot numbering, for the slots a levelling character cares
 # about. Anything not here is a bag, a reagent or similar.
@@ -202,7 +240,17 @@ def main():
                     it["stats"] = known[it["id"]]
 
         d, q = gear_only(drops), gear_only(quests)
-        out[name] = { "zoneId": zone, "levels": levels, "drops": d, "questRewards": q }
+        # Nothing published, so say what the loot itself asks for rather
+        # than leaving the column blank.
+        derived = False
+        if not levels:
+            reqs = [i["reqLevel"] for i in d + q if i.get("reqLevel")]
+            if reqs:
+                levels, derived = "%d-%d" % (min(reqs), max(reqs)), True
+        entry = { "zoneId": zone, "levels": levels or "", "drops": d, "questRewards": q }
+        if derived:
+            entry["levelsDerived"] = True
+        out[name] = entry
         total += len(drops) + len(quests)
         equippable += len(d) + len(q)
         print("  %-24s %3d dropped, %3d from quests" % (name, len(d), len(q)))
@@ -214,6 +262,9 @@ def main():
         merged = dict(previous)
         merged.update(out)
         out = merged
+
+    # Keep the file in run order whichever subset was scraped.
+    out = dict(sorted(out.items(), key=lambda kv: level_key(kv[1].get("levels"))))
 
     os.makedirs(OUT_DIR, exist_ok=True)
     path = os.path.normpath(os.path.join(OUT_DIR, "dungeon-loot.json"))

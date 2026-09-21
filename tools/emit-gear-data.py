@@ -75,6 +75,11 @@ def main():
         order.append(name)
         out.append("    [%s] = {" % lua_str(name))
         out.append("        levels = %s," % lua_str(d.get("levels", "")))
+        if d.get("levelsDerived"):
+            # Wowhead publishes no range for this one, so the range is
+            # what its loot asks for. Say so rather than implying it is
+            # the dungeon's own bracket.
+            out.append("        levelsDerived = true,")
         out.append("        zone = %d," % d.get("zoneId", 0))
         out.append("        items = {")
         out.extend("    " + r for r in rows)

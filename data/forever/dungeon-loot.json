@@ -3,9 +3,209 @@
   "collected": "2026-09-21",
   "note": "Coverage is uneven, because Wowhead's Forever data grows from what players actually see: the early dungeons are well filled in and the later ones are thin. Re-run as the beta goes on.",
   "dungeons": {
+    "The Hall of Thanes": {
+      "zoneId": 16919,
+      "levels": "9-10",
+      "drops": [],
+      "questRewards": [
+        {
+          "id": 279899,
+          "name": "Catacomb Cloak",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "An Ancient Grudge"
+          ],
+          "stats": {
+            "stamina": 3,
+            "armor": 17
+          }
+        },
+        {
+          "id": 280096,
+          "name": "Tomb Robber's Gloves",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Important Heirlooms"
+          ],
+          "stats": {
+            "stamina": 3,
+            "intellect": 6,
+            "armor": 21
+          }
+        },
+        {
+          "id": 279898,
+          "name": "Dwarven Tome",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Held in Off-hand",
+          "slotId": 23,
+          "itemClass": 4,
+          "itemSubclass": -5,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Important Heirlooms"
+          ],
+          "stats": {
+            "spirit": 2
+          }
+        },
+        {
+          "id": 279900,
+          "name": "Deepgrave Trousers",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "An Ancient Grudge"
+          ],
+          "stats": {
+            "strength": 7,
+            "agility": 3,
+            "spirit": 3,
+            "armor": 70
+          }
+        },
+        {
+          "id": 279894,
+          "name": "Calibrated Blunderbuss",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 3,
+          "dps": 16.05,
+          "speed": 2.3,
+          "droppedBy": [
+            "Old Ironforge Incursion"
+          ],
+          "stats": {
+            "stamina": 3,
+            "minDamage": 25,
+            "maxDamage": 48,
+            "speed": 2.3,
+            "dps": 15.87
+          }
+        },
+        {
+          "id": 279896,
+          "name": "Deepblaze",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
+          "dps": 12.26,
+          "speed": 1.7,
+          "droppedBy": [
+            "Old Ironforge Incursion"
+          ],
+          "stats": {
+            "intellect": 3,
+            "speed": 1.7,
+            "dps": 12.06
+          }
+        },
+        {
+          "id": 279895,
+          "name": "Ironforge Greathammer",
+          "ilvl": 18,
+          "reqLevel": 9,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
+          "dps": 16.09,
+          "speed": 3.1,
+          "droppedBy": [
+            "Old Ironforge Incursion"
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 7,
+            "minDamage": 39,
+            "maxDamage": 60,
+            "speed": 3.1,
+            "dps": 15.97
+          }
+        },
+        {
+          "id": 279897,
+          "name": "Dusty Belt",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Restless Dead"
+          ],
+          "stats": {
+            "agility": 5,
+            "spirit": 4,
+            "armor": 45
+          }
+        },
+        {
+          "id": 280095,
+          "name": "Cryptwalker Bracers",
+          "ilvl": 17,
+          "reqLevel": 10,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Restless Dead"
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 3,
+            "armor": 76
+          }
+        }
+      ],
+      "levelsDerived": true
+    },
     "Ragefire Chasm": {
       "zoneId": 2437,
-      "levels": "13-18",
+      "levels": "15-25",
       "drops": [
         {
           "id": 14149,
@@ -268,7 +468,7 @@
     },
     "The Deadmines": {
       "zoneId": 1581,
-      "levels": "15-21",
+      "levels": "15-25",
       "drops": [
         {
           "id": 5193,
@@ -1019,9 +1219,260 @@
       ],
       "questRewards": []
     },
+    "Ruins of Lordaeron": {
+      "zoneId": 16611,
+      "levels": "15-16",
+      "drops": [],
+      "questRewards": [
+        {
+          "id": 279865,
+          "name": "Grave Shroud",
+          "ilvl": 23,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 3,
+            "agility": 2,
+            "stamina": 5,
+            "armor": 20
+          }
+        },
+        {
+          "id": 279869,
+          "name": "Remembrance Armor",
+          "ilvl": 24,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bloodied Insignia"
+          ],
+          "stats": {
+            "strength": 4,
+            "stamina": 10,
+            "spirit": 4,
+            "armor": 198
+          }
+        },
+        {
+          "id": 279867,
+          "name": "Slain Baron's Signet",
+          "ilvl": 23,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 5
+          }
+        },
+        {
+          "id": 279877,
+          "name": "Blight Gloves",
+          "ilvl": 24,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The New Plague"
+          ],
+          "stats": {
+            "intellect": 7,
+            "spirit": 5,
+            "armor": 26,
+            "natureRes": 3
+          }
+        },
+        {
+          "id": 279868,
+          "name": "Duty Bound Leggings",
+          "ilvl": 24,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bloodied Insignia"
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 9,
+            "armor": 81
+          }
+        },
+        {
+          "id": 279874,
+          "name": "The Stitcher",
+          "ilvl": 24,
+          "reqLevel": 15,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
+          "dps": 15.72,
+          "speed": 2.4,
+          "droppedBy": [
+            "Light's Justice"
+          ],
+          "stats": {
+            "stamina": 6,
+            "minDamage": 26,
+            "maxDamage": 49,
+            "speed": 2.4,
+            "dps": 15.63
+          }
+        },
+        {
+          "id": 279876,
+          "name": "Plaguefang",
+          "ilvl": 24,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
+          "dps": 15.75,
+          "speed": 2.1,
+          "droppedBy": [
+            "The New Plague"
+          ],
+          "stats": {
+            "minDamage": 23,
+            "maxDamage": 43,
+            "speed": 2.1,
+            "dps": 15.71
+          }
+        },
+        {
+          "id": 251533,
+          "name": "Forsaken Greataxe",
+          "ilvl": 24,
+          "reqLevel": 15,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
+          "dps": 20.53,
+          "speed": 3.0,
+          "droppedBy": [
+            "The Wrath of Rath'mael"
+          ],
+          "stats": {
+            "strength": 8,
+            "stamina": 4,
+            "minDamage": 49,
+            "maxDamage": 74,
+            "speed": 3.0,
+            "dps": 20.5,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 251534,
+          "name": "Gnarled Necromancer's Staff",
+          "ilvl": 24,
+          "reqLevel": 15,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 20.51,
+          "speed": 2.8,
+          "droppedBy": [
+            "The Wrath of Rath'mael"
+          ],
+          "stats": {
+            "intellect": 10,
+            "minDamage": 45,
+            "maxDamage": 69,
+            "speed": 2.8,
+            "dps": 20.36,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 279864,
+          "name": "Monstrous Cleaver",
+          "ilvl": 23,
+          "reqLevel": 16,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 8,
+          "dps": 19.74,
+          "speed": 3.3,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 9,
+            "minDamage": 52,
+            "maxDamage": 78,
+            "speed": 3.3,
+            "dps": 19.7
+          }
+        },
+        {
+          "id": 279875,
+          "name": "Spare Part Bindings",
+          "ilvl": 24,
+          "reqLevel": 15,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Light's Justice"
+          ],
+          "stats": {
+            "agility": 3,
+            "stamina": 5,
+            "spirit": 3,
+            "armor": 40
+          }
+        }
+      ],
+      "levelsDerived": true
+    },
     "Wailing Caverns": {
       "zoneId": 718,
-      "levels": "15-21",
+      "levels": "17-27",
       "drops": [
         {
           "id": 6449,
@@ -1532,308 +1983,6 @@
         }
       ],
       "questRewards": []
-    },
-    "The Stockade": {
-      "zoneId": 717,
-      "levels": "22-30",
-      "drops": [
-        {
-          "id": 1076,
-          "name": "Defias Renegade Ring",
-          "ilvl": 26,
-          "reqLevel": 21,
-          "quality": "rare",
-          "slot": "Finger",
-          "slotId": 11,
-          "itemClass": 4,
-          "itemSubclass": -2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "agility": 5,
-            "stamina": 5
-          }
-        },
-        {
-          "id": 2941,
-          "name": "Prison Shank",
-          "ilvl": 28,
-          "reqLevel": 23,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 15,
-          "dps": 17.88,
-          "speed": 1.8,
-          "droppedBy": [
-            "Bruegal Ironknuckle"
-          ],
-          "stats": {
-            "agility": 6,
-            "stamina": 2,
-            "minDamage": 22,
-            "maxDamage": 42,
-            "speed": 1.8,
-            "dps": 17.78
-          }
-        },
-        {
-          "id": 2942,
-          "name": "Iron Knuckles",
-          "ilvl": 28,
-          "reqLevel": 23,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 13,
-          "dps": 17.68,
-          "speed": 1.7,
-          "droppedBy": [
-            "Bruegal Ironknuckle"
-          ],
-          "stats": {
-            "minDamage": 21,
-            "maxDamage": 39,
-            "speed": 1.7,
-            "dps": 17.65
-          }
-        },
-        {
-          "id": 2280,
-          "name": "Kam's Walking Stick",
-          "ilvl": 29,
-          "reqLevel": 24,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 10,
-          "dps": 23.83,
-          "speed": 2.8,
-          "droppedBy": [
-            "Kam Deepfury"
-          ],
-          "stats": {
-            "agility": 10,
-            "intellect": 3,
-            "minDamage": 53,
-            "maxDamage": 80,
-            "speed": 2.8,
-            "dps": 23.75,
-            "equip": [
-              "Equip:"
-            ]
-          }
-        },
-        {
-          "id": 3228,
-          "name": "Jimmied Handcuffs",
-          "ilvl": 28,
-          "reqLevel": 23,
-          "quality": "rare",
-          "slot": "Wrist",
-          "slotId": 9,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Bruegal Ironknuckle"
-          ],
-          "stats": {
-            "strength": 3,
-            "stamina": 8,
-            "armor": 92
-          }
-        }
-      ],
-      "questRewards": [
-        {
-          "id": 2033,
-          "name": "Ambassador's Boots",
-          "ilvl": 28,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Feet",
-          "slotId": 8,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Crime and Punishment"
-          ],
-          "stats": {
-            "agility": 5,
-            "stamina": 8,
-            "spirit": 6,
-            "armor": 68
-          }
-        },
-        {
-          "id": 270029,
-          "name": "Town Clerk's Mittens",
-          "ilvl": 28,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Hands",
-          "slotId": 10,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Crime and Punishment"
-          ],
-          "stats": {
-            "intellect": 11,
-            "armor": 29
-          }
-        },
-        {
-          "id": 2906,
-          "name": "Darkshire Mail Leggings",
-          "ilvl": 28,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Legs",
-          "slotId": 7,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Crime and Punishment"
-          ],
-          "stats": {
-            "strength": 10,
-            "spirit": 10,
-            "armor": 185
-          }
-        },
-        {
-          "id": 3400,
-          "name": "Lucine Longsword",
-          "ilvl": 27,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Main Hand",
-          "slotId": 21,
-          "itemClass": 2,
-          "itemSubclass": 7,
-          "dps": 17.23,
-          "speed": 2.5,
-          "droppedBy": [
-            "What Comes Around..."
-          ],
-          "stats": {
-            "stamina": 4,
-            "spirit": 4,
-            "minDamage": 30,
-            "maxDamage": 56,
-            "speed": 2.5,
-            "dps": 17.2
-          }
-        },
-        {
-          "id": 1264,
-          "name": "Headbasher",
-          "ilvl": 29,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 5,
-          "dps": 23.89,
-          "speed": 2.3,
-          "droppedBy": [
-            "The Fury Runs Deep"
-          ],
-          "stats": {
-            "strength": 10,
-            "stamina": 5,
-            "intellect": 9,
-            "minDamage": 43,
-            "maxDamage": 66,
-            "speed": 2.3,
-            "dps": 23.7
-          }
-        },
-        {
-          "id": 1317,
-          "name": "Hardened Root Staff",
-          "ilvl": 27,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 10,
-          "dps": 22.44,
-          "speed": 3.3,
-          "droppedBy": [
-            "What Comes Around..."
-          ],
-          "stats": {
-            "strength": 2,
-            "spirit": 13,
-            "minDamage": 59,
-            "maxDamage": 89,
-            "speed": 3.3,
-            "dps": 22.42
-          }
-        },
-        {
-          "id": 270027,
-          "name": "Ursine Hammer",
-          "ilvl": 27,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 5,
-          "dps": 22.39,
-          "speed": 3.2,
-          "droppedBy": [
-            "What Comes Around..."
-          ],
-          "stats": {
-            "agility": 8,
-            "intellect": 7,
-            "spirit": 8,
-            "minDamage": 57,
-            "maxDamage": 86,
-            "speed": 3.2,
-            "dps": 22.34
-          }
-        },
-        {
-          "id": 3562,
-          "name": "Belt of Vindication",
-          "ilvl": 29,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Waist",
-          "slotId": 6,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "The Fury Runs Deep"
-          ],
-          "stats": {
-            "agility": 7,
-            "stamina": 3,
-            "armor": 57
-          }
-        }
-      ]
     },
     "Shadowfang Keep": {
       "zoneId": 209,
@@ -2709,7 +2858,7 @@
     },
     "Blackfathom Deeps": {
       "zoneId": 719,
-      "levels": "24-32",
+      "levels": "22-32",
       "drops": [
         {
           "id": 6901,
@@ -3078,9 +3227,311 @@
       ],
       "questRewards": []
     },
+    "The Stockade": {
+      "zoneId": 717,
+      "levels": "22-32",
+      "drops": [
+        {
+          "id": 1076,
+          "name": "Defias Renegade Ring",
+          "ilvl": 26,
+          "reqLevel": 21,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "agility": 5,
+            "stamina": 5
+          }
+        },
+        {
+          "id": 2941,
+          "name": "Prison Shank",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
+          "dps": 17.88,
+          "speed": 1.8,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ],
+          "stats": {
+            "agility": 6,
+            "stamina": 2,
+            "minDamage": 22,
+            "maxDamage": 42,
+            "speed": 1.8,
+            "dps": 17.78
+          }
+        },
+        {
+          "id": 2942,
+          "name": "Iron Knuckles",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 13,
+          "dps": 17.68,
+          "speed": 1.7,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ],
+          "stats": {
+            "minDamage": 21,
+            "maxDamage": 39,
+            "speed": 1.7,
+            "dps": 17.65
+          }
+        },
+        {
+          "id": 2280,
+          "name": "Kam's Walking Stick",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 23.83,
+          "speed": 2.8,
+          "droppedBy": [
+            "Kam Deepfury"
+          ],
+          "stats": {
+            "agility": 10,
+            "intellect": 3,
+            "minDamage": 53,
+            "maxDamage": 80,
+            "speed": 2.8,
+            "dps": 23.75,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 3228,
+          "name": "Jimmied Handcuffs",
+          "ilvl": 28,
+          "reqLevel": 23,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Bruegal Ironknuckle"
+          ],
+          "stats": {
+            "strength": 3,
+            "stamina": 8,
+            "armor": 92
+          }
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 2033,
+          "name": "Ambassador's Boots",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ],
+          "stats": {
+            "agility": 5,
+            "stamina": 8,
+            "spirit": 6,
+            "armor": 68
+          }
+        },
+        {
+          "id": 270029,
+          "name": "Town Clerk's Mittens",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ],
+          "stats": {
+            "intellect": 11,
+            "armor": 29
+          }
+        },
+        {
+          "id": 2906,
+          "name": "Darkshire Mail Leggings",
+          "ilvl": 28,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Crime and Punishment"
+          ],
+          "stats": {
+            "strength": 10,
+            "spirit": 10,
+            "armor": 185
+          }
+        },
+        {
+          "id": 3400,
+          "name": "Lucine Longsword",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
+          "dps": 17.23,
+          "speed": 2.5,
+          "droppedBy": [
+            "What Comes Around..."
+          ],
+          "stats": {
+            "stamina": 4,
+            "spirit": 4,
+            "minDamage": 30,
+            "maxDamage": 56,
+            "speed": 2.5,
+            "dps": 17.2
+          }
+        },
+        {
+          "id": 1264,
+          "name": "Headbasher",
+          "ilvl": 29,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
+          "dps": 23.89,
+          "speed": 2.3,
+          "droppedBy": [
+            "The Fury Runs Deep"
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 5,
+            "intellect": 9,
+            "minDamage": 43,
+            "maxDamage": 66,
+            "speed": 2.3,
+            "dps": 23.7
+          }
+        },
+        {
+          "id": 1317,
+          "name": "Hardened Root Staff",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 22.44,
+          "speed": 3.3,
+          "droppedBy": [
+            "What Comes Around..."
+          ],
+          "stats": {
+            "strength": 2,
+            "spirit": 13,
+            "minDamage": 59,
+            "maxDamage": 89,
+            "speed": 3.3,
+            "dps": 22.42
+          }
+        },
+        {
+          "id": 270027,
+          "name": "Ursine Hammer",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
+          "dps": 22.39,
+          "speed": 3.2,
+          "droppedBy": [
+            "What Comes Around..."
+          ],
+          "stats": {
+            "agility": 8,
+            "intellect": 7,
+            "spirit": 8,
+            "minDamage": 57,
+            "maxDamage": 86,
+            "speed": 3.2,
+            "dps": 22.34
+          }
+        },
+        {
+          "id": 3562,
+          "name": "Belt of Vindication",
+          "ilvl": 29,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Fury Runs Deep"
+          ],
+          "stats": {
+            "agility": 7,
+            "stamina": 3,
+            "armor": 57
+          }
+        }
+      ]
+    },
     "Gnomeregan": {
       "zoneId": 721,
-      "levels": "29-38",
+      "levels": "26-36",
       "drops": [
         {
           "id": 9450,
@@ -3363,569 +3814,9 @@
       ],
       "questRewards": []
     },
-    "Razorfen Kraul": {
-      "zoneId": 491,
-      "levels": "29-38",
-      "drops": [
-        {
-          "id": 6682,
-          "name": "Death Speaker Robes",
-          "ilvl": 31,
-          "reqLevel": 26,
-          "quality": "rare",
-          "slot": "Chest",
-          "slotId": 5,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Death Speaker Jargba"
-          ],
-          "stats": {
-            "stamina": 4,
-            "intellect": 11,
-            "armor": 48
-          }
-        },
-        {
-          "id": 1978,
-          "name": "Wolfclaw Gloves",
-          "ilvl": 27,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Hands",
-          "slotId": 10,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "strength": 5,
-            "agility": 6,
-            "stamina": 6,
-            "armor": 61
-          }
-        },
-        {
-          "id": 6686,
-          "name": "Tusken Helm",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Head",
-          "slotId": 1,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Overlord Ramtusk"
-          ],
-          "stats": {
-            "strength": 13,
-            "armor": 188
-          }
-        },
-        {
-          "id": 6688,
-          "name": "Whisperwind Headdress",
-          "ilvl": 32,
-          "reqLevel": 27,
-          "quality": "rare",
-          "slot": "Head",
-          "slotId": 1,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Earthcaller Halmgar"
-          ],
-          "stats": {
-            "stamina": 6,
-            "intellect": 10,
-            "spirit": 10,
-            "armor": 86
-          }
-        },
-        {
-          "id": 6690,
-          "name": "Ferine Leggings",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Legs",
-          "slotId": 7,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Agathelos the Raging"
-          ],
-          "stats": {
-            "intellect": 12,
-            "armor": 96
-          }
-        },
-        {
-          "id": 6691,
-          "name": "Swinetusk Shank",
-          "ilvl": 35,
-          "reqLevel": 30,
-          "quality": "rare",
-          "slot": "Main Hand",
-          "slotId": 21,
-          "itemClass": 2,
-          "itemSubclass": 15,
-          "dps": 23.12,
-          "speed": 1.5,
-          "droppedBy": [
-            "Agathelos the Raging"
-          ],
-          "stats": {
-            "stamina": 6,
-            "spirit": 4,
-            "minDamage": 24,
-            "maxDamage": 45,
-            "speed": 1.5,
-            "dps": 23.0
-          }
-        },
-        {
-          "id": 2816,
-          "name": "Death Speaker Scepter",
-          "ilvl": 33,
-          "reqLevel": 28,
-          "quality": "rare",
-          "slot": "Main Hand",
-          "slotId": 21,
-          "itemClass": 2,
-          "itemSubclass": 4,
-          "dps": 21.43,
-          "speed": 2.8,
-          "droppedBy": [
-            "Death Speaker Jargba"
-          ],
-          "stats": {
-            "minDamage": 42,
-            "maxDamage": 78,
-            "speed": 2.8,
-            "dps": 21.43
-          }
-        },
-        {
-          "id": 6695,
-          "name": "Stygian Bone Amulet",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Neck",
-          "slotId": 2,
-          "itemClass": 4,
-          "itemSubclass": -3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Blind Hunter"
-          ],
-          "stats": {
-            "stamina": 4
-          }
-        },
-        {
-          "id": 6692,
-          "name": "Pronged Reaver",
-          "ilvl": 35,
-          "reqLevel": 30,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 0,
-          "dps": 23.12,
-          "speed": 2.4,
-          "droppedBy": [
-            "Charlga Razorflank"
-          ],
-          "stats": {
-            "strength": 5,
-            "minDamage": 38,
-            "maxDamage": 72,
-            "speed": 2.4,
-            "dps": 22.92
-          }
-        },
-        {
-          "id": 6681,
-          "name": "Thornspike",
-          "ilvl": 32,
-          "reqLevel": 27,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 15,
-          "dps": 20.74,
-          "speed": 1.7,
-          "droppedBy": [
-            "Aggem Thorncurse"
-          ],
-          "stats": {
-            "minDamage": 24,
-            "maxDamage": 46,
-            "speed": 1.7,
-            "dps": 20.59
-          }
-        },
-        {
-          "id": 6696,
-          "name": "Nightstalker Bow",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Ranged",
-          "slotId": 15,
-          "itemClass": 2,
-          "itemSubclass": 2,
-          "dps": 28.98,
-          "speed": 1.7,
-          "droppedBy": [
-            "Blind Hunter"
-          ],
-          "stats": {
-            "agility": 3,
-            "shadowRes": 5,
-            "minDamage": 34,
-            "maxDamage": 64,
-            "speed": 1.7,
-            "dps": 28.82
-          }
-        },
-        {
-          "id": 6697,
-          "name": "Batwing Mantle",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Shoulder",
-          "slotId": 3,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Blind Hunter"
-          ],
-          "stats": {
-            "agility": 3,
-            "intellect": 11,
-            "spirit": 5,
-            "armor": 38
-          }
-        },
-        {
-          "id": 6685,
-          "name": "Death Speaker Mantle",
-          "ilvl": 32,
-          "reqLevel": 27,
-          "quality": "rare",
-          "slot": "Shoulder",
-          "slotId": 3,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Death Speaker Jargba"
-          ],
-          "stats": {
-            "intellect": 11,
-            "armor": 37
-          }
-        },
-        {
-          "id": 2264,
-          "name": "Mantle of Thieves",
-          "ilvl": 30,
-          "reqLevel": 25,
-          "quality": "rare",
-          "slot": "Shoulder",
-          "slotId": 3,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "agility": 10,
-            "stamina": 4,
-            "spirit": 3,
-            "armor": 77
-          }
-        },
-        {
-          "id": 6687,
-          "name": "Corpsemaker",
-          "ilvl": 34,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 1,
-          "dps": 28.97,
-          "speed": 3.8,
-          "droppedBy": [
-            "Overlord Ramtusk"
-          ],
-          "stats": {
-            "strength": 15,
-            "stamina": 8,
-            "minDamage": 88,
-            "maxDamage": 132,
-            "speed": 3.8,
-            "dps": 28.95
-          }
-        },
-        {
-          "id": 1976,
-          "name": "Slaghammer",
-          "ilvl": 29,
-          "reqLevel": 24,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 5,
-          "dps": 23.83,
-          "speed": 2.8,
-          "droppedBy": [],
-          "stats": {
-            "strength": 11,
-            "stamina": 10,
-            "minDamage": 53,
-            "maxDamage": 80,
-            "speed": 2.8,
-            "dps": 23.75
-          }
-        },
-        {
-          "id": 6679,
-          "name": "Armor Piercer",
-          "ilvl": 29,
-          "reqLevel": 24,
-          "quality": "uncommon",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 6,
-          "dps": 19.85,
-          "speed": 2.6,
-          "droppedBy": [
-            "Razorfen Spearhide"
-          ],
-          "stats": {
-            "agility": 11,
-            "minDamage": 41,
-            "maxDamage": 62,
-            "speed": 2.6,
-            "dps": 19.81
-          }
-        },
-        {
-          "id": 2549,
-          "name": "Staff of the Shade",
-          "ilvl": 27,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 10,
-          "dps": 22.42,
-          "speed": 2.6,
-          "droppedBy": [],
-          "stats": {
-            "stamina": 15,
-            "minDamage": 46,
-            "maxDamage": 70,
-            "speed": 2.6,
-            "dps": 22.31
-          }
-        },
-        {
-          "id": 4438,
-          "name": "Pugilist Bracers",
-          "ilvl": 30,
-          "reqLevel": 25,
-          "quality": "rare",
-          "slot": "Wrist",
-          "slotId": 9,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "strength": 8,
-            "stamina": 3,
-            "armor": 95
-          }
-        }
-      ],
-      "questRewards": [
-        {
-          "id": 6752,
-          "name": "Lancer Boots",
-          "ilvl": 32,
-          "reqLevel": 25,
-          "quality": "rare",
-          "slot": "Feet",
-          "slotId": 8,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Mortality Wanes"
-          ],
-          "stats": {
-            "agility": 7,
-            "stamina": 8,
-            "spirit": 6,
-            "armor": 73
-          }
-        },
-        {
-          "id": 6748,
-          "name": "Monkey Ring",
-          "ilvl": 32,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Finger",
-          "slotId": 11,
-          "itemClass": 4,
-          "itemSubclass": -2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Willix the Importer"
-          ],
-          "stats": {
-            "agility": 7,
-            "spirit": 7
-          }
-        },
-        {
-          "id": 6750,
-          "name": "Snake Hoop",
-          "ilvl": 32,
-          "reqLevel": 22,
-          "quality": "rare",
-          "slot": "Finger",
-          "slotId": 11,
-          "itemClass": 4,
-          "itemSubclass": -2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Willix the Importer"
-          ],
-          "stats": {
-            "intellect": 7,
-            "spirit": 7
-          }
-        },
-        {
-          "id": 3041,
-          "name": "\"Mage-Eye\" Blunderbuss",
-          "ilvl": 31,
-          "reqLevel": 26,
-          "quality": "uncommon",
-          "slot": "Ranged",
-          "slotId": 15,
-          "itemClass": 2,
-          "itemSubclass": 3,
-          "dps": 21.15,
-          "speed": 2.8,
-          "droppedBy": [
-            "The Crone of the Kraul"
-          ],
-          "stats": {
-            "agility": 4,
-            "minDamage": 41,
-            "maxDamage": 77,
-            "speed": 2.8,
-            "dps": 21.07
-          }
-        },
-        {
-          "id": 6725,
-          "name": "Marbled Buckler",
-          "ilvl": 36,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Shield",
-          "slotId": 14,
-          "itemClass": 4,
-          "itemSubclass": 6,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "strength": 5,
-            "agility": 5,
-            "stamina": 5,
-            "spirit": 5,
-            "armor": 776
-          }
-        },
-        {
-          "id": 4197,
-          "name": "Berylline Pads",
-          "ilvl": 36,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Shoulder",
-          "slotId": 3,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "stamina": 5,
-            "intellect": 10,
-            "armor": 39
-          }
-        },
-        {
-          "id": 6742,
-          "name": "Stonefist Girdle",
-          "ilvl": 36,
-          "reqLevel": 29,
-          "quality": "rare",
-          "slot": "Waist",
-          "slotId": 6,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [],
-          "stats": {
-            "strength": 6,
-            "stamina": 5,
-            "armor": 134
-          }
-        }
-      ]
-    },
     "Scarlet Monastery": {
       "zoneId": 796,
-      "levels": "34-45",
+      "levels": "26-45",
       "drops": [
         {
           "id": 7711,
@@ -4650,9 +4541,569 @@
         }
       ]
     },
+    "Razorfen Kraul": {
+      "zoneId": 491,
+      "levels": "32-42",
+      "drops": [
+        {
+          "id": 6682,
+          "name": "Death Speaker Robes",
+          "ilvl": 31,
+          "reqLevel": 26,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 11,
+            "armor": 48
+          }
+        },
+        {
+          "id": 1978,
+          "name": "Wolfclaw Gloves",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "agility": 6,
+            "stamina": 6,
+            "armor": 61
+          }
+        },
+        {
+          "id": 6686,
+          "name": "Tusken Helm",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Overlord Ramtusk"
+          ],
+          "stats": {
+            "strength": 13,
+            "armor": 188
+          }
+        },
+        {
+          "id": 6688,
+          "name": "Whisperwind Headdress",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Earthcaller Halmgar"
+          ],
+          "stats": {
+            "stamina": 6,
+            "intellect": 10,
+            "spirit": 10,
+            "armor": 86
+          }
+        },
+        {
+          "id": 6690,
+          "name": "Ferine Leggings",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Agathelos the Raging"
+          ],
+          "stats": {
+            "intellect": 12,
+            "armor": 96
+          }
+        },
+        {
+          "id": 6691,
+          "name": "Swinetusk Shank",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 15,
+          "dps": 23.12,
+          "speed": 1.5,
+          "droppedBy": [
+            "Agathelos the Raging"
+          ],
+          "stats": {
+            "stamina": 6,
+            "spirit": 4,
+            "minDamage": 24,
+            "maxDamage": 45,
+            "speed": 1.5,
+            "dps": 23.0
+          }
+        },
+        {
+          "id": 2816,
+          "name": "Death Speaker Scepter",
+          "ilvl": 33,
+          "reqLevel": 28,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
+          "dps": 21.43,
+          "speed": 2.8,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ],
+          "stats": {
+            "minDamage": 42,
+            "maxDamage": 78,
+            "speed": 2.8,
+            "dps": 21.43
+          }
+        },
+        {
+          "id": 6695,
+          "name": "Stygian Bone Amulet",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Blind Hunter"
+          ],
+          "stats": {
+            "stamina": 4
+          }
+        },
+        {
+          "id": 6692,
+          "name": "Pronged Reaver",
+          "ilvl": 35,
+          "reqLevel": 30,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 0,
+          "dps": 23.12,
+          "speed": 2.4,
+          "droppedBy": [
+            "Charlga Razorflank"
+          ],
+          "stats": {
+            "strength": 5,
+            "minDamage": 38,
+            "maxDamage": 72,
+            "speed": 2.4,
+            "dps": 22.92
+          }
+        },
+        {
+          "id": 6681,
+          "name": "Thornspike",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
+          "dps": 20.74,
+          "speed": 1.7,
+          "droppedBy": [
+            "Aggem Thorncurse"
+          ],
+          "stats": {
+            "minDamage": 24,
+            "maxDamage": 46,
+            "speed": 1.7,
+            "dps": 20.59
+          }
+        },
+        {
+          "id": 6696,
+          "name": "Nightstalker Bow",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
+          "dps": 28.98,
+          "speed": 1.7,
+          "droppedBy": [
+            "Blind Hunter"
+          ],
+          "stats": {
+            "agility": 3,
+            "shadowRes": 5,
+            "minDamage": 34,
+            "maxDamage": 64,
+            "speed": 1.7,
+            "dps": 28.82
+          }
+        },
+        {
+          "id": 6697,
+          "name": "Batwing Mantle",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Blind Hunter"
+          ],
+          "stats": {
+            "agility": 3,
+            "intellect": 11,
+            "spirit": 5,
+            "armor": 38
+          }
+        },
+        {
+          "id": 6685,
+          "name": "Death Speaker Mantle",
+          "ilvl": 32,
+          "reqLevel": 27,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Death Speaker Jargba"
+          ],
+          "stats": {
+            "intellect": 11,
+            "armor": 37
+          }
+        },
+        {
+          "id": 2264,
+          "name": "Mantle of Thieves",
+          "ilvl": 30,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "agility": 10,
+            "stamina": 4,
+            "spirit": 3,
+            "armor": 77
+          }
+        },
+        {
+          "id": 6687,
+          "name": "Corpsemaker",
+          "ilvl": 34,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 1,
+          "dps": 28.97,
+          "speed": 3.8,
+          "droppedBy": [
+            "Overlord Ramtusk"
+          ],
+          "stats": {
+            "strength": 15,
+            "stamina": 8,
+            "minDamage": 88,
+            "maxDamage": 132,
+            "speed": 3.8,
+            "dps": 28.95
+          }
+        },
+        {
+          "id": 1976,
+          "name": "Slaghammer",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 5,
+          "dps": 23.83,
+          "speed": 2.8,
+          "droppedBy": [],
+          "stats": {
+            "strength": 11,
+            "stamina": 10,
+            "minDamage": 53,
+            "maxDamage": 80,
+            "speed": 2.8,
+            "dps": 23.75
+          }
+        },
+        {
+          "id": 6679,
+          "name": "Armor Piercer",
+          "ilvl": 29,
+          "reqLevel": 24,
+          "quality": "uncommon",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
+          "dps": 19.85,
+          "speed": 2.6,
+          "droppedBy": [
+            "Razorfen Spearhide"
+          ],
+          "stats": {
+            "agility": 11,
+            "minDamage": 41,
+            "maxDamage": 62,
+            "speed": 2.6,
+            "dps": 19.81
+          }
+        },
+        {
+          "id": 2549,
+          "name": "Staff of the Shade",
+          "ilvl": 27,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 22.42,
+          "speed": 2.6,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 15,
+            "minDamage": 46,
+            "maxDamage": 70,
+            "speed": 2.6,
+            "dps": 22.31
+          }
+        },
+        {
+          "id": 4438,
+          "name": "Pugilist Bracers",
+          "ilvl": 30,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 8,
+            "stamina": 3,
+            "armor": 95
+          }
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 6752,
+          "name": "Lancer Boots",
+          "ilvl": 32,
+          "reqLevel": 25,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mortality Wanes"
+          ],
+          "stats": {
+            "agility": 7,
+            "stamina": 8,
+            "spirit": 6,
+            "armor": 73
+          }
+        },
+        {
+          "id": 6748,
+          "name": "Monkey Ring",
+          "ilvl": 32,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Willix the Importer"
+          ],
+          "stats": {
+            "agility": 7,
+            "spirit": 7
+          }
+        },
+        {
+          "id": 6750,
+          "name": "Snake Hoop",
+          "ilvl": 32,
+          "reqLevel": 22,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Willix the Importer"
+          ],
+          "stats": {
+            "intellect": 7,
+            "spirit": 7
+          }
+        },
+        {
+          "id": 3041,
+          "name": "\"Mage-Eye\" Blunderbuss",
+          "ilvl": 31,
+          "reqLevel": 26,
+          "quality": "uncommon",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 3,
+          "dps": 21.15,
+          "speed": 2.8,
+          "droppedBy": [
+            "The Crone of the Kraul"
+          ],
+          "stats": {
+            "agility": 4,
+            "minDamage": 41,
+            "maxDamage": 77,
+            "speed": 2.8,
+            "dps": 21.07
+          }
+        },
+        {
+          "id": 6725,
+          "name": "Marbled Buckler",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 5,
+            "agility": 5,
+            "stamina": 5,
+            "spirit": 5,
+            "armor": 776
+          }
+        },
+        {
+          "id": 4197,
+          "name": "Berylline Pads",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 5,
+            "intellect": 10,
+            "armor": 39
+          }
+        },
+        {
+          "id": 6742,
+          "name": "Stonefist Girdle",
+          "ilvl": 36,
+          "reqLevel": 29,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 6,
+            "stamina": 5,
+            "armor": 134
+          }
+        }
+      ]
+    },
     "Razorfen Downs": {
       "zoneId": 722,
-      "levels": "37-46",
+      "levels": "37-47",
       "drops": [
         {
           "id": 10762,
@@ -4873,7 +5324,7 @@
     },
     "Uldaman": {
       "zoneId": 1337,
-      "levels": "41-51",
+      "levels": "42-52",
       "drops": [
         {
           "id": 9415,
@@ -5047,324 +5498,9 @@
         }
       ]
     },
-    "Zul'Farrak": {
-      "zoneId": 978,
-      "levels": "44-54",
-      "drops": [
-        {
-          "id": 9473,
-          "name": "Jinxed Hoodoo Skin",
-          "ilvl": 49,
-          "reqLevel": 44,
-          "quality": "rare",
-          "slot": "Chest",
-          "slotId": 5,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Shadowpriest Sezz'ziz"
-          ],
-          "stats": {
-            "strength": 10,
-            "stamina": 20,
-            "spirit": 8,
-            "armor": 144
-          }
-        },
-        {
-          "id": 9469,
-          "name": "Gahz'rilla Scale Armor",
-          "ilvl": 48,
-          "reqLevel": 43,
-          "quality": "rare",
-          "slot": "Chest",
-          "slotId": 5,
-          "itemClass": 4,
-          "itemSubclass": 3,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Gahz'rilla"
-          ],
-          "stats": {
-            "stamina": 10,
-            "spirit": 16,
-            "armor": 290
-          }
-        },
-        {
-          "id": 12470,
-          "name": "Sandstalker Ankleguards",
-          "ilvl": 47,
-          "reqLevel": 42,
-          "quality": "rare",
-          "slot": "Feet",
-          "slotId": 8,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Zerillis"
-          ],
-          "stats": {
-            "strength": 6,
-            "agility": 17,
-            "spirit": 3,
-            "armor": 95
-          }
-        },
-        {
-          "id": 9640,
-          "name": "Vice Grips",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "Hands",
-          "slotId": 10,
-          "itemClass": 4,
-          "itemSubclass": 4,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Antu'sul"
-          ],
-          "stats": {
-            "armor": 330
-          }
-        },
-        {
-          "id": 9470,
-          "name": "Bad Mojo Mask",
-          "ilvl": 49,
-          "reqLevel": 44,
-          "quality": "rare",
-          "slot": "Head",
-          "slotId": 1,
-          "itemClass": 4,
-          "itemSubclass": 1,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Shadowpriest Sezz'ziz"
-          ],
-          "stats": {
-            "intellect": 21,
-            "armor": 57
-          }
-        },
-        {
-          "id": 9474,
-          "name": "Jinxed Hoodoo Kilt",
-          "ilvl": 49,
-          "reqLevel": 44,
-          "quality": "rare",
-          "slot": "Legs",
-          "slotId": 7,
-          "itemClass": 4,
-          "itemSubclass": 2,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Shadowpriest Sezz'ziz"
-          ],
-          "stats": {
-            "intellect": 10,
-            "spirit": 19,
-            "armor": 126
-          }
-        },
-        {
-          "id": 9639,
-          "name": "The Hand of Antu'sul",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "Main Hand",
-          "slotId": 21,
-          "itemClass": 2,
-          "itemSubclass": 4,
-          "dps": 33.38,
-          "speed": 2.7,
-          "droppedBy": [
-            "Antu'sul"
-          ],
-          "stats": {
-            "minDamage": 63,
-            "maxDamage": 117,
-            "speed": 2.7,
-            "dps": 33.33
-          }
-        },
-        {
-          "id": 11086,
-          "name": "Jang'thraze the Protector",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "Main Hand",
-          "slotId": 21,
-          "itemClass": 2,
-          "itemSubclass": 7,
-          "dps": 33.56,
-          "speed": 1.9,
-          "droppedBy": [
-            "Chief Ukorz Sandscalp"
-          ],
-          "stats": {
-            "minDamage": 44,
-            "maxDamage": 83,
-            "speed": 1.9,
-            "dps": 33.42
-          }
-        },
-        {
-          "id": 9379,
-          "name": "Sang'thraze the Deflector",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 7,
-          "dps": 33.48,
-          "speed": 1.7,
-          "droppedBy": [
-            "Antu'sul"
-          ],
-          "stats": {
-            "minDamage": 39,
-            "maxDamage": 74,
-            "speed": 1.7,
-            "dps": 33.24
-          }
-        },
-        {
-          "id": 9467,
-          "name": "Gahz'rilla Fang",
-          "ilvl": 48,
-          "reqLevel": 43,
-          "quality": "rare",
-          "slot": "One-Hand",
-          "slotId": 13,
-          "itemClass": 2,
-          "itemSubclass": 15,
-          "dps": 32.41,
-          "speed": 1.8,
-          "droppedBy": [
-            "Gahz'rilla"
-          ],
-          "stats": {
-            "minDamage": 40,
-            "maxDamage": 76,
-            "speed": 1.8,
-            "dps": 32.22,
-            "equip": [
-              "Equip:"
-            ]
-          }
-        },
-        {
-          "id": 9476,
-          "name": "Big Bad Pauldrons",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "Shoulder",
-          "slotId": 3,
-          "itemClass": 4,
-          "itemSubclass": 4,
-          "dps": null,
-          "speed": null,
-          "droppedBy": [
-            "Chief Ukorz Sandscalp"
-          ],
-          "stats": {
-            "strength": 12,
-            "stamina": 12,
-            "armor": 396
-          }
-        },
-        {
-          "id": 9477,
-          "name": "The Chief's Enforcer",
-          "ilvl": 50,
-          "reqLevel": 45,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 10,
-          "dps": 43.58,
-          "speed": 3.4,
-          "droppedBy": [
-            "Chief Ukorz Sandscalp"
-          ],
-          "stats": {
-            "minDamage": 118,
-            "maxDamage": 178,
-            "speed": 3.4,
-            "dps": 43.53
-          }
-        },
-        {
-          "id": 9475,
-          "name": "Diabolic Skiver",
-          "ilvl": 49,
-          "reqLevel": 44,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 6,
-          "dps": 42.79,
-          "speed": 2.9,
-          "droppedBy": [
-            "Shadowpriest Sezz'ziz"
-          ],
-          "stats": {
-            "minDamage": 99,
-            "maxDamage": 149,
-            "speed": 2.9,
-            "dps": 42.76
-          }
-        },
-        {
-          "id": 18082,
-          "name": "Zum'rah's Vexing Cane",
-          "ilvl": 48,
-          "reqLevel": 43,
-          "quality": "rare",
-          "slot": "Two-Hand",
-          "slotId": 17,
-          "itemClass": 2,
-          "itemSubclass": 10,
-          "dps": 41.97,
-          "speed": 2.7,
-          "droppedBy": [
-            "Witch Doctor Zum'rah"
-          ],
-          "stats": {
-            "stamina": 10,
-            "intellect": 10,
-            "minDamage": 90,
-            "maxDamage": 136,
-            "speed": 2.7,
-            "dps": 41.85,
-            "equip": [
-              "Equip:"
-            ]
-          }
-        }
-      ],
-      "questRewards": []
-    },
     "Maraudon": {
       "zoneId": 2100,
-      "levels": "46-55",
+      "levels": "42-52",
       "drops": [
         {
           "id": 17739,
@@ -5966,8 +6102,976 @@
         }
       ]
     },
+    "Dire Maul": {
+      "zoneId": 2557,
+      "levels": "44-54",
+      "drops": [],
+      "questRewards": [
+        {
+          "id": 22150,
+          "name": "Beads of Ogre Might",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Falrin's Vendetta"
+          ],
+          "stats": {
+            "stamina": 7
+          }
+        },
+        {
+          "id": 22149,
+          "name": "Beads of Ogre Mojo",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Falrin's Vendetta"
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 12
+          }
+        }
+      ]
+    },
+    "Zul'Farrak": {
+      "zoneId": 1176,
+      "levels": "46-56",
+      "drops": [
+        {
+          "id": 9473,
+          "name": "Jinxed Hoodoo Skin",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ],
+          "stats": {
+            "strength": 10,
+            "stamina": 20,
+            "spirit": 8,
+            "armor": 144
+          }
+        },
+        {
+          "id": 9469,
+          "name": "Gahz'rilla Scale Armor",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gahz'rilla"
+          ],
+          "stats": {
+            "stamina": 10,
+            "spirit": 16,
+            "armor": 290
+          }
+        },
+        {
+          "id": 12470,
+          "name": "Sandstalker Ankleguards",
+          "ilvl": 47,
+          "reqLevel": 42,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Zerillis"
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 17,
+            "spirit": 3,
+            "armor": 95
+          }
+        },
+        {
+          "id": 9640,
+          "name": "Vice Grips",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Antu'sul"
+          ],
+          "stats": {
+            "armor": 330
+          }
+        },
+        {
+          "id": 9470,
+          "name": "Bad Mojo Mask",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ],
+          "stats": {
+            "intellect": 21,
+            "armor": 57
+          }
+        },
+        {
+          "id": 9474,
+          "name": "Jinxed Hoodoo Kilt",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ],
+          "stats": {
+            "intellect": 10,
+            "spirit": 19,
+            "armor": 126
+          }
+        },
+        {
+          "id": 9639,
+          "name": "The Hand of Antu'sul",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 4,
+          "dps": 33.38,
+          "speed": 2.7,
+          "droppedBy": [
+            "Antu'sul"
+          ],
+          "stats": {
+            "minDamage": 63,
+            "maxDamage": 117,
+            "speed": 2.7,
+            "dps": 33.33
+          }
+        },
+        {
+          "id": 11086,
+          "name": "Jang'thraze the Protector",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
+          "dps": 33.56,
+          "speed": 1.9,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ],
+          "stats": {
+            "minDamage": 44,
+            "maxDamage": 83,
+            "speed": 1.9,
+            "dps": 33.42
+          }
+        },
+        {
+          "id": 9379,
+          "name": "Sang'thraze the Deflector",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 7,
+          "dps": 33.48,
+          "speed": 1.7,
+          "droppedBy": [
+            "Antu'sul"
+          ],
+          "stats": {
+            "minDamage": 39,
+            "maxDamage": 74,
+            "speed": 1.7,
+            "dps": 33.24
+          }
+        },
+        {
+          "id": 9467,
+          "name": "Gahz'rilla Fang",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "One-Hand",
+          "slotId": 13,
+          "itemClass": 2,
+          "itemSubclass": 15,
+          "dps": 32.41,
+          "speed": 1.8,
+          "droppedBy": [
+            "Gahz'rilla"
+          ],
+          "stats": {
+            "minDamage": 40,
+            "maxDamage": 76,
+            "speed": 1.8,
+            "dps": 32.22,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 9476,
+          "name": "Big Bad Pauldrons",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ],
+          "stats": {
+            "strength": 12,
+            "stamina": 12,
+            "armor": 396
+          }
+        },
+        {
+          "id": 9477,
+          "name": "The Chief's Enforcer",
+          "ilvl": 50,
+          "reqLevel": 45,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 43.58,
+          "speed": 3.4,
+          "droppedBy": [
+            "Chief Ukorz Sandscalp"
+          ],
+          "stats": {
+            "minDamage": 118,
+            "maxDamage": 178,
+            "speed": 3.4,
+            "dps": 43.53
+          }
+        },
+        {
+          "id": 9475,
+          "name": "Diabolic Skiver",
+          "ilvl": 49,
+          "reqLevel": 44,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 6,
+          "dps": 42.79,
+          "speed": 2.9,
+          "droppedBy": [
+            "Shadowpriest Sezz'ziz"
+          ],
+          "stats": {
+            "minDamage": 99,
+            "maxDamage": 149,
+            "speed": 2.9,
+            "dps": 42.76
+          }
+        },
+        {
+          "id": 18082,
+          "name": "Zum'rah's Vexing Cane",
+          "ilvl": 48,
+          "reqLevel": 43,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 41.97,
+          "speed": 2.7,
+          "droppedBy": [
+            "Witch Doctor Zum'rah"
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 10,
+            "minDamage": 90,
+            "maxDamage": 136,
+            "speed": 2.7,
+            "dps": 41.85,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        }
+      ],
+      "questRewards": []
+    },
+    "Stratholme": {
+      "zoneId": 2017,
+      "levels": "48-58",
+      "drops": [
+        {
+          "id": 13340,
+          "name": "Cape of the Black Baron",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "agility": 15,
+            "armor": 45
+          }
+        },
+        {
+          "id": 13397,
+          "name": "Stoneskin Gargoyle Cape",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Stonespine"
+          ],
+          "stats": {
+            "strength": 7,
+            "agility": 8,
+            "stamina": 14,
+            "armor": 43
+          }
+        },
+        {
+          "id": 13402,
+          "name": "Timmy's Galoshes",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Timmy the Cruel"
+          ],
+          "stats": {
+            "agility": 17,
+            "stamina": 11,
+            "intellect": 10,
+            "armor": 240
+          }
+        },
+        {
+          "id": 16675,
+          "name": "Beaststalker's Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Nerub'enkan"
+          ],
+          "stats": {
+            "agility": 21,
+            "stamina": 9,
+            "intellect": 3,
+            "armor": 240
+          }
+        },
+        {
+          "id": 16682,
+          "name": "Magister's Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Hearthsinger Forresten"
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 14,
+            "spirit": 14,
+            "armor": 58
+          }
+        },
+        {
+          "id": 16691,
+          "name": "Devout Sandals",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Maleki the Pallid"
+          ],
+          "stats": {
+            "stamina": 9,
+            "intellect": 10,
+            "spirit": 17,
+            "armor": 58
+          }
+        },
+        {
+          "id": 16704,
+          "name": "Dreadmist Sandals",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baroness Anastari"
+          ],
+          "stats": {
+            "stamina": 17,
+            "intellect": 7,
+            "spirit": 10,
+            "armor": 58
+          }
+        },
+        {
+          "id": 16725,
+          "name": "Lightforge Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 11,
+            "stamina": 18,
+            "spirit": 9,
+            "armor": 424
+          }
+        },
+        {
+          "id": 18722,
+          "name": "Death Grips",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Magistrate Barthilas"
+          ],
+          "stats": {
+            "strength": 22,
+            "armor": 404,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 16692,
+          "name": "Devout Gloves",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Archivist Galford"
+          ],
+          "stats": {
+            "stamina": 8,
+            "intellect": 10,
+            "spirit": 17,
+            "armor": 52
+          }
+        },
+        {
+          "id": 16737,
+          "name": "Gauntlets of Valor",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ramstein the Gorger"
+          ],
+          "stats": {
+            "strength": 17,
+            "agility": 3,
+            "stamina": 10,
+            "spirit": 8,
+            "armor": 386
+          }
+        },
+        {
+          "id": 13404,
+          "name": "Mask of the Unforgiven",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Unforgiven"
+          ],
+          "stats": {
+            "stamina": 13,
+            "armor": 132
+          }
+        },
+        {
+          "id": 16668,
+          "name": "Kilt of Elements",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "stamina": 7,
+            "intellect": 15,
+            "spirit": 20,
+            "armor": 315
+          }
+        },
+        {
+          "id": 16678,
+          "name": "Beaststalker's Pants",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 26,
+            "stamina": 6,
+            "intellect": 10,
+            "spirit": 12,
+            "armor": 315
+          }
+        },
+        {
+          "id": 16687,
+          "name": "Magister's Leggings",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "stamina": 12,
+            "intellect": 15,
+            "spirit": 21,
+            "armor": 76
+          }
+        },
+        {
+          "id": 16694,
+          "name": "Devout Skirt",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "stamina": 12,
+            "intellect": 15,
+            "spirit": 23,
+            "armor": 76
+          }
+        },
+        {
+          "id": 16699,
+          "name": "Dreadmist Leggings",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "stamina": 15,
+            "intellect": 14,
+            "spirit": 21,
+            "armor": 76
+          }
+        },
+        {
+          "id": 16709,
+          "name": "Shadowcraft Pants",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "agility": 25,
+            "stamina": 14,
+            "spirit": 14,
+            "armor": 150
+          }
+        },
+        {
+          "id": 16719,
+          "name": "Wildheart Kilt",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "strength": 12,
+            "stamina": 14,
+            "intellect": 14,
+            "spirit": 14,
+            "armor": 150
+          }
+        },
+        {
+          "id": 16728,
+          "name": "Lightforge Legplates",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "strength": 20,
+            "agility": 9,
+            "stamina": 14,
+            "intellect": 12,
+            "armor": 557
+          }
+        },
+        {
+          "id": 16732,
+          "name": "Legplates of Valor",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Baron Rivendare"
+          ],
+          "stats": {
+            "strength": 23,
+            "agility": 11,
+            "stamina": 15,
+            "spirit": 4,
+            "armor": 557
+          }
+        },
+        {
+          "id": 23125,
+          "name": "Chains of the Lich",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Balzaphon"
+          ],
+          "stats": {}
+        },
+        {
+          "id": 18720,
+          "name": "Shroud of the Nathrezim",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "intellect": 16,
+            "spirit": 8,
+            "armor": 67
+          }
+        },
+        {
+          "id": 16708,
+          "name": "Shadowcraft Spaulders",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "agility": 22,
+            "stamina": 9,
+            "armor": 127
+          }
+        },
+        {
+          "id": 13405,
+          "name": "Wailing Nightbane Pauldrons",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Unforgiven"
+          ],
+          "stats": {
+            "strength": 14,
+            "stamina": 14,
+            "armor": 448,
+            "shadowRes": 6
+          }
+        },
+        {
+          "id": 13387,
+          "name": "Foresight Girdle",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Archivist Galford"
+          ],
+          "stats": {
+            "armor": 202
+          }
+        },
+        {
+          "id": 13400,
+          "name": "Vambraces of the Sadist",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Timmy the Cruel"
+          ],
+          "stats": {
+            "strength": 7,
+            "stamina": 8,
+            "armor": 270
+          }
+        },
+        {
+          "id": 16697,
+          "name": "Devout Bracers",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 7,
+            "intellect": 8,
+            "spirit": 10,
+            "armor": 35
+          }
+        }
+      ],
+      "questRewards": []
+    },
     "Temple of Atal'Hakkar": {
-      "zoneId": 1477,
+      "zoneId": 1417,
       "levels": "50-60",
       "drops": [
         {
@@ -5993,6 +7097,1875 @@
           }
         }
       ],
+      "questRewards": []
+    },
+    "Blackrock Depths": {
+      "zoneId": 1584,
+      "levels": "52-60",
+      "drops": [
+        {
+          "id": 11623,
+          "name": "Spritecaster Cape",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Back",
+          "slotId": 16,
+          "itemClass": 4,
+          "itemSubclass": -6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Houndmaster Grebmar"
+          ],
+          "stats": {
+            "stamina": 5,
+            "intellect": 6,
+            "spirit": 6,
+            "armor": 37
+          }
+        },
+        {
+          "id": 11726,
+          "name": "Savage Gladiator Chain",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "epic",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gorosh the Dervish"
+          ],
+          "stats": {
+            "strength": 16,
+            "agility": 14,
+            "stamina": 18,
+            "armor": 369,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 11633,
+          "name": "Spiderfang Carapace",
+          "ilvl": 54,
+          "reqLevel": 49,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Hedrum the Creeper"
+          ],
+          "stats": {
+            "strength": 14,
+            "stamina": 14,
+            "intellect": 13,
+            "armor": 567
+          }
+        },
+        {
+          "id": 11747,
+          "name": "Flamestrider Robes",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Pyromancer Loregrain"
+          ],
+          "stats": {
+            "stamina": 5,
+            "intellect": 4,
+            "spirit": 16,
+            "armor": 153,
+            "fireRes": 10
+          }
+        },
+        {
+          "id": 11822,
+          "name": "Omnicast Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Golem Lord Argelmach"
+          ],
+          "stats": {
+            "stamina": 8,
+            "intellect": 12,
+            "armor": 58
+          }
+        },
+        {
+          "id": 11731,
+          "name": "Savage Gladiator Greaves",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Anub'shiah"
+          ],
+          "stats": {
+            "strength": 9,
+            "agility": 15,
+            "stamina": 13,
+            "armor": 233
+          }
+        },
+        {
+          "id": 11627,
+          "name": "Fleetfoot Greaves",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Houndmaster Grebmar"
+          ],
+          "stats": {
+            "agility": 19,
+            "stamina": 6,
+            "intellect": 6,
+            "armor": 218
+          }
+        },
+        {
+          "id": 22240,
+          "name": "Greaves of Withering Despair",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "High Interrogator Gerstahn"
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 10,
+            "armor": 218
+          }
+        },
+        {
+          "id": 11730,
+          "name": "Savage Gladiator Grips",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Eviscerator"
+          ],
+          "stats": {
+            "strength": 5,
+            "agility": 9,
+            "stamina": 14,
+            "intellect": 12,
+            "armor": 211
+          }
+        },
+        {
+          "id": 11745,
+          "name": "Fists of Phalanx",
+          "ilvl": 56,
+          "reqLevel": 51,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Phalanx"
+          ],
+          "stats": {
+            "strength": 20,
+            "stamina": 9,
+            "armor": 367
+          }
+        },
+        {
+          "id": 11729,
+          "name": "Savage Gladiator Helm",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Hedrum the Creeper"
+          ],
+          "stats": {
+            "strength": 8,
+            "agility": 12,
+            "stamina": 26,
+            "armor": 275
+          }
+        },
+        {
+          "id": 11735,
+          "name": "Ragefury Eyepatch",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Hurley Blackbreath"
+          ],
+          "stats": {
+            "strength": 6,
+            "stamina": 10,
+            "armor": 132
+          }
+        },
+        {
+          "id": 11746,
+          "name": "Golem Skull Helm",
+          "ilvl": 56,
+          "reqLevel": 51,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 18,
+            "stamina": 18,
+            "armor": 477
+          }
+        },
+        {
+          "id": 11823,
+          "name": "Luminary Kilt",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Golem Lord Argelmach"
+          ],
+          "stats": {
+            "stamina": 8,
+            "intellect": 20,
+            "spirit": 8,
+            "armor": 147
+          }
+        },
+        {
+          "id": 11821,
+          "name": "Warstrife Leggings",
+          "ilvl": 58,
+          "reqLevel": 53,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Angerforge"
+          ],
+          "stats": {
+            "strength": 8,
+            "agility": 7,
+            "stamina": 22,
+            "armor": 144
+          }
+        },
+        {
+          "id": 11728,
+          "name": "Savage Gladiator Leggings",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ok'thor the Breaker"
+          ],
+          "stats": {
+            "strength": 12,
+            "agility": 18,
+            "stamina": 19,
+            "armor": 296
+          }
+        },
+        {
+          "id": 11841,
+          "name": "Senior Designer's Pantaloons",
+          "ilvl": 55,
+          "reqLevel": 50,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Fineous Darkvire"
+          ],
+          "stats": {
+            "stamina": 8,
+            "intellect": 7,
+            "spirit": 18,
+            "armor": 69
+          }
+        },
+        {
+          "id": 11749,
+          "name": "Searingscale Leggings",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Pyromancer Loregrain"
+          ],
+          "stats": {
+            "agility": 13,
+            "stamina": 13,
+            "intellect": 13,
+            "spirit": 6,
+            "armor": 277,
+            "fireRes": 10
+          }
+        },
+        {
+          "id": 11817,
+          "name": "Lord General's Sword",
+          "ilvl": 56,
+          "reqLevel": 51,
+          "quality": "rare",
+          "slot": "Main Hand",
+          "slotId": 21,
+          "itemClass": 2,
+          "itemSubclass": 7,
+          "dps": 37.02,
+          "speed": 2.6,
+          "droppedBy": [
+            "General Angerforge"
+          ],
+          "stats": {
+            "minDamage": 67,
+            "maxDamage": 125,
+            "speed": 2.6,
+            "dps": 36.92
+          }
+        },
+        {
+          "id": 11628,
+          "name": "Houndmaster's Bow",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 2,
+          "dps": 45.77,
+          "speed": 1.8,
+          "droppedBy": [
+            "Houndmaster Grebmar"
+          ],
+          "stats": {
+            "strength": 3,
+            "minDamage": 57,
+            "maxDamage": 107,
+            "speed": 1.8,
+            "dps": 45.56
+          }
+        },
+        {
+          "id": 11748,
+          "name": "Pyric Caduceus",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 19,
+          "dps": 35.4,
+          "speed": 1.8,
+          "droppedBy": [
+            "Pyromancer Loregrain"
+          ],
+          "stats": {
+            "spirit": 3,
+            "speed": 1.8,
+            "dps": 35.28
+          }
+        },
+        {
+          "id": 11631,
+          "name": "Stoneshell Guard",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Roccor"
+          ],
+          "stats": {
+            "strength": 7,
+            "stamina": 9,
+            "armor": 1803
+          }
+        },
+        {
+          "id": 22241,
+          "name": "Dark Warder's Pauldrons",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Warder Stilgiss"
+          ],
+          "stats": {
+            "strength": 11,
+            "agility": 17,
+            "stamina": 7,
+            "armor": 122
+          }
+        },
+        {
+          "id": 11632,
+          "name": "Earthslag Shoulders",
+          "ilvl": 52,
+          "reqLevel": 47,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Roccor"
+          ],
+          "stats": {
+            "strength": 13,
+            "stamina": 8,
+            "intellect": 8,
+            "armor": 410
+          }
+        },
+        {
+          "id": 11750,
+          "name": "Kindling Stave",
+          "ilvl": 53,
+          "reqLevel": 48,
+          "quality": "rare",
+          "slot": "Two-Hand",
+          "slotId": 17,
+          "itemClass": 2,
+          "itemSubclass": 10,
+          "dps": 45.93,
+          "speed": 2.9,
+          "droppedBy": [
+            "Pyromancer Loregrain"
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 12,
+            "fireRes": 10,
+            "minDamage": 106,
+            "maxDamage": 160,
+            "speed": 2.9,
+            "dps": 45.86,
+            "equip": [
+              "Equip:"
+            ]
+          }
+        },
+        {
+          "id": 22242,
+          "name": "Verek's Leash",
+          "ilvl": 56,
+          "reqLevel": 51,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Verek"
+          ],
+          "stats": {
+            "strength": 8,
+            "agility": 7,
+            "stamina": 8,
+            "intellect": 8,
+            "armor": 187
+          }
+        },
+        {
+          "id": 11764,
+          "name": "Cinderhide Armsplints",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "armor": 71,
+            "fireRes": 10
+          }
+        },
+        {
+          "id": 11765,
+          "name": "Pyremail Wristguards",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Lord Incendius"
+          ],
+          "stats": {
+            "armor": 148,
+            "fireRes": 10
+          }
+        }
+      ],
+      "questRewards": []
+    },
+    "Blackrock Spire": {
+      "zoneId": 1583,
+      "levels": "55-60",
+      "drops": [
+        {
+          "id": 16666,
+          "name": "Vest of Elements",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "stamina": 13,
+            "intellect": 20,
+            "armor": 370
+          }
+        },
+        {
+          "id": 16674,
+          "name": "Beaststalker's Tunic",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "strength": 8,
+            "agility": 21,
+            "stamina": 16,
+            "intellect": 13,
+            "spirit": 6,
+            "armor": 370
+          }
+        },
+        {
+          "id": 16688,
+          "name": "Magister's Robes",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "stamina": 9,
+            "intellect": 28,
+            "spirit": 8,
+            "armor": 89
+          }
+        },
+        {
+          "id": 16690,
+          "name": "Devout Robe",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "stamina": 13,
+            "intellect": 24,
+            "spirit": 15,
+            "armor": 89
+          }
+        },
+        {
+          "id": 16700,
+          "name": "Dreadmist Robe",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "stamina": 20,
+            "intellect": 21,
+            "spirit": 10,
+            "armor": 89
+          }
+        },
+        {
+          "id": 16706,
+          "name": "Wildheart Vest",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "stamina": 13,
+            "intellect": 20,
+            "spirit": 20,
+            "armor": 176
+          }
+        },
+        {
+          "id": 16721,
+          "name": "Shadowcraft Tunic",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "agility": 26,
+            "stamina": 13,
+            "spirit": 12,
+            "armor": 176
+          }
+        },
+        {
+          "id": 16726,
+          "name": "Lightforge Breastplate",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "strength": 13,
+            "stamina": 21,
+            "intellect": 16,
+            "spirit": 8,
+            "armor": 657
+          }
+        },
+        {
+          "id": 16730,
+          "name": "Breastplate of Valor",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "strength": 15,
+            "agility": 10,
+            "stamina": 24,
+            "spirit": 12,
+            "armor": 657
+          }
+        },
+        {
+          "id": 16670,
+          "name": "Boots of Elements",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Highlord Omokk"
+          ],
+          "stats": {
+            "agility": 9,
+            "spirit": 17,
+            "armor": 240
+          }
+        },
+        {
+          "id": 16715,
+          "name": "Wildheart Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Mother Smolderweb"
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 9,
+            "spirit": 17,
+            "armor": 115
+          }
+        },
+        {
+          "id": 16672,
+          "name": "Gauntlets of Elements",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Pyroguard Emberseer"
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 10,
+            "spirit": 16,
+            "armor": 218
+          }
+        },
+        {
+          "id": 16676,
+          "name": "Beaststalker's Gloves",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "War Master Voone"
+          ],
+          "stats": {
+            "agility": 14,
+            "stamina": 10,
+            "intellect": 10,
+            "spirit": 10,
+            "armor": 218
+          }
+        },
+        {
+          "id": 16712,
+          "name": "Shadowcraft Gloves",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Shadow Hunter Vosh'gajin"
+          ],
+          "stats": {
+            "strength": 9,
+            "agility": 14,
+            "stamina": 10,
+            "spirit": 11,
+            "armor": 105
+          }
+        },
+        {
+          "id": 12952,
+          "name": "Gyth's Skull",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 20,
+            "armor": 509
+          }
+        },
+        {
+          "id": 12651,
+          "name": "Blackcrow",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Ranged",
+          "slotId": 15,
+          "itemClass": 2,
+          "itemSubclass": 18,
+          "dps": 50.56,
+          "speed": 3.2,
+          "droppedBy": [
+            "Shadow Hunter Vosh'gajin"
+          ],
+          "stats": {
+            "agility": 3,
+            "minDamage": 129,
+            "maxDamage": 194,
+            "speed": 3.2,
+            "dps": 50.47
+          }
+        },
+        {
+          "id": 12602,
+          "name": "Draconian Deflector",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Shield",
+          "slotId": 14,
+          "itemClass": 4,
+          "itemSubclass": 6,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 7,
+            "armor": 2153,
+            "fireRes": 8
+          }
+        },
+        {
+          "id": 16669,
+          "name": "Pauldrons of Elements",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gyth"
+          ],
+          "stats": {
+            "strength": 5,
+            "stamina": 14,
+            "intellect": 15,
+            "spirit": 6,
+            "armor": 266
+          }
+        },
+        {
+          "id": 16679,
+          "name": "Beaststalker's Mantle",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Overlord Wyrmthalak"
+          ],
+          "stats": {
+            "agility": 11,
+            "stamina": 17,
+            "intellect": 7,
+            "spirit": 7,
+            "armor": 266
+          }
+        },
+        {
+          "id": 16695,
+          "name": "Devout Mantle",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Solakar Flamewreath"
+          ],
+          "stats": {
+            "stamina": 4,
+            "intellect": 21,
+            "spirit": 9,
+            "armor": 64
+          }
+        },
+        {
+          "id": 16718,
+          "name": "Wildheart Spaulders",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Gizrul the Slavener"
+          ],
+          "stats": {
+            "stamina": 9,
+            "intellect": 18,
+            "spirit": 8,
+            "armor": 127
+          }
+        },
+        {
+          "id": 16729,
+          "name": "Lightforge Spaulders",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "The Beast"
+          ],
+          "stats": {
+            "strength": 9,
+            "agility": 5,
+            "stamina": 15,
+            "intellect": 10,
+            "armor": 470
+          }
+        },
+        {
+          "id": 16733,
+          "name": "Spaulders of Valor",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Warchief Rend Blackhand"
+          ],
+          "stats": {
+            "strength": 11,
+            "agility": 9,
+            "stamina": 17,
+            "armor": 470
+          }
+        },
+        {
+          "id": 13164,
+          "name": "Heart of the Scale",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Trinket",
+          "slotId": 12,
+          "itemClass": 4,
+          "itemSubclass": -4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {}
+        },
+        {
+          "id": 13142,
+          "name": "Brigam Girdle",
+          "ilvl": 63,
+          "reqLevel": 58,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "General Drakkisath"
+          ],
+          "stats": {
+            "strength": 14,
+            "stamina": 18,
+            "armor": 369
+          }
+        },
+        {
+          "id": 16673,
+          "name": "Cord of Elements",
+          "ilvl": 58,
+          "reqLevel": 53,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 9,
+            "stamina": 6,
+            "intellect": 17,
+            "spirit": 7,
+            "armor": 193
+          }
+        },
+        {
+          "id": 16680,
+          "name": "Beaststalker's Belt",
+          "ilvl": 58,
+          "reqLevel": 53,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 8,
+            "agility": 10,
+            "stamina": 6,
+            "intellect": 9,
+            "spirit": 11,
+            "armor": 193
+          }
+        },
+        {
+          "id": 16696,
+          "name": "Devout Belt",
+          "ilvl": 58,
+          "reqLevel": 53,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 4,
+            "intellect": 20,
+            "spirit": 9,
+            "armor": 46
+          }
+        },
+        {
+          "id": 16713,
+          "name": "Shadowcraft Belt",
+          "ilvl": 58,
+          "reqLevel": 53,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 9,
+            "agility": 14,
+            "stamina": 10,
+            "spirit": 11,
+            "armor": 93
+          }
+        },
+        {
+          "id": 16683,
+          "name": "Magister's Bindings",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 6,
+            "intellect": 13,
+            "spirit": 6,
+            "armor": 35
+          }
+        },
+        {
+          "id": 16703,
+          "name": "Dreadmist Bracers",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 10,
+            "intellect": 11,
+            "spirit": 5,
+            "armor": 35
+          }
+        },
+        {
+          "id": 16735,
+          "name": "Bracers of Valor",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 7,
+            "agility": 3,
+            "stamina": 14,
+            "spirit": 2,
+            "armor": 261
+          }
+        }
+      ],
+      "questRewards": [
+        {
+          "id": 16309,
+          "name": "Drakefire Amulet",
+          "ilvl": 63,
+          "reqLevel": 50,
+          "quality": "rare",
+          "slot": "Neck",
+          "slotId": 2,
+          "itemClass": 4,
+          "itemSubclass": -3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 10,
+            "fireRes": 15
+          }
+        }
+      ]
+    },
+    "Scholomance": {
+      "zoneId": 2057,
+      "levels": "55-60",
+      "drops": [
+        {
+          "id": 14624,
+          "name": "Deathbone Chestplate",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Chest",
+          "slotId": 5,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 16,
+            "intellect": 11,
+            "armor": 637
+          }
+        },
+        {
+          "id": 14621,
+          "name": "Deathbone Sabatons",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 11,
+            "intellect": 14,
+            "armor": 438
+          }
+        },
+        {
+          "id": 16711,
+          "name": "Shadowcraft Boots",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Rattlegore"
+          ],
+          "stats": {
+            "agility": 21,
+            "stamina": 9,
+            "armor": 115
+          }
+        },
+        {
+          "id": 16734,
+          "name": "Boots of Valor",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Feet",
+          "slotId": 8,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Kirtonos the Herald"
+          ],
+          "stats": {
+            "strength": 9,
+            "agility": 5,
+            "stamina": 20,
+            "armor": 424
+          }
+        },
+        {
+          "id": 18760,
+          "name": "Necromantic Band",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Finger",
+          "slotId": 11,
+          "itemClass": 4,
+          "itemSubclass": -2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Death Knight Darkreaver"
+          ],
+          "stats": {
+            "shadowRes": 15
+          }
+        },
+        {
+          "id": 14525,
+          "name": "Boneclenched Gauntlets",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ras Frostwhisper"
+          ],
+          "stats": {
+            "strength": 16,
+            "stamina": 15,
+            "armor": 404
+          }
+        },
+        {
+          "id": 14622,
+          "name": "Deathbone Gauntlets",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 14,
+            "intellect": 11,
+            "armor": 398
+          }
+        },
+        {
+          "id": 16684,
+          "name": "Magister's Gloves",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 8,
+            "intellect": 14,
+            "spirit": 14,
+            "armor": 52
+          }
+        },
+        {
+          "id": 16705,
+          "name": "Dreadmist Wraps",
+          "ilvl": 59,
+          "reqLevel": 54,
+          "quality": "rare",
+          "slot": "Hands",
+          "slotId": 10,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 13,
+            "intellect": 9,
+            "spirit": 14,
+            "armor": 52
+          }
+        },
+        {
+          "id": 16667,
+          "name": "Coif of Elements",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "strength": 7,
+            "stamina": 13,
+            "intellect": 23,
+            "spirit": 12,
+            "armor": 297
+          }
+        },
+        {
+          "id": 16677,
+          "name": "Beaststalker's Cap",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 3,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "agility": 20,
+            "stamina": 20,
+            "intellect": 13,
+            "spirit": 6,
+            "armor": 297
+          }
+        },
+        {
+          "id": 16686,
+          "name": "Magister's Crown",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "stamina": 10,
+            "intellect": 30,
+            "armor": 71
+          }
+        },
+        {
+          "id": 16693,
+          "name": "Devout Crown",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "stamina": 13,
+            "intellect": 24,
+            "spirit": 15,
+            "armor": 71
+          }
+        },
+        {
+          "id": 16698,
+          "name": "Dreadmist Mask",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "stamina": 15,
+            "intellect": 23,
+            "spirit": 12,
+            "armor": 71
+          }
+        },
+        {
+          "id": 16707,
+          "name": "Shadowcraft Cap",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "strength": 6,
+            "agility": 20,
+            "stamina": 20,
+            "spirit": 13,
+            "armor": 141
+          }
+        },
+        {
+          "id": 16720,
+          "name": "Wildheart Cowl",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 2,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "strength": 6,
+            "stamina": 10,
+            "intellect": 20,
+            "spirit": 20,
+            "armor": 141
+          }
+        },
+        {
+          "id": 16727,
+          "name": "Lightforge Helm",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "strength": 14,
+            "agility": 7,
+            "stamina": 20,
+            "intellect": 13,
+            "armor": 526
+          }
+        },
+        {
+          "id": 16731,
+          "name": "Helm of Valor",
+          "ilvl": 62,
+          "reqLevel": 57,
+          "quality": "rare",
+          "slot": "Head",
+          "slotId": 1,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Darkmaster Gandling"
+          ],
+          "stats": {
+            "strength": 15,
+            "agility": 9,
+            "stamina": 27,
+            "armor": 526
+          }
+        },
+        {
+          "id": 14623,
+          "name": "Deathbone Legguards",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Legs",
+          "slotId": 7,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 20,
+            "intellect": 14,
+            "armor": 557
+          }
+        },
+        {
+          "id": 16689,
+          "name": "Magister's Mantle",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Ras Frostwhisper"
+          ],
+          "stats": {
+            "stamina": 6,
+            "intellect": 22,
+            "armor": 64
+          }
+        },
+        {
+          "id": 16701,
+          "name": "Dreadmist Mantle",
+          "ilvl": 60,
+          "reqLevel": 55,
+          "quality": "rare",
+          "slot": "Shoulder",
+          "slotId": 3,
+          "itemClass": 4,
+          "itemSubclass": 1,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [
+            "Jandice Barov"
+          ],
+          "stats": {
+            "stamina": 14,
+            "intellect": 15,
+            "armor": 64
+          }
+        },
+        {
+          "id": 14620,
+          "name": "Deathbone Girdle",
+          "ilvl": 61,
+          "reqLevel": 56,
+          "quality": "rare",
+          "slot": "Waist",
+          "slotId": 6,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "stamina": 15,
+            "intellect": 11,
+            "armor": 358
+          }
+        },
+        {
+          "id": 16722,
+          "name": "Lightforge Bracers",
+          "ilvl": 57,
+          "reqLevel": 52,
+          "quality": "rare",
+          "slot": "Wrist",
+          "slotId": 9,
+          "itemClass": 4,
+          "itemSubclass": 4,
+          "dps": null,
+          "speed": null,
+          "droppedBy": [],
+          "stats": {
+            "strength": 8,
+            "agility": 5,
+            "stamina": 10,
+            "intellect": 7,
+            "armor": 261
+          }
+        }
+      ],
+      "questRewards": []
+    },
+    "Karazhan Crypts": {
+      "zoneId": 16074,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "Excavation Site: Wetlands": {
+      "zoneId": 16732,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "The Burning of Andorhal": {
+      "zoneId": 15828,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "Manor Mistmantle": {
+      "zoneId": 17191,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "Half-Pint Tavern": {
+      "zoneId": 16632,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "The Scarab Dais": {
+      "zoneId": 16295,
+      "levels": "",
+      "drops": [],
+      "questRewards": []
+    },
+    "City of Dalaran": {
+      "zoneId": 16544,
+      "levels": "",
+      "drops": [],
       "questRewards": []
     }
   },
