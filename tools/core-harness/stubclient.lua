@@ -544,6 +544,10 @@ if MODERN then
     C_GameRules = { GetActiveGameMode = function() return 3 end, IsHardcoreActive = function() return false end, IsSelfFoundAllowed = function() return false end }
     C_Item = {
         GetItemInfo = function(id)
+            -- The real one returns nothing until the item has arrived
+            -- from the server, which is the whole reason the addon has
+            -- a queue and a redraw.
+            if type(id) == "number" and S.UNCACHED and S.UNCACHED[id] then return nil end
             if type(id) == "number" and S.ITEMS and S.ITEMS[id] then
                 local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[item %d]|h|r"):format(id, id)
                 return ("item %d"):format(id), link, 3, 1, 0, "Armor", "", 1, "", 134414,

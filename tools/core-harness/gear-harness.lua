@@ -51,17 +51,37 @@ local ids = ns.AllItemIDs()
 check(#ids > 200, #ids .. " distinct items, deduplicated")
 check(ns.WEIGHTS.ROGUE ~= nil and ns.PROFICIENCY.ROGUE ~= nil, "weights and proficiencies came with it")
 
--- Nothing can be scored before the client has the items.
--- The stub runs timers the instant they are set, so the three second
--- backstop fires here rather than the load events doing it. What matters
--- either way is that the caller is told exactly once: told twice and the
--- panel rebuilds itself on top of itself.
-local calls = 0
-ns.Score:Preload({ 7719, 6463, 7717 }, function() calls = calls + 1 end)
-check(S.REQUESTED == 3, "every uncached item was requested, got " .. S.REQUESTED)
-check(calls == 1, "the caller is told once")
-for _, id in ipairs({ 7719, 6463, 7717 }) do S.fire("ITEM_DATA_LOAD_RESULT", id, true) end
-check(calls == 1, "and not again when the loads land afterwards")
+-- The client answers item queries from the server and throttles hard,
+-- so they leave in small batches rather than all at once. Asking for
+-- everything the moment the window opened got most of them dropped.
+S.UNCACHED = { [7719] = true, [6463] = true, [7717] = true }
+S.REQUESTED = 0
+local missing = ns.Score:Want({ 7719, 6463, 7717 })
+check(missing == 3, "three unknown items are queued, got " .. missing)
+check(S.REQUESTED > 0 and S.REQUESTED <= 12,
+    "and they leave a batch at a time rather than in a flood: " .. S.REQUESTED)
+
+-- The spacing itself cannot be seen here, because the stub runs timers
+-- the instant they are set and the queue drains in one go. What can be
+-- seen is that nothing is asked for twice, which is the other half of
+-- not flooding the server.
+S.REQUESTED = 0
+S.UNCACHED = {}
+local many = {}
+for i = 1, 100 do many[i] = 900000 + i; S.UNCACHED[many[i]] = true end
+ns.Score:Want(many)
+check(S.REQUESTED == 100, "a hundred unknown items are each asked for: " .. S.REQUESTED)
+S.REQUESTED = 0
+ns.Score:Want(many)
+check(S.REQUESTED == 0, "and asking again does not ask the server again: " .. S.REQUESTED)
+
+-- Anything the client already knows is never asked for at all.
+S.UNCACHED = {}
+S.REQUESTED = 0
+ns.Score:Want({ 7719, 6463 })
+check(S.REQUESTED == 0, "known items are not requested, got " .. S.REQUESTED)
+
+S.UNCACHED = {}   -- they have arrived now; the rest of the run assumes so
 
 -- Proficiency. A rogue in mail, or holding a two-handed mace, is how you
 -- can tell a gear list has never been used by anyone.
