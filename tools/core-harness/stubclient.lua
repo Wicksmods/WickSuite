@@ -240,8 +240,31 @@ if MODERN then
 else
     MinimapBorder = newMock("Texture", "MinimapBorder")
 end
-GameTooltip = newMock("GameTooltip", "GameTooltip")
-ItemRefTooltip = newMock("GameTooltip", "ItemRefTooltip")
+-- Tooltips accumulate lines, and a test that cannot read them back can
+-- only check that nothing threw.
+local function tooltipMock(name)
+    local t = newMock("GameTooltip", name)
+    t.__lines = {}
+    local realIndex = getmetatable(t).__index
+    getmetatable(t).__index = function(tbl, k)
+        if k == "AddLine" then
+            return function(_, text) tbl.__lines[#tbl.__lines + 1] = tostring(text) end
+        elseif k == "SetText" then
+            return function(_, text) tbl.__lines = { tostring(text) } end
+        elseif k == "SetHyperlink" then
+            return function(_, link) tbl.__hyperlink = link; tbl.__lines = { "<game tooltip>" } end
+        elseif k == "ClearLines" then
+            return function() tbl.__lines = {} end
+        elseif k == "Text" then
+            return function() return table.concat(tbl.__lines, "|") end
+        end
+        return realIndex(tbl, k)
+    end
+    return t
+end
+
+GameTooltip = tooltipMock("GameTooltip")
+ItemRefTooltip = tooltipMock("ItemRefTooltip")
 BankFrame = newMock("Frame", "BankFrame")
 DEFAULT_CHAT_FRAME = { AddMessage = function(_, msg) S.CHAT[#S.CHAT + 1] = msg end }
 SlashCmdList = {}
@@ -609,7 +632,11 @@ if MODERN then
                        0, 4, 2, 1, 0, nil, false, true
             end
             local name = CLASS == "MAGE" and "Conjured Spring Water" or "Hearthstone"
-            return name, ITEM_LINK, 1, 1, 0, "Consumable", "Food & Drink", 20, "", 134414, 0, 15, 0, 1, 0, nil, false, true
+            -- Per id even in the catch-all. One shared link for every
+            -- item let a test pass while the addon confused them.
+            local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[%s]|h|r")
+                :format(tonumber(id) or 6948, name)
+            return name, link, 1, 1, 0, "Consumable", "Food & Drink", 20, "", 134414, 0, 15, 0, 1, 0, nil, false, true
         end,
         GetItemInfoInstant = function(id)
             local e = S.ITEMS and S.ITEMS[id]

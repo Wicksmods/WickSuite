@@ -253,6 +253,67 @@ check(shown and not (shown.value:GetText() or ""):find("table"),
 UnitStat, UnitArmor = realStat, realArmor
 ns.Doll:RefreshStats()
 
+-- On this beta the client only knows an item the character has actually
+-- met. Asking it for a tooltip on any other one gives "Retrieving item
+-- information" forever, because the data is never coming. So when the
+-- client cannot answer, the tooltip is built from what we shipped.
+do
+    -- Pick one the client knows nothing about, the way the beta leaves
+    -- most of this list.
+    local uncached = nil
+    for _, id in ipairs(ns.AllItemIDs()) do
+        if ns.ENTRY[id] and ns.ENTRY[id].name ~= "" and ns.ENTRY[id].stats then
+            uncached = id
+            break
+        end
+    end
+    -- Server data missing, client files still there: that is exactly
+    -- the beta's state. GetItemInfo goes quiet, GetItemInfoInstant
+    -- still answers with the slot.
+    S.ITEMS = S.ITEMS or {}
+    S.ITEMS[uncached] = { name = ns.ENTRY[uncached].name, type = "Armor",
+                          equipLoc = "INVTYPE_CLOAK", classID = 4, subClassID = -6 }
+    S.UNCACHED = S.UNCACHED or {}
+    S.UNCACHED[uncached] = true
+    S.UNKNOWN = S.UNKNOWN or {}
+    S.UNKNOWN[uncached] = true
+    check(uncached ~= nil and not ns.Score:Cached(uncached),
+        "the stub has an item the client cannot describe")
+    if uncached then
+        local e = ns.ENTRY[uncached]
+        GameTooltip:ClearLines()
+        local fromGame = ns.Score:FillTooltip(GameTooltip, uncached, ns.Score:LinkFor(uncached))
+        local text = GameTooltip:Text()
+        check(not fromGame, "the game is not asked for one it cannot answer")
+        check(text:find(e.name, 1, true) ~= nil,
+            "the item is named from our own data: " .. text:sub(1, 48))
+        check(text:find("Retrieving") == nil, "and never says Retrieving item information")
+        check(text:find(e.dungeon, 1, true) ~= nil, "with where it drops")
+        check(text:find("what you are wearing") ~= nil or text:find("No change") ~= nil,
+            "and what it would change against what is worn")
+    end
+
+    -- Shift-click has to produce something chat will accept. The bare
+    -- "item:id" used for weighing is not a link.
+    local link = ns.Score:ChatLink(uncached)
+    check(link ~= nil and link:find("|Hitem:" .. uncached, 1, true) ~= nil,
+        "an uncached item still gets a chat link: " .. tostring(link))
+    check(link:find("[" .. ns.ENTRY[uncached].name .. "]", 1, true) ~= nil and link:sub(-4) == "|h|r",
+        "a well formed one, with the name in brackets")
+
+    S.UNCACHED[uncached] = nil
+    S.UNKNOWN[uncached] = nil
+
+    -- An item the client does know is still the client's to describe.
+    local known = ns.AllItemIDs()[2]
+    if ns.Score:Cached(known) then
+        GameTooltip:ClearLines()
+        local fromGame = ns.Score:FillTooltip(GameTooltip, known, ns.Score:LinkFor(known))
+        check(fromGame, "a cached item still goes to the game, whose answer is the real one")
+    end
+
+end
+
 -- A class that cannot use it is refused rather than silently accepted.
 check(not ns.Doll:TryOn(6463), "mail is refused for a rogue")
 

@@ -46,8 +46,10 @@ def main():
         "ns.SOURCE = %s" % lua_str(loot.get("source", "")),
         "ns.COLLECTED = %s" % lua_str(loot.get("statsCollected") or loot.get("collected")),
         "",
-        "-- dungeon -> { levels, items = { { id, req, how, from } } }",
-        "-- how is \"drop\" or \"quest\"; from is the boss or quest giver.",
+        "-- dungeon -> { levels, items = { { id, req, how, from, name, q, slot, stats } } }",
+        "-- how is \"drop\" or \"quest\"; from is the boss or quest giver. The",
+        "-- name, quality, slot and stats are what a tooltip is built from when",
+        "-- the client has never seen the item and cannot describe it.",
         "ns.DUNGEONS = {",
     ]
 
@@ -65,11 +67,14 @@ def main():
                 bits = ["%s = %d" % (short, st[long])
                         for long, short in keep.items()
                         if isinstance(st.get(long), int)]
-                rows.append("        { id = %d, req = %d, how = %s%s, name = %s%s }," % (
-                    it["id"], it.get("reqLevel") or 0, lua_str(how),
-                    (", from = " + lua_str(frm)) if frm else "",
-                    lua_str(it.get("name") or ""),
-                    (", stats = { " + ", ".join(bits) + " }") if bits else ""))
+                rows.append(
+                    "        { id = %d, req = %d, how = %s%s, name = %s, q = %s%s%s }," % (
+                        it["id"], it.get("reqLevel") or 0, lua_str(how),
+                        (", from = " + lua_str(frm)) if frm else "",
+                        lua_str(it.get("name") or ""),
+                        lua_str(it.get("quality") or "common"),
+                        (", slot = " + lua_str(it["slot"])) if it.get("slot") else "",
+                        (", stats = { " + ", ".join(bits) + " }") if bits else ""))
         if not rows:
             continue
         order.append(name)

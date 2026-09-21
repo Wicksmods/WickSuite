@@ -706,6 +706,32 @@ if CA then
     client:Apply()
     check(S.CVARS["cameraDistanceMaxZoomFactor"] == "1", "and off puts it back")
 
+    -- A miss must not be remembered. The console variables were not
+    -- readable when this module first applied, and caching that meant
+    -- the option did nothing for the rest of the session.
+    client.zoomName, client.zoomWas, client.found, client.pushed = nil, nil, nil, nil
+    S.CVARS["cameraDistanceMaxZoomFactor"] = nil
+    check(client:ZoomCVar() == nil, "no camera variable, nothing to do")
+    S.CVARS["cameraDistanceMaxZoomFactor"] = "1"
+    check(client:ZoomCVar() == "cameraDistanceMaxZoomFactor",
+        "and it is found once the client will answer")
+
+    -- The other spelling, for the Classic side of this client's family.
+    client.zoomName, client.zoomWas, client.found = nil, nil, nil
+    S.CVARS["cameraDistanceMaxZoomFactor"] = nil
+    S.CVARS["cameraDistanceMaxFactor"] = "1"
+    S.CVAR_CEILING["cameraDistanceMaxFactor"] = 3.4
+    db.maxCameraZoom = true
+    client:Apply()
+    check(tonumber(S.CVARS["cameraDistanceMaxFactor"]) == 3.4,
+        "the Classic spelling works too, at its own ceiling: "
+        .. tostring(S.CVARS["cameraDistanceMaxFactor"]))
+    db.maxCameraZoom = false
+    client:Apply()
+    S.CVARS["cameraDistanceMaxFactor"] = nil
+    S.CVARS["cameraDistanceMaxZoomFactor"] = "1"
+    client.zoomName, client.zoomWas, client.found = nil, nil, nil
+
     check(S.CVARS["Sound_EnableSoundWhenGameIsInBG"] ~= "1", "background sound is off until asked")
     db.soundInBackground = true
     client:Apply()
