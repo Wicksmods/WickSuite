@@ -470,8 +470,8 @@ end
 
 io.write("== Comforts ==\n")
 
-S.loadAddon(ADDONS_DIR .. "/WicksComforts", "WicksComforts",
-    { "Core.lua", "Minimap.lua", "Tooltips.lua", "Loot.lua", "Vendor.lua", "Fixes.lua" })
+local CNS = S.loadAddon(ADDONS_DIR .. "/WicksComforts", "WicksComforts",
+    { "Core.lua", "Minimap.lua", "Tooltips.lua", "Loot.lua", "Vendor.lua", "Fixes.lua", "Frames.lua" })
 S.fire("ADDON_LOADED", "WicksComforts")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -487,6 +487,36 @@ if CA then
     for k, v in pairs(db) do if v == true then onCount = onCount + 1 end end
     check(onCount == 1 and db.clientFixes == true, "only the client-error fix starts on")
     check(_G.LFGWhoListFrame ~= nil and _G.LFGWhoListFrame.wicksStub, "the missing group finder frame is stood in for")
+
+    -- Health bars. Blizzard paints every one the same green; this
+    -- colours the frames its own class-colour setting leaves out.
+    local frames = CNS.modules.frames
+    local bar = S.newMock("StatusBar")
+    CLASS = "ROGUE"
+    UnitFrameHealthBar_Update(bar, "player")
+    check(bar.__color and bar.__color[2] == 1 and bar.__color[1] == 0,
+        "off by default, the bar stays Blizzard's green")
+
+    db.classColorHealth = true
+    CNS.Apply()
+    UnitFrameHealthBar_Update(bar, "player")
+    local c = RAID_CLASS_COLORS.ROGUE
+    check(bar.__color and math.abs(bar.__color[1] - c.r) < 0.01,
+        "switched on, a rogue's bar is rogue coloured")
+
+    -- An NPC has no class, so it keeps the colour Blizzard chose.
+    S.IS_PLAYER = { target = false }
+    UnitFrameHealthBar_Update(bar, "target")
+    check(bar.__color[1] == 0 and bar.__color[2] == 1, "a creature is left green")
+    S.IS_PLAYER = nil
+
+    -- Moving frames is Edit Mode's job, not ours.
+    _G.EditModeManagerFrame = S.newMock("Frame")
+    _G.EditModeManagerFrame.CanEnterEditMode = function() return true end
+    _G.ShowUIPanel = function(f) S.SHOWN_PANEL = f end
+    check(frames:OpenEditMode(), "the Edit Mode button opens Blizzard's own")
+    check(S.SHOWN_PANEL == _G.EditModeManagerFrame, "and opens the right frame")
+    db.classColorHealth = false
     check(Minimap.__maskTex == nil, "the minimap is untouched until asked")
 
     db.squareMinimap = true

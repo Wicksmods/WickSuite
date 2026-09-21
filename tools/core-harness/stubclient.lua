@@ -349,6 +349,23 @@ INTELLECT_BREAK = 20
 MANA_PER_INTELLECT = 15
 ARMOR_PER_AGILITY = 2
 
+-- Unit frames, enough of them to check what gets painted what colour.
+function UnitIsPlayer(unit) return S.IS_PLAYER == nil or S.IS_PLAYER[unit] ~= false end
+function UnitIsConnected() return true end
+RAID_CLASS_COLORS = RAID_CLASS_COLORS or {}
+function UnitFrameHealthBar_Update(bar, unit)
+    if not bar then return end
+    bar.unit = unit
+    bar:SetStatusBarColor(0, 1, 0)      -- the flat green Blizzard uses
+end
+function UnitFrameHealthBar_OnValueChanged(bar) end
+function hooksecurefunc(name, fn)
+    local orig = _G[name]
+    if type(orig) ~= "function" then return end
+    _G[name] = function(...) local r = { orig(...) } fn(...) return unpack(r) end
+end
+PlayerFrame = PlayerFrame or nil
+
 function UnitCreatureType(unit)
     if unit == "target" then return S.TARGET_TYPE or "Beast" end
     return "Beast"
