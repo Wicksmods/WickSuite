@@ -488,26 +488,44 @@ if CA then
     check(onCount == 1 and db.clientFixes == true, "only the client-error fix starts on")
     check(_G.LFGWhoListFrame ~= nil and _G.LFGWhoListFrame.wicksStub, "the missing group finder frame is stood in for")
 
-    -- Health bars. Blizzard paints every one the same green; this
-    -- colours the frames its own class-colour setting leaves out.
     local frames = CNS.modules.frames
-    local bar = S.newMock("StatusBar")
-    CLASS = "ROGUE"
-    UnitFrameHealthBar_Update(bar, "player")
-    check(bar.__color and bar.__color[2] == 1 and bar.__color[1] == 0,
-        "off by default, the bar stays Blizzard's green")
+    S.UNITS = { target = true }
+
+    -- Health bars. Hooking UnitFrameHealthBar_Update looked right and
+    -- did nothing in game, because Blizzard's callers reach it through a
+    -- local. Their update skips a bar whose lockColor is set, so that is
+    -- the door, and it is the one the target frame proved we needed.
+    CLASS = "PALADIN"
+    _G.TargetFrame = S.newMock("Frame")
+    _G.TargetFrame.healthbar = S.newMock("StatusBar")
+    _G.TargetFrame.healthbar.unit = "target"
+    _G.TargetFrame.healthbar:SetStatusBarColor(0, 1, 0)
+
+    db.classColorHealth = false
+    frames:Repaint()
+    check(_G.TargetFrame.healthbar.__color[2] == 1 and _G.TargetFrame.healthbar.__color[1] == 0,
+        "off by default, a paladin target stays Blizzard's green")
 
     db.classColorHealth = true
-    CNS.Apply()
-    UnitFrameHealthBar_Update(bar, "player")
-    local c = RAID_CLASS_COLORS.ROGUE
-    check(bar.__color and math.abs(bar.__color[1] - c.r) < 0.01,
-        "switched on, a rogue's bar is rogue coloured")
+    frames:Repaint()
+    local pal = RAID_CLASS_COLORS.PALADIN
+    check(math.abs(_G.TargetFrame.healthbar.__color[1] - pal.r) < 0.01,
+        "switched on, the bar takes the class colour")
+    check(_G.TargetFrame.healthbar.lockColor == true,
+        "and is locked so their own update will not paint over it")
 
-    -- An NPC has no class, so it keeps the colour Blizzard chose.
+    -- Turning it off has to hand the bar back as it was found.
+    db.classColorHealth = false
+    frames:Repaint()
+    check(not _G.TargetFrame.healthbar.lockColor, "off again releases the lock")
+    check(_G.TargetFrame.healthbar.__color[2] == 1, "and puts the green back")
+    db.classColorHealth = true
+
+    -- A creature has no class, so nothing is touched.
     S.IS_PLAYER = { target = false }
-    UnitFrameHealthBar_Update(bar, "target")
-    check(bar.__color[1] == 0 and bar.__color[2] == 1, "a creature is left green")
+    _G.TargetFrame.healthbar:SetStatusBarColor(0, 1, 0)
+    frames:Repaint()
+    check(_G.TargetFrame.healthbar.__color[2] == 1, "a creature is left alone")
     S.IS_PLAYER = nil
 
     -- Moving frames is Edit Mode's job, not ours.
@@ -520,24 +538,28 @@ if CA then
     -- one; ours may not, and anything we call inherits our taint. Asking
     -- their update to redraw a bar threw inside their text formatter,
     -- blaming us. So our repaint must never go through their function.
+    S.UNITS = { target = true, player = true }
     local called = 0
     local realUpdate = UnitFrameHealthBar_Update
     UnitFrameHealthBar_Update = function(...) called = called + 1 return realUpdate(...) end
     _G.PlayerFrame = S.newMock("Frame")
     _G.PlayerFrame.healthbar = S.newMock("StatusBar")
     _G.PlayerFrame.healthbar.unit = "player"
+    -- The player's own bar is permanently lockColor, so honouring a lock
+    -- we did not set would mean never colouring the frame you look at most.
+    _G.PlayerFrame.healthbar.lockColor = true
+    _G.PlayerFrame.healthbar:SetStatusBarColor(0, 1, 0)
     frames:Apply()
     UnitFrameHealthBar_Update = realUpdate
     check(called == 0, "repainting never calls Blizzard's update, which would run tainted")
-    check(_G.PlayerFrame.healthbar.__color ~= nil, "but the bar is still coloured")
+    check(math.abs((_G.PlayerFrame.healthbar.__color[1] or 0) - pal.r) < 0.01,
+        "a lock we did not set does not stop us colouring the player frame")
 
-    -- The player frame's bar is permanently lockColor, so honouring that
-    -- would mean never colouring the frame you look at most.
-    _G.PlayerFrame.healthbar.lockColor = true
-    _G.PlayerFrame.healthbar:SetStatusBarColor(0, 1, 0)
+    -- Switching off has to hand back the lock it came with, not ours.
+    db.classColorHealth = false
     frames:Repaint()
-    check(_G.PlayerFrame.healthbar.__color[1] ~= 0, "lockColor does not stop us: "
-        .. tostring(_G.PlayerFrame.healthbar.__color[1]))
+    check(_G.PlayerFrame.healthbar.lockColor == true,
+        "off again leaves a pre-existing lock exactly as it was found")
 
     db.classColorHealth = false
     check(Minimap.__maskTex == nil, "the minimap is untouched until asked")

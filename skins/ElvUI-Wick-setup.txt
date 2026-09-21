@@ -1,0 +1,105 @@
+==============================================================
+WICK'S RAID BOARD — ELVUI SKIN  (manual setup, ~5 minutes)
+==============================================================
+
+This is a step-by-step manual config — NOT a paste-in profile
+string. A real `!E1!...` import would need ElvUI's serialize +
+deflate + base64 pipeline; saved for a future pass.
+
+Open ElvUI's config first:    /ec      (or /elvui)
+
+==============================================================
+LOCKED WICK PALETTE — copy these hex codes
+==============================================================
+
+  FEL        #4FC778    fel-green accent
+  VOID       #0D0A14    panel background
+  SHADOW     #171124    secondary panel / header
+  BORDER     #383058    1px muted-purple borders
+  OFFWHITE   #D4C8A1    primary text
+
+==============================================================
+STEP 1 — GENERAL > MEDIA
+==============================================================
+
+  Borders:                  Default (1px)
+  Status Bar Texture:       ElvUI Norm
+                            (flat texture; matches Wick's
+                             "no gradient" panel rule)
+  Custom Border Color:      ON
+    Color:                  #383058    (BORDER)
+
+==============================================================
+STEP 2 — GENERAL > COLORS
+==============================================================
+
+  Backdrop Color:           #0D0A14    (VOID)        alpha 0.97
+  Backdrop Fade Color:      #171124    (SHADOW)      alpha 1.00
+  Border Color:             #383058    (BORDER)
+  Value Color:              #D4C8A1    (OFFWHITE)
+  Mouseover Highlight:      #4FC778    (FEL)         alpha 0.55
+
+==============================================================
+STEP 3 — UNIT FRAMES > GENERAL OPTIONS > COLORS
+==============================================================
+
+  Class Colored Health:     OFF
+  Health:                   #171124    (SHADOW)
+  Health Background:        #0D0A14    (VOID)
+  Power Background:         #0D0A14    (VOID)
+  Casting Bar Color:        #383058    (BORDER)
+  Casting Bar Backdrop:     #0D0A14    (VOID)
+
+  (re-enable Class Colored if you prefer per-class HP fills —
+   the rest of the Wick palette still applies as backdrop.)
+
+==============================================================
+STEP 4 — ACTION BARS
+==============================================================
+
+  Backdrop Color:           #0D0A14    (VOID)
+  Border:                   Default
+  Border Color:             #383058    (BORDER)
+  Empty-button Background:  #0D0A14    (VOID)        alpha 0.6
+
+==============================================================
+STEP 5 — CHAT
+==============================================================
+
+  Panel Backdrop Color:     #0D0A14    (VOID)        alpha 0.85
+  Tab Selected Color:       #4FC778    (FEL)
+  Tab Unselected Color:     #D4C8A1    (OFFWHITE)    alpha 0.55
+
+==============================================================
+STEP 6 — DATA TEXTS / MINIMAP / NAMEPLATES
+==============================================================
+
+  Data Text Backdrop:       #171124    (SHADOW)
+  Minimap Border Color:     #383058    (BORDER)
+  Nameplate Border:         #383058    (BORDER)
+  Nameplate Backdrop:       #0D0A14    (VOID)        alpha 0.55
+
+==============================================================
+WHAT THIS SKIN DOES NOT INCLUDE
+==============================================================
+
+  - Fel-green L-bracket corner accents.
+    Wick's signature chrome element. ElvUI has no
+    "draw arbitrary decoration at corner" hook, so brackets
+    stay a Wick-suite-only feature.
+  - 35%-alpha fel-green underline in headers.
+    Same reason. Live in Wick's own addons.
+
+  These are stylistic, not functional — the palette + flat-panel
+  + 1px-border rules carry the brand identity on their own.
+
+==============================================================
+RELOAD UI WHEN DONE
+==============================================================
+
+  /reloadui      (or /rl)
+
+  All ElvUI panels should now show: void backgrounds,
+  muted-purple borders, fel-green accents, off-white text.
+
+==============================================================

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wick's Raid Board — Encounter Maps</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d0a14;
+    color: #D4C8A1;
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 32px;
+  }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    font-size: 28px;
+    color: #D4C8A1;
+    margin-bottom: 4px;
+  }
+  .sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #7A6E58;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .instructions {
+    background: #171124;
+    border: 1px solid #383058;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #D4C8A1;
+    max-width: 860px;
+  }
+  .instructions b { color: #4FC778; }
+  .instructions code {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    background: #0d0a14;
+    padding: 2px 6px;
+    border: 1px solid #383058;
+    color: #4FC778;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: #4FC778;
+    text-transform: uppercase;
+    margin: 36px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 860px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #383058;
+  }
+  .map-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .map-cell { display: flex; flex-direction: column; align-items: flex-start; }
+  .map-dim {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #7A6E58;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* -----------------------------------------------------------
+     Encounter card: 320×320 square, captured by igrab.
+     Element id → output filename: magtheridon.png, maulgar.png, …
+     Layout per card:
+       row 1 (28px): boss name (left)  ·  instance (right)
+       row 2 (~248px): SVG diagram (room + boss + markers + edge callouts)
+       row 3 (44px): 1–2 tactical callouts (fel-green bullets)
+     ----------------------------------------------------------- */
+  .encounter-map {
+    width: 320px;
+    height: 320px;
+    background:
+      radial-gradient(ellipse at center,
+        rgba(79, 199, 120, 0.04) 0%,
+        rgba(13, 10, 20, 0.0) 60%),
+      #0D0A14;
+    position: relative;
+    border: 1px solid #383058;
+    overflow: hidden;
+  }
+  /* Fel-green L-bracket corners (10px arms, 2px thick) */
+  .encounter-map .br-tl, .encounter-map .br-tr, .encounter-map .br-bl, .encounter-map .br-br {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+  }
+  .encounter-map .br-tl { top: 0; left: 0;     border-top: 2px solid #4FC778; border-left: 2px solid #4FC778; }
+  .encounter-map .br-tr { top: 0; right: 0;    border-top: 2px solid #4FC778; border-right: 2px solid #4FC778; }
+  .encounter-map .br-bl { bottom: 0; left: 0;  border-bottom: 2px solid #4FC778; border-left: 2px solid #4FC778; }
+  .encounter-map .br-br { bottom: 0; right: 0; border-bottom: 2px solid #4FC778; border-right: 2px solid #4FC778; }
+
+  .encounter-map .top-row {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    height: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .encounter-map .boss-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: #D4C8A1;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .encounter-map .instance-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: #4FC778;
+    text-transform: uppercase;
+  }
+  .encounter-map svg.diagram {
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 320px;
+    height: 244px;
+  }
+  .encounter-map .callouts {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+    color: #D4C8A1;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .encounter-map .callouts .b { color: #4FC778; margin-right: 4px; }
+
+  /* Stub variant — text only, for encounters without a positional diagram yet. */
+  .encounter-map.stub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .encounter-map.stub .stub-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    color: #D4C8A1;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 0 24px;
+    line-height: 1.15;
+  }
+  .encounter-map.stub .stub-line {
+    height: 1px; width: 60px; background: #4FC778; opacity: 0.5; margin-bottom: 10px;
+  }
+  .encounter-map.stub .stub-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: #4FC778;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<h1>Wick's Raid Board · Encounter Maps</h1>
+<div class="sub">320×320 positional cards · Phase 1 · v2</div>
+
+<div class="instructions">
+  <b>Format:</b> 320×320 square, room outline + boss silhouette + position markers + edge callouts. Inspired by the original sheet inserts, polished with the Wick brand.<br/>
+  <b>Export:</b> <code>node ~/.claude/tools/igrab/igrab.mjs WickSuite/encounter-maps.html WickSuite/images/maps --selector=".encounter-map"</code><br/>
+  <b>Convert:</b> <code>node ~/.claude/tools/blp/blpify.mjs WickSuite/images/maps/</code> (after dropping BLPConverter.exe in the tool folder).
+</div>
+
+<!-- ============================================================
+     PRIORITY 1 — MAGTHERIDON
+     5 cubes around the boss in a pentagon. Cube colors match
+     Data/Encounters.lua: A #FFFFFF · B #C73030 · C #3070C0 · D #E0A020 · E #4FC778
+     ============================================================ -->
+<div class="section-label">Priority · Positional diagrams</div>
+<div class="map-row">
+
+  <div class="map-cell">
+    <div class="map-dim">magtheridon · 320×320</div>
+    <div class="encounter-map" id="magtheridon">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="top-row">
+        <div class="boss-name">Magtheridon</div>
+        <div class="instance-tag">Mag's Lair · P2+</div>
+      </div>
+      <svg class="diagram" viewBox="0 0 320 244" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="magGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4FC778" stop-opacity="0.18"/>
+            <stop offset="60%" stop-color="#4FC778" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#4FC778" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="cubeShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Circular room outline -->
+        <circle cx="160" cy="118" r="100" fill="url(#magGlow)" stroke="#383058" stroke-width="1"/>
+        <circle cx="160" cy="118" r="100" fill="none" stroke="#4FC778" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.3"/>
+
+        <!-- Mag silhouette: stylized pit lord (horns above, broad body) -->
+        <g transform="translate(160, 118)">
+          <!-- Horns -->
+          <path d="M -16,-22 Q -22,-32 -10,-30 L -6,-14" fill="#171124" stroke="#4FC778" stroke-width="1.2"/>
+          <path d="M  16,-22 Q  22,-32  10,-30 L  6,-14" fill="#171124" stroke="#4FC778" stroke-width="1.2"/>
+          <!-- Body -->
+          <ellipse cx="0" cy="2" rx="22" ry="18" fill="#171124" stroke="#4FC778" stroke-width="1.5" filter="url(#cubeShadow)"/>
+          <!-- Eyes -->
+          <circle cx="-7" cy="-2" r="2" fill="#C73030"/>
+          <circle cx="7"  cy="-2" r="2" fill="#C73030"/>
+          <text x="0" y="32" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="9" fill="#7A6E58" letter-spacing="0.2em">MAG</text>
+        </g>
+
+        <!-- 5 cubes positioned at pentagon points around Mag -->
+        <!-- Cube A (white) — N (top) -->
+        <g transform="translate(160, 30)">
+          <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#FFFFFF" stroke="#D4C8A1" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#0D0A14">A</text>
+        </g>
+        <!-- Cube B (red) — NE -->
+        <g transform="translate(258, 70)">
+          <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#C73030" stroke="#4FC778" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#0D0A14">B</text>
+        </g>
+        <!-- Cube C (blue) — SE -->
+        <g transform="translate(232, 192)">
+          <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#3070C0" stroke="#4FC778" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#D4C8A1">C</text>
+        </g>
+        <!-- Cube D (yellow) — SW -->
+        <g transform="translate(88, 192)">
+          <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#E0A020" stroke="#4FC778" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#0D0A14">D</text>
+        </g>
+        <!-- Cube E (fel green) — NW -->
+        <g transform="translate(62, 70)">
+          <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#4FC778" stroke="#D4C8A1" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#0D0A14">E</text>
+        </g>
+
+        <!-- Connector channels: hint at "all 5 channel together" -->
+        <g stroke="#4FC778" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.45" fill="none">
+          <line x1="160" y1="46"  x2="160" y2="98"/>
+          <line x1="244" y1="78"  x2="180" y2="108"/>
+          <line x1="218" y1="180" x2="178" y2="132"/>
+          <line x1="102" y1="180" x2="142" y2="132"/>
+          <line x1="76"  y1="78"  x2="140" y2="108"/>
+        </g>
+      </svg>
+      <div class="callouts">
+        <div><span class="b">›</span> Stand against wall behind your cube — dodge Quake</div>
+        <div><span class="b">›</span> 5 cubes channel together = interrupt Blast Nova</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PRIORITY 2 — HIGH KING MAULGAR
+       5 mobs across the room with raid-target markers + kill-order numbers.
+       Markers from Data/Encounters.lua:
+         Maulgar=square · Blindeye=skull · Krosh=triangle · Kiggler=diamond · Olm=cross
+       ============================================================ -->
+  <div class="map-cell">
+    <div class="map-dim">maulgar · 320×320</div>
+    <div class="encounter-map" id="maulgar">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="top-row">
+        <div class="boss-name">High King Maulgar</div>
+        <div class="instance-tag">Gruul's · Council</div>
+      </div>
+      <svg class="diagram" viewBox="0 0 320 244" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="maulGlow" cx="50%" cy="40%" r="60%">
+            <stop offset="0%"   stop-color="#4FC778" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#4FC778" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Room: rectangular cavern -->
+        <rect x="20" y="20" width="280" height="180" rx="14" fill="url(#maulGlow)" stroke="#383058" stroke-width="1"/>
+
+        <!-- 5 mobs across the room -->
+        <!-- 1. Krosh (triangle) — far left -->
+        <g transform="translate(60, 100)">
+          <polygon points="0,-22 19,16 -19,16" fill="#171124" stroke="#AAF0A0" stroke-width="2"/>
+          <text x="0" y="-1" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="13" fill="#AAF0A0">1</text>
+          <text x="0" y="40" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.15em">KROSH</text>
+          <text x="0" y="52" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#7A6E58" letter-spacing="0.15em">(MAGE TANK)</text>
+        </g>
+        <!-- 2. Olm (red X / cross) -->
+        <g transform="translate(120, 100)">
+          <g stroke="#E25050" stroke-width="4" fill="none" stroke-linecap="round">
+            <line x1="-15" y1="-15" x2="15" y2="15"/>
+            <line x1="15"  y1="-15" x2="-15" y2="15"/>
+          </g>
+          <text x="0" y="40" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="13" fill="#E25050">2</text>
+          <text x="0" y="52" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.15em">OLM</text>
+        </g>
+        <!-- 3. Kiggler (yellow diamond) -->
+        <g transform="translate(180, 100)">
+          <polygon points="0,-20 20,0 0,20 -20,0" fill="#171124" stroke="#E0C050" stroke-width="2"/>
+          <text x="0" y="40" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="13" fill="#E0C050">3</text>
+          <text x="0" y="52" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.15em">KIGGLER</text>
+        </g>
+        <!-- 4. Blindeye (skull) -->
+        <g transform="translate(240, 100)">
+          <circle cx="0" cy="0" r="18" fill="#171124" stroke="#D4C8A1" stroke-width="2"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="14" fill="#D4C8A1">☠</text>
+          <text x="0" y="40" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="13" fill="#D4C8A1">4</text>
+          <text x="0" y="52" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.15em">BLINDEYE</text>
+        </g>
+        <!-- 5. Maulgar (blue square) — far right but elevated -->
+        <g transform="translate(160, 168)">
+          <rect x="-19" y="-19" width="38" height="38" rx="3" fill="#171124" stroke="#5090E0" stroke-width="2.5"/>
+          <text x="0" y="6" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="16" fill="#5090E0">5</text>
+        </g>
+        <text x="160" y="195" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.15em">MAULGAR</text>
+
+        <!-- Entrance arrow from below -->
+        <g transform="translate(160, 230)" opacity="0.5">
+          <path d="M 0,-6 L -6,4 L 6,4 Z" fill="#4FC778"/>
+          <text x="0" y="14" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#7A6E58" letter-spacing="0.2em">ENTRANCE</text>
+        </g>
+      </svg>
+      <div class="callouts">
+        <div><span class="b">›</span> Kill order 1→5 · NEVER dispel Krosh's Spell Shield</div>
+        <div><span class="b">›</span> Tanks pre-positioned — pull on signal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PRIORITY 3 — NETHERSPITE
+       3 portals on the east wall emit Red/Green/Blue beams across the room.
+       Tank/Heal/DPS rotations soak respective beams.
+       Banish phase = run to opposite (west) end.
+       ============================================================ -->
+  <div class="map-cell">
+    <div class="map-dim">netherspite · 320×320</div>
+    <div class="encounter-map" id="netherspite">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="top-row">
+        <div class="boss-name">Netherspite</div>
+        <div class="instance-tag">Karazhan · Beam Phase</div>
+      </div>
+      <svg class="diagram" viewBox="0 0 320 244" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="redBeam" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#C73030" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#C73030" stop-opacity="0.15"/>
+          </linearGradient>
+          <linearGradient id="greenBeam" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#4FC778" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#4FC778" stop-opacity="0.15"/>
+          </linearGradient>
+          <linearGradient id="blueBeam" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#3070C0" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#3070C0" stop-opacity="0.15"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Room outline -->
+        <rect x="20" y="20" width="280" height="180" rx="10" fill="none" stroke="#383058" stroke-width="1"/>
+        <line x1="60" y1="20" x2="60" y2="200" stroke="#383058" stroke-dasharray="3 3" stroke-width="0.5"/>
+        <text x="40" y="14" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#7A6E58" letter-spacing="0.2em">BANISH</text>
+
+        <!-- Beams from east portals -->
+        <line x1="280" y1="55"  x2="60" y2="55"  stroke="url(#redBeam)"   stroke-width="3"/>
+        <line x1="280" y1="110" x2="60" y2="110" stroke="url(#greenBeam)" stroke-width="3"/>
+        <line x1="280" y1="165" x2="60" y2="165" stroke="url(#blueBeam)"  stroke-width="3"/>
+
+        <!-- 3 portals on east wall -->
+        <g transform="translate(284, 55)">
+          <circle cx="0" cy="0" r="11" fill="#171124" stroke="#C73030" stroke-width="2"/>
+          <circle cx="0" cy="0" r="5"  fill="#C73030"/>
+        </g>
+        <g transform="translate(284, 110)">
+          <circle cx="0" cy="0" r="11" fill="#171124" stroke="#4FC778" stroke-width="2"/>
+          <circle cx="0" cy="0" r="5"  fill="#4FC778"/>
+        </g>
+        <g transform="translate(284, 165)">
+          <circle cx="0" cy="0" r="11" fill="#171124" stroke="#3070C0" stroke-width="2"/>
+          <circle cx="0" cy="0" r="5"  fill="#3070C0"/>
+        </g>
+
+        <!-- Spite in middle -->
+        <g transform="translate(170, 110)">
+          <ellipse cx="0" cy="0" rx="26" ry="14" fill="#171124" stroke="#4FC778" stroke-width="1.5"/>
+          <ellipse cx="0" cy="0" rx="26" ry="14" fill="none"   stroke="#4FC778" stroke-width="0.5" stroke-dasharray="1 2"/>
+          <text x="0" y="3" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="9" fill="#D4C8A1" letter-spacing="0.1em">SPITE</text>
+        </g>
+
+        <!-- Role labels at west end of each beam -->
+        <g font-family="Space Mono, monospace" font-size="9" letter-spacing="0.2em">
+          <text x="74" y="48"  fill="#E25050">TANKS  ◄</text>
+          <text x="74" y="103" fill="#4FC778">HEALS  ◄</text>
+          <text x="74" y="158" fill="#5090E0">DPS    ◄</text>
+        </g>
+      </svg>
+      <div class="callouts">
+        <div><span class="b">›</span> 60s beam · 30s banish · alternates</div>
+        <div><span class="b">›</span> Banish: all run west · void zones spawn</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PRIORITY 4 — PRINCE MALCHEZAAR
+       Circular room. Outer ring path (CW). Don't cross center.
+       Infernals spawn periodically — kite around the perimeter.
+       ============================================================ -->
+  <div class="map-cell">
+    <div class="map-dim">prince · 320×320</div>
+    <div class="encounter-map" id="prince">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="top-row">
+        <div class="boss-name">Prince Malchezaar</div>
+        <div class="instance-tag">Karazhan · Infernal Ring</div>
+      </div>
+      <svg class="diagram" viewBox="0 0 320 244" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="princeStack" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#4FC778" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#4FC778" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="princeBoss" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#C73030" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#C73030" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Room outline -->
+        <rect x="20" y="20" width="280" height="180" rx="10" fill="none" stroke="#383058" stroke-width="1"/>
+
+        <!-- Boss zone glow (top) -->
+        <ellipse cx="160" cy="58" rx="80" ry="34" fill="url(#princeBoss)"/>
+        <!-- Raid stack glow (bottom near door) -->
+        <ellipse cx="160" cy="172" rx="46" ry="22" fill="url(#princeStack)"/>
+
+        <!-- Max range dashed line — ~35 yards between stack and Prince -->
+        <line x1="60" y1="118" x2="260" y2="118" stroke="#4FC778" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.5"/>
+        <text x="160" y="115" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#4FC778" letter-spacing="0.25em" opacity="0.85">— MAX RANGE —</text>
+
+        <!-- Prince silhouette: dual-axe knight at top of room -->
+        <g transform="translate(160, 60)">
+          <rect x="-12" y="-14" width="24" height="28" rx="2" fill="#171124" stroke="#C73030" stroke-width="1.5"/>
+          <!-- Axes -->
+          <line x1="-22" y1="-12" x2="-12" y2="-2"  stroke="#D4C8A1" stroke-width="2"/>
+          <line x1="22"  y1="-12" x2="12"  y2="-2"  stroke="#D4C8A1" stroke-width="2"/>
+          <polygon points="-26,-16 -22,-12 -18,-18" fill="#D4C8A1"/>
+          <polygon points=" 26,-16  22,-12  18,-18" fill="#D4C8A1"/>
+          <text x="0" y="24" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="8" fill="#7A6E58" letter-spacing="0.2em">PRINCE</text>
+        </g>
+
+        <!-- Tank position between Prince and raid (closer to Prince) -->
+        <g transform="translate(160, 96)">
+          <circle cx="0" cy="0" r="5" fill="#171124" stroke="#5090E0" stroke-width="1.5"/>
+          <text x="14" y="3" font-family="Space Mono, monospace" font-size="7" fill="#5090E0" letter-spacing="0.2em">TANK</text>
+        </g>
+
+        <!-- Raid stack at the door (max range from Prince) -->
+        <g transform="translate(160, 172)">
+          <!-- multiple overlapping circles to suggest a stack -->
+          <circle cx="-6" cy="-2" r="6" fill="#171124" stroke="#4FC778" stroke-width="1.2" opacity="0.85"/>
+          <circle cx=" 4" cy="-3" r="6" fill="#171124" stroke="#4FC778" stroke-width="1.2" opacity="0.85"/>
+          <circle cx="-2" cy=" 5" r="6" fill="#171124" stroke="#4FC778" stroke-width="1.2" opacity="0.85"/>
+          <circle cx=" 8" cy=" 4" r="6" fill="#171124" stroke="#4FC778" stroke-width="1.2" opacity="0.85"/>
+          <circle cx="-12" cy="2" r="6" fill="#171124" stroke="#4FC778" stroke-width="1.2" opacity="0.85"/>
+          <text x="0" y="22" text-anchor="middle" font-family="Space Mono, monospace" font-size="8" fill="#D4C8A1" letter-spacing="0.2em">RAID STACK</text>
+        </g>
+
+        <!-- Door / entrance at bottom -->
+        <g transform="translate(160, 200)">
+          <rect x="-22" y="0" width="44" height="6" fill="#171124" stroke="#4FC778" stroke-width="1"/>
+          <text x="0" y="-22" text-anchor="middle" font-family="Space Mono, monospace" font-size="7" fill="#7A6E58" letter-spacing="0.3em">↑ DOOR ↑</text>
+        </g>
+
+        <!-- Infernal markers (random spawns — illustrative) -->
+        <g opacity="0.55">
+          <circle cx="80"  cy="60" r="5" fill="#C73030" stroke="#171124" stroke-width="1"/>
+          <circle cx="240" cy="84" r="5" fill="#C73030" stroke="#171124" stroke-width="1"/>
+          <circle cx="100" cy="150" r="5" fill="#C73030" stroke="#171124" stroke-width="1"/>
+        </g>
+        <text x="298" y="32" text-anchor="end" font-family="Space Mono, monospace" font-size="7" fill="#C73030" letter-spacing="0.2em" opacity="0.8">INFERNALS ◯</text>
+      </svg>
+      <div class="callouts">
+        <div><span class="b">›</span> Stack at door · max range from Prince</div>
+        <div><span class="b">›</span> Move only if infernal drops on stack</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     STUBS — text-only square cards for the other 11 encounters.
+     Same 320×320 size; replace with full positional designs as needed.
+     ============================================================ -->
+<div class="section-label">Stubs · Text-only for the remaining 11</div>
+<div class="map-row">
+
+  <div class="map-cell">
+    <div class="map-dim">attumen · 320×320</div>
+    <div class="encounter-map stub" id="attumen">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Attumen<br/>the Huntsman</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Mount at 25%</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">moroes · 320×320</div>
+    <div class="encounter-map stub" id="moroes">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Moroes</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · 4 CC adds</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">maiden · 320×320</div>
+    <div class="encounter-map stub" id="maiden">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Maiden of Virtue</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Repentance</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">opera_oz · 320×320</div>
+    <div class="encounter-map stub" id="opera_oz">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Opera<br/>Wizard of Oz</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · The Crone</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">opera_rj · 320×320</div>
+    <div class="encounter-map stub" id="opera_rj">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Opera<br/>Romulo & Julianne</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · 10s kill window</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">opera_wolf · 320×320</div>
+    <div class="encounter-map stub" id="opera_wolf">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Opera<br/>Big Bad Wolf</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Riding Hood</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">nightbane · 320×320</div>
+    <div class="encounter-map stub" id="nightbane">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Nightbane</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Air Phase</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">curator · 320×320</div>
+    <div class="encounter-map stub" id="curator">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">The Curator</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Evocate</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">illhoof · 320×320</div>
+    <div class="encounter-map stub" id="illhoof">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Terestian Illhoof</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Demon Chains</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">aran · 320×320</div>
+    <div class="encounter-map stub" id="aran">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Shade of Aran</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Karazhan · Flame Wreath</div>
+    </div>
+  </div>
+
+  <div class="map-cell">
+    <div class="map-dim">gruul · 320×320</div>
+    <div class="encounter-map stub" id="gruul">
+      <span class="br-tl"></span><span class="br-tr"></span><span class="br-bl"></span><span class="br-br"></span>
+      <div class="stub-name">Gruul<br/>the Dragonkiller</div>
+      <div class="stub-line"></div>
+      <div class="stub-tag">Gruul's Lair · Hurtful</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

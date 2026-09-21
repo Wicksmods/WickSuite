@@ -271,7 +271,7 @@ CLASS = "SHAMAN"
 local CLASS_NAMES = { SHAMAN = { "Shaman", 7 }, WARLOCK = { "Warlock", 9 }, DRUID = { "Druid", 11 }, HUNTER = { "Hunter", 3 }, ROGUE = { "Rogue", 4 } }
 function UnitClass() local c = CLASS_NAMES[CLASS] or { CLASS, 0 } return c[1], CLASS, c[2] end
 function UnitRace() return "Orc", "Orc", 2 end
-function UnitExists(u) return u == "player" or u == "pet" end
+function UnitExists(u) return u == "player" or u == "pet" or (S.HAS_TARGET and u == "target") or (S.UNITS and S.UNITS[u]) or false end
 function UnitCreatureFamily(unit)
     if unit == "target" then return S.TARGET_FAMILY end
     return S.PET_FAMILY or (CLASS == "HUNTER" and "Wolf" or "Imp")
