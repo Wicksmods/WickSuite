@@ -179,6 +179,35 @@ ns.Doll:Clear(7)
 check(ns.Doll.trying[7] == nil, "right-click puts it back")
 check(next(ns.Doll:Deltas()) == nil, "and the deltas go with it")
 
+-- Item data arrives from the server a few at a time. Whatever had not
+-- turned up when the list was drawn used to sit there reading "item
+-- 9454" until you closed and reopened the window.
+ns.UI:Select("browse")
+ns.UI.panes.browse.open["The Deadmines"] = true
+ns.UI:FillBrowse()
+local before
+for _, r in ipairs(ns.UI.panes.browse.rows or {}) do
+    if r:IsShown() and r.itemID == 5202 then before = r.left:GetText() end
+end
+check(before ~= nil, "the row is on screen")
+
+ns.UI.redrawQueued = nil
+S.fire("ITEM_DATA_LOAD_RESULT", 5202, true)
+check(ns.UI.redrawQueued == nil, "a late arrival triggers a redraw rather than being ignored")
+
+-- Arrivals come in floods, so the redraw is coalesced behind a flag.
+-- The stub runs timers the instant they are set, so the coalescing
+-- itself cannot be observed here; what can is that the flag stops a
+-- second redraw being queued while one is already waiting.
+local drew = 0
+local realFill = ns.UI.FillBrowse
+ns.UI.FillBrowse = function(self) drew = drew + 1 return realFill(self) end
+ns.UI.redrawQueued = true          -- pretend one is already pending
+for i = 1, 20 do S.fire("ITEM_DATA_LOAD_RESULT", 5202, true) end
+ns.UI.FillBrowse = realFill
+check(drew == 0, "arrivals are ignored while a redraw is already queued, got " .. drew)
+ns.UI.redrawQueued = nil
+
 S.CHAT = {}
 SlashCmdList.WICKSGEAR("browse")
 check(true, "/wgear browse does not error")
