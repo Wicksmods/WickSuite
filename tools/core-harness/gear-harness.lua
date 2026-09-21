@@ -114,6 +114,23 @@ rows = 0
 for _, r in ipairs(ns.UI.panes.browse.rows or {}) do if r:IsShown() then rows = rows + 1 end end
 check(rows > before, "opening a dungeon lists its loot: " .. before .. " to " .. rows)
 
+-- Gear the class cannot use has to be obvious at a glance. Muted grey
+-- against off-white reads as the same colour at this size, so it is
+-- darkened and the icon is desaturated too.
+-- Both of these really do drop in the Deadmines, so they appear in the
+-- list; the stub decides what they are made of.
+S.ITEMS[10399] = { equipLoc = "INVTYPE_CHEST", classID = 4, subClassID = 2 }  -- leather
+S.ITEMS[5202]  = { equipLoc = "INVTYPE_CHEST", classID = 4, subClassID = 3 }  -- call it mail
+ns.UI:FillBrowse()
+local dim, lit = 0, 0
+for _, r in ipairs(ns.UI.panes.browse.rows or {}) do
+    if r:IsShown() and r.itemID then
+        if r.dimmed then dim = dim + 1 else lit = lit + 1 end
+    end
+end
+check(lit > 0, "usable items stay lit, " .. lit .. " of them")
+check(dim > 0, "and the ones a rogue cannot wear are dimmed, " .. dim .. " of them")
+
 S.CHAT = {}
 SlashCmdList.WICKSGEAR("browse")
 check(true, "/wgear browse does not error")
