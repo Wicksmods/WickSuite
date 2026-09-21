@@ -140,6 +140,15 @@ S.LINK_TO_ID["|Hitem:old|h"] = 8888
 S.ITEMS[8888] = { equipLoc = "INVTYPE_LEGS", classID = 4, subClassID = 2,
                   stats = { ITEM_MOD_AGILITY_SHORT = 4 } }
 
+-- Right-clicking a row can ask to try something on before the Compare
+-- tab has ever been drawn, so there is no paperdoll yet to put it in.
+-- That is the order a real person hits first and it used to throw.
+check(ns.Doll.pane == nil, "nothing is built until the tab is needed")
+local okEarly, errEarly = pcall(function() return ns.Doll:TryOn(7719) end)
+check(okEarly, "trying a piece on before the tab exists does not error: " .. tostring(errEarly))
+check(ns.Doll.pane ~= nil, "it builds the paperdoll on demand instead")
+ns.Doll:ClearAll()
+
 ns.UI:Select("compare")
 check(ns.Doll.pane ~= nil, "the paperdoll builds")
 local slots = 0
