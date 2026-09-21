@@ -99,15 +99,19 @@ def main():
     out.append("")
     out.append("-- What each class may wear or wield, by item class and subclass.")
     out.append("-- A negative armour subclass is a cloak, ring, neck or trinket,")
-    out.append("-- which carries no restriction at all.")
+    out.append("-- which carries no restriction at all. armorAt is the level a")
+    out.append("-- class is trained in that armour type, for mail and plate at 40.")
     out.append("ns.PROFICIENCY = {")
     for key, p in weights["proficiency"].items():
         if key.startswith("_"):
             continue
-        out.append("    [%s] = { armor = { %s }, weapon = { %s } }," % (
+        at = p.get("armorAt") or {}
+        at_lua = ", ".join("[%s] = %d" % (sub, lvl) for sub, lvl in sorted(at.items()))
+        out.append("    [%s] = { armor = { %s }, weapon = { %s }%s }," % (
             lua_str(key),
             ", ".join(str(n) for n in p["armor"]),
-            ", ".join(str(n) for n in p["weapon"])))
+            ", ".join(str(n) for n in p["weapon"]),
+            (", armorAt = { " + at_lua + " }") if at_lua else ""))
     out.append("}")
     out.append("")
 

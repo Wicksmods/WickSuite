@@ -95,7 +95,15 @@ def main():
             # a positive subclass is a real cloth/leather/mail/plate check.
             if sub is None or sub <= 0:
                 return True
-            return sub in prof["armor"]
+            if sub not in prof["armor"]:
+                return False
+            # Mail and plate are trained at forty, so a level filter that
+            # only looks at the item's own requirement still hands a
+            # level twenty hunter a mail chest.
+            at = (prof.get("armorAt") or {}).get(str(sub))
+            if at and args.level and args.level < at:
+                return False
+            return True
         if cls == 2:
             return sub in prof["weapon"]
         return True   # anything else is not gear we are ranking

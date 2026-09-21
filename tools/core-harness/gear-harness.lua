@@ -256,6 +256,25 @@ ns.Doll:RefreshStats()
 -- A class that cannot use it is refused rather than silently accepted.
 check(not ns.Doll:TryOn(6463), "mail is refused for a rogue")
 
+-- Mail and plate are trained at forty. A hunter is listed as wearing
+-- mail, which was true of the character sheet and false of a level
+-- twenty hunter, who was being told to go and find mail.
+do
+    local realClass, realLevel = CLASS, S.LEVEL
+    CLASS = "HUNTER"
+    local mail = { classID = 4, subClassID = 3 }
+    local leather = { classID = 4, subClassID = 2 }
+    S.LEVEL = 20
+    check(not ns.Score:Usable(mail), "a level twenty hunter is not shown mail")
+    check(ns.Score:Usable(leather), "but leather is still theirs")
+    S.LEVEL = 40
+    check(ns.Score:Usable(mail), "and at forty the mail appears")
+    CLASS = "ROGUE"
+    S.LEVEL = 60
+    check(not ns.Score:Usable(mail), "a rogue never gets it, whatever the level")
+    CLASS, S.LEVEL = realClass, realLevel
+end
+
 ns.Doll:Clear(7)
 check(ns.Doll.trying[7] == nil, "right-click puts it back")
 check(next(ns.Doll:Deltas()) == nil, "and the deltas go with it")

@@ -422,6 +422,44 @@ for _, name in ipairs({ "WicksTotemsAndThings", "WicksDemonsAndThings", "WicksFo
     end
 end
 
+-- A lock is there to stop an accidental nudge while you click the bar,
+-- not to stop you moving it on purpose. Hunting for the unlock checkbox
+-- every time is worse than the accident, so shift always moves it. One
+-- rule, asked of WickCore, rather than each bar deciding for itself.
+io.write("== a lock yields to shift ==\n")
+local Chrome = WickCore.Chrome
+local realShift = IsShiftKeyDown
+IsShiftKeyDown = function() return false end
+check(Chrome:DragAllowed(false) == true, "an unlocked frame drags")
+check(Chrome:DragAllowed(true) == false, "a locked one does not")
+IsShiftKeyDown = function() return true end
+check(Chrome:DragAllowed(true) == true, "until you hold shift")
+check(Chrome:DragAllowed(false) == true, "and shift never gets in the way of an unlocked one")
+
+-- Not just the helper: the bar people actually lock has to move.
+do
+    local entry = WickCore.Launcher.entries["WicksTotemsAndThings"]
+    local bar = entry and entry.addon and entry.addon.cooldowns
+    -- The frame is built lazily, so ask for it rather than waiting for
+    -- something else in the run to have opened the bar.
+    local frame = bar and bar:Build()
+    local h = frame and frame.GetScript and frame:GetScript("OnDragStart")
+    check(h ~= nil, "the cooldown bar has a drag handler to test")
+    if h then
+        bar:SetLocked(true)
+        local started = false
+        frame.StartMoving = function() started = true end
+        IsShiftKeyDown = function() return false end
+        h(frame)
+        check(not started, "a locked cooldown bar ignores a plain drag")
+        IsShiftKeyDown = function() return true end
+        h(frame)
+        check(started, "and moves when the drag is deliberate")
+        bar:SetLocked(false)
+    end
+end
+IsShiftKeyDown = realShift
+
 io.write("== Conjures and Things ==\n")
 CLASS = "MAGE"
 S.loadAddon(ADDONS_DIR .. "/WicksConjuresAndThings", "WicksConjuresAndThings", { "Core.lua", "Conjure.lua", "UI.lua" })

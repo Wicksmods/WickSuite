@@ -423,7 +423,8 @@ SOUNDKIT = { UI_AUTOLOOT_COMPLETE = 798 }
 BOOKTYPE_SPELL = "spell"
 function GetSpellTexture() return 136048 end
 function CreateFromMixins(...) local o = {} for i = 1, select("#", ...) do for k, v in pairs(select(i, ...)) do o[k] = v end end return o end
-function UnitLevel() return 30 end
+S.LEVEL = S.LEVEL or 30
+function UnitLevel() return S.LEVEL end
 function UnitFactionGroup() return "Horde", "Horde" end
 function IsLoggedIn() return LOGGED end
 function InCombatLockdown() return COMBAT end

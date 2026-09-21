@@ -163,8 +163,9 @@
       "Weapons: 0 axe1h, 1 axe2h, 2 bow, 3 gun, 4 mace1h, 5 mace2h,",
       "6 polearm, 7 sword1h, 8 sword2h, 10 staff, 13 fist, 15 dagger,",
       "16 thrown, 18 crossbow, 19 wand.",
-      "Plate and mail are listed where a class gets them at 40; below",
-      "that level the ranker's own level filter keeps them out anyway."
+      "Plate and mail are listed for the classes that get them, with",
+      "armorAt giving the level they are trained at. Without that a",
+      "level 20 hunter is told to go and find mail."
     ],
     "WARRIOR": {
       "armor": [
@@ -190,7 +191,10 @@
         15,
         16,
         18
-      ]
+      ],
+      "armorAt": {
+        "4": 40
+      }
     },
     "WARRIOR_PROT": {
       "armor": [
@@ -216,7 +220,10 @@
         15,
         16,
         18
-      ]
+      ],
+      "armorAt": {
+        "4": 40
+      }
     },
     "PALADIN": {
       "armor": [
@@ -236,7 +243,10 @@
         6,
         7,
         8
-      ]
+      ],
+      "armorAt": {
+        "4": 40
+      }
     },
     "PALADIN_HOLY": {
       "armor": [
@@ -256,7 +266,10 @@
         6,
         7,
         8
-      ]
+      ],
+      "armorAt": {
+        "4": 40
+      }
     },
     "HUNTER": {
       "armor": [
@@ -277,7 +290,10 @@
         13,
         15,
         18
-      ]
+      ],
+      "armorAt": {
+        "3": 40
+      }
     },
     "ROGUE": {
       "armor": [
@@ -326,7 +342,10 @@
         10,
         13,
         15
-      ]
+      ],
+      "armorAt": {
+        "3": 40
+      }
     },
     "SHAMAN_CASTER": {
       "armor": [
@@ -345,7 +364,10 @@
         10,
         13,
         15
-      ]
+      ],
+      "armorAt": {
+        "3": 40
+      }
     },
     "MAGE": {
       "armor": [
