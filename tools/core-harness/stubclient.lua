@@ -520,7 +520,11 @@ function GetMacroInfo(slot)
     local list, i = macroAt(slot)
     local m = list[i]
     if not m then return nil end
-    return m.name, m.icon, m.body, list == S.MACROS.char
+    -- After a restart the server hands every body back with a newline on
+    -- the end. A test flips this on to be the restart.
+    local body = m.body
+    if S.MACRO_SERVER_NEWLINE and body then body = body .. string.char(10) end
+    return m.name, m.icon, body, list == S.MACROS.char
 end
 function GetMacroIndexByName(name)
     for i, m in ipairs(S.MACROS.acct) do if m.name == name then return i end end

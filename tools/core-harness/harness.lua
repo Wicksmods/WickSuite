@@ -487,6 +487,15 @@ do
     for i = 1, n - 1 do if #mine[i].body ~= 240 then full = false end end
     check(full and #mine[n].body <= 240, "every body but the last is exactly 240, none over")
 
+    -- The restart: every body comes back a newline longer. In game that
+    -- read as "WickCfg01 holds 256 characters, expected 240". It has to
+    -- read as if nothing happened.
+    S.MACRO_SERVER_NEWLINE = true
+    Store.cache, Store.readError = nil, nil
+    check(Store:Read() ~= nil, "bodies that came back a newline longer still read: " .. tostring(Store.readError))
+    check(Store.bodyLengths[1] == 240, "and are counted at their real length: " .. tostring(Store.bodyLengths[1]))
+    S.MACRO_SERVER_NEWLINE = nil
+
     -- The server cuts one character from the first macro.
     local kept = S.MACROS.acct[mine[1].index].body
     S.MACROS.acct[mine[1].index].body = kept:sub(1, 239)
