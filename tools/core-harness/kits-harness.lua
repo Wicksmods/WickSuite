@@ -221,6 +221,24 @@ SlashCmdList.WICK_WICKSBEASTSANDTHINGS("strip")
 check(strip and not strip:IsShown() and S.CHAT[1] and S.CHAT[1]:find("hidden"), "/wbt strip hides the strip")
 SlashCmdList.WICK_WICKSBEASTSANDTHINGS("strip")
 check(strip and strip:IsShown(), "/wbt strip shows it again")
+-- The strip reads shots over what the quiver holds, 1768/2000 style, when
+-- a quiver or ammo pouch is equipped; without one it is the plain count.
+-- Capacity is every slot of every such bag, by the family the client
+-- reports, times the stack the ammo itself reports.
+S.ITEMS = S.ITEMS or {}
+S.ITEMS[2512] = { name = "Rough Arrow", type = "Projectile", sub = "Arrow", classID = 6, subClassID = 2, stack = 200 }
+S.BAG_FAMILY[1] = 1                       -- bag 1 is a quiver, sixteen slots in the stub
+BNS.UI:RefreshAmmo()
+local ammoState = BNS.Ammo:State()
+check(ammoState.capacity == 3200, "a sixteen slot quiver of two hundred stacks holds 3200: " .. tostring(ammoState.capacity))
+check(strip.ammoText.__text == ("%d/%d"):format(ammoState.total, 3200),
+    "the strip reads shots over capacity: " .. tostring(strip.ammoText.__text))
+S.BAG_FAMILY[1] = nil
+BNS.UI:RefreshAmmo()
+ammoState = BNS.Ammo:State()
+check(ammoState.capacity == nil, "no quiver, no capacity")
+check(not tostring(strip.ammoText.__text):find("/"), "and the strip goes back to the plain count: " .. tostring(strip.ammoText.__text))
+S.ITEMS[2512] = nil
 SlashCmdList.WICK_WICKSBEASTSANDTHINGS("unlock")
 SlashCmdList.WICK_WICKSBEASTSANDTHINGS("lock")
 try("beasts panel", function() WicksBeastsAndThings_Toggle() end)
