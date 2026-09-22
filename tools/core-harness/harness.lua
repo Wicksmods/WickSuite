@@ -611,6 +611,60 @@ check(#S.CHAT == 1 and S.CHAT[1]:find("store on"), "and the offer is said once: 
 S.MACROS.acct = held
 Store.cache, Store.enabled, Store.optedIn, Store.announced = nil, nil, nil, nil
 
+-- Addons can be enabled per character, so a session is only ever a
+-- subset of the account. Rebuilding the store from the addons loaded
+-- right now erased every other one: settings set up on a hunter came
+-- back as defaults after an hour on a warrior with the hunter kit
+-- switched off. What the store holds for an addon that is not here has
+-- to survive a save.
+do
+    -- A character where both addons ran.
+    Store.cache, Store.restored, Store.enabled, Store.optedIn = nil, {}, nil, true
+    local other = Core:NewAddon("WicksTestAbsent", {
+        savedVar = "WicksAbsentDB", defaults = { profile = { keep = false } },
+    })
+    fire("ADDON_LOADED", "WicksTestAbsent")
+    other.db.profile.keep = true
+    -- Its own saved variable: earlier blocks left three addons sharing
+    -- WicksTestDB to test rebinding, and whichever iterates last would
+    -- decide what this one saw.
+    local here = Core:NewAddon("WicksTestPresent", {
+        savedVar = "WicksPresentDB", defaults = { profile = { n = 0 } },
+    })
+    fire("ADDON_LOADED", "WicksTestPresent")
+    here.db.profile.n = 91
+    check(Store:Save(true), "both addons save together")
+    local both = Store:Read()
+    check(both and both.WicksAbsentDB and both.WicksPresentDB, "and the store holds both")
+
+    -- The next character does not load that one at all. Forget it the
+    -- way a session that never saw it would.
+    Core.addons.WicksTestAbsent = nil
+    for i, name in ipairs(Core.order) do
+        if name == "WicksTestAbsent" then table.remove(Core.order, i) break end
+    end
+    Store.cache, Store.lastEncoded = nil, nil
+    check(Store:Carried()[1] == "WicksAbsentDB",
+        "the store knows it is carrying something nothing here owns: " .. tostring(Store:Carried()[1]))
+
+    here.db.profile.n = 92
+    check(Store:Save(true), "the second character saves")
+    Store.cache = nil
+    local after = Store:Read()
+    check(after and after.WicksPresentDB.profiles.Default.n == 92, "its own settings are current")
+    check(after and after.WicksAbsentDB and after.WicksAbsentDB.profiles.Default.keep == true,
+        "and the absent addon's settings are still there, not erased")
+
+    -- Back on the first character, the addon gets its own settings back.
+    Store.restored = {}
+    WicksAbsentDB = nil
+    local back = Core:NewAddon("WicksTestAbsent", {
+        savedVar = "WicksAbsentDB", defaults = { profile = { keep = false } },
+    })
+    fire("ADDON_LOADED", "WicksTestAbsent")
+    check(back.db.profile.keep == true, "and it comes back with them when it next loads")
+end
+
 -- Off means off: when the client does hand the table over, the store
 -- must not put an old copy on top of it.
 local handed = Core:NewAddon("WicksTestHanded", { savedVar = "WicksHandedDB", defaults = { profile = { v = 1 } } })
