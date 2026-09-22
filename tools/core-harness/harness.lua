@@ -16,9 +16,7 @@ end
 
 -- ---------- load the library -------------------------------------------
 io.write("== load (", MODE, ") ==\n")
-S.loadAddon(ADDON_DIR, "WickCore", { "LibStub.lua", "Core.lua", "Client.lua", "Restrict.lua", "Dialect.lua",
-    "Locale.lua", "Chrome.lua", "Theme.lua", "Profiles.lua", "Store.lua", "Options.lua", "Launcher.lua", "Version.lua",
-    "Talents.lua", "Checklist.lua", "Racials.lua", "Cooldowns.lua", "Kit.lua" })
+S.loadAddon(ADDON_DIR, "WickCore")   -- file list straight off WickCore.toc
 check(type(WickCore) == "table", "WickCore global")
 local Core = WickCore
 
@@ -501,8 +499,10 @@ do
     S.MACROS.acct[mine[1].index].body = kept:sub(1, 239)
     Store.cache, Store.readError = nil, nil
     check(Store:Read() == nil, "a short body makes the read fail")
-    check(tostring(Store.readError):find("WickCfg01 holds 239", 1, true) ~= nil,
-        "and the error names the macro and the shortfall: " .. tostring(Store.readError))
+    -- With only two macros and the first one cut, lengths alone cannot say
+    -- which was damaged, so the decoder's own error is the honest report.
+    -- With three or more the odd one out is named (checked further down).
+    check(Store.readError ~= nil, "and there is an error to show: " .. tostring(Store.readError))
 
     S.CHAT = {}
     local writesBefore = S.MACRO_WRITES
@@ -534,6 +534,25 @@ do
         "a baked table is recognised as baked, and not as the client's")
     check(not Store:RestoreFor(bakedAddon) and bakedAddon.db.profile.v == 7, "and the store does not put macros over it")
     _G.WicksProfile = nil
+end
+
+-- A store written by the 255-character version reads under 240: the test
+-- is that the chunks agree with each other, not with today's size.
+do
+    local enc = Store.escape(Store:Encode({ WicksTestDB = { profiles = { Default = { nested = { a = 55 }, note = string.rep("x", 600) } }, profileKeys = {}, keyMode = "char", global = {}, char = {} } }))
+    S.MACROS.acct = { S.MACROS.acct[1] }
+    for i = 1, math.ceil(#enc / 255) do
+        S.MACROS.acct[#S.MACROS.acct + 1] = { name = ("WickCfg%02d"):format(i), icon = 134400, body = enc:sub((i - 1) * 255 + 1, i * 255) }
+    end
+    check(#S.MACROS.acct >= 3, "the old store spans more than one macro: " .. (#S.MACROS.acct - 1))
+    Store.cache, Store.readError = nil, nil
+    local old = Store:Read()
+    check(old and old.WicksTestDB.profiles.Default.nested.a == 55, "a store in 255-character chunks reads under a 240 chunk: " .. tostring(Store.readError))
+    -- Cut the middle one and the length check names it.
+    S.MACROS.acct[3].body = S.MACROS.acct[3].body:sub(1, 254)
+    Store.cache, Store.readError = nil, nil
+    check(Store:Read() == nil and tostring(Store.readError):find("WickCfg02 holds 254 characters where the others hold 255", 1, true) ~= nil,
+        "a cut middle macro is named with the shortfall: " .. tostring(Store.readError))
 end
 
 -- A store written by the base64 version is still readable.

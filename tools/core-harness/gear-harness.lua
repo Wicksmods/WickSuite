@@ -17,12 +17,7 @@ end
 
 CLASS = "ROGUE"
 
-S.loadAddon(CORE_DIR, "WickCore", {
-    "LibStub.lua", "Core.lua", "Client.lua", "Dialect.lua", "Restrict.lua",
-    "Locale.lua", "Chrome.lua", "Theme.lua", "Profiles.lua", "Store.lua", "Options.lua",
-    "Launcher.lua", "Version.lua", "Talents.lua", "Checklist.lua",
-    "Racials.lua", "Cooldowns.lua", "Kit.lua",
-})
+S.loadAddon(CORE_DIR, "WickCore")   -- file list straight off WickCore.toc
 S.fire("ADDON_LOADED", "WickCore")
 
 io.write("== Wick's Gear ==\n")

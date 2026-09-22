@@ -140,6 +140,8 @@ local function newMock(kind, name)
         elseif k == "SetAttribute" then return function(_, a, v) t.__attr = t.__attr or {}; t.__attr[a] = v end
         elseif k == "GetAttribute" then return function(_, a) return t.__attr and t.__attr[a] end
         elseif k == "SetStatusBarColor" then return function(_, r, g, b, a) t.__color = { r, g, b, a } end
+        elseif k == "SetStatusBarTexture" then return function(_, tex) t.__statusTex = tex end
+        elseif k == "GetStatusBarTexture" then return function() return t.__statusTexObj or t end
         elseif k == "SetColorTexture" then return function(_, r, g, b, a) t.__color = { r, g, b, a } end
         elseif k == "SetTextColor" then return function(_, r, g, b, a) t.__textColor = { r, g, b, a } end
         -- Slider

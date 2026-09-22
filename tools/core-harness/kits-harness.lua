@@ -22,12 +22,9 @@ local function try(label, fn)
     return ok
 end
 
-local CORE_FILES = { "LibStub.lua", "Core.lua", "Client.lua", "Restrict.lua", "Dialect.lua", "Locale.lua",
-    "Chrome.lua", "Profiles.lua", "Store.lua", "Options.lua", "Launcher.lua", "Version.lua",
-    "Talents.lua", "Checklist.lua", "Racials.lua", "Cooldowns.lua", "Kit.lua" }
 
 io.write("== load WickCore (", MODE, ") ==\n")
-S.loadAddon(CORE_DIR, "WickCore", CORE_FILES)
+S.loadAddon(CORE_DIR, "WickCore")   -- file list straight off WickCore.toc
 S.fire("ADDON_LOADED", "WickCore")
 check(WickCore.Kit and WickCore.Talents and WickCore.Checklist and WickCore.Racials, "kit layer present")
 
@@ -607,6 +604,16 @@ if CA then
         "and it carries the class colour: " .. tostring(ov.__color[1]))
     check(theirs.__color[1] == 0 and theirs.__color[2] == 1,
         "while their own bar is still the green it always was")
+    -- The hue follows the class colour set WickCore is on. Classic paladin
+    -- pink is F58CBA where the client table says F48CBA: one step of red.
+    check(tostring(ov.__statusTex or ""):find("UI%-StatusBar") ~= nil,
+        "the overlay draws with Blizzard's shaded bar texture, not a flat fill")
+    WickCore.Chrome.classColorSet = "classic"
+    frames:Apply()
+    check(math.abs(ov.__color[1] - 0xF5 / 255) < 0.002, "switching WickCore to the Classic-era set changes the bar: " .. tostring(ov.__color[1]))
+    WickCore.Chrome.classColorSet = "client"
+    frames:Apply()
+    check(math.abs(ov.__color[1] - pal.r) < 0.01, "and back to the client set restores it")
 
     -- The whole point. One new field on their frame is enough to throw
     -- inside TextStatusBar the next time it formats secret health.
