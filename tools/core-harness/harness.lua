@@ -471,6 +471,62 @@ check(fired, "OnProfileChanged fired so a product re-applies")
 check(WicksTestDB == B.db.sv, "the global points at the restored table, so logout writes it")
 check(Store.restored.WicksTestReborn == "WicksTestDB", "the store records what it put back, per addon")
 
+-- The macro window takes 255 and the client caches 255, but the server
+-- hands back 254 after a restart. In game that decoded to "unexpected
+-- byte at 514" and then the periodic save wrote this session's defaults
+-- over the player's settings. Two rules came out of it: bodies are 240,
+-- the size the Probe proved through a restart, and a store that is there
+-- but will not read is never overwritten by anything but a deliberate
+-- "store on".
+do
+    local mine = Store.Ours()
+    local n = 0
+    for _ in pairs(mine) do n = n + 1 end
+    check(n >= 2, "enough macros to have a boundary: " .. n)
+    local full = true
+    for i = 1, n - 1 do if #mine[i].body ~= 240 then full = false end end
+    check(full and #mine[n].body <= 240, "every body but the last is exactly 240, none over")
+
+    -- The server cuts one character from the first macro.
+    local kept = S.MACROS.acct[mine[1].index].body
+    S.MACROS.acct[mine[1].index].body = kept:sub(1, 239)
+    Store.cache, Store.readError = nil, nil
+    check(Store:Read() == nil, "a short body makes the read fail")
+    check(tostring(Store.readError):find("WickCfg01 holds 239", 1, true) ~= nil,
+        "and the error names the macro and the shortfall: " .. tostring(Store.readError))
+
+    S.CHAT = {}
+    local writesBefore = S.MACRO_WRITES
+    A.db.profile.locked = not A.db.profile.locked
+    local okS, why = Store:Save()
+    check(not okS and why == "store unreadable, left alone", "the periodic save refuses to write over it: " .. tostring(why))
+    check(S.MACRO_WRITES == writesBefore, "and touched nothing")
+    check(#S.CHAT == 1 and S.CHAT[1]:find("could not be read"), "saying so once")
+    S.CHAT = {}
+    Store:Save()
+    check(#S.CHAT == 0, "and not again")
+
+    -- A deliberate store on is allowed to replace it.
+    local okF = Store:Save(true)
+    check(okF and S.MACRO_WRITES > writesBefore, "store on, the deliberate path, writes")
+    Store.cache = nil
+    check(Store:Read() ~= nil, "and the store reads cleanly again")
+    Store.warnedUnreadable = nil
+end
+
+-- A WicksProfile bake is a deliberate recovery. What it put in place wins
+-- over the macros this session, and the save then carries it into them.
+do
+    local bakedAddon = Core:NewAddon("WicksTestBaked", { savedVar = "WicksBakedDB", defaults = { profile = { v = 1 } } })
+    WicksBakedDB = { profiles = { Default = { v = 7 } }, profileKeys = {}, global = {}, char = {}, keyMode = "char" }
+    _G.WicksProfile = { restored = { "WicksBakedDB" } }
+    fire("ADDON_LOADED", "WicksTestBaked")
+    check(bakedAddon.db.baked == true and bakedAddon.db.handedOver == false,
+        "a baked table is recognised as baked, and not as the client's")
+    check(not Store:RestoreFor(bakedAddon) and bakedAddon.db.profile.v == 7, "and the store does not put macros over it")
+    _G.WicksProfile = nil
+end
+
 -- A store written by the base64 version is still readable.
 local legacy = Store.b64enc(Store:Encode({ WicksTestDB = { profiles = { Default = { nested = { a = 77 } } }, profileKeys = {}, keyMode = "char", global = {}, char = {} } }))
 S.MACROS.acct = { S.MACROS.acct[1] }
