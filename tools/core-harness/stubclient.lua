@@ -636,10 +636,12 @@ local INSTALLED = {
     ["Blizzard_GroupFinder_VanillaStyle"] = true,
 }
 
+S.LOADED = S.LOADED or {}
 C_AddOns = {
     GetNumAddOns = function() return 0 end,
     GetAddOnInfo = function(name) if INSTALLED[name] then return name end return nil end,
-    IsAddOnLoaded = function() return false end,
+    -- Load on demand: S.LOADED[name] marks one as having loaded.
+    IsAddOnLoaded = function(name) return (S.LOADED and S.LOADED[name]) and true or false end,
     LoadAddOn = function() return false end,
     GetAddOnMetadata = function() return nil end,
     EnableAddOn = function() end,

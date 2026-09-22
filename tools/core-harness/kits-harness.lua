@@ -639,7 +639,26 @@ if CA then
     local onCount = 0
     for k, v in pairs(db) do if v == true then onCount = onCount + 1 end end
     check(onCount == 1 and db.clientFixes == true, "only the client-error fix starts on")
-    check(_G.LFGWhoListFrame ~= nil and _G.LFGWhoListFrame.wicksStub, "the missing group finder frame is stood in for")
+    -- The group finder is load on demand. Claiming its frame name before
+    -- it has loaded takes the name away from Blizzard, and the who panel
+    -- then opens with its close button and side tabs drawn and nothing in
+    -- the middle. So: nothing until their addon has actually loaded.
+    check(_G.LFGWhoListFrame == nil, "no stub while the group finder has not loaded")
+    S.LOADED["Blizzard_GroupFinder_VanillaStyle"] = true
+    S.fire("ADDON_LOADED", "Blizzard_GroupFinder_VanillaStyle")
+    check(_G.LFGWhoListFrame ~= nil and _G.LFGWhoListFrame.wicksStub,
+        "once it has loaded and still has no frame, the stub stands in")
+
+    -- And if Blizzard does build one, theirs is left alone.
+    CNS.modules.fixes.stubbedWhoList = nil
+    _G.LFGWhoListFrame = S.newMock("Frame")
+    CNS.modules.fixes:Apply()
+    check(not _G.LFGWhoListFrame.wicksStub, "a real frame from Blizzard is never replaced")
+    local report = table.concat(CNS.modules.fixes:WhoReport(), " | ")
+    check(report:find("Blizzard's") ~= nil, "and the report says whose it is: " .. report:sub(1, 80))
+    _G.LFGWhoListFrame = nil
+    S.LOADED["Blizzard_GroupFinder_VanillaStyle"] = nil
+    CNS.modules.fixes.stubbedWhoList = nil
 
     local frames = CNS.modules.frames
     S.UNITS = { target = true, player = true }
