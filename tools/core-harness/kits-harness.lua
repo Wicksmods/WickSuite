@@ -713,6 +713,22 @@ check(Bd:Handle("WTB arcanite bar paying well", "Buyer", 2), "a buy advert is ta
 check(Bd.listings[1].category == "WTB", "and read as buying: " .. tostring(Bd.listings[1].category))
 check(Bd:Handle("Free enchants at the bank, tips welcome", "Enchanter", 2), "an enchanter is taken")
 check(Bd.listings[1].category == "ENCHANT", "and read as enchanting: " .. tostring(Bd.listings[1].category))
+
+-- Both of these landed in Misc on the live board, which is what sent me
+-- back to the rule. An advert with no service word is still an advert,
+-- and someone looking for an enchant belongs on the enchanting shelf
+-- next to the person offering one.
+check(Bd:Handle("Enchanting in Undercity", "Ench2", 2), "a bare enchant advert is taken")
+check(Bd.listings[1].category == "ENCHANT", "and is enchanting, not misc: " .. tostring(Bd.listings[1].category))
+check(Bd:Handle("LF agility to gloves enchant", "Ench3", 2), "someone looking for an enchant is taken")
+check(Bd.listings[1].category == "ENCHANT", "and is enchanting too: " .. tostring(Bd.listings[1].category))
+
+-- And the mistake in the other direction, which the fix nearly made: a
+-- slot name on its own must not pull a sale into enchanting.
+check(Bd:Handle("WTS gloves and boots cheap", "Vendor", 2), "a sale naming armour slots is taken")
+check(Bd.listings[1].category == "WTS", "and stays selling: " .. tostring(Bd.listings[1].category))
+check(Bd:Handle("Free crusader at the bank, tips welcome", "Ench4", 2), "an enchant named without the word is taken")
+check(Bd.listings[1].category == "ENCHANT", "and reads as enchanting: " .. tostring(Bd.listings[1].category))
 check(Bd:Handle("Portals to Stormwind, 5s, pst", "Mage", 2), "a portal advert is taken")
 check(Bd.listings[1].category == "TRAVEL", "and read as travel: " .. tostring(Bd.listings[1].category))
 
