@@ -174,6 +174,20 @@ local function newMock(kind, name)
 end
 S.newMock = newMock
 
+-- Blizzard's secure click dispatcher, as far as a test needs it: for a
+-- right-click it reads type2 and, when that is "item", uses the bag and
+-- slot the button carries. It records the use so a test can see that the
+-- click reached the protected call instead of being blocked.
+S.SECURE_USES = {}
+function SecureActionButton_OnClick(self, button)
+    local suffix = (button == "RightButton") and "2" or "1"
+    local kind = self:GetAttribute("type" .. suffix) or self:GetAttribute("type")
+    if kind ~= "item" then return end
+    local bag, slot = self:GetAttribute("bag"), self:GetAttribute("slot")
+    if bag == nil or slot == nil then return end
+    S.SECURE_USES[#S.SECURE_USES + 1] = { bag = bag, slot = slot }
+end
+
 -- Templates whose base type is the retail intrinsic ItemButton. Creating one
 -- as a plain "Button" on a modern client keeps the virtual template's own
 -- children but drops the intrinsic's regions (icon, Count, IconBorder,
@@ -192,6 +206,20 @@ function CreateFrame(kind, name, parent, template)
     f.__parent = parent
     f.__template = template
     if name then _G[name] = f end
+    -- SecureActionButtonTemplate brings its own XML-defined OnClick. That
+    -- is the whole point of it: the handler is Blizzard's, so it runs in
+    -- the secure environment whatever created the button. Inheriting it
+    -- alongside a template that also defines OnClick does NOT get you
+    -- that handler, which is what broke right-click in the bags.
+    if template and tostring(template):find("SecureActionButtonTemplate", 1, true) then
+        if tostring(template):find(",", 1, true) then
+            f.__scripts.OnClick = function() end          -- the other template's, inert here
+            f.__secureClick = false
+        else
+            f.__scripts.OnClick = SecureActionButton_OnClick
+            f.__secureClick = true
+        end
+    end
     if MODERN and (kind == "ItemButton" or (template and ITEM_BUTTON_TEMPLATES[template])) then
         if kind == "ItemButton" then
             -- Intrinsic regions, keyed and named the way the XML does it.

@@ -62,11 +62,15 @@ local slotBtn = _G.WicksBagsSlot1
 check(slotBtn ~= nil, "slot button 1 built")
 check(slotBtn and slotBtn._iconTex ~= nil and slotBtn._countText ~= nil, "slot icon and count regions resolved")
 if MODERN then
-    check(slotBtn and slotBtn.__kind == "ItemButton", "slot created with the intrinsic ItemButton type")
-    check(slotBtn and slotBtn._iconTex == slotBtn.icon, "slot icon is the template's own region")
-    local wrong = 0
-    for _, f in ipairs(S.ITEM_BUTTONS) do if f.__kind ~= "ItemButton" then wrong = wrong + 1 end end
-    check(wrong == 0, "no item buttons created as plain Button: " .. wrong)
+    -- The slots are a plain Button with SecureActionButtonTemplate and
+    -- nothing else. Inheriting Blizzard's container template as well left
+    -- their OnClick attached instead of the secure one, and right-click
+    -- stopped working entirely. Every region is ours.
+    check(slotBtn and slotBtn.__kind == "Button", "slot is a plain Button: " .. tostring(slotBtn and slotBtn.__kind))
+    check(slotBtn and slotBtn.__template == "SecureActionButtonTemplate",
+        "with only the secure template: " .. tostring(slotBtn and slotBtn.__template))
+    check(slotBtn and slotBtn.__secureClick == true, "so the secure handler is the one attached")
+    check(slotBtn and slotBtn._iconTex ~= nil and slotBtn._countText ~= nil, "and we supply the icon and count")
 end
 if MODERN then
     check(WB.Bag.panel._sortBtn ~= nil, "sort button present on modern client")
@@ -219,6 +223,21 @@ for _, f in ipairs(S.frames) do
     end
 end
 check(filled ~= nil, "a slot with an item in it")
+S.SECURE_USES = {}
+if filled then
+    -- Our own hooks wrap OnClick, so the script is not the dispatcher
+    -- itself; what matters is that the dispatcher is still in the chain.
+    local onClick = filled:GetScript("OnClick")
+    check(onClick ~= nil and filled.__secureClick == true,
+        "the slot's click chain starts at Blizzard's secure dispatcher")
+    onClick(filled, "RightButton")
+    check(#S.SECURE_USES == 1, "right-click reaches it")
+    check(S.SECURE_USES[1].bag == filled._bag and S.SECURE_USES[1].slot == filled._slot,
+        "with this slot's bag and slot: " .. tostring(S.SECURE_USES[1].bag) .. "/" .. tostring(S.SECURE_USES[1].slot))
+    S.SECURE_USES = {}
+    onClick(filled, "LeftButton")
+    check(#S.SECURE_USES == 0, "left-click does not, so it stays ours for picking up")
+end
 if filled then
     check(filled:GetAttribute("type2") == "item",
         "right-click is handed to the secure handler: " .. tostring(filled:GetAttribute("type2")))
