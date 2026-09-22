@@ -185,6 +185,23 @@ io.write("== missing globals reached during the run ==\n")
 local missing = S.missingReport()
 io.write("  ", table.concat(missing, " "), "\n")
 
+-- ---------- escape ----------------------------------------------------------
+-- Escape closes the bags before it opens the game menu. The bank panel is
+-- left out on purpose: the default BankFrame stays shown behind ours, so
+-- Escape reaches it, ends the bank session, and its OnHide brings ours down.
+io.write("== escape ==" .. string.char(10))
+local listed = {}
+for _, n in ipairs(UISpecialFrames) do listed[n] = true end
+check(listed.WicksBagsPanel, "the bag panel is listed for Escape")
+check(listed.WicksAltViewerPanel and listed.WicksBagsOptions, "so are the alt viewer and the options window")
+check(not listed.WicksBankPanel, "the bank panel is not, so the bank session is not left open")
+local dup = 0
+for _, n in ipairs(UISpecialFrames) do if n == "WicksBagsPanel" then dup = dup + 1 end end
+check(dup == 1, "listed once, however many times the panel is built")
+WB.Bag:Show()
+check(WB.Bag.panel:IsShown() and CloseSpecialWindows() == true, "Escape with the bags open closes them and stops there")
+check(not WB.Bag.panel:IsShown(), "the bags are hidden")
+check(CloseSpecialWindows() == false, "Escape with nothing of ours open falls through to the game menu")
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end
 io.write("PASS\n")

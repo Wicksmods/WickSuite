@@ -561,6 +561,18 @@ function DeleteMacro(slot)
     if list[i] then table.remove(list, i) end
 end
 
+-- Escape. The game walks UISpecialFrames, hides whatever is shown, and
+-- opens the game menu only when nothing was.
+UISpecialFrames = UISpecialFrames or {}
+function CloseSpecialWindows()
+    local found = false
+    for _, name in ipairs(UISpecialFrames) do
+        local f = rawget(_G, name)
+        if f and f.IsShown and f:IsShown() then f:Hide(); found = true end
+    end
+    return found
+end
+
 -- Console variables. S.CVARS survives a simulated reload, the way the
 -- real ones survive a session, which is what the settings store relies on.
 S.CVARS = S.CVARS or {}

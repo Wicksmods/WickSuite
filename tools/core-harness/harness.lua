@@ -355,6 +355,16 @@ check(SLASH_WICK_WICKSTEST1 == "/wtest" and SLASH_WICK_WICKSTEST2 == "/wt", "sla
 SlashCmdList.WICK_WICKSTEST("  hello  ")
 check(got == "hello", "slash handler trims and receives message")
 
+-- ---------- escape ----------------------------------------------------------
+io.write("== escape ==" .. string.char(10))
+local esc = Core.Chrome:NewPanel("WicksTestEscPanel", { title = "Esc" })
+local fixed = Core.Chrome:NewPanel("WicksTestFixedPanel", { title = "Fixed", closable = false })
+local seen = {}
+for _, n in ipairs(UISpecialFrames) do seen[n] = (seen[n] or 0) + 1 end
+check(seen.WicksTestEscPanel == 1, "a closable panel is listed for Escape, once")
+check(seen.WicksTestFixedPanel == nil, "a panel with no close glyph is not")
+esc:Show()
+check(CloseSpecialWindows() and not esc:IsShown(), "and Escape closes it")
 -- ---------- store -----------------------------------------------------------
 -- The Forever beta writes saved variables at logout and hands nothing back
 -- at load. Everything below is that client: no saved variable was ever
