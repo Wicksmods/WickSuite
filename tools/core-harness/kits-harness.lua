@@ -396,6 +396,52 @@ if BADDON then
     check(tostring(brows[1].name:GetText()):find("Grizzle") ~= nil,
         "naming the animal: " .. tostring(brows[1].name:GetText()))
     check(tostring(brows[1].age:GetText()) == "out", "and marking the one that is out")
+    -- The window: a roster on the left, a page on the right. The page is
+    -- the join the two records exist for, so it has to name what the
+    -- family brings alongside the animal itself.
+    S.PET_NAME, S.PET_FAMILY = "Grizzle", "Bear"
+    Bst:Record()
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSBEASTSANDTHINGS("bestiary")
+    local win = _G.WicksBestiaryWindow
+    check(win ~= nil and win:IsShown(), "/wbt bestiary opens the window")
+    check(Bst.selectedKey ~= nil, "with something selected rather than a blank page")
+    local wrows, wshown = win.rows, 0
+    for _, r in ipairs(wrows) do if r:IsShown() then wshown = wshown + 1 end end
+    check(wshown == 1, "a roster row per animal, got " .. wshown)
+    check(wrows[1].hl:IsShown(), "the selected one is highlighted")
+    check(wrows[1].tag:GetText() == "out", "and tagged as out")
+    check(tostring(win.detail.name:GetText()) == "Grizzle", "the page names it: " .. tostring(win.detail.name:GetText()))
+    check(tostring(win.detail.diet:GetText()):find("Eats:") ~= nil, "and says what it eats")
+    check(win.detail.empty:IsShown() == false, "with no empty notice while there is an animal")
+
+    -- Bear was never recorded in the family atlas, so there is nothing to
+    -- join; a Wolf was. The page has to handle both.
+    check(tostring(win.detail.abil:GetText()) == "", "no family abilities recorded, so nothing claimed")
+    S.PET_NAME, S.PET_FAMILY = "Fang", "Wolf"
+    Bst:Record()
+    Bst.selectedKey = Bst:Key("Fang", "Wolf")
+    Bst:RefreshWindow()
+    check(tostring(win.detail.abilHead:GetText()):find("Wolf") ~= nil,
+        "a recorded family is named: " .. tostring(win.detail.abilHead:GetText()))
+    check(tostring(win.detail.abil:GetText()):find("Furious Howl") ~= nil,
+        "with what it brings: " .. tostring(win.detail.abil:GetText()))
+
+    -- Forgetting the selected animal must not leave the page pointing at a
+    -- record that is gone.
+    win.forget.__scripts.OnClick()
+    check(Bst:Find("Fang") == nil, "the Forget button forgets the selected animal")
+    check(Bst.selectedKey == Bst:Key("Grizzle", "Bear"), "and the page falls to what is left")
+    check(tostring(win.detail.name:GetText()) == "Grizzle", "showing it: " .. tostring(win.detail.name:GetText()))
+
+    Bst:Forget()
+    Bst:RefreshWindow()
+    check(win.detail.empty:IsShown(), "an empty roster shows the notice instead of a page")
+    check(win.forget:IsShown() == false, "and takes the buttons away")
+
+    SlashCmdList.WICK_WICKSBEASTSANDTHINGS("bestiary")
+    check(win:IsShown() == false, "/wbt bestiary again closes it")
+
     kit:Select("beasts")
     S.PET_NAME, S.PET_FAMILY = nil, "Wolf"
 
