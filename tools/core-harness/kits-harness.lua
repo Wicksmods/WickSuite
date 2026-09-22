@@ -541,6 +541,85 @@ if MA then
     check(MA.cooldowns ~= nil, "conjures has a cooldown bar")
 end
 
+io.write("== Stances and Things ==\n")
+CLASS = "WARRIOR"
+S.STANCE, S.STANCE_COUNT = 1, 3          -- a warrior past thirty, in Battle
+S.loadAddon(ADDONS_DIR .. "/WicksStancesAndThings", "WicksStancesAndThings")
+S.fire("ADDON_LOADED", "WicksStancesAndThings")
+S.fire("PLAYER_LOGIN")
+dumpErrors()
+local SENTRY = WickCore.Launcher.entries.WicksStancesAndThings
+local SA = SENTRY and SENTRY.addon
+check(SA ~= nil, "stances launcher registered")
+local sstrip = _G.WicksStancesStrip
+check(sstrip ~= nil and sstrip:IsShown(), "stance strip shown for a warrior")
+check(_G.WicksStancesButton1 and _G.WicksStancesButton2 and _G.WicksStancesButton3,
+    "a keybindable button per stance")
+check(_G.WicksStancesSmartButton ~= nil, "and one for the smart key")
+
+-- The macro is the whole feature: it has to name the stance the ability
+-- needs and only cast the ability once you are in it. Two lines, because
+-- the game will not change stance and swing off the same press.
+local Stances
+for _, fr in ipairs(S.frames) do if fr.__name == "WicksStancesEvents" then Stances = true end end
+check(Stances, "stances event frame created")
+
+local smart = _G.WicksStancesSmartButton
+local charge = tostring(smart:GetAttribute("macrotext"))
+check(charge:find("/cast %[nostance:1%] Battle Stance") ~= nil,
+    "the smart key swaps to Battle for Charge: " .. charge:gsub("\n", " | "))
+check(charge:find("/cast %[stance:1%] Charge") ~= nil, "and casts Charge once there")
+check(tostring(_G.WicksStancesButton3:GetAttribute("macrotext")):find("Berserker Stance") ~= nil,
+    "the third button swaps to Berserker")
+
+-- An ability in another stance re-routes.
+S.CHAT = {}
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("bind Shield Wall")
+local sw = tostring(smart:GetAttribute("macrotext"))
+check(sw:find("nostance:2") ~= nil and sw:find("%[stance:2%] Shield Wall") ~= nil,
+    "Shield Wall routes to Defensive: " .. sw:gsub("\n", " | "))
+
+-- One with no stance requirement is cast where you stand, not routed.
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("bind Execute")
+local ex = tostring(smart:GetAttribute("macrotext"))
+check(ex:find("stance") == nil and ex:find("/cast Execute") ~= nil,
+    "an ability needing no stance is cast where you stand: " .. ex:gsub("\n", " | "))
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("bind Charge")
+
+-- Secure attributes cannot be written in combat, and the strip has to
+-- pick the change up the moment it clears rather than staying stale.
+COMBAT = true
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("bind Intercept")
+check(tostring(smart:GetAttribute("macrotext")):find("Intercept") == nil,
+    "nothing is written to a secure button in combat")
+COMBAT = false
+S.fire("PLAYER_REGEN_ENABLED")
+check(tostring(smart:GetAttribute("macrotext")):find("%[stance:3%] Intercept") ~= nil,
+    "and it catches up when combat ends: " .. tostring(smart:GetAttribute("macrotext")):gsub("\n", " | "))
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("bind Charge")
+
+-- A stance the character has not learned reads as unlearned, not missing.
+S.STANCE_COUNT = 1
+sstrip.__scripts.OnShow(sstrip)
+check(SA.kit ~= nil, "stances has a kit")
+S.STANCE_COUNT = 3
+
+S.CHAT = {}
+SlashCmdList.WICK_WICKSSTANCESANDTHINGS("status")
+local sline = table.concat(S.CHAT, " | ")
+check(#S.CHAT >= 3, "/wst status prints")
+check(sline:find("Battle Stance") ~= nil, "and names the stance you are in: " .. sline:sub(1, 90))
+
+try("stances strip toggle", function() WicksStancesAndThings_Toggle(); WicksStancesAndThings_Toggle() end)
+try("stances kit", function() SlashCmdList.WICK_WICKSSTANCESANDTHINGS("kit") end)
+if SA then
+    local srows = SA.kit.checklist:Evaluate()
+    check(#srows == 4, "stances checklist 4 rows, got " .. #srows)
+    check(srows[2].state == "ok", "in a stance reads ok while in one: " .. tostring(srows[2].state))
+    check(SA.cooldowns ~= nil, "stances has a cooldown bar")
+end
+S.STANCE, S.STANCE_COUNT = 0, 0
+
 io.write("== Comforts ==\n")
 
 -- Straight off the toc, so a module added to the addon is tested here

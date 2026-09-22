@@ -430,9 +430,19 @@ end
 function GetComboPoints() return S.POWER_SECRET and SECRET or (S.COMBO or 0) end
 function UnitIsUnit(a, b) return a == b or (S.HAS_TARGET and a == "nameplate1" and b == "target") end
 function UnitHealthMax() return 500 end
-function GetShapeshiftForm() return 0 end
-function GetShapeshiftFormInfo() return nil end
-function GetNumShapeshiftForms() return 0 end
+-- Shapeshift bar: druid forms and warrior stances come through the same
+-- API. S.STANCE is the one you are in (0 for none), S.STANCE_COUNT how
+-- many the character has learned.
+S.STANCE = S.STANCE or 0
+S.STANCE_COUNT = S.STANCE_COUNT or 0
+local STANCE_NAMES = { "Battle Stance", "Defensive Stance", "Berserker Stance" }
+function GetShapeshiftForm() return S.STANCE end
+function GetShapeshiftFormInfo(i)
+    if type(i) ~= "number" or i < 1 or i > S.STANCE_COUNT then return nil end
+    -- texture, name, isActive, isCastable
+    return 132349 + i, STANCE_NAMES[i] or ("Form " .. i), S.STANCE == i, true
+end
+function GetNumShapeshiftForms() return S.STANCE_COUNT end
 function IsSwimming() return false end
 function IsOutdoors() return true end
 function GetRealZoneText() return "Elwynn Forest" end

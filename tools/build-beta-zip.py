@@ -21,6 +21,7 @@ FOLDERS = [
     "WickCore", "WicksBags", "WicksComforts", "WicksGear",
     "WicksTotemsAndThings", "WicksDemonsAndThings", "WicksFormsAndThings",
     "WicksBeastsAndThings", "WicksPoisonsAndThings", "WicksConjuresAndThings",
+    "WicksStancesAndThings",
 ]
 SKIP_DIRS = {".git", ".github", "node_modules"}
 
@@ -88,6 +89,7 @@ Wick's Forms and Things      Druid    /wft
 Wick's Beasts and Things     Hunter   /wbt
 Wick's Poisons and Things    Rogue    /wpt
 Wick's Conjures and Things   Mage     /wcj
+Wick's Stances and Things    Warrior  /wst
 
 
 KEEPING YOUR SETTINGS
@@ -112,6 +114,10 @@ fixes the client, it notices and stays out of the way.
 
 WHAT IS NEW SINCE THE LAST PACKAGE
 ----------------------------------
+* New: Wick's Stances and Things, the warrior kit. Three stances and a
+  smart key in one row: bind an ability and the key puts you in the
+  stance it needs, then uses it. Plus a shout and stance checklist,
+  talents, racials and a cooldown bar.
 * Settings can be kept across restarts. See above.
 * Escape closes any Wick window before it opens the game menu.
 * Comforts: auto accept and hand in quests (Shift at any npc for the
