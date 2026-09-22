@@ -467,6 +467,21 @@ function GetRealZoneText() return "Elwynn Forest" end
 function IsFlyableArea() return false end
 function GetBindingKey() return nil end
 function SetBindingClick() return true end
+
+-- A merchant. S.REPAIR_COST is what the repair would come to, and
+-- S.REPAIRED records the call, so a test can tell "did not repair"
+-- apart from "repaired and said nothing".
+S.REPAIR_COST = 0
+S.REPAIRED = nil
+function CanMerchantRepair() return S.CAN_REPAIR ~= false end
+function GetRepairAllCost()
+    -- Two returns, which is the whole point: guarding this call inline
+    -- with `and` keeps only the first and silently kills the feature.
+    return S.REPAIR_COST or 0, (S.REPAIR_COST or 0) > 0
+end
+function RepairAllItems(useGuild) S.REPAIRED = useGuild and "guild" or "self" end
+function CanGuildBankRepair() return S.GUILD_REPAIR == true end
+function GetGuildBankWithdrawMoney() return S.GUILD_FUNDS or 0 end
 function SaveBindings() end
 function GetCurrentBindingSet() return 1 end
 function GetWeaponEnchantInfo() return true, 600, 1, 0, false end
@@ -492,7 +507,7 @@ function GetCursorPosition() return 0, 0 end
 function GetCursorInfo() return nil end
 function CursorHasItem() return false end
 function ClearCursor() end
-function GetMoney() return 123456 end
+function GetMoney() return S.MONEY or 123456 end
 function GetInventoryItemID(unit, inv)
     if inv and inv >= 20 and inv <= 23 then return 4500 end
     if CLASS == "HUNTER" and inv == 0 then return 2512 end   -- Rough Arrow

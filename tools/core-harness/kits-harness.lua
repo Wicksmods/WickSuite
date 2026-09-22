@@ -1275,6 +1275,50 @@ if CA then
     check(S.GLOW[button] == true, "and off gives the game its own glow back")
     check(next(glow.wrapped) == nil, "with nothing of ours left wrapped around it")
 
+    -- Repair on arrival. This shipped broken: the cost was fetched as
+    -- `local cost, canRepair = GetRepairAllCost and GetRepairAllCost()`,
+    -- and `and` keeps only the first return, so canRepair was always nil
+    -- and the guard on the next line sent it home every time.
+    db.autoRepair = true
+    db.guildRepair = false
+    S.REPAIR_COST, S.REPAIRED, S.MONEY = 5000, nil, 100000
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == "self", "arriving at a merchant repairs: " .. tostring(S.REPAIRED))
+
+    -- Nothing to repair is not a failure, it is just quiet.
+    S.REPAIR_COST, S.REPAIRED = 0, nil
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == nil, "with nothing broken it does not pay to repair nothing")
+
+    -- Guild funds first when they are offered and they cover it.
+    db.guildRepair = true
+    S.GUILD_REPAIR, S.GUILD_FUNDS = true, 10000
+    S.REPAIR_COST, S.REPAIRED = 5000, nil
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == "guild", "guild funds are used when they cover it: " .. tostring(S.REPAIRED))
+
+    -- Guild funds that fall short fall back to the player's own.
+    S.GUILD_FUNDS, S.REPAIRED = 100, nil
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == "self", "and fall back to your own when they do not: " .. tostring(S.REPAIRED))
+
+    -- Too poor to repair says so rather than failing silently.
+    db.guildRepair = false
+    S.GUILD_REPAIR = false
+    S.MONEY, S.REPAIRED = 100, nil
+    S.CHAT = {}
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == nil, "too poor to repair does not try")
+    check(table.concat(S.CHAT, " "):find("cannot afford") ~= nil, "and says why")
+    S.MONEY = 100000
+
+    -- Off means off.
+    db.autoRepair = false
+    S.REPAIR_COST, S.REPAIRED = 5000, nil
+    S.fire("MERCHANT_SHOW")
+    check(S.REPAIRED == nil, "and with the setting off it leaves the repair alone")
+    db.autoRepair = true
+
     check(Minimap.__maskTex == nil, "the minimap is untouched until asked")
 
     db.squareMinimap = true
