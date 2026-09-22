@@ -292,7 +292,10 @@ function print(...) local parts = {} for i = 1, select("#", ...) do parts[#parts
 -- ---------- shared client functions --------------------------------------
 function GetLocale() return "enUS" end
 function GetRealmName() return "Classic Beta PvP" end
-function UnitName() return "Wick" end
+function UnitName(unit)
+    if unit == "pet" then return S.PET_NAME or "Wolfie" end
+    return "Wick"
+end
 CLASS = "SHAMAN"
 local CLASS_NAMES = { SHAMAN = { "Shaman", 7 }, WARLOCK = { "Warlock", 9 }, DRUID = { "Druid", 11 }, HUNTER = { "Hunter", 3 }, ROGUE = { "Rogue", 4 } }
 function UnitClass() local c = CLASS_NAMES[CLASS] or { CLASS, 0 } return c[1], CLASS, c[2] end

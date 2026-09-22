@@ -188,7 +188,7 @@ io.write("== Beasts and Things ==\n")
 CLASS = "HUNTER"
 S.PET_FAMILY = "Wolf"
 S.PET_SPELLS = { { "Bite", "active" }, { "Growl", "active" }, { "Furious Howl", "active" }, { "Avoidance", "passive" } }
-local BNS = S.loadAddon(ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings", { "Core.lua", "Pet.lua", "Ammo.lua", "Beasts.lua", "UI.lua" })
+local BNS = S.loadAddon(ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings", { "Core.lua", "Pet.lua", "Ammo.lua", "Beasts.lua", "Bestiary.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksBeastsAndThings")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -326,6 +326,79 @@ if BADDON then
     kit:Select("beasts")
     check(kit.panes.beasts:IsShown(), "selecting it shows the pane")
     check(kit.panes.talents:IsShown() == false, "and puts the others away")
+    -- ========================================================
+    -- The bestiary: the animals, not the families.
+    -- ========================================================
+    -- Beasts.lua files what a Wolf can do. Nothing filed the wolf. A pet
+    -- in the stable reads nothing at all to the client, so the only place
+    -- this can come from is a record kept while the animal is out.
+    local Bst = BNS.Bestiary
+    check(Bst ~= nil, "the bestiary module loaded")
+    Bst:Forget()
+    S.PET_NAME, S.PET_FAMILY = "Grizzle", "Bear"
+    check(Bst:Record() ~= nil, "a pet that is out is written down")
+    check(Bst:Count() == 1, "one animal recorded, got " .. Bst:Count())
+    local grizzle = Bst:Find("Grizzle")
+    check(grizzle ~= nil and grizzle.family == "Bear", "with its family: " .. tostring(grizzle and grizzle.family))
+    check(grizzle.diet ~= nil and #grizzle.diet > 0, "and what it eats")
+
+    -- Calling the same animal again is the same line, not a second one.
+    Bst:Record()
+    check(Bst:Count() == 1, "calling it again does not duplicate it, got " .. Bst:Count())
+    check(grizzle.seen == 2, "it counts the times it was out: " .. tostring(grizzle.seen))
+
+    -- A second animal of a different family is a second line. The family
+    -- alone would not do as a key, since a hunter can own two wolves.
+    S.PET_NAME, S.PET_FAMILY = "Skitter", "Spider"
+    Bst:Record()
+    check(Bst:Count() == 2, "a second animal is a second line, got " .. Bst:Count())
+    local all = Bst:All()
+    check(all[1].name == "Skitter", "most recently out comes first: " .. tostring(all[1].name))
+    check(Bst:Current() ~= nil and Bst:Current().name == "Skitter", "and the one out now is known")
+
+    -- A level the client will not hand over must not wipe the one it did.
+    local skitter = Bst:Find("Skitter")
+    local hadLevel = skitter.level
+    check(hadLevel ~= nil, "a level was recorded: " .. tostring(hadLevel))
+    local realLevel = UnitLevel
+    UnitLevel = function(unit) if unit == "pet" then return nil end return realLevel(unit) end
+    Bst:Record()
+    check(Bst:Find("Skitter").level == hadLevel, "a level the client withholds leaves the last one alone")
+    UnitLevel = realLevel
+
+    -- The food pin belongs to the animal. It used to be one item for the
+    -- hunter, which silently misapplies the moment you own two pets that
+    -- eat different things.
+    check(Bst:Pin(6948) == "Skitter", "the pin goes to the animal that is out")
+    check(Bst:PinnedFood() == 6948, "and reads back for that animal")
+    S.PET_NAME, S.PET_FAMILY = "Grizzle", "Bear"
+    Bst:Record()
+    check(Bst:PinnedFood() == nil, "the other animal does not inherit it")
+
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSBEASTSANDTHINGS("pets")
+    local plist = table.concat(S.CHAT, " | ")
+    check(plist:find("Grizzle") ~= nil and plist:find("Skitter") ~= nil, "/wbt pets lists them: " .. plist:sub(1, 90))
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSBEASTSANDTHINGS("pets Skitter")
+    check(Bst:Count() == 1, "/wbt pets <name> forgets one, left " .. Bst:Count())
+    check(Bst:Find("Grizzle") ~= nil, "and leaves the others alone")
+
+    -- Its own tab, alongside Beasts.
+    check(kit.tabs.bestiary ~= nil, "the kit grew a Bestiary tab")
+    kit:Select("bestiary")
+    check(kit.panes.bestiary:IsShown(), "selecting it shows the pane")
+    check(kit.panes.beasts:IsShown() == false, "and puts the Beasts pane away")
+    local brows = BNS.Bestiary.pane.rows
+    local bshown = 0
+    for _, r in ipairs(brows) do if r:IsShown() then bshown = bshown + 1 end end
+    check(bshown == 1, "a row per animal, got " .. bshown)
+    check(tostring(brows[1].name:GetText()):find("Grizzle") ~= nil,
+        "naming the animal: " .. tostring(brows[1].name:GetText()))
+    check(tostring(brows[1].age:GetText()) == "out", "and marking the one that is out")
+    kit:Select("beasts")
+    S.PET_NAME, S.PET_FAMILY = nil, "Wolf"
+
     local prows = BNS.beasts.pane.rows
     local shown = 0
     for _, r in ipairs(prows) do if r:IsShown() then shown = shown + 1 end end
