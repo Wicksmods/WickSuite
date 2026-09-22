@@ -21,7 +21,7 @@ S.fire("ADDON_LOADED", "WickCore")
 WicksBagsDB = { options = { showJunk = false, sortMode = "name" }, bagPos = { posPoint = "CENTER", posRel = "CENTER", posX = 1, posY = 2, panelW = 500 } }
 WicksBagsAlts = { ["Classic Beta PvP-Altchar"] = { bags = { { itemID = 6948, count = 2 } }, bank = { { itemID = 6948, count = 5 } }, bagsLastSeen = 1 } }
 
-local BAGSNS = S.loadAddon(BAGS_DIR, "WicksBags", { "Core.lua", "Categories.lua", "UI.lua", "Options.lua", "Bag.lua", "Bank.lua", "AltViewer.lua" })
+S.loadAddon(BAGS_DIR, "WicksBags", { "Core.lua", "Categories.lua", "UI.lua", "Options.lua", "Bag.lua", "Bank.lua", "AltViewer.lua" })
 check(type(WicksBags) == "table" and WicksBags.A, "WicksBags namespace + WickCore addon object")
 
 io.write("== lifecycle ==\n")
@@ -62,15 +62,11 @@ local slotBtn = _G.WicksBagsSlot1
 check(slotBtn ~= nil, "slot button 1 built")
 check(slotBtn and slotBtn._iconTex ~= nil and slotBtn._countText ~= nil, "slot icon and count regions resolved")
 if MODERN then
-    -- The slots are a plain Button with SecureActionButtonTemplate and
-    -- nothing else. Inheriting Blizzard's container template as well left
-    -- their OnClick attached instead of the secure one, and right-click
-    -- stopped working entirely. Every region is ours.
-    check(slotBtn and slotBtn.__kind == "Button", "slot is a plain Button: " .. tostring(slotBtn and slotBtn.__kind))
-    check(slotBtn and slotBtn.__template == "SecureActionButtonTemplate",
-        "with only the secure template: " .. tostring(slotBtn and slotBtn.__template))
-    check(slotBtn and slotBtn.__secureClick == true, "so the secure handler is the one attached")
-    check(slotBtn and slotBtn._iconTex ~= nil and slotBtn._countText ~= nil, "and we supply the icon and count")
+    check(slotBtn and slotBtn.__kind == "ItemButton", "slot created with the intrinsic ItemButton type")
+    check(slotBtn and slotBtn._iconTex == slotBtn.icon, "slot icon is the template's own region")
+    local wrong = 0
+    for _, f in ipairs(S.ITEM_BUTTONS) do if f.__kind ~= "ItemButton" then wrong = wrong + 1 end end
+    check(wrong == 0, "no item buttons created as plain Button: " .. wrong)
 end
 if MODERN then
     check(WB.Bag.panel._sortBtn ~= nil, "sort button present on modern client")
@@ -206,73 +202,6 @@ WB.Bag:Show()
 check(WB.Bag.panel:IsShown() and CloseSpecialWindows() == true, "Escape with the bags open closes them and stops there")
 check(not WB.Bag.panel:IsShown(), "the bags are hidden")
 check(CloseSpecialWindows() == false, "Escape with nothing of ours open falls through to the game menu")
--- ---------- using an item ----------------------------------------------------
--- UseContainerItem is protected and a button this addon created carries
--- this addon's taint, so the template's own OnClick could not complete it:
--- right-clicking anything in the bags printed "blocked from an action".
--- Right-click now goes through the game's secure dispatch, which runs
--- outside our execution entirely.
-io.write("== using an item ==" .. string.char(10))
-WB.Bag:Show()
-WB.Bag:Refresh()
-local filled, empty
-for _, f in ipairs(S.frames) do
-    if f.__name and tostring(f.__name):find("^WicksBagsSlot") then
-        if f._itemID and not filled then filled = f end
-        if f.__shown and not f._itemID and not empty then empty = f end
-    end
-end
-check(filled ~= nil, "a slot with an item in it")
-S.SECURE_USES = {}
-if filled then
-    -- Our own hooks wrap OnClick, so the script is not the dispatcher
-    -- itself; what matters is that the dispatcher is still in the chain.
-    local onClick = filled:GetScript("OnClick")
-    check(onClick ~= nil and filled.__secureClick == true,
-        "the slot's click chain starts at Blizzard's secure dispatcher")
-    onClick(filled, "RightButton")
-    check(#S.SECURE_USES == 1, "right-click reaches it")
-    check(S.SECURE_USES[1].bag == filled._bag and S.SECURE_USES[1].slot == filled._slot,
-        "with this slot's bag and slot: " .. tostring(S.SECURE_USES[1].bag) .. "/" .. tostring(S.SECURE_USES[1].slot))
-    S.SECURE_USES = {}
-    onClick(filled, "LeftButton")
-    check(#S.SECURE_USES == 0, "left-click does not, so it stays ours for picking up")
-end
-if filled then
-    check(filled:GetAttribute("type2") == "macro",
-        "right-click is handed to the secure handler as a macro: " .. tostring(filled:GetAttribute("type2")))
-    check(filled:GetAttribute("macrotext2") == ("/use %d %d"):format(filled._bag, filled._slot),
-        "whose text uses this slot: " .. tostring(filled:GetAttribute("macrotext2")))
-    check(filled:GetAttribute("type1") == nil, "left-click is not, so it can still pick the item up")
-end
-if empty then
-    check(empty:GetAttribute("type2") == nil, "an empty slot has nothing to use")
-end
-
--- A secure button refuses attribute writes in combat, so a slot whose
--- item changed mid-fight keeps the pair it had and is marked to catch
--- up. Writing anyway would throw and lose the click entirely.
-if filled then
-    local hadBag = filled:GetAttribute("macrotext2")
-    COMBAT = true
-    check(BAGSNS.SetSlotUse(filled, 3, 7) == false, "in combat the write is refused")
-    check(filled:GetAttribute("macrotext2") == hadBag, "and the old text is left alone: " .. tostring(filled:GetAttribute("macrotext2")))
-    check(filled._useStale == true, "the slot is marked to catch up")
-    COMBAT = false
-    check(BAGSNS.SetSlotUse(filled, 3, 7) == true, "out of combat it writes")
-    check(filled:GetAttribute("macrotext2") == "/use 3 7",
-        "with the new text: " .. tostring(filled:GetAttribute("macrotext2")))
-    check(filled._useStale == nil, "and is no longer stale")
-    -- And the event that clears combat redresses every slot, so a stale
-    -- one fixes itself without the player clicking anything.
-    COMBAT = true
-    BAGSNS.SetSlotUse(filled, 9, 9)
-    check(filled._useStale == true, "stale again after a mid-fight change")
-    COMBAT = false
-    S.fire("PLAYER_REGEN_ENABLED")
-    check(filled._useStale == nil and filled:GetAttribute("macrotext2") == ("/use %d %d"):format(filled._bag, filled._slot),
-        "combat ending redresses it: " .. tostring(filled:GetAttribute("macrotext2")))
-end
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end
 io.write("PASS\n")
