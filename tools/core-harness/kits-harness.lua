@@ -620,6 +620,87 @@ if SA then
 end
 S.STANCE, S.STANCE_COUNT = 0, 0
 
+io.write("== Trade Hall ==\n")
+CLASS = "HUNTER"
+local THNS = S.loadAddon(ADDONS_DIR .. "/WicksTradeHall", "WicksTradeHall")
+S.fire("ADDON_LOADED", "WicksTradeHall")
+S.fire("PLAYER_LOGIN")
+dumpErrors()
+local THENTRY = WickCore.Launcher.entries.WicksTradeHall
+local THA = THENTRY and THENTRY.addon
+check(THA ~= nil and THA.enabled, "trade hall registered and enabled")
+check(_G.WicksTradeHallBar ~= nil and _G.WicksTradeHallBar:IsShown(), "the session bar is up")
+
+local Lg, P = THNS.Ledger, THNS.Prices
+
+-- Money is plain on this client, so the gold delta is ordinary
+-- arithmetic. The purse is driven by hand here.
+local realMoney = GetMoney
+local purse = 100000
+GetMoney = function() return purse end
+
+check(Lg:Start(), "a session starts")
+check(Lg.active and Lg.startMoney == 100000, "and takes the purse as its starting point")
+check(not Lg:Start(), "starting twice does nothing")
+
+purse = 112345
+S.fire("PLAYER_MONEY")
+check(Lg.goldDelta == 12345, "gold earned is the difference: " .. tostring(Lg.goldDelta))
+check(Lg.totalCopper == 12345, "and the total follows it")
+
+-- A grey collapses into one Junk row however many drop; anything else
+-- is its own line.
+S.ITEMS = S.ITEMS or {}
+S.ITEMS[2589] = { name = "Linen Cloth", quality = 1, sellPrice = 15 }
+S.ITEMS[3300] = { name = "Rabbit's Foot", quality = 0, sellPrice = 40 }
+check(Lg:AddLoot("You receive loot: |cff9d9d9d|Hitem:3300::::::::20:::::::::|h[Rabbit's Foot]|h|r."), "a grey is taken")
+Lg:AddLoot("You receive loot: |cff9d9d9d|Hitem:3300::::::::20:::::::::|h[Rabbit's Foot]|h|r x3.")
+check(Lg.loot.junk ~= nil and Lg.loot.junk.count == 4, "greys collapse into one Junk row: " .. tostring(Lg.loot.junk and Lg.loot.junk.count))
+check(Lg.loot.junk.copper == 160, "carrying the running total, not a unit price: " .. tostring(Lg.loot.junk.copper))
+Lg:AddLoot("You receive loot: |cffffffff|Hitem:2589::::::::20:::::::::|h[Linen Cloth]|h|r x5.")
+check(Lg.loot["2589"] ~= nil and Lg.loot["2589"].count == 5, "a white gets its own line")
+check(Lg.totalCopper == 12345 + 160 + 15 * 5, "and the total counts each by its own rule: " .. tostring(Lg.totalCopper))
+
+-- An item the client cannot price counts as nothing, and says so.
+S.UNKNOWN = S.UNKNOWN or {}
+S.UNKNOWN[11111] = true
+Lg:AddLoot("You receive loot: |cffffffff|Hitem:11111::::::::20:::::::::|h[Something]|h|r.")
+check(Lg.loot["11111"].source == "unknown", "an unpriceable item is marked, not guessed at")
+local conf, known, total = P:Confidence(Lg.loot)
+-- Three kinds, not four: the two greys merged into one junk row.
+check(known == 2 and total == 3, "and the confidence says how much of the total is real: " .. known .. "/" .. total)
+
+-- When the server answers late it is repriced, not left wrong.
+S.UNKNOWN[11111] = nil
+S.ITEMS[11111] = { name = "Something", quality = 2, sellPrice = 500 }
+check(Lg:Reprice(), "a late arrival is repriced")
+check(Lg.loot["11111"].copper == 500 and Lg.loot["11111"].source == "vendor", "with the real price")
+
+-- A reload must not lose the run.
+local carried = Lg.totalCopper
+Lg.Persist()
+Lg.active, Lg.totalCopper, Lg.loot = false, 0, {}
+check(Lg:Resume(), "a saved session resumes")
+check(Lg.totalCopper == carried, "with its total intact: " .. tostring(Lg.totalCopper))
+
+check(Lg:Stop(), "the session stops")
+check(#Lg:History() == 1, "and lands in history")
+Lg:Start(); Lg:Stop()
+check(#Lg:History() == 1, "a session that earned nothing is not filed")
+
+-- A running total is not a setting: the macro store must not carry it,
+-- or a long night of looting crowds out the settings that matter.
+check(THA.opts.storeExclude ~= nil and THA.opts.storeExclude[1] == "char",
+    "the session is excluded from the macro store")
+
+S.CHAT = {}
+SlashCmdList.WICK_WICKSTRADEHALL("status")
+check(#S.CHAT >= 2, "/wth status prints")
+try("trade hall window", function() WicksTradeHall_Toggle(); WicksTradeHall_Toggle() end)
+try("trade board tab", function() THNS.UI:Select("board"); THNS.UI:Select("ledger") end)
+GetMoney = realMoney
+S.ITEMS[2589], S.ITEMS[3300], S.ITEMS[11111] = nil, nil, nil
+
 io.write("== Comforts ==\n")
 
 -- Straight off the toc, so a module added to the addon is tested here

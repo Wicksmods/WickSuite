@@ -735,8 +735,12 @@ if MODERN then
             if type(id) == "number" and S.ITEMS and S.ITEMS[id] then
                 local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[item %d]|h|r"):format(id, id)
                 local e = S.ITEMS[id]
-                return e.name or ("item %d"):format(id), link, 3, 1, 0, e.type or "Armor", e.sub or "", e.stack or 1, "", 134414,
-                       0, 4, 2, 1, 0, nil, false, true
+                -- quality is the third return and sellPrice the eleventh;
+                -- a staged item gets to decide both, so a test can be a
+                -- grey worth forty copper.
+                return e.name or ("item %d"):format(id), link, e.quality or 3, 1, 0,
+                       e.type or "Armor", e.sub or "", e.stack or 1, e.equipLoc or "", 134414,
+                       e.sellPrice or 0, e.classID or 4, e.subClassID or 2, 1, 0, nil, false, true
             end
             local name = CLASS == "MAGE" and "Conjured Spring Water" or "Hearthstone"
             -- Per id even in the catch-all. One shared link for every
@@ -926,7 +930,7 @@ else
         local e = S.ITEMS and S.ITEMS[id]
         if e then
             local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[%s]|h|r"):format(id, e.name or ("item " .. id))
-            return e.name or ("item " .. id), link, 3, 1, 0, e.type or "Armor", e.sub or "", e.stack or 1, e.equipLoc or "", 134414, 0, e.classID or 4, e.subClassID or 2, 1, 0, nil, false
+            return e.name or ("item " .. id), link, e.quality or 3, 1, 0, e.type or "Armor", e.sub or "", e.stack or 1, e.equipLoc or "", 134414, e.sellPrice or 0, e.classID or 4, e.subClassID or 2, 1, 0, nil, false
         end
         local name = CLASS == "ROGUE" and "Instant Poison" or "Hearthstone"
         return name, ITEM_LINK, 1, 1, 0, "Consumable", "Consumable", 1, "",
