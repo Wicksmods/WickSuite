@@ -23,7 +23,7 @@ local function try(label, fn)
 end
 
 local CORE_FILES = { "LibStub.lua", "Core.lua", "Client.lua", "Restrict.lua", "Dialect.lua", "Locale.lua",
-    "Chrome.lua", "Profiles.lua", "Options.lua", "Launcher.lua", "Version.lua",
+    "Chrome.lua", "Profiles.lua", "Store.lua", "Options.lua", "Launcher.lua", "Version.lua",
     "Talents.lua", "Checklist.lua", "Racials.lua", "Cooldowns.lua", "Kit.lua" }
 
 io.write("== load WickCore (", MODE, ") ==\n")
@@ -615,6 +615,17 @@ if CA then
     check(frames.driver:IsShown(), "and runs again when there is")
     db.classColorHealth = false
     frames:Apply()
+
+    -- The party and raid setting is a console variable and only that.
+    -- Asking CompactRaidFrameContainer to refresh from our execution
+    -- leaves a tainted needsUpdate on every compact frame, and their
+    -- OnUpdate then compares a secret colour in our name.
+    local poked = false
+    _G.CompactRaidFrameContainer = { TryUpdate = function() poked = true end }
+    check(frames:SetRaidClassColor(true), "the raid frame class colour setting is written")
+    check(S.CVARS["raidFramesDisplayClassColor"] == "1", "as the game's own variable")
+    check(not poked, "and their container is never asked to refresh by us")
+    _G.CompactRaidFrameContainer = nil
 
     -- Moving frames is Edit Mode's job, not ours.
     _G.EditModeManagerFrame = S.newMock("Frame")

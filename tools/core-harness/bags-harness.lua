@@ -15,7 +15,7 @@ end
 
 io.write("== load WickCore + WicksBags (", MODE, ") ==\n")
 S.loadAddon(CORE_DIR, "WickCore", { "LibStub.lua", "Core.lua", "Client.lua", "Restrict.lua", "Dialect.lua",
-    "Locale.lua", "Chrome.lua", "Profiles.lua", "Options.lua", "Launcher.lua", "Version.lua" })
+    "Locale.lua", "Chrome.lua", "Profiles.lua", "Store.lua", "Options.lua", "Launcher.lua", "Version.lua" })
 S.fire("ADDON_LOADED", "WickCore")
 
 -- Pre-seed an old-layout saved file to exercise the migration.

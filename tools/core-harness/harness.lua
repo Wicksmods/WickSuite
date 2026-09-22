@@ -17,7 +17,7 @@ end
 -- ---------- load the library -------------------------------------------
 io.write("== load (", MODE, ") ==\n")
 S.loadAddon(ADDON_DIR, "WickCore", { "LibStub.lua", "Core.lua", "Client.lua", "Restrict.lua", "Dialect.lua",
-    "Locale.lua", "Chrome.lua", "Theme.lua", "Profiles.lua", "Options.lua", "Launcher.lua", "Version.lua",
+    "Locale.lua", "Chrome.lua", "Theme.lua", "Profiles.lua", "Store.lua", "Options.lua", "Launcher.lua", "Version.lua",
     "Talents.lua", "Checklist.lua", "Racials.lua", "Cooldowns.lua", "Kit.lua" })
 check(type(WickCore) == "table", "WickCore global")
 local Core = WickCore
@@ -356,6 +356,131 @@ A:RegisterSlash(function(self, msg) got = msg end, "/wtest", "/wt")
 check(SLASH_WICK_WICKSTEST1 == "/wtest" and SLASH_WICK_WICKSTEST2 == "/wt", "slash globals")
 SlashCmdList.WICK_WICKSTEST("  hello  ")
 check(got == "hello", "slash handler trims and receives message")
+
+-- ---------- store -----------------------------------------------------------
+-- The Forever beta writes saved variables at logout and hands nothing back
+-- at load. Everything below is that client: no saved variable was ever
+-- handed over in this run, so the store is the only thing standing
+-- between a setting and defaults.
+io.write("== store ==\n")
+local Store = Core.Store
+check(type(Store) == "table", "Core.Store exists")
+check(A.db.handedOver == false, "the client handed nothing over for the product")
+-- The theme section above re-bound WickCore's own db against a global it
+-- had already populated, to test "init never ran". On the real client
+-- WickCoreDB is nil at binding; put the decision input back to that.
+Core.self.db.handedOver = false
+Store.enabled, Store.reason = nil, nil
+check(Store:Decide() == true, "so the store decides to run: " .. tostring(Store.reason))
+
+-- The encoding is a faithful round trip and always the same text for the
+-- same table, because "did anything change" is a string compare.
+local sample = { profiles = { Default = { locked = true, name = "Wick|s", note = "two\nlines", n = 3.5, list = { "x", "y" } } },
+                 profileKeys = { ["A - R"] = "Default" }, keyMode = "char", global = { seen = 7 }, char = {} }
+local enc1 = Store:Encode(sample)
+local enc2 = Store:Encode(sample)
+check(enc1 == enc2, "encoding is deterministic")
+local back = Store:Decode(enc1)
+check(back and back.profiles.Default.name == "Wick|s" and back.profiles.Default.note == "two\nlines"
+    and back.profiles.Default.n == 3.5 and back.profiles.Default.list[2] == "y" and back.global.seen == 7,
+    "and round-trips strings with pipes and newlines, numbers, booleans, lists")
+check(Store.b64dec(Store.b64enc(enc1)) == enc1, "base64 round-trips it")
+
+-- A macro the player made is sacred.
+S.MACROS.acct = { { name = "ss", icon = 134400, body = "#showtooltip\n/cast Serpent Sting" } }
+S.MACROS.char = {}
+
+A.db.profile.locked = true
+A.db.profile.nested.a = 42
+local ok, n = Store:Save(true)
+check(ok and n >= 1, "settings are written into macros: " .. tostring(n))
+check(S.MACROS.acct[1].name == "ss" and S.MACROS.acct[1].body:find("Serpent"), "the player's own macro is untouched and still first")
+local mine = Store.Ours()
+local count = 0
+for _ in pairs(mine) do count = count + 1 end
+check(count == n, "and exactly that many WickCfg macros exist")
+for _, m in pairs(mine) do
+    check(#m.body <= 255, "no body over the client's limit: " .. #m.body)
+    break
+end
+
+-- Unchanged settings write nothing. This is what keeps the once-a-minute
+-- sweep from hammering the server.
+local before = S.MACRO_WRITES
+local ok2, n2 = Store:Save()
+check(ok2 and n2 == 0 and S.MACRO_WRITES == before, "saving again with nothing changed writes nothing")
+
+A.db.profile.locked = false
+Store:Dirty()          -- C_Timer.After runs at once in the stub
+check(S.MACRO_WRITES > before, "a change marked dirty is written")
+
+-- Combat: the client refuses, so the write waits for it to end.
+A.db.profile.nested.a = 43
+COMBAT = true
+local okc, why = Store:Save()
+check(not okc and why == "in combat", "nothing is written in combat")
+COMBAT = false
+before = S.MACRO_WRITES
+fire("PLAYER_REGEN_ENABLED")
+check(S.MACRO_WRITES > before, "and it is written when combat ends")
+
+-- Now the part that matters: a relog. The global is gone, the macros are
+-- what the server hands back, and a fresh addon reading the same saved
+-- variable has to come up with the settings it left with.
+WicksTestDB = nil
+Store.cache, Store.cacheCount, Store.stamp = nil, nil, nil
+Store.restored = {}
+local fired = false
+local B = Core:NewAddon("WicksTestReborn", {
+    title = "Wick's Test Reborn", savedVar = "WicksTestDB",
+    defaults = { profile = { locked = false, nested = { a = 1 }, list = { "x" } }, global = { seen = 0 } },
+})
+function B:OnInitialize()
+    check(self.db.profile.nested.a == 1, "before login the reborn addon sees defaults")
+    self.db:On("OnProfileChanged", function() fired = true end)
+end
+local seenAtEnable
+function B:OnEnable() seenAtEnable = self.db.profile.nested.a end
+fire("ADDON_LOADED", "WicksTestReborn")
+check(B.db.profile.locked == false and B.db.profile.nested.a == 43, "after enable it has the settings it logged out with")
+check(seenAtEnable == 43, "and OnEnable already saw them, not the defaults")
+check(fired, "OnProfileChanged fired so a product re-applies")
+check(WicksTestDB == B.db.sv, "the global points at the restored table, so logout writes it")
+check(Store.restored.WicksTestReborn == "WicksTestDB", "the store records what it put back, per addon")
+
+-- The macros were not there yet. On a slow login they arrive after the
+-- addon enabled; the store has to notice and put things back then.
+WicksTestDB = nil
+Store.cache, Store.restored, Store.waiting = nil, {}, nil
+local held = S.MACROS.acct
+S.MACROS.acct = {}
+local C2 = Core:NewAddon("WicksTestLate", {
+    title = "Late", savedVar = "WicksTestDB",
+    defaults = { profile = { locked = false, nested = { a = 1 } } },
+})
+fire("ADDON_LOADED", "WicksTestLate")
+check(C2.db.profile.nested.a == 1, "with no macros yet the addon runs on defaults")
+check(Store.waiting == true, "and the store knows it is waiting")
+S.MACROS.acct = held
+check(Store:Poll() == true, "when they arrive the poll sees them")
+check(C2.db.profile.nested.a == 43, "and the late addon gets its settings")
+
+-- Off means off: when the client does hand the table over, the store
+-- must not put an old copy on top of it.
+local handed = Core:NewAddon("WicksTestHanded", { savedVar = "WicksHandedDB", defaults = { profile = { v = 1 } } })
+WicksHandedDB = { profiles = { Default = { v = 99 } }, profileKeys = {}, global = {}, char = {}, keyMode = "char" }
+fire("ADDON_LOADED", "WicksTestHanded")
+check(handed.db.handedOver == true, "a table the client supplied is recognised as such")
+check(not Store:RestoreFor(handed) and handed.db.profile.v == 99, "and the store leaves it alone")
+
+-- Clearing removes ours and only ours.
+local removed = Store:Clear()
+check(removed >= 1 and #S.MACROS.acct == 1 and S.MACROS.acct[1].name == "ss", "clear removes every WickCfg macro and nothing else")
+
+-- The slash command speaks.
+S.CHAT = {}
+SlashCmdList.WICK_WICKCORE("store")
+check(#S.CHAT >= 3, "/wickcore store reports")
 
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end

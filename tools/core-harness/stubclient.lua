@@ -499,6 +499,62 @@ function UnitPower(unit, ptype)
     return 650
 end
 C_Timer = { After = function(_, fn) fn() end, NewTicker = function() return { Cancel = function() end } end }
+-- Macros. Two packed lists, account then character, addressed by a
+-- single slot number with the character list starting after the account
+-- maximum, exactly as the client does it. GetMacroIndexByName searches
+-- the account list only, because that is what this build does. Every
+-- create or edit is counted so a test can tell "saved" from "noticed
+-- nothing changed".
+S.MACROS = S.MACROS or { acct = {}, char = {} }
+S.MACRO_WRITES = 0
+Constants = Constants or {}
+Constants.MacroConsts = Constants.MacroConsts or { MAX_ACCOUNT_MACROS = 120, MAX_CHARACTER_MACROS = 30 }
+local MACRO_BASE = Constants.MacroConsts.MAX_ACCOUNT_MACROS
+local function macroAt(slot)
+    if slot <= MACRO_BASE then return S.MACROS.acct, slot end
+    return S.MACROS.char, slot - MACRO_BASE
+end
+function GetNumMacros() return #S.MACROS.acct, #S.MACROS.char end
+function GetMacroInfo(slot)
+    if type(slot) ~= "number" then return nil end
+    local list, i = macroAt(slot)
+    local m = list[i]
+    if not m then return nil end
+    return m.name, m.icon, m.body, list == S.MACROS.char
+end
+function GetMacroIndexByName(name)
+    for i, m in ipairs(S.MACROS.acct) do if m.name == name then return i end end
+    return 0
+end
+function CreateMacro(name, icon, body, perChar)
+    if COMBAT then error("Interface action failed because of an AddOn", 2) end
+    local list = perChar == true and S.MACROS.char or S.MACROS.acct
+    local cap = perChar == true and Constants.MacroConsts.MAX_CHARACTER_MACROS or MACRO_BASE
+    if #list >= cap then return nil end
+    if type(body) == "string" and #body > 255 then error("macro body too long", 2) end
+    list[#list + 1] = { name = name, icon = icon, body = body }
+    S.MACRO_WRITES = S.MACRO_WRITES + 1
+    return perChar == true and (MACRO_BASE + #list) or #list
+end
+function EditMacro(slot, name, icon, body)
+    if COMBAT then error("Interface action failed because of an AddOn", 2) end
+    local list, i = macroAt(slot)
+    local m = list[i]
+    if not m then return end
+    if name then m.name = name end
+    if icon then m.icon = icon end
+    if body then
+        if #body > 255 then error("macro body too long", 2) end
+        m.body = body
+    end
+    S.MACRO_WRITES = S.MACRO_WRITES + 1
+end
+function DeleteMacro(slot)
+    if COMBAT then error("Interface action failed because of an AddOn", 2) end
+    local list, i = macroAt(slot)
+    if list[i] then table.remove(list, i) end
+end
+
 -- Console variables. S.CVARS survives a simulated reload, the way the
 -- real ones survive a session, which is what the settings store relies on.
 S.CVARS = S.CVARS or {}
