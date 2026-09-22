@@ -142,6 +142,17 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 * Every locked Wick bar or window moves when you hold Shift and drag.
   The lock stops an accidental nudge, not you.
 
+Fixed since the last package
+----------------------------
+* The /who panel opened with its close button and side tabs drawn and
+  nothing in the middle. Comforts was claiming a frame name before the
+  group finder had loaded, so Blizzard could not build the real one.
+* Settings kept in macros are no longer lost when you play a character
+  that does not load all the same addons. Anything the store holds for
+  an addon that is not loaded is now carried through untouched.
+* The unit tooltip's "Targeting" line no longer tests a secret value for
+  truth, which the client was blocking.
+
 
 KNOWN ISSUES
 ------------
