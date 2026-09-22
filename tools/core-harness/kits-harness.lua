@@ -734,6 +734,21 @@ check(Bd.listings[1] and Bd.listings[1].message:find("Linen Cloth", 1, true) ~= 
     "a link reads as the item name: " .. tostring(Bd.listings[1] and Bd.listings[1].message))
 check(Bd.listings[1].message:find("|c") == nil, "with no markup left in it")
 
+-- A long advert ran off the panel and over whatever was behind it.
+-- The text is bounded by where the age begins and never wraps.
+THNS.UI:Build()
+THNS.UI.panel:Show()
+THNS.UI:Select("board")
+local prow = THNS.UI.panel.rows[1]
+check(prow ~= nil, "a board row was drawn")
+if prow then
+    check(prow.left.__wordWrap == false, "a listing is one line, never wrapped")
+    local bounded = false
+    for _, pt in ipairs(prow.left.__points or {}) do if pt[1] == "RIGHT" then bounded = true end end
+    check(bounded, "and is bounded on the right so it cannot overflow")
+end
+THNS.UI.panel:Hide()
+
 -- Anything nobody repeats ages off.
 Bd.listings[1].lastSeen = time() - (25 * 60)
 check(Bd:Prune() == 1, "a listing nobody repeated for twenty minutes drops off")
@@ -742,6 +757,17 @@ check(#Bd.listings == 0, "leaving the board empty")
 -- The bar has a control. A tracker you cannot start is an ornament.
 local bar = _G.WicksTradeHallBar
 check(bar.go ~= nil, "the session bar has a start button")
+-- Drawn, not typed: this client's font has no play or stop glyph and
+-- the bar showed an empty box.
+check(bar.go.rows ~= nil and #bar.go.rows == 8, "built from textures rather than a character")
+bar.go:SetShape(false, { 0.31, 0.78, 0.47 })
+local widths = {}
+for i, t in ipairs(bar.go.rows) do widths[i] = t.__w end
+check(widths[1] < widths[4] and widths[4] > widths[8], "stopped, it is a triangle: " .. table.concat(widths, ","))
+bar.go:SetShape(true, { 0.88, 0.29, 0.29 })
+local same = true
+for _, t in ipairs(bar.go.rows) do if t.__w ~= bar.go.rows[1].__w then same = false end end
+check(same, "running, it is a square")
 local wasActive = Lg.active
 bar.go.__scripts.OnClick(bar.go)
 check(Lg.active ~= wasActive, "clicking it starts or stops the session")

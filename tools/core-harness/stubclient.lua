@@ -74,6 +74,7 @@ local function newMock(kind, name)
         elseif k == "SetShown" then return function(_, v) if v then t:Show() else t:Hide() end end
         elseif k == "SetSize" then return function(_, w, h) t.__w, t.__h = w, h end
         elseif k == "SetWidth" then return function(_, w) t.__w = w end
+        elseif k == "SetWordWrap" then return function(_, v) t.__wordWrap = v and true or false end
         elseif k == "SetHeight" then return function(_, h) t.__h = h end
         elseif k == "GetWidth" then return function() return t.__w end
         elseif k == "GetHeight" then return function() return t.__h end
