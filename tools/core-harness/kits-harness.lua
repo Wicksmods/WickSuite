@@ -410,19 +410,36 @@ if BADDON then
     for _, r in ipairs(wrows) do if r:IsShown() then wshown = wshown + 1 end end
     check(wshown == 1, "a roster row per animal, got " .. wshown)
     check(wrows[1].hl:IsShown(), "the selected one is highlighted")
-    check(wrows[1].tag:GetText() == "out", "and tagged as out")
+    check(tostring(wrows[1].tag:GetText()):find("out") ~= nil, "and tagged as out: " .. tostring(wrows[1].tag:GetText()))
+
+    -- Icons. The game names its own pet icons after the family, so the
+    -- path is derived; only the families whose file name differs from the
+    -- printed name are listed out.
+    check(Bst:FamilyIcon("Bear") == "Interface\\Icons\\Ability_Hunter_Pet_Bear",
+        "a family icon is derived from its name: " .. Bst:FamilyIcon("Bear"))
+    check(Bst:FamilyIcon("Wind Serpent") == "Interface\\Icons\\Ability_Hunter_Pet_WindSerpent",
+        "a two word family loses the space: " .. Bst:FamilyIcon("Wind Serpent"))
+    check(Bst:FamilyIcon(nil):find("Ability_Hunter_BeastCall") ~= nil,
+        "and an unknown family falls back rather than asking for a file that is not there")
+    check(wrows[1].icon.__tex == Bst:FamilyIcon("Bear"),
+        "the roster row carries it: " .. tostring(wrows[1].icon.__tex))
     check(tostring(win.detail.name:GetText()) == "Grizzle", "the page names it: " .. tostring(win.detail.name:GetText()))
-    check(tostring(win.detail.diet:GetText()):find("Eats:") ~= nil, "and says what it eats")
+    check(tostring(win.detail.diet:GetText()):find("Fish") ~= nil,
+        "and says what it eats: " .. tostring(win.detail.diet:GetText()))
+    check(win.detail.vLevel:GetText() ~= "-", "with its level in its own cell: " .. tostring(win.detail.vLevel:GetText()))
+    check(win.detail.dot:IsShown() and win.detail.outText:IsShown(), "and marked out while it is out")
+    check(win.detail.portraitFrame:IsShown(), "the portrait is framed")
     check(win.detail.empty:IsShown() == false, "with no empty notice while there is an animal")
 
     -- Bear was never recorded in the family atlas, so there is nothing to
     -- join; a Wolf was. The page has to handle both.
-    check(tostring(win.detail.abil:GetText()) == "", "no family abilities recorded, so nothing claimed")
+    check(tostring(win.detail.abilHead:GetText()):find("NOT TAMED") ~= nil,
+        "an unrecorded family says so rather than claiming it brings nothing: " .. tostring(win.detail.abilHead:GetText()))
     S.PET_NAME, S.PET_FAMILY = "Fang", "Wolf"
     Bst:Record()
     Bst.selectedKey = Bst:Key("Fang", "Wolf")
     Bst:RefreshWindow()
-    check(tostring(win.detail.abilHead:GetText()):find("Wolf") ~= nil,
+    check(tostring(win.detail.abilHead:GetText()):find("WOLF") ~= nil,
         "a recorded family is named: " .. tostring(win.detail.abilHead:GetText()))
     check(tostring(win.detail.abil:GetText()):find("Furious Howl") ~= nil,
         "with what it brings: " .. tostring(win.detail.abil:GetText()))
