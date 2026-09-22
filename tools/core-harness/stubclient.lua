@@ -623,6 +623,26 @@ local function slotHasItem(bag, slot) return slot <= 3 end
 local ITEM_LINK = "|cffffffff|Hitem:6948::::::::1:::::|h[Hearthstone]|h|r"
 
 S.BAGS_SCANNED = {}
+-- S.BAG_FAMILY[bag] is the family bit the client reports for a special
+-- bag: 1 quiver, 2 ammo pouch, 4 soul bag. S.SLOT_ITEMS[bag][slot] stages
+-- an item { id, count, link, icon } in place of the default Hearthstone.
+S.BAG_FAMILY = S.BAG_FAMILY or {}
+S.SLOT_ITEMS = S.SLOT_ITEMS or {}
+local function staged(bag, slot)
+    local b = S.SLOT_ITEMS[bag]
+    return b and b[slot] or nil
+end
+local function stagedLink(it)
+    if it.link then return it.link end
+    local e = S.ITEMS and S.ITEMS[it.id]
+    local name = (e and e.name) or ("item " .. it.id)
+    return ("|cffffffff|Hitem:%d::::::::20:::::::::|h[%s]|h|r"):format(it.id, name)
+end
+-- WoW ships a bit library; plain Lua does not.
+bit = bit or {
+    band = function(a, b) local r, m = 0, 1 while a > 0 and b > 0 do if a % 2 == 1 and b % 2 == 1 then r = r + m end a, b, m = math.floor(a / 2), math.floor(b / 2), m * 2 end return r end,
+    bor  = function(a, b) local r, m = 0, 1 while a > 0 or b > 0 do if a % 2 == 1 or b % 2 == 1 then r = r + m end a, b, m = math.floor(a / 2), math.floor(b / 2), m * 2 end return r end,
+}
 local function numSlots(bag)
     S.BAGS_SCANNED[bag] = (S.BAGS_SCANNED[bag] or 0) + 1
     if bag == 5 and MODERN then return 12 end   -- a reagent bag is equipped
@@ -684,7 +704,8 @@ if MODERN then
             if type(id) == "number" and S.UNCACHED and S.UNCACHED[id] then return nil end
             if type(id) == "number" and S.ITEMS and S.ITEMS[id] then
                 local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[item %d]|h|r"):format(id, id)
-                return ("item %d"):format(id), link, 3, 1, 0, "Armor", "", 1, "", 134414,
+                local e = S.ITEMS[id]
+                return e.name or ("item %d"):format(id), link, 3, 1, 0, e.type or "Armor", e.sub or "", e.stack or 1, "", 134414,
                        0, 4, 2, 1, 0, nil, false, true
             end
             local name = CLASS == "MAGE" and "Conjured Spring Water" or "Hearthstone"
@@ -749,13 +770,28 @@ if MODERN then
     C_SpellBook = { IsSpellKnown = function() return not S.ALL_UNKNOWN end }
     C_Container = {
         GetContainerNumSlots = numSlots,
-        GetContainerNumFreeSlots = function(bag) return math.max(0, numSlots(bag) - 3), 0 end,
+        GetContainerNumFreeSlots = function(bag) return math.max(0, numSlots(bag) - 3), S.BAG_FAMILY[bag] or 0 end,
         GetContainerItemInfo = function(bag, slot)
+            local it = staged(bag, slot)
+            if it then
+                return { iconFileID = it.icon or 132382, stackCount = it.count or 1, isLocked = false, quality = 1, hyperlink = stagedLink(it), itemID = it.id, isBound = false }
+            end
+            if S.SLOT_ITEMS[bag] then return nil end   -- a staged bag holds only what was staged
             if not slotHasItem(bag, slot) or slot > numSlots(bag) then return nil end
             return { iconFileID = 134414, stackCount = 1, isLocked = false, quality = 1, hyperlink = ITEM_LINK, itemID = 6948, isBound = true }
         end,
-        GetContainerItemLink = function(bag, slot) if slotHasItem(bag, slot) and slot <= numSlots(bag) then return ITEM_LINK end end,
-        GetContainerItemID = function(bag, slot) if slotHasItem(bag, slot) and slot <= numSlots(bag) then return 6948 end end,
+        GetContainerItemLink = function(bag, slot)
+            local it = staged(bag, slot)
+            if it then return stagedLink(it) end
+            if S.SLOT_ITEMS[bag] then return nil end
+            if slotHasItem(bag, slot) and slot <= numSlots(bag) then return ITEM_LINK end
+        end,
+        GetContainerItemID = function(bag, slot)
+            local it = staged(bag, slot)
+            if it then return it.id end
+            if S.SLOT_ITEMS[bag] then return nil end
+            if slotHasItem(bag, slot) and slot <= numSlots(bag) then return 6948 end
+        end,
         UseContainerItem = function() end,
         PickupContainerItem = function() end,
         ContainerIDToInventoryID = function(bag) return 19 + bag end,
@@ -856,11 +892,22 @@ else
     -- A legacy client has no consumable subclass enum, so a rogue's bag
     -- item is named like a poison to exercise the name fallback.
     function GetItemInfo(id)
+        -- Staged items answer for themselves here too; the eighth return is the stack size.
+        local e = S.ITEMS and S.ITEMS[id]
+        if e then
+            local link = ("|cffffffff|Hitem:%d::::::::20:::::::::|h[%s]|h|r"):format(id, e.name or ("item " .. id))
+            return e.name or ("item " .. id), link, 3, 1, 0, e.type or "Armor", e.sub or "", e.stack or 1, e.equipLoc or "", 134414, 0, e.classID or 4, e.subClassID or 2, 1, 0, nil, false
+        end
         local name = CLASS == "ROGUE" and "Instant Poison" or "Hearthstone"
         return name, ITEM_LINK, 1, 1, 0, "Consumable", "Consumable", 1, "",
             "Interface\\Icons\\INV_Misc_Rune_01", 0, 15, 0, 1, 0, nil, false
     end
-    function GetItemInfoInstant(id) return 6948, "Miscellaneous", "Junk", "", 134414, 15, 0 end
+    function GetItemInfoInstant(id)
+        -- Staged items answer for themselves on the legacy client too.
+        local e = S.ITEMS and S.ITEMS[id]
+        if e then return id, e.type or "Armor", e.sub or "", e.equipLoc or "", 134414, e.classID or 4, e.subClassID or 2 end
+        return 6948, "Miscellaneous", "Junk", "", 134414, 15, 0
+    end
     function GetItemCount(id) return id == 17030 and 0 or 1 end
     function GetItemIcon() return "Interface\\Icons\\INV_Misc_Rune_01" end
     function GetItemStats(link) return { ITEM_MOD_STAMINA_SHORT = 10 } end
@@ -876,13 +923,26 @@ else
     function GetSpellCooldown() return 0, 0, 1, 1 end
     function IsSpellKnown() return not S.ALL_UNKNOWN end
     GetContainerNumSlots = numSlots
-    function GetContainerNumFreeSlots(bag) return math.max(0, numSlots(bag) - 3), 0 end
+    function GetContainerNumFreeSlots(bag) return math.max(0, numSlots(bag) - 3), S.BAG_FAMILY[bag] or 0 end
     function GetContainerItemInfo(bag, slot)
+        local it = staged(bag, slot)
+        if it then return it.icon or 132382, it.count or 1, false, 1, false, false, stagedLink(it), false, false, it.id, false end
+        if S.SLOT_ITEMS[bag] then return nil end
         if not slotHasItem(bag, slot) or slot > numSlots(bag) then return nil end
         return "Interface\\Icons\\INV_Misc_Rune_01", 1, false, 1, false, false, ITEM_LINK, false, false, 6948, true
     end
-    function GetContainerItemLink(bag, slot) if slotHasItem(bag, slot) and slot <= numSlots(bag) then return ITEM_LINK end end
-    function GetContainerItemID(bag, slot) if slotHasItem(bag, slot) and slot <= numSlots(bag) then return 6948 end end
+    function GetContainerItemLink(bag, slot)
+        local it = staged(bag, slot)
+        if it then return stagedLink(it) end
+        if S.SLOT_ITEMS[bag] then return nil end
+        if slotHasItem(bag, slot) and slot <= numSlots(bag) then return ITEM_LINK end
+    end
+    function GetContainerItemID(bag, slot)
+        local it = staged(bag, slot)
+        if it then return it.id end
+        if S.SLOT_ITEMS[bag] then return nil end
+        if slotHasItem(bag, slot) and slot <= numSlots(bag) then return 6948 end
+    end
     function UseContainerItem() end
     function PickupContainerItem() end
     function ContainerIDToInventoryID(bag) return 19 + bag end

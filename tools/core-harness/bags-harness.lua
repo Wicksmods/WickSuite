@@ -186,6 +186,58 @@ io.write("== missing globals reached during the run ==\n")
 local missing = S.missingReport()
 io.write("  ", table.concat(missing, " "), "\n")
 
+-- ---------- quiver ----------------------------------------------------------
+-- Ammunition collapses to one tile with a count. A hunter reads 1768/2000
+-- at a glance; 1768 on its own is a number they have to think about. The
+-- limit is what the bags built for it hold: every slot of every quiver or
+-- ammo pouch, times the stack size. No such bag, no limit shown.
+io.write("== quiver ==\n")
+S.ITEMS = S.ITEMS or {}
+S.ITEMS[2512] = { name = "Rough Arrow", type = "Projectile", sub = "Arrow", classID = 6, subClassID = 2, stack = 200, equipLoc = "" }
+S.BAG_FAMILY[1] = 1                      -- bag 1 is a quiver (16 slots in the stub)
+S.SLOT_ITEMS[1] = {}
+for slot = 1, 8 do S.SLOT_ITEMS[1][slot] = { id = 2512, count = 200 } end
+S.SLOT_ITEMS[1][9] = { id = 2512, count = 168 }
+check(WB.Categories:GetCategory(2512, "|Hitem:2512|h[Rough Arrow]|h") == "Projectile",
+    "arrows are Projectile: " .. tostring(WB.Categories:GetCategory(2512, "x")))
+
+local function ammoTile()
+    for _, f in ipairs(S.frames) do
+        if f._cat == "Projectile" and f.__shown then return f end
+    end
+end
+if WB.Bag.panel._search then WB.Bag.panel._search:SetText("") end
+-- Freshly staged arrows would land in Recent, as newly looted ones do in game,
+-- and Recent is not a bulk tile. Turn the highlight off so they sort by kind.
+local hadHighlights = WB.db.options.showHighlights
+WB.db.options.showHighlights = false
+-- Refresh is a no-op while the panel is hidden, and an earlier section hid it.
+local okQ, errQ = pcall(function() WB.Bag:Show(); WB.Bag:Refresh() end)
+check(okQ, "refresh with a quiver equipped " .. tostring(errQ or ""))
+local tile = ammoTile()
+check(tile ~= nil, "the ammunition tile is on screen")
+if tile then
+    check(tile._count == 1768, "it counts every arrow: " .. tostring(tile._count))
+    check(tile._capacity == 3200, "and knows the quiver holds sixteen stacks of two hundred: " .. tostring(tile._capacity))
+    check(tile._countTxt.__text == "1768/3200", "the badge reads count over capacity: " .. tostring(tile._countTxt.__text))
+    check(tile._holder == "quiver", "and the tooltip will call it a quiver")
+end
+
+-- Arrows loose in an ordinary bag: a count, no invented limit.
+S.BAG_FAMILY[1] = nil
+local okP = pcall(function() WB.Bag:Show(); WB.Bag:Refresh() end)
+tile = ammoTile()
+check(okP and tile ~= nil, "refresh without a quiver")
+if tile then
+    check(tile._capacity == nil, "no quiver, no capacity")
+    check(tile._countTxt.__text == "1.8k", "and the badge is the plain abbreviated count: " .. tostring(tile._countTxt.__text))
+end
+
+S.SLOT_ITEMS[1] = nil
+S.ITEMS[2512] = nil
+WB.db.options.showHighlights = hadHighlights
+pcall(function() WB.Bag:Refresh() end)
+
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end
 io.write("PASS\n")
