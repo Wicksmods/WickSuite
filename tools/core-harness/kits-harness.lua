@@ -480,17 +480,33 @@ if BADDON then
         "and says when one is not")
     howl.__scripts.OnLeave(howl)
 
-    -- An atlas recorded before icons were captured still has the names, and
-    -- a name beats a blank row.
+    -- An atlas filed before icons were captured has the names and nothing
+    -- else, and only the family of the pet that is out can be read again.
+    -- Rather than make the player summon every animal in the stable, the
+    -- name is handed to the client, which knows the spell either way.
     local wolfRec = BNS.A.db.global.families["Wolf"]
     local keptIcons = wolfRec.icons
     wolfRec.icons = {}
     Bst:RefreshWindow()
     local stillShown = 0
     for _, b in ipairs(chips) do if b:IsShown() then stillShown = stillShown + 1 end end
-    check(stillShown == 0, "no icons recorded, so no chips, got " .. stillShown)
+    check(stillShown == 4, "an atlas with no icons still draws, resolved by name, got " .. stillShown)
+    check(win.detail.abil:IsShown() == false, "so there is nothing left to spell out")
+    -- A guess must never be written back, or it would outrank the real
+    -- read the next time the pet is out.
+    check(next(wolfRec.icons) == nil, "and the guess is not written into the atlas")
+
+    -- A name the client cannot place still has to say something.
+    S.UNKNOWN_SPELLS = { ["Furious Howl"] = true, ["Bite"] = true, ["Growl"] = true, ["Avoidance"] = true }
+    BNS.beasts:ForgetResolved()
+    Bst:RefreshWindow()
+    local noneShown = 0
+    for _, b in ipairs(chips) do if b:IsShown() then noneShown = noneShown + 1 end end
+    check(noneShown == 0, "nothing the client can place, so no chips, got " .. noneShown)
     check(win.detail.abil:IsShown() and tostring(win.detail.abil:GetText()):find("Furious Howl") ~= nil,
         "and it falls back to naming them: " .. tostring(win.detail.abil:GetText()))
+    S.UNKNOWN_SPELLS = nil
+    BNS.beasts:ForgetResolved()
     wolfRec.icons = keptIcons
     Bst:RefreshWindow()
 

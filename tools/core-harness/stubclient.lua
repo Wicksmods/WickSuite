@@ -925,6 +925,7 @@ if MODERN then
         return { name = e[1], isPassive = e[2] == "passive", iconID = e[3], spellID = e[4] }
     end
     C_Spell.GetSpellInfo = function(idOrName)
+        if S.UNKNOWN_SPELLS and S.UNKNOWN_SPELLS[idOrName] then return nil end
         local names = { [133] = "Fireball", [783] = "Travel Form", [768] = "Cat Form", [1066] = "Aquatic Form", [16864] = "Omen of Clarity" }
         local name = type(idOrName) == "string" and idOrName or (names[idOrName] or ("Spell " .. tostring(idOrName)))
         local id = type(idOrName) == "number" and idOrName or (name == "Searing Totem" and 3599 or 133)
@@ -985,7 +986,10 @@ else
     function GetPetLoyalty() return PET.loyalty end
     function GetPetTrainingPoints() return PET.total, PET.used end
     function GetPetFoodTypes() return unpack(PET.diet) end
-    function GetSpellInfo(id) return "Fireball", "Rank 1", "Interface\\Icons\\Spell_Fire_FlameBolt", 3500, 0, 35, 133 end
+    function GetSpellInfo(id)
+        if S.UNKNOWN_SPELLS and S.UNKNOWN_SPELLS[id] then return nil end
+        return "Fireball", "Rank 1", "Interface\\Icons\\Spell_Fire_FlameBolt", 3500, 0, 35, 133
+    end
     function GetSpellTexture() return "Interface\\Icons\\Spell_Fire_FlameBolt" end
     function GetSpellCooldown() return 0, 0, 1, 1 end
     function IsSpellKnown() return not S.ALL_UNKNOWN end
