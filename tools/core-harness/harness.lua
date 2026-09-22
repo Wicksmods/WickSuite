@@ -370,42 +370,63 @@ check(A.db.handedOver == false, "the client handed nothing over for the product"
 -- had already populated, to test "init never ran". On the real client
 -- WickCoreDB is nil at binding; put the decision input back to that.
 Core.self.db.handedOver = false
-Store.enabled, Store.reason = nil, nil
-check(Store:Decide() == true, "so the store decides to run: " .. tostring(Store.reason))
+Store.enabled, Store.reason, Store.optedIn = nil, nil, nil
+
+-- Off until asked. Macros are the player's screen space.
+S.MACROS.acct = { { name = "ss", icon = 134400, body = "#showtooltip\n/cast Serpent Sting" } }
+S.MACROS.char = {}
+check(Store:Needed() == true, "the client needs a store: " .. select(2, Store:Needed()))
+check(Store:Decide() == false, "but it is off until asked: " .. tostring(Store.reason))
+local okOff, whyOff = Store:Save(true)
+check(not okOff and #S.MACROS.acct == 1, "and writes nothing while off")
 
 -- The encoding is a faithful round trip and always the same text for the
 -- same table, because "did anything change" is a string compare.
-local sample = { profiles = { Default = { locked = true, name = "Wick|s", note = "two\nlines", n = 3.5, list = { "x", "y" } } },
+local sample = { profiles = { Default = { locked = true, name = "Wick|s~", note = "two\nlines\r", tab = "a\tb", n = 3.5, list = { "x", "y" } } },
                  profileKeys = { ["A - R"] = "Default" }, keyMode = "char", global = { seen = 7 }, char = {} }
 local enc1 = Store:Encode(sample)
-local enc2 = Store:Encode(sample)
-check(enc1 == enc2, "encoding is deterministic")
+check(enc1 == Store:Encode(sample), "encoding is deterministic")
 local back = Store:Decode(enc1)
-check(back and back.profiles.Default.name == "Wick|s" and back.profiles.Default.note == "two\nlines"
-    and back.profiles.Default.n == 3.5 and back.profiles.Default.list[2] == "y" and back.global.seen == 7,
-    "and round-trips strings with pipes and newlines, numbers, booleans, lists")
-check(Store.b64dec(Store.b64enc(enc1)) == enc1, "base64 round-trips it")
+check(back and back.profiles.Default.name == "Wick|s~" and back.profiles.Default.note == "two\nlines\r"
+    and back.profiles.Default.tab == "a\tb" and back.profiles.Default.n == 3.5
+    and back.profiles.Default.list[2] == "y" and back.global.seen == 7,
+    "and round-trips pipes, tildes, newlines, tabs, numbers, booleans, lists")
+local esc = Store.escape(enc1)
+check(not esc:find("[|\n\r\t]"), "the escaped body carries no pipe, newline or control character")
+check(Store.unescape(esc) == enc1, "and unescapes to exactly the payload")
+check(Store.b64dec(Store.b64enc(enc1)) == enc1, "the base64 pair still round-trips, for what older macros hold")
 
--- A macro the player made is sacred.
-S.MACROS.acct = { { name = "ss", icon = 134400, body = "#showtooltip\n/cast Serpent Sting" } }
-S.MACROS.char = {}
+-- Only what differs from the defaults is kept. A saved variable is
+-- mostly its own defaults written back on every load.
+local slimmed = Store.withoutDefaults(
+    { locked = false, nested = { a = 1, b = 2 }, list = { "x" }, extra = "mine", emptied = {} },
+    { locked = false, nested = { a = 1 }, list = { "x" }, emptied = { "gone" } })
+check(slimmed.locked == nil and slimmed.list == nil, "values equal to the default are dropped")
+check(slimmed.nested and slimmed.nested.b == 2 and slimmed.nested.a == nil, "a keyed table keeps only its differing keys")
+check(slimmed.extra == "mine", "a key with no default is kept")
+check(type(slimmed.emptied) == "table" and next(slimmed.emptied) == nil, "a list the player emptied is kept empty, not refilled")
 
+-- On.
 A.db.profile.locked = true
 A.db.profile.nested.a = 42
-local ok, n = Store:Save(true)
-check(ok and n >= 1, "settings are written into macros: " .. tostring(n))
+A.db.global.cache = { big = string.rep("z", 600) }     -- pretend a cache
+A.opts.storeExclude = { "global.cache" }
+local okOn, n = Store:TurnOn()
+check(okOn and n >= 1, "turning on writes the settings into macros: " .. tostring(n))
 check(S.MACROS.acct[1].name == "ss" and S.MACROS.acct[1].body:find("Serpent"), "the player's own macro is untouched and still first")
 local mine = Store.Ours()
-local count = 0
-for _ in pairs(mine) do count = count + 1 end
+local count, joined = 0, {}
+for i = 1, 200 do if mine[i] then count = count + 1; joined[#joined + 1] = mine[i].body end end
 check(count == n, "and exactly that many WickCfg macros exist")
 for _, m in pairs(mine) do
     check(#m.body <= 255, "no body over the client's limit: " .. #m.body)
     break
 end
+check(not table.concat(joined):find("zzzz"), "a declared cache path is not written")
+check(A.db.global.cache.big:len() == 600, "while the live table still has it")
+check(n <= 3, "a small addon's settings fit in a few macros, not dozens: " .. tostring(n))
 
--- Unchanged settings write nothing. This is what keeps the once-a-minute
--- sweep from hammering the server.
+-- Unchanged settings write nothing.
 local before = S.MACRO_WRITES
 local ok2, n2 = Store:Save()
 check(ok2 and n2 == 0 and S.MACRO_WRITES == before, "saving again with nothing changed writes nothing")
@@ -424,12 +445,12 @@ before = S.MACRO_WRITES
 fire("PLAYER_REGEN_ENABLED")
 check(S.MACRO_WRITES > before, "and it is written when combat ends")
 
--- Now the part that matters: a relog. The global is gone, the macros are
--- what the server hands back, and a fresh addon reading the same saved
--- variable has to come up with the settings it left with.
+-- A relog. The global is gone, the macros are what the server hands
+-- back, and a fresh addon reading the same saved variable has to come
+-- up with the settings it left with, defaults filled back in.
 WicksTestDB = nil
 Store.cache, Store.cacheCount, Store.stamp = nil, nil, nil
-Store.restored = {}
+Store.restored, Store.enabled, Store.optedIn = {}, nil, nil
 local fired = false
 local B = Core:NewAddon("WicksTestReborn", {
     title = "Wick's Test Reborn", savedVar = "WicksTestDB",
@@ -442,17 +463,35 @@ end
 local seenAtEnable
 function B:OnEnable() seenAtEnable = self.db.profile.nested.a end
 fire("ADDON_LOADED", "WicksTestReborn")
+check(Store:Decide() == true, "our macros being there means on, without being asked again")
 check(B.db.profile.locked == false and B.db.profile.nested.a == 43, "after enable it has the settings it logged out with")
+check(B.db.profile.list[1] == "x" and B.db.global.seen == 0, "and the defaults that were not stored are back")
 check(seenAtEnable == 43, "and OnEnable already saw them, not the defaults")
 check(fired, "OnProfileChanged fired so a product re-applies")
 check(WicksTestDB == B.db.sv, "the global points at the restored table, so logout writes it")
 check(Store.restored.WicksTestReborn == "WicksTestDB", "the store records what it put back, per addon")
 
+-- A store written by the base64 version is still readable.
+local legacy = Store.b64enc(Store:Encode({ WicksTestDB = { profiles = { Default = { nested = { a = 77 } } }, profileKeys = {}, keyMode = "char", global = {}, char = {} } }))
+S.MACROS.acct = { S.MACROS.acct[1] }
+for i = 1, math.ceil(#legacy / 240) do
+    S.MACROS.acct[#S.MACROS.acct + 1] = { name = ("WickCfg%02d"):format(i), icon = 134400, body = legacy:sub((i - 1) * 240 + 1, i * 240) }
+end
+Store.cache = nil
+local old = Store:Read()
+check(old and old.WicksTestDB.profiles.Default.nested.a == 77, "macros written by the base64 version still decode")
+
 -- The macros were not there yet. On a slow login they arrive after the
 -- addon enabled; the store has to notice and put things back then.
-WicksTestDB = nil
-Store.cache, Store.restored, Store.waiting = nil, {}, nil
+S.MACROS.acct = { S.MACROS.acct[1] }
+Store.cache, Store.restored, Store.waiting, Store.enabled, Store.optedIn = nil, {}, nil, nil, true
+Store:Save(true)
 local held = S.MACROS.acct
+WicksTestDB = nil
+-- Nothing at all from the server yet: not the player's macros either.
+-- And nobody has said "on" this session; the only sign it should be on
+-- is the macros themselves, which have not arrived.
+Store.cache, Store.restored, Store.waiting, Store.enabled, Store.optedIn, Store.announced = nil, {}, nil, nil, nil, nil
 S.MACROS.acct = {}
 local C2 = Core:NewAddon("WicksTestLate", {
     title = "Late", savedVar = "WicksTestDB",
@@ -461,9 +500,22 @@ local C2 = Core:NewAddon("WicksTestLate", {
 fire("ADDON_LOADED", "WicksTestLate")
 check(C2.db.profile.nested.a == 1, "with no macros yet the addon runs on defaults")
 check(Store.waiting == true, "and the store knows it is waiting")
+check(Store.enabled == nil, "without having decided off, which a slow login would then be stuck with")
 S.MACROS.acct = held
 check(Store:Poll() == true, "when they arrive the poll sees them")
+check(Store.enabled == true, "and seeing ours among them settles the store as on")
 check(C2.db.profile.nested.a == 43, "and the late addon gets its settings")
+
+-- The batch arrives with none of ours in it: that settles off, once.
+Store.cache, Store.restored, Store.waiting, Store.enabled, Store.optedIn, Store.announced = nil, {}, nil, nil, nil, nil
+S.MACROS.acct = {}
+check(Store:Decide() == false and Store.waiting == true and Store.enabled == nil, "empty macro list again leaves it undecided")
+S.MACROS.acct = { held[1] }
+S.CHAT = {}
+check(Store:Poll() == true and Store.enabled == false, "the player's macros alone settle it off")
+check(#S.CHAT == 1 and S.CHAT[1]:find("store on"), "and the offer is said once: " .. tostring(S.CHAT[1]))
+S.MACROS.acct = held
+Store.cache, Store.enabled, Store.optedIn, Store.announced = nil, nil, nil, nil
 
 -- Off means off: when the client does hand the table over, the store
 -- must not put an old copy on top of it.
@@ -473,9 +525,13 @@ fire("ADDON_LOADED", "WicksTestHanded")
 check(handed.db.handedOver == true, "a table the client supplied is recognised as such")
 check(not Store:RestoreFor(handed) and handed.db.profile.v == 99, "and the store leaves it alone")
 
--- Clearing removes ours and only ours.
-local removed = Store:Clear()
-check(removed >= 1 and #S.MACROS.acct == 1 and S.MACROS.acct[1].name == "ss", "clear removes every WickCfg macro and nothing else")
+-- Turning off removes ours and only ours, and stays off.
+local removed = Store:TurnOff()
+check(removed >= 1 and #S.MACROS.acct == 1 and S.MACROS.acct[1].name == "ss", "off removes every WickCfg macro and nothing else")
+A.db.profile.locked = true
+Store:Dirty()
+fire("PLAYER_REGEN_ENABLED")
+check(#S.MACROS.acct == 1, "and nothing comes back afterwards")
 
 -- The slash command speaks.
 S.CHAT = {}
