@@ -693,6 +693,61 @@ check(#Lg:History() == 1, "a session that earned nothing is not filed")
 check(THA.opts.storeExclude ~= nil and THA.opts.storeExclude[1] == "char",
     "the session is excluded from the macro store")
 
+-- The board reads the trade channel. Reading chat is not restricted on
+-- this client, only sending, so this is the piece that ports whole.
+local Bd = THNS.Board
+S.CHANNELS = { [1] = "General", [2] = "Trade - City", [5] = "LookingForGroup" }
+GetChannelList = function() return 1, "General", false, 2, "Trade - City", false, 5, "LookingForGroup", false end
+Bd:RebuildChannels()
+check(Bd:Watching(2) == true, "a channel named Trade is watched")
+check(Bd:Watching(1) == false and Bd:Watching(5) == false, "General and LookingForGroup are not")
+
+Bd:Clear()
+check(Bd:Handle("WTS [Copper Bar] x20 cheap pst", "Seller-Realm", 2), "a sell advert is taken")
+check(Bd.listings[1] and Bd.listings[1].category == "WTS", "and read as selling: " .. tostring(Bd.listings[1] and Bd.listings[1].category))
+check(Bd.listings[1].name == "Seller", "with the realm stripped off the name")
+check(not Bd:Handle("WTS [Copper Bar] x20 cheap pst", "Seller-Realm", 2), "the same person repeating it is one listing, not two")
+check(#Bd.listings == 1, "so the board still has one: " .. #Bd.listings)
+
+check(Bd:Handle("WTB arcanite bar paying well", "Buyer", 2), "a buy advert is taken")
+check(Bd.listings[1].category == "WTB", "and read as buying: " .. tostring(Bd.listings[1].category))
+check(Bd:Handle("Free enchants at the bank, tips welcome", "Enchanter", 2), "an enchanter is taken")
+check(Bd.listings[1].category == "ENCHANT", "and read as enchanting: " .. tostring(Bd.listings[1].category))
+check(Bd:Handle("Portals to Stormwind, 5s, pst", "Mage", 2), "a portal advert is taken")
+check(Bd.listings[1].category == "TRAVEL", "and read as travel: " .. tostring(Bd.listings[1].category))
+
+-- A group advert is not trade, and the blacklist runs before the rules.
+check(not Bd:Handle("LFM Deadmines need tank and healer", "Leader", 2), "a group advert is not a listing")
+check(not Bd:Handle("Guild recruiting for raids, apply within", "Recruiter", 2), "nor is guild recruitment")
+-- Unless it says outright that it is selling.
+check(Bd:Handle("WTS Deadmines boost, raid geared", "Booster", 2), "but a boost being sold is")
+
+-- Nothing from a channel we do not watch.
+local before = #Bd.listings
+check(not Bd:Handle("WTS everything cheap", "Spammer", 5), "a channel we do not watch is ignored")
+check(#Bd.listings == before, "and nothing lands")
+
+-- An item link reads as the item name, not the markup.
+Bd:Clear()
+Bd:Handle("WTS |cffffffff|Hitem:2589::::::::20:::::::::|h[Linen Cloth]|h|r x20", "Tailor", 2)
+check(Bd.listings[1] and Bd.listings[1].message:find("Linen Cloth", 1, true) ~= nil,
+    "a link reads as the item name: " .. tostring(Bd.listings[1] and Bd.listings[1].message))
+check(Bd.listings[1].message:find("|c") == nil, "with no markup left in it")
+
+-- Anything nobody repeats ages off.
+Bd.listings[1].lastSeen = time() - (25 * 60)
+check(Bd:Prune() == 1, "a listing nobody repeated for twenty minutes drops off")
+check(#Bd.listings == 0, "leaving the board empty")
+
+-- The bar has a control. A tracker you cannot start is an ornament.
+local bar = _G.WicksTradeHallBar
+check(bar.go ~= nil, "the session bar has a start button")
+local wasActive = Lg.active
+bar.go.__scripts.OnClick(bar.go)
+check(Lg.active ~= wasActive, "clicking it starts or stops the session")
+if Lg.active then bar.go.__scripts.OnClick(bar.go) end
+check(not Lg.active, "and clicking again stops it")
+
 S.CHAT = {}
 SlashCmdList.WICK_WICKSTRADEHALL("status")
 check(#S.CHAT >= 2, "/wth status prints")
