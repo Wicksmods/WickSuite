@@ -187,7 +187,12 @@ check(#S.CHAT >= 3, "/wft debug prints")
 io.write("== Beasts and Things ==\n")
 CLASS = "HUNTER"
 S.PET_FAMILY = "Wolf"
-S.PET_SPELLS = { { "Bite", "active" }, { "Growl", "active" }, { "Furious Howl", "active" }, { "Avoidance", "passive" } }
+S.PET_SPELLS = {
+    { "Bite", "active", 132127, 17253 },
+    { "Growl", "active", 132270, 2649 },
+    { "Furious Howl", "active", 136168, 24604 },
+    { "Avoidance", "passive", 132279, 24672 },
+}
 local BNS = S.loadAddon(ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings", { "Core.lua", "Pet.lua", "Ammo.lua", "Beasts.lua", "Bestiary.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksBeastsAndThings")
 S.fire("PLAYER_LOGIN")
@@ -441,8 +446,53 @@ if BADDON then
     Bst:RefreshWindow()
     check(tostring(win.detail.abilHead:GetText()):find("WOLF") ~= nil,
         "a recorded family is named: " .. tostring(win.detail.abilHead:GetText()))
-    check(tostring(win.detail.abil:GetText()):find("Furious Howl") ~= nil,
-        "with what it brings: " .. tostring(win.detail.abil:GetText()))
+    -- Abilities are drawn now, not spelled out. The book gives an icon and
+    -- a spell id, so each one is a chip you can point at.
+    local chips, nchips = win.detail.chips, 0
+    for _, b in ipairs(chips) do if b:IsShown() then nchips = nchips + 1 end end
+    check(nchips == 4, "a chip per ability the family brings, got " .. nchips)
+    -- What sets the family apart leads, alphabetically within each group,
+    -- so find them by name rather than assuming a position.
+    local byName = {}
+    for i, b in ipairs(chips) do if b:IsShown() then byName[b.abilityName] = i end end
+    check(byName["Furious Howl"] ~= nil and byName["Bite"] ~= nil, "every ability got a chip")
+    check(byName["Avoidance"] < byName["Bite"] and byName["Furious Howl"] < byName["Bite"],
+        "what sets the family apart comes before the plumbing")
+    local howl = chips[byName["Furious Howl"]]
+    check(howl.icon.__tex == 136168, "carrying its icon: " .. tostring(howl.icon.__tex))
+    check(howl.spellID == 24604, "and its spell, so the tooltip is the real one")
+    check(howl.shared == false and howl.icon.__desaturated == false, "and is not dimmed")
+    local bite = chips[byName["Bite"]]
+    check(bite.shared == true and bite.icon.__desaturated == true,
+        "while the plumbing is greyed rather than hidden")
+    check(chips[byName["Avoidance"]].passive == true, "a passive ability is known to be one")
+    check(win.detail.abil:IsShown() == false, "with no leftover text line while every ability has a chip")
+
+    -- Pointing at one has to say something, whether or not the client will
+    -- hand over a spell tooltip.
+    GameTooltip.__lines = {}
+    bite.__scripts.OnEnter(bite)
+    local tip = table.concat(GameTooltip.__lines, " | ")
+    check(tip:find("Most families bring this") ~= nil, "the tooltip says when one is shared: " .. tip)
+    GameTooltip.__lines = {}
+    howl.__scripts.OnEnter(howl)
+    check(table.concat(GameTooltip.__lines, " | "):find("Sets this family apart") ~= nil,
+        "and says when one is not")
+    howl.__scripts.OnLeave(howl)
+
+    -- An atlas recorded before icons were captured still has the names, and
+    -- a name beats a blank row.
+    local wolfRec = BNS.A.db.global.families["Wolf"]
+    local keptIcons = wolfRec.icons
+    wolfRec.icons = {}
+    Bst:RefreshWindow()
+    local stillShown = 0
+    for _, b in ipairs(chips) do if b:IsShown() then stillShown = stillShown + 1 end end
+    check(stillShown == 0, "no icons recorded, so no chips, got " .. stillShown)
+    check(win.detail.abil:IsShown() and tostring(win.detail.abil:GetText()):find("Furious Howl") ~= nil,
+        "and it falls back to naming them: " .. tostring(win.detail.abil:GetText()))
+    wolfRec.icons = keptIcons
+    Bst:RefreshWindow()
 
     -- Forgetting the selected animal must not leave the page pointing at a
     -- record that is gone.

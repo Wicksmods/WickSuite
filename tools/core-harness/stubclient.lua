@@ -133,6 +133,7 @@ local function newMock(kind, name)
         elseif k == "GetAlpha" then return function() return t.__alpha or 1 end
         elseif k == "GetTexture" then return function() return t.__tex end
         elseif k == "SetTexture" then return function(_, v) t.__tex = v end
+        elseif k == "SetDesaturated" then return function(_, v) t.__desaturated = v and true or false end
         elseif k == "SetMaskTexture" then return function(_, v) t.__maskTex = v end
         elseif k == "GetNumLines" then return function() return 1 end
         elseif k == "NumLines" then return function() return 1 end
@@ -319,6 +320,19 @@ function IsPassiveSpell(i, book)
     if book ~= "pet" then return false end
     local e = S.PET_SPELLS and S.PET_SPELLS[i]
     return e ~= nil and e[2] == "passive"
+end
+-- The pet book carries an icon and a spell id as well as a name, which is
+-- what lets the bestiary draw an ability instead of spelling it out.
+function GetSpellBookItemTexture(i, book)
+    if book ~= "pet" then return nil end
+    local e = S.PET_SPELLS and S.PET_SPELLS[i]
+    return e and e[3] or nil
+end
+function GetSpellBookItemInfo(i, book)
+    if book ~= "pet" then return nil end
+    local e = S.PET_SPELLS and S.PET_SPELLS[i]
+    if not e then return nil end
+    return "SPELL", e[4]
 end
 -- Unit identity. Not restricted on this client, which is what makes layer
 -- fingerprinting possible at all, so the GUID comes back as a plain string.
@@ -893,7 +907,7 @@ if MODERN then
         if bank ~= 1 then return nil end
         local e = S.PET_SPELLS and S.PET_SPELLS[i]
         if not e then return nil end
-        return { name = e[1], isPassive = e[2] == "passive" }
+        return { name = e[1], isPassive = e[2] == "passive", iconID = e[3], spellID = e[4] }
     end
     C_Spell.GetSpellInfo = function(idOrName)
         local names = { [133] = "Fireball", [783] = "Travel Form", [768] = "Cat Form", [1066] = "Aquatic Form", [16864] = "Omen of Clarity" }
