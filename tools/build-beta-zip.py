@@ -3,10 +3,14 @@
 The package is for other people. It carries what a player needs and nothing
 else: no notes, no tools, nothing of Claude's, nothing personal, no
 credentials, and none of Wick's own settings, whether as a WicksProfile bake
-or as a macro store payload. Anything not on the allowlist is left out and
+or as a saved-variable dump. Anything not on the allowlist is left out and
 named; anything forbidden by name or content fails the build.
+
+The zip is built to a temporary file and only replaces the published one
+once the audit passes. A failed build never touches what is already there.
+
+    python WickSuite/tools/build-beta-zip.py
 """
-import io
 import os
 import re
 import zipfile
@@ -31,15 +35,18 @@ FORBIDDEN_NAME = re.compile(
     r"wicksprofile|profile\.lua$|macros-cache|^!",
     re.I)
 
-# Must never appear in a public package, by content: personal paths and
-# addresses, credentials, Claude's fingerprints, and Wick's own settings
-# in either of the two forms they have ever been carried in.
+# Must never appear in a public package, by content. These match data, not
+# the words: "WickCfg01" in a readme is documentation, a global being
+# assigned at the start of a line is somebody's settings.
 FORBIDDEN_TEXT = [
     r"jspli", r"s-56\.com", r"CLAUDE", r"claude", r"Co-Authored-By",
     r"X-Api-Token", r"api[_ -]?token\s*[:=]", r"CLOUDFLARE", r"C:.Users",
     r"OneDrive", r"Wicksmodsinfo", r"AppData",
-    r"WicksProfileData", r"WicksProfileStamp", r"WickCfg\d\d", r"\bWC1D\d+;",
-    r"WicksComfortsSaved\s*=\s*\{", r"WicksBagsDB\s*=\s*\{", r"WickCoreDB\s*=\s*\{",
+    r"WicksProfileData\s*=", r"WicksProfileStamp\s*=",
+    # A saved-variable dump: a global assigned a table whose next line is a
+    # bracketed key, the shape the client's serializer writes. Code that
+    # initialises a global to {} on one line is not that.
+    r"^\s*(WickCoreDB|Wicks\w+(Saved|DB|Alts))\s*=\s*\{\s*\n\s*\[",
 ]
 
 README = """Wick's Mods for World of Warcraft: Forever - beta test build
@@ -158,7 +165,8 @@ def allowed(name):
 
 def main():
     count, left_out = 0, []
-    with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
+    tmp = OUT + ".building"
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("READ ME FIRST.txt", README.replace("\n", "\r\n"))
         for folder in FOLDERS:
             root = os.path.join(ADDONS, folder)
@@ -173,13 +181,13 @@ def main():
                     z.write(os.path.join(dirpath, f), rel)
                     count += 1
 
-    size = os.path.getsize(OUT)
-    print("wrote %s: %d files, %.2f MB" % (OUT, count, size / 1048576.0))
+    print("built %d files, %.2f MB" % (count, os.path.getsize(tmp) / 1048576.0))
     print("left out:", ", ".join(left_out) if left_out else "nothing")
 
-    # The audit. Fails the build rather than warning.
+    # The audit. Fails the build rather than warning, and leaves the
+    # published zip exactly as it was.
     problems = []
-    with zipfile.ZipFile(OUT) as z:
+    with zipfile.ZipFile(tmp) as z:
         names = z.namelist()
         print("top level:", ", ".join(sorted({n.split("/")[0] for n in names})))
         for n in names:
@@ -190,15 +198,16 @@ def main():
                 problems.append("name: " + n)
             text = z.read(n).decode("utf-8", "ignore")
             for pat in FORBIDDEN_TEXT:
-                m = re.search(pat, text)
+                m = re.search(pat, text, re.M)
                 if m:
                     where = text[max(0, m.start() - 40):m.end() + 40].replace("\n", " ").strip()
                     problems.append("content: %s matches %s near ...%s..." % (n, pat, where))
                     break
     if problems:
-        os.remove(OUT)
-        raise SystemExit("AUDIT FAILED, zip removed:\n  " + "\n  ".join(problems))
-    print("audit: clean, %d files scanned by name and content" % len(names))
+        os.remove(tmp)
+        raise SystemExit("AUDIT FAILED, nothing published:\n  " + "\n  ".join(problems))
+    os.replace(tmp, OUT)
+    print("audit: clean, %d files scanned by name and content; wrote %s" % (len(names), OUT))
 
 
 if __name__ == "__main__":
