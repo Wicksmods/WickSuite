@@ -231,8 +231,28 @@ S.BAG_FAMILY[1] = 1                       -- bag 1 is a quiver, sixteen slots in
 BNS.UI:RefreshAmmo()
 local ammoState = BNS.Ammo:State()
 check(ammoState.capacity == 3200, "a sixteen slot quiver of two hundred stacks holds 3200: " .. tostring(ammoState.capacity))
-check(strip.ammoText.__text == ("%d/%d"):format(ammoState.total, 3200),
-    "the strip reads shots over capacity: " .. tostring(strip.ammoText.__text))
+-- The count carries a colour for how full the quiver is: under a fifth
+-- red, up to three fifths amber, above that the brand green. The
+-- capacity is abbreviated so the number that matters gets the room.
+local function hex6(c) return ("%02x%02x%02x"):format(math.floor(c[1] * 255 + 0.5), math.floor(c[2] * 255 + 0.5), math.floor(c[3] * 255 + 0.5)) end
+local RED_HEX, AMBER_HEX, FEL_HEX = "cc4d4d", "d9a640", hex6(WickCore.Chrome.Colors.fel)
+check(strip.ammoText.__text == ("|cff%s%d|r/3.2k"):format(RED_HEX, ammoState.total),
+    "151 of 3200 is red over an abbreviated capacity: " .. tostring(strip.ammoText.__text))
+local realCount = GetInventoryItemCount
+GetInventoryItemCount = function(_, inv) return inv == 0 and 1300 or 1 end
+BNS.UI:RefreshAmmo()
+check(tostring(strip.ammoText.__text):find("|cff" .. AMBER_HEX .. "1301|r/3.2k", 1, true) ~= nil,
+    "about forty percent is amber: " .. tostring(strip.ammoText.__text))
+GetInventoryItemCount = function(_, inv) return inv == 0 and 2500 or 1 end
+BNS.UI:RefreshAmmo()
+check(tostring(strip.ammoText.__text):find("|cff" .. FEL_HEX .. "2501|r/3.2k", 1, true) ~= nil,
+    "nearly full is green: " .. tostring(strip.ammoText.__text))
+GetInventoryItemCount = realCount
+S.ITEMS[2512].stack = 125                 -- sixteen slots of 125 is a round two thousand
+BNS.UI:RefreshAmmo()
+check(tostring(strip.ammoText.__text):find("/2k", 1, true) ~= nil, "a round capacity abbreviates without a decimal: " .. tostring(strip.ammoText.__text))
+S.ITEMS[2512].stack = 200
+BNS.UI:RefreshAmmo()
 S.BAG_FAMILY[1] = nil
 BNS.UI:RefreshAmmo()
 ammoState = BNS.Ammo:State()
