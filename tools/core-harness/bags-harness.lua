@@ -239,10 +239,10 @@ if filled then
     check(#S.SECURE_USES == 0, "left-click does not, so it stays ours for picking up")
 end
 if filled then
-    check(filled:GetAttribute("type2") == "item",
-        "right-click is handed to the secure handler: " .. tostring(filled:GetAttribute("type2")))
-    check(filled:GetAttribute("bag") == filled._bag and filled:GetAttribute("slot") == filled._slot,
-        "with this slot's own bag and slot: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+    check(filled:GetAttribute("type2") == "macro",
+        "right-click is handed to the secure handler as a macro: " .. tostring(filled:GetAttribute("type2")))
+    check(filled:GetAttribute("macrotext2") == ("/use %d %d"):format(filled._bag, filled._slot),
+        "whose text uses this slot: " .. tostring(filled:GetAttribute("macrotext2")))
     check(filled:GetAttribute("type1") == nil, "left-click is not, so it can still pick the item up")
 end
 if empty then
@@ -253,15 +253,15 @@ end
 -- item changed mid-fight keeps the pair it had and is marked to catch
 -- up. Writing anyway would throw and lose the click entirely.
 if filled then
-    local hadBag = filled:GetAttribute("bag")
+    local hadBag = filled:GetAttribute("macrotext2")
     COMBAT = true
     check(BAGSNS.SetSlotUse(filled, 3, 7) == false, "in combat the write is refused")
-    check(filled:GetAttribute("bag") == hadBag, "and the old pair is left alone: " .. tostring(filled:GetAttribute("bag")))
+    check(filled:GetAttribute("macrotext2") == hadBag, "and the old text is left alone: " .. tostring(filled:GetAttribute("macrotext2")))
     check(filled._useStale == true, "the slot is marked to catch up")
     COMBAT = false
     check(BAGSNS.SetSlotUse(filled, 3, 7) == true, "out of combat it writes")
-    check(filled:GetAttribute("bag") == 3 and filled:GetAttribute("slot") == 7,
-        "with the new pair: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+    check(filled:GetAttribute("macrotext2") == "/use 3 7",
+        "with the new text: " .. tostring(filled:GetAttribute("macrotext2")))
     check(filled._useStale == nil, "and is no longer stale")
     -- And the event that clears combat redresses every slot, so a stale
     -- one fixes itself without the player clicking anything.
@@ -270,8 +270,8 @@ if filled then
     check(filled._useStale == true, "stale again after a mid-fight change")
     COMBAT = false
     S.fire("PLAYER_REGEN_ENABLED")
-    check(filled._useStale == nil and filled:GetAttribute("bag") == filled._bag,
-        "combat ending redresses it: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+    check(filled._useStale == nil and filled:GetAttribute("macrotext2") == ("/use %d %d"):format(filled._bag, filled._slot),
+        "combat ending redresses it: " .. tostring(filled:GetAttribute("macrotext2")))
 end
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end

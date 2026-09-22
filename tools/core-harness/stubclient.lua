@@ -182,10 +182,17 @@ S.SECURE_USES = {}
 function SecureActionButton_OnClick(self, button)
     local suffix = (button == "RightButton") and "2" or "1"
     local kind = self:GetAttribute("type" .. suffix) or self:GetAttribute("type")
-    if kind ~= "item" then return end
-    local bag, slot = self:GetAttribute("bag"), self:GetAttribute("slot")
-    if bag == nil or slot == nil then return end
-    S.SECURE_USES[#S.SECURE_USES + 1] = { bag = bag, slot = slot }
+    if kind == "item" then
+        -- The Classic dispatcher's form. This client is Mainline shaped
+        -- and ignores it, which is why the bags use macro text instead.
+        return
+    end
+    if kind ~= "macro" then return end
+    local text = self:GetAttribute("macrotext" .. suffix) or self:GetAttribute("macrotext")
+    if type(text) ~= "string" then return end
+    local bag, slot = text:match("^/use%s+(%d+)%s+(%d+)")
+    if not bag then return end
+    S.SECURE_USES[#S.SECURE_USES + 1] = { bag = tonumber(bag), slot = tonumber(slot) }
 end
 
 -- Templates whose base type is the retail intrinsic ItemButton. Creating one
