@@ -21,7 +21,7 @@ S.fire("ADDON_LOADED", "WickCore")
 WicksBagsDB = { options = { showJunk = false, sortMode = "name" }, bagPos = { posPoint = "CENTER", posRel = "CENTER", posX = 1, posY = 2, panelW = 500 } }
 WicksBagsAlts = { ["Classic Beta PvP-Altchar"] = { bags = { { itemID = 6948, count = 2 } }, bank = { { itemID = 6948, count = 5 } }, bagsLastSeen = 1 } }
 
-S.loadAddon(BAGS_DIR, "WicksBags", { "Core.lua", "Categories.lua", "UI.lua", "Options.lua", "Bag.lua", "Bank.lua", "AltViewer.lua" })
+local BAGSNS = S.loadAddon(BAGS_DIR, "WicksBags", { "Core.lua", "Categories.lua", "UI.lua", "Options.lua", "Bag.lua", "Bank.lua", "AltViewer.lua" })
 check(type(WicksBags) == "table" and WicksBags.A, "WicksBags namespace + WickCore addon object")
 
 io.write("== lifecycle ==\n")
@@ -202,6 +202,58 @@ WB.Bag:Show()
 check(WB.Bag.panel:IsShown() and CloseSpecialWindows() == true, "Escape with the bags open closes them and stops there")
 check(not WB.Bag.panel:IsShown(), "the bags are hidden")
 check(CloseSpecialWindows() == false, "Escape with nothing of ours open falls through to the game menu")
+-- ---------- using an item ----------------------------------------------------
+-- UseContainerItem is protected and a button this addon created carries
+-- this addon's taint, so the template's own OnClick could not complete it:
+-- right-clicking anything in the bags printed "blocked from an action".
+-- Right-click now goes through the game's secure dispatch, which runs
+-- outside our execution entirely.
+io.write("== using an item ==" .. string.char(10))
+WB.Bag:Show()
+WB.Bag:Refresh()
+local filled, empty
+for _, f in ipairs(S.frames) do
+    if f.__name and tostring(f.__name):find("^WicksBagsSlot") then
+        if f._itemID and not filled then filled = f end
+        if f.__shown and not f._itemID and not empty then empty = f end
+    end
+end
+check(filled ~= nil, "a slot with an item in it")
+if filled then
+    check(filled:GetAttribute("type2") == "item",
+        "right-click is handed to the secure handler: " .. tostring(filled:GetAttribute("type2")))
+    check(filled:GetAttribute("bag") == filled._bag and filled:GetAttribute("slot") == filled._slot,
+        "with this slot's own bag and slot: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+    check(filled:GetAttribute("type1") == nil, "left-click is not, so it can still pick the item up")
+end
+if empty then
+    check(empty:GetAttribute("type2") == nil, "an empty slot has nothing to use")
+end
+
+-- A secure button refuses attribute writes in combat, so a slot whose
+-- item changed mid-fight keeps the pair it had and is marked to catch
+-- up. Writing anyway would throw and lose the click entirely.
+if filled then
+    local hadBag = filled:GetAttribute("bag")
+    COMBAT = true
+    check(BAGSNS.SetSlotUse(filled, 3, 7) == false, "in combat the write is refused")
+    check(filled:GetAttribute("bag") == hadBag, "and the old pair is left alone: " .. tostring(filled:GetAttribute("bag")))
+    check(filled._useStale == true, "the slot is marked to catch up")
+    COMBAT = false
+    check(BAGSNS.SetSlotUse(filled, 3, 7) == true, "out of combat it writes")
+    check(filled:GetAttribute("bag") == 3 and filled:GetAttribute("slot") == 7,
+        "with the new pair: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+    check(filled._useStale == nil, "and is no longer stale")
+    -- And the event that clears combat redresses every slot, so a stale
+    -- one fixes itself without the player clicking anything.
+    COMBAT = true
+    BAGSNS.SetSlotUse(filled, 9, 9)
+    check(filled._useStale == true, "stale again after a mid-fight change")
+    COMBAT = false
+    S.fire("PLAYER_REGEN_ENABLED")
+    check(filled._useStale == nil and filled:GetAttribute("bag") == filled._bag,
+        "combat ending redresses it: " .. tostring(filled:GetAttribute("bag")) .. "/" .. tostring(filled:GetAttribute("slot")))
+end
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end
 io.write("PASS\n")
