@@ -195,7 +195,16 @@ were doing. Issues: github.com/Wicksmods
 """
 
 
+# The 2x art exists for CurseForge and the og tags, which fetch from the
+# repo, not from here. In the package it is 2.6 MB a player downloads and
+# never sees: the addon code is under half a megabyte.
+def is_marketing_2x(name):
+    return "-2x." in name
+
+
 def allowed(name):
+    if is_marketing_2x(name):
+        return False
     if name in ALLOWED_NAMES:
         return True
     if name.startswith("."):

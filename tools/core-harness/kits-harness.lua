@@ -1138,6 +1138,20 @@ if CA then
     db.soundInBackground = true
     client:Apply()
     check(S.CVARS["Sound_EnableSoundWhenGameIsInBG"] == "1", "and on when it is")
+
+    -- The chat boxes arrive in the old alt arrow mode: arrows steer the
+    -- character, Alt and an arrow moves the cursor and walks the history.
+    -- Confirmed on the live client 2026-09-23.
+    check(ChatFrame1EditBox.__altArrow == true, "the chat box starts in the client's alt arrow mode")
+    db.chatArrowKeys = true
+    client:Apply()
+    check(ChatFrame1EditBox.__altArrow == false, "asked, the arrows go to the text box")
+    check(ChatFrame7EditBox.__altArrow == false, "every chat window, not just the first")
+    db.chatArrowKeys = false
+    client:Apply()
+    check(ChatFrame1EditBox.__altArrow == true,
+        "and switching it off puts the client default back rather than leaving ours")
+
     db.soundInBackground = false
 
     -- ---- Proc glow ----------------------------------------------

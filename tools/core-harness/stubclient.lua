@@ -70,6 +70,7 @@ local function newMock(kind, name)
         elseif k == "CreateTexture" or k == "CreateFontString" or k == "CreateLine" then return function() return newMock(k) end
         -- Whether a frame takes mouse input decides whether it swallows a
         -- click meant for what is underneath it, so it is worth recording.
+        elseif k == "SetAltArrowKeyMode" then return function(_, v) t.__altArrow = v and true or false end
         elseif k == "SetFrameStrata" then return function(_, v) t.__strata = v end
         elseif k == "GetFrameStrata" then return function() return t.__strata end
         elseif k == "EnableMouse" then return function(_, v) t.__mouseEnabled = v and true or false end
@@ -473,6 +474,17 @@ function GetRealZoneText() return "Elwynn Forest" end
 function IsFlyableArea() return false end
 function GetBindingKey() return nil end
 function SetBindingClick() return true end
+
+-- The chat edit boxes. This client brings them up in the old alt arrow
+-- mode, where the arrows steer your character instead of moving the
+-- cursor, so an addon that offers to change that needs them here.
+NUM_CHAT_WINDOWS = 10
+for i = 1, NUM_CHAT_WINDOWS do
+    local box = newMock("EditBox", "ChatFrame" .. i .. "EditBox")
+    box.__altArrow = true          -- as the client hands it over
+    _G["ChatFrame" .. i .. "EditBox"] = box
+end
+
 
 -- A merchant. S.REPAIR_COST is what the repair would come to, and
 -- S.REPAIRED records the call, so a test can tell "did not repair"
