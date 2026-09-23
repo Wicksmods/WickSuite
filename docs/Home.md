@@ -1,6 +1,6 @@
 # Wick Suite
 
-> A suite of precision addons for serious TBC Classic raiders. One locked palette, one voice, one chrome.
+> A suite of precision addons for serious TBC Classic raiders. One voice, one chrome.
 
 ## The addons
 
