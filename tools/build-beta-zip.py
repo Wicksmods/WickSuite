@@ -116,6 +116,22 @@ fixes the client, it notices and stays out of the way.
 
 WHAT IS NEW SINCE THE LAST PACKAGE
 ----------------------------------
+* Mages: portals and teleports in one panel. Left-click a destination
+  to teleport, right-click to open the portal for the group. The list
+  comes from your own spellbook, so it is the cities you actually know
+  and never the other faction's. Rune counts along the top, and a
+  destination whose rune has run out is dimmed. /wcj portals, the
+  Portals button, a middle-click on the minimap button, or a keybind.
+* Mages: teleport and portal runes join the pre-pull checklist once you
+  have learned the spells that use them, and not before.
+* The cooldown bar tracks rather than casts. It was built out of cast
+  buttons, which meant it could not be changed at all during a fight,
+  which is when a cooldown tracker is worth having. Clicking an icon no
+  longer casts; it was never the point of the bar.
+* The cooldown bar has a scale, 0.5x to 2.5x, and a row width so a long
+  list wraps instead of running off the edge. Both are in the options,
+  in the kit's Cooldowns tab, and on the cd command. It does not drift
+  when you resize it.
 * Wick's Gear browses four sources, not one. Dungeons as before, plus
   what the four gear professions make, quest rewards worth crossing a
   zone for, and everything grouped by the set it belongs to. A search
@@ -128,12 +144,6 @@ WHAT IS NEW SINCE THE LAST PACKAGE
   it in the dressing room, shift-click to put it in chat. An Equippable
   toggle hides what your class cannot wear, which matters once a list is
   a profession's four hundred pieces rather than a dungeon's nine.
-* Comforts: arrow keys move the cursor in chat. This client hands the
-  chat box the old behaviour, where the arrows steer your character.
-  Off until you turn it on.
-* Trade Hall: the board reads as a board. Category badges, the icon of
-  the first item a listing names, filters, a search box, and an age that
-  fades. Right-click to whisper, shift-click to link.
 * New: Wick's Trade Hall. Two things in one window. A session tracker
   that says what a run earned and what that is an hour, valuing loot at
   its vendor price and marking anything it cannot price rather than
@@ -185,10 +195,6 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 Fixed since the last package
 ----------------------------
 * Your theme no longer resets. A login that read the setting before it
-  had arrived fell back to Fel and then saved Fel over your real choice.
-* Trade Hall: a taxi or a summon reads as travel rather than Misc, and
-  the session total no longer counts most loot as nothing.
-* Your theme no longer resets. A login that read the setting before it
   had arrived fell back to Fel and then saved Fel over your real
   choice, so one early read lost it for good.
 * Trade Hall: a taxi or a summon reads as travel rather than falling
@@ -196,8 +202,6 @@ Fixed since the last package
 * Trade Hall: the session total was counting most loot as nothing. It
   listened for the client to answer about an item but never asked, and
   a fresh drop is exactly the case the client stays quiet about.
-* Bags: the cooldown swirl was covering the whole item button and
-  swallowing right-clicks.
 * Comforts: automatic repair had never once worked. The cost was read in
   a way that dropped the answer to "can this be repaired", so it always
   read no and went home. Selling junk was never affected.

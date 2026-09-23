@@ -5,6 +5,7 @@
     python WickSuite/tools/core-harness/run.py --both          # WickCore, both
     python WickSuite/tools/core-harness/run.py --bags --both   # Wick's Bags on WickCore, both
     python WickSuite/tools/core-harness/run.py --kits --both   # Totems, Demons, Forms kits, both
+    python WickSuite/tools/core-harness/run.py --probe        # Wick's Probe, aura-route watcher
 
 Exits non-zero on any failed check.
 """
@@ -45,6 +46,8 @@ def main():
     ap.add_argument("--bags", action="store_true", help="run the Wick's Bags product harness")
     ap.add_argument("--kits", action="store_true", help="run the class kits harness (Totems, Demons, Forms)")
     ap.add_argument("--gear", action="store_true", help="run the Wick's Gear harness")
+    ap.add_argument("--probe", action="store_true",
+                    help="run the Wick's Probe harness (aura-route watcher)")
     ap.add_argument("--legacy", action="store_true")
     ap.add_argument("--both", action="store_true")
     args = ap.parse_args()
@@ -56,6 +59,10 @@ def main():
     # first line that asks the client for an item.
     if args.gear:
         modes = ["modern"]
+    # The probe's aura work is a question about the Forever client, so
+    # there is nothing for a legacy pass to say about it.
+    if args.probe:
+        modes = ["modern"]
     ok = True
     for mode in modes:
         if args.bags:
@@ -64,6 +71,10 @@ def main():
             ok = run(HERE + "/kits-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
         elif args.gear:
             ok = run(HERE + "/gear-harness.lua", mode, args.core, BETA_ADDONS, mode, stub) and ok
+        elif args.probe:
+            probe = BETA_ADDONS + "/WicksProbe"
+            ok = run(HERE + "/probe-verbs.lua", mode, probe, stub) and ok
+            ok = run(HERE + "/probe-harness.lua", mode, probe, stub) and ok
         else:
             ok = run(HERE + "/harness.lua", mode, args.core, mode, stub) and ok
         print()
