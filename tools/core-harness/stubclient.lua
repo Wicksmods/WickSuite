@@ -530,7 +530,21 @@ function GetCursorInfo() return nil end
 function CursorHasItem() return false end
 function ClearCursor() end
 function GetMoney() return S.MONEY or 123456 end
+-- The structured tooltip. S.TOOLTIP_LINES_FOR lets a test put words in
+-- the client's mouth, which is how the set bonus reader is exercised:
+-- on the real client those lines are Forever's own set data.
+C_TooltipInfo = C_TooltipInfo or {}
+C_TooltipInfo.GetHyperlink = function(link)
+    if not S.TOOLTIP_LINES_FOR then return nil end
+    local lines = {}
+    for _, t in ipairs(S.TOOLTIP_LINES_FOR) do lines[#lines + 1] = { leftText = t } end
+    return { lines = lines }
+end
+
 function GetInventoryItemID(unit, inv)
+    -- S.EQUIPPED_IDS lets a test dress the character, which is what
+    -- counting set pieces needs.
+    if S.EQUIPPED_IDS and S.EQUIPPED_IDS[inv] then return S.EQUIPPED_IDS[inv] end
     if inv and inv >= 20 and inv <= 23 then return 4500 end
     if CLASS == "HUNTER" and inv == 0 then return 2512 end   -- Rough Arrow
     if CLASS == "HUNTER" and inv == 18 then return 2504 end  -- Worn Shortbow

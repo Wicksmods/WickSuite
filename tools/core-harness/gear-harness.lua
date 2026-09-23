@@ -36,7 +36,7 @@ S.UNCACHED = { [7719] = true, [6463] = true, [7717] = true }
 S.REQUESTED = 0
 
 local ns = S.loadAddon(ADDONS_DIR .. "/WicksGear", "WicksGear",
-    { "Data.lua", "DataCrafted.lua", "DataQuests.lua", "Score.lua", "Core.lua", "Doll.lua", "UI.lua" })
+    { "Data.lua", "DataCrafted.lua", "DataQuests.lua", "DataSetBonus.lua", "Score.lua", "Core.lua", "Doll.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksGear")
 S.fire("PLAYER_LOGIN")
 
@@ -570,6 +570,59 @@ itemRow.__scripts.OnClick(itemRow, "LeftButton")
 S.CTRL = false
 check(S.DRESSED ~= nil, "ctrl-click sends it to the dressing room: " .. tostring(S.DRESSED))
 check(ns.UI.active == "browse", "and leaves you where you were")
+
+-- Set bonuses. The count comes off the equipped slots so it is right
+-- for this build; the bonus text is Classic's, because Forever
+-- publishes none, and the addon has to say so rather than pass it off.
+local setName, setIds = nil, {}
+for id, e in pairs(ns.ENTRY) do
+    if e.set and (ns.SET_BONUS or {})[e.set] then
+        setName = setName or e.set
+        if e.set == setName then setIds[#setIds + 1] = id end
+    end
+end
+check(setName ~= nil, "a set with bonuses is in the data: " .. tostring(setName))
+
+S.EQUIPPED_IDS = {}
+local prog = ns.Score:SetProgress(setName)
+check(prog ~= nil and prog.worn == 0, "wearing none of it: " .. tostring(prog and prog.worn))
+check(prog.total == #setIds, "and it knows how many pieces there are: " .. prog.total)
+check(#prog.earned == 0, "so no bonus is earned")
+check(prog.next ~= nil, "but it names the next one: " .. tostring(prog.next and prog.next.pieces))
+check(prog.approximate == true, "and flags the bonuses as not this build's own")
+
+-- Wear enough for the first bonus.
+local need = prog.next.pieces
+for i = 1, need do S.EQUIPPED_IDS[i] = setIds[i] end
+prog = ns.Score:SetProgress(setName)
+check(prog.worn == need, "wearing " .. need .. " of them: " .. prog.worn)
+check(#prog.earned >= 1, "earns the bonus, got " .. #prog.earned)
+check(prog.earned[1].pieces <= need, "and it is one the count actually reaches")
+
+-- The client's own tooltip beats the scrape, because the tooltip is this
+-- build and Classic's numbers are only a guess at it. Both wordings are
+-- accepted, since the phrasing has moved across expansions.
+S.TOOLTIP_LINES_FOR = { "Some Armour", "(2) Set: +10 Forever Bonus.",
+                        "4 pieces: +20 Forever Bonus." }
+local other
+for _, e in pairs(ns.ENTRY) do
+    if e.set and e.set ~= setName then other = e.set break end
+end
+local fromClient = ns.Score:ClientSetBonuses(other)
+check(fromClient ~= nil and #fromClient == 2,
+    "both tooltip wordings are read: " .. tostring(fromClient and #fromClient))
+check(fromClient[1].pieces == 2 and fromClient[2].pieces == 4,
+    "and come back in piece order")
+check(fromClient[1].text:find("Forever") ~= nil, "with the client's own wording")
+
+local p2 = ns.Score:SetProgress(other)
+check(p2.fromClient == true, "SetProgress prefers the client")
+check(p2.approximate == false,
+    "and drops the Classic warning when the client answered")
+
+S.TOOLTIP_LINES_FOR = nil
+S.EQUIPPED_IDS = {}
+S.EQUIPPED_IDS = {}
 
 local miss = S.missingReport()
 if #miss > 0 then
