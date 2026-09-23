@@ -740,6 +740,13 @@ function resolveAddon(config, folder, flags) {
 async function cmdRelease(folder, newVer, ...flags) {
   if (!folder || !newVer) die("usage: wick release <folder> <version> [--no-announce]");
   const noAnnounce = flags.includes("--no-announce");
+  // Shipping several addons in one sitting: Discord wants every one of them,
+  // because it is the changelog people follow, while a run of near identical
+  // Facebook posts inside a few minutes reads as spam and risks the rate
+  // limit. --no-fb keeps the per addon Discord line and leaves Facebook for
+  // one post covering the lot.
+  const noFB = noAnnounce || flags.includes("--no-fb");
+  const noX  = noAnnounce || flags.includes("--no-x");
   const config = readConfig();
   const addon = resolveAddon(config, folder, flags);
   if (!addon.cf_project_id) die(`wick.json missing cf_project_id for ${folder} — set it first`);
@@ -796,12 +803,19 @@ async function cmdRelease(folder, newVer, ...flags) {
   } else {
     log(`  working tree clean — skipping release commit`);
   }
-  gitIn(dir, "tag", `v${newVer}`);
+  // Bags and Trade Hall keep both builds in one repo, TBC on main and
+  // Forever on its own branch, so a bare vX.Y.Z collides: Bags had already
+  // used v0.9.0 through v0.9.3 on the TBC line. Non-tbc releases get their
+  // own prefix so the two lines can run at the same numbers.
+  const tagName = (addon.client && addon.client !== "tbc")
+    ? `${addon.client}-v${newVer}`
+    : `v${newVer}`;
+  gitIn(dir, "tag", tagName);
   // Detect branch: WicksSurvivors uses 'master'; all others use 'main'.
   const currentBranch = runCapture(`git -C "${dir}" rev-parse --abbrev-ref HEAD`).trim();
   gitIn(dir, "push", "origin", currentBranch);
-  gitIn(dir, "push", "origin", `v${newVer}`);
-  ok(`git: tagged v${newVer} and pushed`);
+  gitIn(dir, "push", "origin", tagName);
+  ok(`git: tagged ${tagName} and pushed`);
 
   // ── Zip the addon folder ─────────────────────────────────────────
   setProgress(cmd, 4, TOTAL, "building release zip");
@@ -843,7 +857,12 @@ async function cmdRelease(folder, newVer, ...flags) {
     releaseType: "release",
     changelog: `Release ${newVer}. See CHANGELOG.md for details.`,
     changelogType: "markdown",
-    displayName: `${addon.title} v${newVer}`,
+    // Bags and Trade Hall host both flavours on one project, so the file
+    // list would otherwise show two files with the same name and nothing
+    // to tell them apart. TBC names are left exactly as they were.
+    displayName: (addon.client && addon.client !== "tbc")
+      ? `${addon.title} v${newVer} (${clientOf(config, addon).label})`
+      : `${addon.title} v${newVer}`,
   });
   const metaPath = path.join(zipDir, `.wick-cf-meta-${folder}.json`);
   // Buffer.from ensures BOM-free UTF-8 — a bare writeFileSync on some Node/PS combos emits a BOM
@@ -870,8 +889,8 @@ async function cmdRelease(folder, newVer, ...flags) {
   ok(`CurseForge: uploaded v${newVer}`);
 
   // ── Announce on Facebook (best effort) ───────────────────────────
-  if (noAnnounce) {
-    log(`  (FB: --no-announce passed, skipping post)`);
+  if (noFB) {
+    log(`  (FB: skipping post, ${noAnnounce ? "--no-announce" : "--no-fb"} passed)`);
   } else {
     setProgress(cmd, 6, TOTAL, "posting to Facebook");
     try { announceFB(addon, newVer, dir, config); }
@@ -888,7 +907,7 @@ async function cmdRelease(folder, newVer, ...flags) {
   }
 
   // ── X (Twitter) intent URL — auto API is paywalled, click-to-post ──
-  if (!noAnnounce) {
+  if (!noX) {
     const cfUrl = `https://www.curseforge.com/wow/addons/${addon.cf_slug}`;
     const tagline = addon.short_tagline || addon.tagline || "";
     const xText = [
