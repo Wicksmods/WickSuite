@@ -259,6 +259,23 @@ do
     COMBAT = true
     local okCD, errCD = pcall(function() bar:Refresh() end)
     check(okCD, "refresh in combat with secret cooldowns " .. tostring(errCD or ""))
+
+    -- The one part of a cooldown combat leaves readable. The times come
+    -- back secret, but isActive stays a plain boolean, so the bar can
+    -- show what is ready without reading anything it should not.
+    bar:Reset()
+    bar:Rebuild()
+    local first = bar.buttons[1]
+    local id = first and first.spellID
+    check(id ~= nil, "the first icon knows its spell id")
+    S.ON_COOLDOWN = { [id] = true }
+    bar:Refresh()
+    check(first.ready == false, "a spell on cooldown reads as not ready in combat")
+    check(first.icon.__desaturated == true, "and its icon is dimmed")
+    S.ON_COOLDOWN = {}
+    bar:Refresh()
+    check(first.ready == true, "and comes back when it is off cooldown")
+    check(first.icon.__desaturated == false, "with the colour back")
     COMBAT = false
     bar:SetShown(false)
     check(not bar.frame:IsShown(), "bar hides")

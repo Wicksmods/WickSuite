@@ -919,7 +919,16 @@ if MODERN then
         GetSpellInfo = function(id) return { name = "Fireball", iconID = 135812, originalIconID = 135812, castTime = 3500, minRange = 0, maxRange = 35, spellID = 133 } end,
         GetSpellName = function() return "Fireball" end,
         GetSpellTexture = function() return 135812 end,
-        GetSpellCooldown = function(id) return { startTime = COMBAT and SECRET or 0, duration = COMBAT and SECRET or 0, isEnabled = true, modRate = 1 } end,
+        -- The live client keeps isActive and isEnabled as plain
+        -- booleans under combat restrictions while the times go
+        -- secret, which is what lets a tracker show readiness without
+        -- reading anything it is not allowed to.
+        GetSpellCooldown = function(id)
+            local on = S.ON_COOLDOWN and S.ON_COOLDOWN[id] or false
+            return { startTime = COMBAT and SECRET or (on and 100 or 0),
+                     duration = COMBAT and SECRET or (on and 30 or 0),
+                     isEnabled = true, isActive = on, modRate = 1 }
+        end,
     }
     C_SpellBook = { IsSpellKnown = function() return not S.ALL_UNKNOWN end }
     C_Container = {
@@ -1113,7 +1122,10 @@ else
         return "Fireball", "Rank 1", "Interface\\Icons\\Spell_Fire_FlameBolt", 3500, 0, 35, 133
     end
     function GetSpellTexture() return "Interface\\Icons\\Spell_Fire_FlameBolt" end
-    function GetSpellCooldown() return 0, 0, 1, 1 end
+    function GetSpellCooldown(id)
+        local on = S.ON_COOLDOWN and S.ON_COOLDOWN[id] or false
+        return (on and 100 or 0), (on and 30 or 0), 1, 1
+    end
     function IsSpellKnown() return not S.ALL_UNKNOWN end
     GetContainerNumSlots = numSlots
     function GetContainerNumFreeSlots(bag) return math.max(0, numSlots(bag) - 3), S.BAG_FAMILY[bag] or 0 end
