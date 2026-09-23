@@ -269,7 +269,7 @@ function announceFB(addon, version, addonDir, config) {
   const changelog = path.join(addonDir, "CHANGELOG.md");
   const body = extractChangelogEntry(changelog, version);
   const caption = composeFBCaption(addon, version, body);
-  const captionPath = path.join(config.addons_root_local, `.wick-fb-caption-${addon.folder}.txt`);
+  const captionPath = path.join(rootOf(config, addon), `.wick-fb-caption-${addon.folder}.txt`);
   fs.writeFileSync(captionPath, caption);
 
   const thumb = findAddonThumb(addonDir);
@@ -413,7 +413,7 @@ function announceDiscord(addon, version, addonDir, config) {
   const body = extractChangelogEntry(changelog, version);
   const embed = composeDiscordEmbed(addon, version, body);
   const payload = JSON.stringify({ embeds: [embed] });
-  const payloadPath = path.join(config.addons_root_local, `.wick-discord-payload-${addon.folder}.json`);
+  const payloadPath = path.join(rootOf(config, addon), `.wick-discord-payload-${addon.folder}.json`);
   fs.writeFileSync(payloadPath, payload);
 
   log(`\nPosting to Discord #announcements ...`);
@@ -692,18 +692,62 @@ function cmdRender() {
 // ═══════════════════════════════════════════════════════════════════════════
 // release <folder> <version> [--no-announce]
 // ═══════════════════════════════════════════════════════════════════════════
+
+// ---------------------------------------------------------------------------
+// Clients
+//
+// The suite used to be one game: one addons root, one game version, one
+// interface, all at the top of wick.json. Forever has its own of each, and
+// Bags and Trade Hall ship on both, so a folder name no longer names one
+// addon on its own.
+//
+// Old entries carry no client and mean tbc, so nothing already written has
+// to change.
+// ---------------------------------------------------------------------------
+function clientOf(config, addon) {
+  const name = (addon && addon.client) || "tbc";
+  const c = (config.clients || {})[name];
+  if (c) return c;
+  // A config from before the clients map: the top level is the tbc client.
+  return {
+    label: name,
+    addons_root: config.addons_root_local,
+    cf_game_version_id: config.cf_game_version_id,
+    cf_game_version_type_id: config.cf_game_version_type_id,
+    interface: config.interface,
+  };
+}
+
+function rootOf(config, addon) { return clientOf(config, addon).addons_root; }
+
+// Folder plus flavour. Two addons can share a folder name across clients, so
+// say which rather than picking one and hoping.
+function resolveAddon(config, folder, flags) {
+  const want = (flags || []).includes("--forever") ? "forever"
+             : (flags || []).includes("--tbc") ? "tbc" : null;
+  const all = config.addons.filter(a => a.folder === folder);
+  if (all.length === 0) die(`addon not found in wick.json: ${folder}`);
+  if (want) {
+    const hit = all.find(a => (a.client || "tbc") === want);
+    if (!hit) die(`${folder} has no ${want} entry in wick.json`);
+    return hit;
+  }
+  if (all.length === 1) return all[0];
+  const names = all.map(a => a.client || "tbc").join(", ");
+  die(`${folder} exists for more than one client (${names}); pass --forever or --tbc`);
+}
+
 async function cmdRelease(folder, newVer, ...flags) {
   if (!folder || !newVer) die("usage: wick release <folder> <version> [--no-announce]");
   const noAnnounce = flags.includes("--no-announce");
   const config = readConfig();
-  const addon = config.addons.find(a => a.folder === folder);
-  if (!addon) die(`addon not found in wick.json: ${folder}`);
+  const addon = resolveAddon(config, folder, flags);
   if (!addon.cf_project_id) die(`wick.json missing cf_project_id for ${folder} — set it first`);
 
   const token = process.env.CURSEFORGE_API_TOKEN;
   if (!token) die("CURSEFORGE_API_TOKEN env var not set");
 
-  const dir = path.join(config.addons_root_local, folder);
+  const dir = path.join(rootOf(config, addon), folder);
   const toc = path.join(dir, `${folder}.toc`);
   if (!fs.existsSync(toc)) die(`.toc not found: ${toc}`);
 
@@ -795,7 +839,7 @@ async function cmdRelease(folder, newVer, ...flags) {
   const metadata = JSON.stringify({
     // An addon that ships one package for several clients lists them all
     // in cf_game_versions; everything else takes the suite default.
-    gameVersions: addon.cf_game_versions || [config.cf_game_version_id],
+    gameVersions: addon.cf_game_versions || [clientOf(config, addon).cf_game_version_id],
     releaseType: "release",
     changelog: `Release ${newVer}. See CHANGELOG.md for details.`,
     changelogType: "markdown",
@@ -876,7 +920,7 @@ function cmdAuditSecrets() {
   // ── Build repo list ──────────────────────────────────────────────
   const repos = [];
   for (const addon of config.addons.filter(a => !a.benched)) {
-    const dir = path.join(config.addons_root_local, addon.folder);
+    const dir = path.join(rootOf(config, addon), addon.folder);
     if (fs.existsSync(path.join(dir, ".git"))) repos.push({ name: addon.folder, dir });
   }
   if (fs.existsSync(path.join(SUITE_DIR, ".git"))) {

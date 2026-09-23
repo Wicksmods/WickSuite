@@ -37,7 +37,8 @@
         "All TBC phases",
         "SoftRes integration"
       ],
-      "repo": "WickidsTBCBISTracker"
+      "repo": "WickidsTBCBISTracker",
+      "client": "tbc"
     },
     {
       "folder": "WicksCDTracker",
@@ -55,7 +56,8 @@
         "Class-colored rows",
         "Per-spell settings"
       ],
-      "repo": "WicksCDTracker"
+      "repo": "WicksCDTracker",
+      "client": "tbc"
     },
     {
       "folder": "WicksTradeHall",
@@ -73,7 +75,8 @@
         "Aged-out fade",
         "Inline item tooltips"
       ],
-      "repo": "WicksTradeHall"
+      "repo": "WicksTradeHall",
+      "client": "tbc"
     },
     {
       "folder": "WicksMacroBuilder",
@@ -91,7 +94,8 @@
         "9-class preset library",
         "Live 255-char counter"
       ],
-      "repo": "WicksMacroBuilder"
+      "repo": "WicksMacroBuilder",
+      "client": "tbc"
     },
     {
       "folder": "WicksCombatLog",
@@ -111,7 +115,8 @@
         "Family + source filters",
         "Click-to-inspect raw args"
       ],
-      "repo": "WicksCombatLog"
+      "repo": "WicksCombatLog",
+      "client": "tbc"
     },
     {
       "folder": "WicksStats",
@@ -129,7 +134,8 @@
         "Source-aware tooltips",
         "Drag-to-scale corner"
       ],
-      "repo": "WicksStats"
+      "repo": "WicksStats",
+      "client": "tbc"
     },
     {
       "folder": "WicksQuestKey",
@@ -147,7 +153,8 @@
         "Cycles on each press",
         "Bind shown on the button"
       ],
-      "repo": "WicksQuestKey"
+      "repo": "WicksQuestKey",
+      "client": "tbc"
     },
     {
       "benched": true,
@@ -168,7 +175,8 @@
         "AutoLayer channel interop",
         "WicksLayer broadcast channel"
       ],
-      "repo": "WicksLayers"
+      "repo": "WicksLayers",
+      "client": "tbc"
     },
     {
       "folder": "WicksTotemsAndThings",
@@ -188,7 +196,8 @@
         "Affected-count overlay",
         "Swing + WF + ankh tracker"
       ],
-      "repo": "WicksTotemsAndThings"
+      "repo": "WicksTotemsAndThings",
+      "client": "tbc"
     },
     {
       "folder": "WicksBags",
@@ -208,7 +217,8 @@
         "Masonry layout, resizable",
         "Bank panel with buy-slot button"
       ],
-      "repo": "WicksBags"
+      "repo": "WicksBags",
+      "client": "tbc"
     },
     {
       "folder": "WicksTravelForm",
@@ -226,7 +236,8 @@
         "Outland flyable-zone whitelist",
         "Contextual icon preview"
       ],
-      "repo": "WicksTravelForm"
+      "repo": "WicksTravelForm",
+      "client": "tbc"
     },
     {
       "folder": "WicksLedger",
@@ -246,7 +257,8 @@
         "Auto-start on instance entry",
         "Expandable itemized breakdown"
       ],
-      "repo": "WicksLedger"
+      "repo": "WicksLedger",
+      "client": "tbc"
     },
     {
       "folder": "WicksWardrobe",
@@ -266,7 +278,8 @@
         "Inline DressUpModel preview",
         "Save and replay named outfits"
       ],
-      "repo": "WicksWardrobe"
+      "repo": "WicksWardrobe",
+      "client": "tbc"
     },
     {
       "folder": "WicksConcessionStand",
@@ -286,7 +299,8 @@
         "Toggleable buff tray: elixirs, flasks, trinkets",
         "Shrinks to fit, horizontal or vertical"
       ],
-      "repo": "WicksConcessionStand"
+      "repo": "WicksConcessionStand",
+      "client": "tbc"
     },
     {
       "folder": "WicksBones",
@@ -306,7 +320,8 @@
         "High-roll or low-roll modes",
         "IOU ledger for gold ante"
       ],
-      "repo": "WicksBones"
+      "repo": "WicksBones",
+      "client": "tbc"
     },
     {
       "folder": "WicksSurvivors",
@@ -330,7 +345,8 @@
       "cf_game_versions": [
         14300,
         17053
-      ]
+      ],
+      "client": "tbc"
     },
     {
       "benched": true,
@@ -351,7 +367,131 @@
         "Encounter-specific role presets",
         "Broadcast to the raid on demand"
       ],
-      "repo": "WicksRaidBoard"
+      "repo": "WicksRaidBoard",
+      "client": "tbc"
+    },
+    {
+      "folder": "WickCore",
+      "title": "WickCore",
+      "short": "Core",
+      "client": "forever",
+      "slash": "/wickcore",
+      "tagline": "The floor everything else stands on.",
+      "short_tagline": "The floor everything else stands on.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wickcore",
+      "cf_project_id": 1708157,
+      "features": [
+        "Brand chrome, profiles and themes",
+        "One options panel for the suite",
+        "Client dialect shim and restriction guard",
+        "Minimap launcher and version broadcast",
+        "Optional settings store in macros"
+      ],
+      "repo": "WickCore"
+    },
+    {
+      "folder": "WicksComforts",
+      "title": "Wick's Comforts",
+      "short": "Comforts",
+      "client": "forever",
+      "slash": "/wcomfort",
+      "tagline": "Small comforts, each one off until you turn it on.",
+      "short_tagline": "Small comforts, each one off until you turn it on.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-comforts",
+      "cf_project_id": 1708161,
+      "features": [
+        "Square minimap in Wick chrome",
+        "Richer unit tooltips",
+        "Auto loot, auto repair, junk selling",
+        "Auto quest accept and hand in",
+        "Class coloured health bars"
+      ],
+      "repo": "WicksComforts"
+    },
+    {
+      "folder": "WicksBeastsAndThings",
+      "title": "Wick's Beasts and Things",
+      "short": "Beasts",
+      "client": "forever",
+      "slash": "/wbt",
+      "tagline": "The hunter kit: pet care, ammo and a beast atlas.",
+      "short_tagline": "The hunter kit: pet care, ammo and a beast atlas.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-beasts-and-things",
+      "cf_project_id": 1708162,
+      "features": [
+        "Pet happiness, loyalty and training",
+        "One key feeding from your own bags",
+        "Ammo read as shots against the quiver",
+        "Atlas of what each beast family brings",
+        "Talents, checklist and racials"
+      ],
+      "repo": "WicksBeastsAndThings"
+    },
+    {
+      "folder": "WicksStancesAndThings",
+      "title": "Wick's Stances and Things",
+      "short": "Stances",
+      "client": "forever",
+      "slash": "/wst",
+      "tagline": "The warrior kit: three stances and a smart key.",
+      "short_tagline": "The warrior kit: three stances and a smart key.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-stances-and-things",
+      "cf_project_id": 1708165,
+      "features": [
+        "Three stances in one strip",
+        "A smart key that stances then casts",
+        "Shout and stance checklist",
+        "Talents, racials and a cooldown bar"
+      ],
+      "repo": "WicksStancesAndThings"
+    },
+    {
+      "folder": "WicksBags",
+      "title": "Wick's Bags",
+      "short": "Bags",
+      "client": "forever",
+      "slash": "/wbags",
+      "tagline": "Bags and bank in one window, sorted the way you say.",
+      "short_tagline": "Bags and bank in one window, sorted the way you say.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-bags",
+      "cf_project_id": 1537836,
+      "features": [
+        "Auto-categorize by class + subclass",
+        "Masonry layout, resizable",
+        "Bank panel with buy-slot button"
+      ],
+      "repo": "WicksBags"
+    },
+    {
+      "folder": "WicksTradeHall",
+      "title": "Wick's Trade Hall",
+      "short": "Trade",
+      "client": "forever",
+      "slash": "/wth",
+      "tagline": "What a run earned, and what trade chat is offering.",
+      "short_tagline": "What a run earned, and what trade chat is offering.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "trade-hall",
+      "cf_project_id": 1502890,
+      "features": [
+        "Session earnings with gold per hour",
+        "Loot valued at vendor price, marked when unknown",
+        "The trade channel as a board",
+        "Badges, item icons, filters and search",
+        "Reads chat, never posts"
+      ],
+      "repo": "WicksTradeHall"
     }
   ],
   "retired": [
@@ -360,5 +500,21 @@
       "reason": "User does not use it. Deleted 2026-04-21. Do NOT recreate unless explicitly asked.",
       "date": "2026-04-21"
     }
-  ]
+  ],
+  "clients": {
+    "tbc": {
+      "label": "TBC Classic Anniversary",
+      "addons_root": "C:\\Program Files (x86)\\World of Warcraft\\_anniversary_\\Interface\\AddOns",
+      "cf_game_version_id": 14300,
+      "cf_game_version_type_id": 73246,
+      "interface": "20505"
+    },
+    "forever": {
+      "label": "World of Warcraft: Forever",
+      "addons_root": "C:\\Program Files (x86)\\World of Warcraft\\_classic_beta_\\Interface\\AddOns",
+      "cf_game_version_id": 17053,
+      "cf_game_version_type_id": 88568,
+      "interface": "16001"
+    }
+  }
 }
