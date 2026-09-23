@@ -624,6 +624,41 @@ S.TOOLTIP_LINES_FOR = nil
 S.EQUIPPED_IDS = {}
 S.EQUIPPED_IDS = {}
 
+-- A two-hander takes the off hand with it. Without that the compare
+-- counted a two-hander and a shield at once, which is not something you
+-- can wear, so every number it produced was too high.
+-- A rogue cannot hold a two-hander at all, and the addon is right to
+-- refuse one, so this rule needs a character who can.
+local wasClass = CLASS
+CLASS = "WARRIOR"
+S.ITEMS[91001] = { name = "Big Axe", equipLoc = "INVTYPE_2HWEAPON", classID = 2, subClassID = 1 }
+S.ITEMS[91002] = { name = "A Shield", equipLoc = "INVTYPE_SHIELD", classID = 4, subClassID = 6 }
+ns.Doll:ClearAll()
+ns.Doll:TryOn(91001)
+check(ns.Doll.trying[16] ~= nil and ns.Doll.trying[16].id == 91001, "the two-hander goes in the weapon slot")
+check(ns.Doll.trying[17] ~= nil and ns.Doll.trying[17].empty == true,
+    "and the off hand is emptied rather than left counted")
+
+-- An emptied slot gives nothing back, it only takes away.
+local d = ns.Doll:Deltas()
+check(type(d) == "table", "deltas still compute with an emptied slot")
+
+-- And the other way round: an off hand takes a two-hander off.
+ns.Doll:ClearAll()
+ns.Doll:TryOn(91001)
+ns.Doll:TryOn(91002)
+check(ns.Doll.trying[17] ~= nil and ns.Doll.trying[17].id == 91002, "the off hand goes on")
+check(ns.Doll.trying[16] ~= nil and ns.Doll.trying[16].empty == true,
+    "and the two-hander comes off")
+
+-- A one-hander leaves the off hand alone.
+S.ITEMS[91003] = { name = "A Sword", equipLoc = "INVTYPE_WEAPON", classID = 2, subClassID = 7 }
+ns.Doll:ClearAll()
+ns.Doll:TryOn(91003)
+check(ns.Doll.trying[17] == nil, "a one-hander leaves the off hand where it was")
+ns.Doll:ClearAll()
+CLASS = wasClass
+
 local miss = S.missingReport()
 if #miss > 0 then
     io.write("== missing globals reached during the run ==\n  ", table.concat(miss, " "), "\n")
