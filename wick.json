@@ -492,6 +492,26 @@
         "Reads chat, never posts"
       ],
       "repo": "WicksTradeHall"
+    },
+    {
+      "folder": "WicksGear",
+      "title": "Wick's Gear",
+      "short": "Gear",
+      "client": "forever",
+      "slash": "/wgear",
+      "tagline": "What to chase while levelling, and where it drops.",
+      "short_tagline": "What to chase while levelling, and where it drops.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-gear",
+      "cf_project_id": 1708290,
+      "features": [
+        "Upgrades scored against what you wear",
+        "Dungeons, crafted, quest rewards and sets",
+        "Live set bonuses read from the client",
+        "Try on, dressing room, link in chat"
+      ],
+      "repo": "WicksGear"
     }
   ],
   "retired": [

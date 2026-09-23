@@ -810,7 +810,18 @@ async function cmdRelease(folder, newVer, ...flags) {
   const tagName = (addon.client && addon.client !== "tbc")
     ? `${addon.client}-v${newVer}`
     : `v${newVer}`;
-  gitIn(dir, "tag", tagName);
+  // An existing tag on this very commit is a re-ship, not a mistake:
+  // the same reason the commit above is skipped when the tree is clean.
+  // A tag pointing somewhere else is a real conflict and stops here.
+  const tagged = runCapture(`git -C "${dir}" tag -l ${tagName}`).trim();
+  if (!tagged) {
+    gitIn(dir, "tag", tagName);
+  } else {
+    const at = runCapture(`git -C "${dir}" rev-list -n 1 ${tagName}`).trim();
+    const head = runCapture(`git -C "${dir}" rev-parse HEAD`).trim();
+    if (at !== head) die(`${tagName} already exists and points at ${at.slice(0, 7)}, not HEAD`);
+    log(`  ${tagName} already on this commit — leaving it`);
+  }
   // Detect branch: WicksSurvivors uses 'master'; all others use 'main'.
   const currentBranch = runCapture(`git -C "${dir}" rev-parse --abbrev-ref HEAD`).trim();
   gitIn(dir, "push", "origin", currentBranch);
