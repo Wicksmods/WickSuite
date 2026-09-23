@@ -148,6 +148,19 @@ check(panel ~= nil and panel:IsShown(), "the window opens")
 check(ns.UI.tabs.upgrades ~= nil and ns.UI.tabs.browse ~= nil, "with both tabs")
 ns.UI:Select("browse")
 check(ns.UI.panes.browse:IsShown() and not ns.UI.panes.upgrades:IsShown(), "browse shows on its own")
+
+-- The source strip belongs to Browse. It was parented to the panel, so
+-- it stayed on screen over Upgrades and Compare: only the pane and its
+-- head are shown and hidden when a tab changes.
+local strip = ns.UI.panes.browse
+check(strip.search:GetParent() == strip, "the search box belongs to the browse pane")
+check(strip.equippable:GetParent() == strip, "so does the equippable toggle")
+for key, b in pairs(strip.sourceBtns) do
+    check(b:GetParent() == strip, "and the " .. key .. " button")
+end
+check(ns.UI.panes.upgrades.sourceBtns == nil, "upgrades never built a strip of its own")
+check(ns.UI.panes.compare.sourceBtns == nil, "nor did compare")
+
 local rows = 0
 for _, r in ipairs(ns.UI.panes.browse.rows or {}) do if r:IsShown() then rows = rows + 1 end end
 check(rows >= 10, "a row per dungeon, got " .. rows)
