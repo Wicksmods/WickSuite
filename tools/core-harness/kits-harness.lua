@@ -339,6 +339,16 @@ if BADDON then
     -- this can come from is a record kept while the animal is out.
     local Bst = BNS.Bestiary
     check(Bst ~= nil, "the bestiary module loaded")
+
+    -- The atlas is a cache and the roster is not. The store is about
+    -- fourteen kilobytes for the whole suite and five recorded families
+    -- already come to ten on their own, so an atlas left in it would crowd
+    -- out every other addon's settings. It rebuilds from the pet spell
+    -- book; a stabled pet reads as nothing, so the roster cannot.
+    check(BADDON.opts.storeExclude and BADDON.opts.storeExclude[1] == "global",
+        "the family atlas is kept out of the settings store")
+    check(BNS.A.db.char.pets ~= nil, "while the roster stays in it")
+
     Bst:Forget()
     S.PET_NAME, S.PET_FAMILY = "Grizzle", "Bear"
     check(Bst:Record() ~= nil, "a pet that is out is written down")
