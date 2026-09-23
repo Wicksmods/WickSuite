@@ -96,6 +96,19 @@ local okBR, errBR = pcall(function() WB.Bank:Refresh() end)
 check(okBR, "Bank:Refresh " .. tostring(errBR or ""))
 check(WB.Bank.panel._buyBtn ~= nil, "buy button exists")
 check(WB.Bank.panel._buyBtn:IsShown() ~= false, "buy button shown while tabs/slots remain")
+-- The cooldown swirl covers the whole button. It never showed until the
+-- duration was fixed, so whether it took mouse input had never mattered;
+-- the moment it drew, a right-click on anything on cooldown would have
+-- gone into the overlay instead of the item.
+local slotWithCd
+for _, b in ipairs(S.frames) do
+    if b.__name and b.__name:find("WicksBagsSlot") and b._cd then slotWithCd = b break end
+end
+check(slotWithCd ~= nil, "a bag slot was built")
+if slotWithCd then
+    check(slotWithCd._cd.__mouseEnabled == false,
+        "its cooldown overlay does not take the click meant for the item under it")
+end
 WB.Bank.panel._buyBtn.__scripts.OnClick()
 if MODERN then
     check(S.PURCHASED_TAB == nil, "buy tab never calls the restricted C_Bank.PurchaseBankTab")

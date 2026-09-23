@@ -68,6 +68,10 @@ local function newMock(kind, name)
             end
         elseif k == "GetScript" then return function(_, n) return t.__scripts[n] end
         elseif k == "CreateTexture" or k == "CreateFontString" or k == "CreateLine" then return function() return newMock(k) end
+        -- Whether a frame takes mouse input decides whether it swallows a
+        -- click meant for what is underneath it, so it is worth recording.
+        elseif k == "EnableMouse" then return function(_, v) t.__mouseEnabled = v and true or false end
+        elseif k == "IsMouseEnabled" then return function() return t.__mouseEnabled end
         elseif k == "IsShown" or k == "IsVisible" then return function() return t.__shown end
         elseif k == "Show" then return function() t.__shown = true; if t.__scripts.OnShow then t.__scripts.OnShow(t) end end
         elseif k == "Hide" then return function() local was = t.__shown; t.__shown = false; if was and t.__scripts.OnHide then t.__scripts.OnHide(t) end end
