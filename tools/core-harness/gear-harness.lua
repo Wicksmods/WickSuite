@@ -160,6 +160,36 @@ rows = 0
 for _, r in ipairs(ns.UI.panes.browse.rows or {}) do if r:IsShown() then rows = rows + 1 end end
 check(rows > before, "opening a dungeon lists its loot: " .. before .. " to " .. rows)
 
+-- Twenty-eight dungeons and four hundred items, navigable only by opening
+-- one dungeon at a time: there was no way to ask where boots drop or where
+-- a named item comes from. Searching flattens the list, because a collapsed
+-- dungeon hiding the match is the opposite of searching.
+local function shownRows()
+    local n = 0
+    for _, r in ipairs(ns.UI.panes.browse.rows or {}) do if r:IsShown() then n = n + 1 end end
+    return n
+end
+ns.UI.panes.browse.open["The Deadmines"] = false
+ns.UI.search = "zzzznothing"
+ns.UI:FillBrowse()
+check(shownRows() == 0, "a search matching nothing shows nothing, got " .. shownRows())
+check(ns.UI.panes.browse.empty:IsShown(), "and says so rather than going blank")
+
+-- A dungeon name finds its loot without the dungeon being open.
+ns.UI.search = "deadmines"
+ns.UI:FillBrowse()
+local byDungeon = shownRows()
+check(byDungeon > 0, "searching a dungeon name finds its loot while it is collapsed: " .. byDungeon)
+
+ns.UI.search = ""
+ns.UI:FillBrowse()
+check(shownRows() >= 10, "clearing the box puts the dungeon list back")
+
+-- Put the list back the way the next checks expect to find it.
+ns.UI.panes.browse.open["The Deadmines"] = true
+ns.UI:FillBrowse()
+
+
 -- Gear the class cannot use has to be obvious at a glance. Muted grey
 -- against off-white reads as the same colour at this size, so it is
 -- darkened and the icon is desaturated too.

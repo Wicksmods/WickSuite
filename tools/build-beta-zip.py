@@ -126,6 +126,20 @@ WHAT IS NEW SINCE THE LAST PACKAGE
   smart key in one row: bind an ability and the key puts you in the
   stance it needs, then uses it. Plus a shout and stance checklist,
   talents, racials and a cooldown bar.
+* The suite is on CurseForge for Forever. WickCore, Bags, Comforts,
+  Trade Hall, Beasts and Things and Stances and Things all have a page
+  now, so you can install and update from the client if you would
+  rather not use this zip. Search CurseForge for Wick.
+* Comforts: arrow keys move the cursor in chat. This client hands the
+  chat box the old behaviour, where the arrows steer your character and
+  it takes Alt and an arrow to move the cursor or bring back what you
+  last typed. Off until you turn it on, under the camera and client
+  heading.
+* Trade Hall: the board reads as a board. Every listing carries a
+  category badge and the icon of the first item it names, filters along
+  the top, a search box, and an age that fades as it gets old.
+  Right-click a line to open a whisper, shift-click to put the item in
+  your chat box. Neither sends anything.
 * Settings can be kept across restarts. See above.
 * Escape closes any Wick window before it opens the game menu.
 * Comforts: auto accept and hand in quests (Shift at any npc for the
@@ -152,6 +166,16 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 
 Fixed since the last package
 ----------------------------
+* Your theme no longer resets. A login that read the setting before it
+  had arrived fell back to Fel and then saved Fel over your real
+  choice, so one early read lost it for good.
+* Trade Hall: a taxi or a summon reads as travel rather than falling
+  into Misc.
+* Trade Hall: the session total was counting most loot as nothing. It
+  listened for the client to answer about an item but never asked, and
+  a fresh drop is exactly the case the client stays quiet about.
+* Bags: the cooldown swirl was covering the whole item button and
+  swallowing right-clicks.
 * Comforts: automatic repair had never once worked. The cost was read in
   a way that dropped the answer to "can this be repaired", so it always
   read no and went home. Selling junk was never affected.
