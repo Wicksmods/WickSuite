@@ -149,6 +149,7 @@ cb.__scripts.OnClick()
 check(flag == true, "Check toggles")
 check(Chrome:Button(panel.content, "Go").label:GetText() == "Go", "Button label")
 
+
 -- ---------- themes --------------------------------------------------------
 io.write("== themes ==\n")
 check(#Chrome.Themes == 10 and Chrome.ThemeByClass.WARLOCK.id == "fel" and Chrome.ThemeByID.custom, "nine class themes plus custom, warlock is fel")

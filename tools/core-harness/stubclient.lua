@@ -70,6 +70,8 @@ local function newMock(kind, name)
         elseif k == "CreateTexture" or k == "CreateFontString" or k == "CreateLine" then return function() return newMock(k) end
         -- Whether a frame takes mouse input decides whether it swallows a
         -- click meant for what is underneath it, so it is worth recording.
+        elseif k == "SetFrameStrata" then return function(_, v) t.__strata = v end
+        elseif k == "GetFrameStrata" then return function() return t.__strata end
         elseif k == "EnableMouse" then return function(_, v) t.__mouseEnabled = v and true or false end
         elseif k == "IsMouseEnabled" then return function() return t.__mouseEnabled end
         elseif k == "IsShown" or k == "IsVisible" then return function() return t.__shown end
