@@ -233,6 +233,40 @@ ns.UI.search = "feet"
 ns.UI:FillBrowse()
 check(shownRows() > inQuests, "and the same search over crafted finds more: " .. shownRows() .. " against " .. inQuests)
 
+-- Equippable. Dimming is enough for a dungeon's nine items and useless
+-- against a profession's four hundred, most of which are the wrong
+-- armour type for this class.
+ns.UI:SetSource("crafted")
+ns.UI.panes.browse.open["Leatherworking"] = true
+ns.UI:FillBrowse()
+local allRows = shownRows()
+
+-- An item the client has not described yet is kept on purpose: hiding it
+-- would make the list shrink as the answers arrive, which reads as the
+-- addon losing things. So the stub has to actually know these three
+-- before the filter has anything to act on. Plate, on a warrior who is
+-- not high enough for it yet.
+for _, id in ipairs({ 2302, 2303, 2307 }) do
+    S.ITEMS[id] = { equipLoc = "INVTYPE_FEET", classID = 4, subClassID = 4 }
+end
+ns.db().onlyEquippable = true
+ns.UI:FillBrowse()
+local fitRows = shownRows()
+check(fitRows == allRows - 3, "the toggle drops what this class cannot wear: " .. fitRows .. " of " .. allRows)
+check(fitRows > 0, "and does not empty the list")
+
+-- A group with nothing left for this class should not sit there as an
+-- empty header inviting a click.
+local names = {}
+for _, r in ipairs(ns.UI.panes.browse.rows or {}) do
+    if r:IsShown() then names[#names + 1] = tostring(r.left:GetText()) end
+end
+check(#names == fitRows, "every shown row accounted for")
+
+ns.db().onlyEquippable = false
+ns.UI.panes.browse.open["Leatherworking"] = false
+for _, id in ipairs({ 2302, 2303, 2307 }) do S.ITEMS[id] = nil end
+
 ns.UI:SetSource("dungeons")
 ns.UI:FillBrowse()
 
