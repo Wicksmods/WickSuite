@@ -288,13 +288,43 @@ do
             "and what it would change against what is worn")
     end
 
-    -- Shift-click has to produce something chat will accept. The bare
-    -- "item:id" used for weighing is not a link.
-    local link = ns.Score:ChatLink(uncached)
+    -- Shift-click has to produce something chat will accept. An item link
+    -- is a fixed shape on any given build, and "|Hitem:279899|h" is not
+    -- it: that one field version carried everything a receiving client
+    -- needs and still would not go in the chat box, which is what the
+    -- player saw as "most of them will not link".
+    --
+    -- So the shape is learned off a link the client itself made, from the
+    -- gear on the player's back, rather than guessed at.
+    local worn = "|cff1eff00|Hitem:12345:0:0:0:0:0:0:0:60:0:0:0:0:0:0:0:0|h[Worn Thing]|h|r"
+    S.EQUIPPED = { [1] = worn }
+    ns.Score:LearnLinkShape()
+    local fields = ns.Score:LinkFields()
+    check(fields == 17, "the link shape is read off what the player is wearing, got " .. tostring(fields))
+
+    local link, source = ns.Score:ChatLink(uncached)
     check(link ~= nil and link:find("|Hitem:" .. uncached, 1, true) ~= nil,
         "an uncached item still gets a chat link: " .. tostring(link))
+    check(source == "built", "and it is ours, not the client's: " .. tostring(source))
     check(link:find("[" .. ns.ENTRY[uncached].name .. "]", 1, true) ~= nil and link:sub(-4) == "|h|r",
         "a well formed one, with the name in brackets")
+
+    -- The part that was actually broken: ours has to have as many fields
+    -- as the client's own, or the chat box will not take it.
+    local function fieldsIn(l)
+        local payload = l:match("|Hitem:([^|]*)|h")
+        local n = 1
+        for _ in payload:gmatch(":") do n = n + 1 end
+        return n
+    end
+    check(fieldsIn(link) == fieldsIn(worn),
+        ("ours carries the same field count as the client's, %d against %d")
+            :format(fieldsIn(link), fieldsIn(worn)))
+
+    -- A build that shapes links differently is followed, not argued with.
+    S.EQUIPPED = { [1] = "|cffffffff|Hitem:99:0:0:0|h[Short]|h|r" }
+    check(fieldsIn(ns.Score:ChatLink(uncached)) == 17,
+        "a shape already learned is not thrown away by a later read")
 
     S.UNCACHED[uncached] = nil
     S.UNKNOWN[uncached] = nil
