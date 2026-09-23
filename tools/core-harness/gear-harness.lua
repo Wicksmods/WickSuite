@@ -36,7 +36,7 @@ S.UNCACHED = { [7719] = true, [6463] = true, [7717] = true }
 S.REQUESTED = 0
 
 local ns = S.loadAddon(ADDONS_DIR .. "/WicksGear", "WicksGear",
-    { "Data.lua", "Score.lua", "Core.lua", "Doll.lua", "UI.lua" })
+    { "Data.lua", "DataCrafted.lua", "DataQuests.lua", "Score.lua", "Core.lua", "Doll.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksGear")
 S.fire("PLAYER_LOGIN")
 
@@ -184,6 +184,58 @@ check(byDungeon > 0, "searching a dungeon name finds its loot while it is collap
 ns.UI.search = ""
 ns.UI:FillBrowse()
 check(shownRows() >= 10, "clearing the box puts the dungeon list back")
+
+-- Four ways into the same pile of gear. Crafted has a skill where a
+-- dungeon has a level bracket, a quest reward has a zone, and a set has
+-- neither, so the group header stopped being dungeon shaped.
+check(#(ns.CRAFTED_ORDER or {}) == 4, "four gear professions, got " .. #(ns.CRAFTED_ORDER or {}))
+check(#(ns.QUESTS_ORDER or {}) > 10, "quest rewards across the zones, got " .. #(ns.QUESTS_ORDER or {}))
+
+local order, groups = ns.UI:Groups("crafted")
+check(#order == 4 and groups[order[1]] ~= nil, "the crafted source offers its professions")
+check(groups[order[1]][1].skill ~= nil, "and a recipe carries the skill it is learned at")
+
+order = ns.UI:Groups("sets")
+check(#order > 10, "sets are built by walking the tables, got " .. #order)
+
+-- Sets are not scraped as their own table; every entry carries the set
+-- it belongs to and the view is assembled from that, so a crafted piece
+-- joins its set with no emitter change.
+local _, setGroups = ns.UI:Groups("sets")
+local anySet, fromCrafted = nil, false
+for name, rows in pairs(setGroups) do
+    anySet = anySet or name
+    for _, e in ipairs(rows) do if e.skill then fromCrafted = true end end
+end
+check(anySet ~= nil, "a set was found: " .. tostring(anySet))
+
+ns.UI:SetSource("crafted")
+check(ns.UI.source == "crafted", "switching source sticks")
+check(shownRows() == 4, "and the list shows a row per profession, got " .. shownRows())
+ns.UI.panes.browse.open["Blacksmithing"] = true
+ns.UI:FillBrowse()
+check(shownRows() > 4, "opening one lists what it makes")
+
+ns.UI:SetSource("quests")
+check(shownRows() == #ns.QUESTS_ORDER, "quests list a row per zone, got " .. shownRows())
+
+-- Search spans whichever source is showing, which is why it was built
+-- before the sources were. Matched on the slot rather than the item
+-- name: the stub answers GetItemInfo for every id, so the shipped name
+-- is never reached here, which is the one thing this harness cannot
+-- exercise about searching.
+ns.UI.search = "feet"
+ns.UI:FillBrowse()
+local inQuests = shownRows()
+check(inQuests > 0, "a slot search finds quest rewards, got " .. inQuests)
+ns.UI:SetSource("crafted")
+ns.UI.search = "feet"
+ns.UI:FillBrowse()
+check(shownRows() > inQuests, "and the same search over crafted finds more: " .. shownRows() .. " against " .. inQuests)
+
+ns.UI:SetSource("dungeons")
+ns.UI:FillBrowse()
+
 
 -- Put the list back the way the next checks expect to find it.
 ns.UI.panes.browse.open["The Deadmines"] = true
