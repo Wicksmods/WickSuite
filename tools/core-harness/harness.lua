@@ -165,6 +165,32 @@ Chrome:SetTheme("druid")
 check(WickCoreDB.global.theme == "druid", "SetTheme still writes with no profile bound")
 S.fire("PLAYER_LOGOUT")
 check(WickCoreDB.global.theme == "druid", "logout flush rewrites the live choice")
+
+-- A read that comes too early must not become a choice lost for good.
+--
+-- On this client the settings arrive from the macro store, which can land
+-- after login. ApplySavedTheme used to save unconditionally, so a login
+-- that read nothing fell back to Fel and then wrote Fel over the real
+-- setting. The user lost their theme to this twice.
+WickCoreDB.global.theme = "shaman"
+Chrome:ApplySavedTheme("login")
+check(Chrome.activeTheme == "shaman", "a stored theme is applied at login")
+check(WickCoreDB.global.theme == "shaman", "and left where it was")
+
+WickCoreDB.global.theme = nil                       -- the store has not landed yet
+Chrome:ApplySavedTheme("login")
+check(Chrome.activeTheme == "fel", "with nothing to read it falls back to Fel")
+check(WickCoreDB.global.theme == nil,
+    "and writes nothing, so a late store still has something to restore: " ..
+    tostring(WickCoreDB.global.theme))
+
+-- Which is what the store does when it lands.
+WickCoreDB.global.theme = "druid"
+Chrome:ApplySavedTheme("store")
+check(Chrome.activeTheme == "druid", "the store landing applies the real choice")
+check(Chrome.applyLog:find("store=druid", 1, true) ~= nil,
+    "and says so in the trace: " .. Chrome.applyLog:sub(-40))
+
 Core.self.db = Core.Profiles:Init(Core.self, "WickCoreDB", Core.self.opts.defaults)
 Chrome:SetTheme("shaman")
 check(Chrome.Colors.fel[3] ~= felBefore and Chrome.Colors.fel[3] > 0.8, "palette mutated in place")
