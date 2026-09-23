@@ -517,7 +517,11 @@ function InCombatLockdown() return COMBAT end
 function IsInGroup() return IN_GROUP end
 function IsInRaid() return false end
 function IsInGuild() return false end
-function IsControlKeyDown() return false end
+function IsControlKeyDown() return S.CTRL == true end
+
+-- The dressing room. S.DRESSED records what was sent to it, so a test
+-- can tell it was asked rather than only that nothing threw.
+function DressUpItemLink(link) S.DRESSED = link return true end
 function IsShiftKeyDown() return false end
 function IsAltKeyDown() return false end
 function GetTime() return os.clock() end

@@ -161,6 +161,8 @@ end
 check(ns.UI.panes.upgrades.sourceBtns == nil, "upgrades never built a strip of its own")
 check(ns.UI.panes.compare.sourceBtns == nil, "nor did compare")
 
+
+
 local rows = 0
 for _, r in ipairs(ns.UI.panes.browse.rows or {}) do if r:IsShown() then rows = rows + 1 end end
 check(rows >= 10, "a row per dungeon, got " .. rows)
@@ -526,6 +528,35 @@ ns.UI.redrawQueued = nil
 S.CHAT = {}
 SlashCmdList.WICKSGEAR("browse")
 check(true, "/wgear browse does not error")
+
+-- What a click on a row does. Rows are pooled, and one used as a group
+-- header carries the header's toggle, so an item row has to take its own
+-- handler back or clicking the item reopens the group.
+ns.UI:SetSource("dungeons")
+ns.UI.panes.browse.open["The Deadmines"] = true
+ns.UI:FillBrowse()
+local itemRow
+for _, r in ipairs(ns.UI.panes.browse.rows) do
+    if r:IsShown() and r.itemID then itemRow = r break end
+end
+check(itemRow ~= nil, "found an item row to click")
+check(itemRow.__scripts.OnClick == ns.UI.RowClick,
+    "an item row carries the item handler, not a header toggle")
+
+-- Plain click: our own viewer, and the tab with it.
+ns.UI:Select("browse")
+S.DRESSED = nil
+itemRow.__scripts.OnClick(itemRow, "LeftButton")
+check(ns.UI.active == "compare", "clicking a row opens our viewer: " .. tostring(ns.UI.active))
+check(S.DRESSED == nil, "and does not open the dressing room")
+
+-- Ctrl-click: the game's dressing room, and not our tab.
+ns.UI:Select("browse")
+S.CTRL = true
+itemRow.__scripts.OnClick(itemRow, "LeftButton")
+S.CTRL = false
+check(S.DRESSED ~= nil, "ctrl-click sends it to the dressing room: " .. tostring(S.DRESSED))
+check(ns.UI.active == "browse", "and leaves you where you were")
 
 local miss = S.missingReport()
 if #miss > 0 then
