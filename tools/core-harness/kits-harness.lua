@@ -766,6 +766,21 @@ check(Bd.listings[1].category == "ENCHANT", "and reads as enchanting: " .. tostr
 check(Bd:Handle("Portals to Stormwind, 5s, pst", "Mage", 2), "a portal advert is taken")
 check(Bd.listings[1].category == "TRAVEL", "and read as travel: " .. tostring(Bd.listings[1].category))
 
+-- Straight off the live board: this one landed in Misc, because a taxi
+-- was pooled with the city names and the rule wanted a mage or a tip
+-- alongside them.
+check(Bd:Handle("< Taxi Service > Undercity , Thunder Bluff 50silver", "Taxi", 2), "a taxi advert is taken")
+check(Bd.listings[1].category == "TRAVEL", "and is travel, not misc: " .. tostring(Bd.listings[1].category))
+check(Bd:Handle("WTS Sum to ThunderBluff", "Summoner", 2), "a summon for sale is taken")
+check(Bd.listings[1].category == "TRAVEL",
+    "and shelved by what it is, not which way it points: " .. tostring(Bd.listings[1].category))
+
+-- A city name on its own is not travel: half of trade chat says where it
+-- is standing.
+check(Bd:Handle("WTS Copper Ore in Orgrimmar, cheap", "Miner", 2), "a sale that mentions a city is taken")
+check(Bd.listings[1].category == "WTS", "and stays selling: " .. tostring(Bd.listings[1].category))
+
+
 -- A group advert is not trade, and the blacklist runs before the rules.
 check(not Bd:Handle("LFM Deadmines need tank and healer", "Leader", 2), "a group advert is not a listing")
 check(not Bd:Handle("Guild recruiting for raids, apply within", "Recruiter", 2), "nor is guild recruitment")
