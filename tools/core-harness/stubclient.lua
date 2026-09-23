@@ -352,6 +352,18 @@ function UnitCreatureFamily(unit)
     if unit == "target" then return S.TARGET_FAMILY end
     return S.PET_FAMILY or (CLASS == "HUNTER" and "Wolf" or "Imp")
 end
+-- The player's own book. Entries are { name, rank, icon, spellID }; a
+-- test sets S.SPELLBOOK and both dialects read the same list.
+S.SPELLBOOK = {
+    { "Fireball", "Rank 7", "Interface\\Icons\\Fireball", 133 },
+    { "Conjure Water", "Rank 4", "Interface\\Icons\\Water", 5504 },
+    { "Conjure Food", "Rank 3", "Interface\\Icons\\Food", 587 },
+    -- The forms the legacy player book used to answer with, kept
+    -- so a druid reading its own book still finds them.
+    { "Flight Form", "", "Interface\\Icons\\Flight", 33943 },
+    { "Cat Form", "", "Interface\\Icons\\Cat", 768 },
+}
+
 function HasPetSpells()
     local list = S.PET_SPELLS
     if not list then return nil end
@@ -987,17 +999,52 @@ if MODERN then
         if S.ALL_UNKNOWN then return false end
         return id ~= 33943 and id ~= 40120 and id ~= 6229
     end
+    -- One line for the player's book, one for the pet's, so a caller
+    -- that iterates lines sees the same spells the legacy tabs give.
     C_SpellBook.GetNumSpellBookSkillLines = function() return 2 end
+    C_SpellBook.GetSpellBookSkillLineInfo = function(i)
+        if i == 1 then
+            return { name = "General", itemIndexOffset = 0,
+                     numSpellBookItems = #(S.SPELLBOOK or {}),
+                     isGuild = false, shouldHide = false }
+        end
+        -- A guild line is somebody else's spells; a caller asking what
+        -- this character can cast should skip it.
+        return { name = "Guild", itemIndexOffset = 500, numSpellBookItems = 1,
+                 isGuild = true, shouldHide = false }
+    end
+    C_SpellBook.GetSpellBookItemName = function(i, bank)
+        if bank == 1 then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            return e and e[1] or nil
+        end
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
+        if not e then return nil end
+        return e[1], e[2]
+    end
+    C_SpellBook.GetSpellBookItemTexture = function(i, bank)
+        if bank == 1 then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            return e and e[3] or nil
+        end
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
+        return e and e[3] or nil
+    end
     C_SpellBook.HasPetSpells = function()
         local list = S.PET_SPELLS
         if not list then return nil end
         return #list, "PET"
     end
     C_SpellBook.GetSpellBookItemInfo = function(i, bank)
-        if bank ~= 1 then return nil end
-        local e = S.PET_SPELLS and S.PET_SPELLS[i]
+        if bank == 1 then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            if not e then return nil end
+            return { name = e[1], isPassive = e[2] == "passive", iconID = e[3], spellID = e[4] }
+        end
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
         if not e then return nil end
-        return { name = e[1], isPassive = e[2] == "passive", iconID = e[3], spellID = e[4] }
+        return { name = e[1], subName = e[2], iconID = e[3], spellID = e[4],
+                 itemType = "Spell", isPassive = false }
     end
     C_Spell.GetSpellInfo = function(idOrName)
         if S.UNKNOWN_SPELLS and S.UNKNOWN_SPELLS[idOrName] then return nil end
@@ -1116,7 +1163,9 @@ else
     function GetNumTalentTabs() return 3 end
     function GetTalentTabInfo(i) return "Tab" .. i, "x", i == 1 and 31 or 10 end
     function GetNumSpellTabs() return 1 end
-    function GetSpellTabInfo() return "General", "x", 0, 2 end
+    function GetSpellTabInfo()
+        return "General", "x", 0, #(S.SPELLBOOK or {})
+    end
     -- The druid forms, but only for the player book: this also answers
     -- for "pet", and swallowing that argument hid the pet list entirely.
     function GetSpellBookItemName(i, book)
@@ -1124,7 +1173,27 @@ else
             local e = S.PET_SPELLS and S.PET_SPELLS[i]
             return e and e[1] or nil
         end
-        return i == 1 and "Flight Form" or "Cat Form"
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
+        if not e then return nil end
+        return e[1], e[2]
+    end
+    function GetSpellBookItemTexture(i, book)
+        if book == "pet" then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            return e and e[3] or nil
+        end
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
+        return e and e[3] or nil
+    end
+    function GetSpellBookItemInfo(i, book)
+        if book == "pet" then
+            local e = S.PET_SPELLS and S.PET_SPELLS[i]
+            if not e then return nil end
+            return "SPELL", e[4]
+        end
+        local e = S.SPELLBOOK and S.SPELLBOOK[i]
+        if not e then return nil end
+        return "SPELL", e[4]
     end
     -- Druid forms, hunter pet and aspect spells: a levelled character.
     local KNOWN = { [33943]=1, [133]=1, [883]=1, [6991]=1, [13163]=1, [1066]=1, [783]=1, [768]=1 }

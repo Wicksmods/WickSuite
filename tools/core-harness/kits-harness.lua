@@ -564,7 +564,18 @@ IsShiftKeyDown = realShift
 
 io.write("== Conjures and Things ==\n")
 CLASS = "MAGE"
-S.loadAddon(ADDONS_DIR .. "/WicksConjuresAndThings", "WicksConjuresAndThings", { "Core.lua", "Conjure.lua", "UI.lua" })
+-- A mage who has the first three teleports and only one portal: the
+-- level 40 gap, which is the normal state for most of the levelling.
+S.SPELLBOOK = {
+    { "Fireball", "Rank 7", "Interface\\Icons\\Fireball", 133 },
+    { "Conjure Water", "Rank 4", "Interface\\Icons\\Water", 5504 },
+    { "Conjure Food", "Rank 3", "Interface\\Icons\\Food", 587 },
+    { "Teleport: Stormwind", "", "Interface\\Icons\\TeleSW", 3561 },
+    { "Teleport: Ironforge", "", "Interface\\Icons\\TeleIF", 3562 },
+    { "Teleport: Darnassus", "", "Interface\\Icons\\TeleDN", 3565 },
+    { "Portal: Stormwind", "", "Interface\\Icons\\PortSW", 10059 },
+}
+S.loadAddon(ADDONS_DIR .. "/WicksConjuresAndThings", "WicksConjuresAndThings", { "Core.lua", "Conjure.lua", "Portals.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksConjuresAndThings")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -604,8 +615,135 @@ try("conjures panel", function() WicksConjuresAndThings_Toggle() end)
 try("conjures kit", function() SlashCmdList.WICK_WICKSCONJURESANDTHINGS("kit") end)
 if MA then
     local crows = MA.kit.checklist:Evaluate()
-    check(#crows == 5, "conjures checklist 5 rows")
+    -- Five base rows plus the two rune rows, which apply because this
+    -- mage knows both a teleport and a portal.
+    check(#crows == 7, "conjures checklist 7 rows, got " .. #crows)
     check(MA.cooldowns ~= nil, "conjures has a cooldown bar")
+end
+
+io.write("== portals and teleports ==\n")
+do
+    local P = WicksConjuresAndThings and nil
+    local Portals = MA and MA.kit and nil
+    -- The addon namespace is not exported, so reach it the way a player
+    -- would: through the panel the command opens.
+    SlashCmdList.WICK_WICKSCONJURESANDTHINGS("portals")
+    local panel = _G.WicksConjuresPortals
+    check(panel ~= nil and panel:IsShown(), "the portals panel opens")
+
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSCONJURESANDTHINGS("status")
+    local line = table.concat(S.CHAT, " | ")
+    -- Three destinations out of four spells: Stormwind has both halves.
+    check(line:find("3 destinations", 1, true) ~= nil,
+        "destinations come from the book, not a list: " .. line:sub(1, 90))
+    check(line:find("Stormwind: teleport + portal", 1, true) ~= nil,
+        "a destination with both halves reads as both")
+    check(line:find("Darnassus: teleport", 1, true) ~= nil
+        and line:find("Darnassus: teleport + portal", 1, true) == nil,
+        "and one with only a teleport does not claim a portal")
+
+    -- The rows are the secure buttons, so check what they would cast.
+    local rows = panel.rows or {}
+    check(#rows == 3, "a row per destination, got " .. #rows)
+    if #rows == 3 then
+        -- Alphabetical: Darnassus, Ironforge, Stormwind.
+        check(rows[1]:GetAttribute("spell1") == "Teleport: Darnassus",
+            "left-click teleports: " .. tostring(rows[1]:GetAttribute("spell1")))
+        check(rows[1]:GetAttribute("spell2") == "",
+            "and a city with no portal has nothing on right-click")
+        check(rows[3]:GetAttribute("spell2") == "Portal: Stormwind",
+            "right-click opens the portal: " .. tostring(rows[3]:GetAttribute("spell2")))
+    end
+
+    -- Learning a city mid-session reorders the list, and the rows are
+    -- pooled, so row one has to end up pointed somewhere new.
+    S.SPELLBOOK[#S.SPELLBOOK + 1] = { "Teleport: Amberfall", "", "Interface\\Icons\\X", 90001 }
+    S.fire("SPELLS_CHANGED")
+    check(#(panel.rows or {}) >= 4, "the new city gets a row")
+    check(rows[1]:GetAttribute("spell1") == "Teleport: Amberfall",
+        "and the pooled first row retargets: " .. tostring(rows[1]:GetAttribute("spell1")))
+
+    -- A destination invented for this test proves the point: nothing
+    -- here knows the name of a single city.
+    table.remove(S.SPELLBOOK)
+    S.fire("SPELLS_CHANGED")
+
+    -- Rows are secure buttons, and a secure button's attributes are
+    -- locked for the duration of a fight. Opening the panel mid-pull,
+    -- or learning something while one is up, must not throw.
+    panel:Hide()
+    local before = #(panel.rows or {})
+    COMBAT = true
+    -- Sanity: the stub must refuse an attribute on a secure frame in
+    -- combat, or the rest of this proves nothing.
+    local okGuard = pcall(function() panel.rows[1]:SetAttribute("type1", "spell") end)
+    check(not okGuard, "a secure row refuses an attribute in combat")
+    -- Two, so the row pool genuinely runs out and a fresh secure
+    -- button has to be built while the attributes are locked. One
+    -- would reuse the row the Amberfall case left behind and prove
+    -- nothing.
+    S.SPELLBOOK[#S.SPELLBOOK + 1] = { "Teleport: Everlook", "", "Interface\\Icons\\X", 90002 }
+    S.SPELLBOOK[#S.SPELLBOOK + 1] = { "Teleport: Booty Bay", "", "Interface\\Icons\\X", 90003 }
+    -- The addon's event dispatcher pcalls each handler and prints what
+    -- it caught, so a throw inside one never reaches this pcall. The
+    -- chat is where the evidence lands, and checking only the pcall let
+    -- a real break pass as green.
+    S.CHAT = {}
+    local okCombat, whyCombat = pcall(function()
+        SlashCmdList.WICK_WICKSCONJURESANDTHINGS("portals")
+        S.fire("SPELLS_CHANGED")
+    end)
+    local swallowed = table.concat(S.CHAT, " | ")
+    check(swallowed:find("error in", 1, true) == nil,
+        "and nothing was swallowed by the dispatcher: " .. swallowed:sub(1, 110))
+    check(okCombat, "the portals panel survives combat: " .. tostring(whyCombat)
+        .. " [shown=" .. tostring(panel:IsShown())
+        .. " rows " .. tostring(before) .. "->" .. tostring(#(panel.rows or {})) .. "]")
+    COMBAT = false
+
+    -- And the city learned during the fight gets its row once it ends.
+    S.fire("PLAYER_REGEN_ENABLED")
+    local found = false
+    for _, r in ipairs(panel.rows or {}) do
+        if r:IsShown() and r:GetAttribute("spell1") == "Teleport: Everlook" then found = true end
+    end
+    check(found, "and the row it could not build arrives when the fight does")
+
+    table.remove(S.SPELLBOOK)
+    table.remove(S.SPELLBOOK)
+    S.fire("SPELLS_CHANGED")
+    panel:Hide()
+end
+
+io.write("== rune rows appear with the spells ==\n")
+do
+    local keep = S.SPELLBOOK
+    -- A mage at nineteen: no teleports, so no rune rows at all. A grey
+    -- row about reagents for a spell you cannot cast is clutter.
+    S.SPELLBOOK = {
+        { "Fireball", "Rank 7", "Interface\\Icons\\Fireball", 133 },
+        { "Conjure Water", "Rank 4", "Interface\\Icons\\Water", 5504 },
+    }
+    S.fire("SPELLS_CHANGED")
+    local rows = MA.kit.checklist:Evaluate()
+    check(#rows == 5, "no teleports, no rune rows: " .. #rows)
+    local labels = {}
+    for _, r in ipairs(rows) do labels[r.label] = true end
+    check(not labels["Teleport runes"] and not labels["Portal runes"],
+        "neither rune row is drawn")
+
+    -- At twenty the teleport row appears, and only that one.
+    S.SPELLBOOK[#S.SPELLBOOK + 1] = { "Teleport: Stormwind", "", "Interface\\Icons\\T", 3561 }
+    S.fire("SPELLS_CHANGED")
+    rows = MA.kit.checklist:Evaluate()
+    labels = {}
+    for _, r in ipairs(rows) do labels[r.label] = true end
+    check(labels["Teleport runes"] == true, "the teleport row arrives with the spell")
+    check(labels["Portal runes"] == nil, "and the portal row waits for level forty")
+
+    S.SPELLBOOK = keep
+    S.fire("SPELLS_CHANGED")
 end
 
 io.write("== Stances and Things ==\n")
