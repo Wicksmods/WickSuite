@@ -867,6 +867,37 @@ const SUITE_ADDONS = [
   { key:'survivors', name:'Survivors', short:'Survivors', mono:'SV', accent:G, slash:'/survivors', tag:'wave survival minigame' },
 ];
 
+// The Forever suite. The class kits share a card rather than taking
+// seven: at fourteen cards the TBC banner clipped every name, and the
+// strip was built for six to eight.
+const FOREVER_ADDONS = [
+  { key:'core',      name:'WickCore',   short:'WickCore',   mono:'WC',  accent:G, slash:'/wickcore',  tag:'the shared platform', bare:true },
+  { key:'bags',      name:'Bags',       short:'Bags',       mono:'BG',  accent:G, slash:'/wbags',     tag:'bags and bank in one' },
+  { key:'comforts',  name:'Comforts',   short:'Comforts',   mono:'CO',  accent:G, slash:'/wcomfort',  tag:'the small client fixes' },
+  { key:'gear',      name:'Gear',       short:'Gear',       mono:'GR',  accent:G, slash:'/wgear',     tag:'what to chase while levelling' },
+  { key:'trade',     name:'Trade Hall', short:'Trade Hall', mono:'TH',  accent:G, slash:'/wth',       tag:'earnings and the trade board' },
+  { key:'kit',       name:'Class Kits', short:'Class Kits', mono:'KIT', accent:G, slash:'/w__',       tag:'one per class', bare:true },
+  { key:'survivors', name:'Survivors',  short:'Survivors',  mono:'SV',  accent:G, slash:'/survivors', tag:'wave survival minigame' },
+];
+
+// Everything that differs between the two clients, in one place.
+const FLAVOURS = {
+  tbc: {
+    eyebrow: 'WORLD OF WARCRAFT \u00b7 TBC CLASSIC',
+    blurb: 'Built for serious TBC Classic raiders.',
+    footer: 'Wick \u00b7 TBC Classic \u00b7 MIT licensed code \u00b7 Trademark protected brand',
+    badges: ['TBC Classic', 'v2.5.5', 'Open Source'],
+    addons: SUITE_ADDONS,
+  },
+  forever: {
+    eyebrow: 'WORLD OF WARCRAFT \u00b7 FOREVER',
+    blurb: 'Rebuilt for Forever on a shared core.',
+    footer: 'Wick \u00b7 World of Warcraft: Forever \u00b7 MIT licensed code \u00b7 Trademark protected brand',
+    badges: ['Forever', 'Beta', 'Open Source'],
+    addons: FOREVER_ADDONS,
+  },
+};
+
 function SuiteThumb() {
   return (
     <div style={{width:460,height:260,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
@@ -921,7 +952,8 @@ function SuiteThumb() {
   );
 }
 
-function SuiteBanner({ w = 860, h = 320 } = {}) {
+function SuiteBanner({ w = 860, h = 320, flavour = 'forever' } = {}) {
+  const F = FLAVOURS[flavour] || FLAVOURS.forever;
   return (
     <div style={{width:w,height:h,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
       <DungeonBg width={w} height={h} glowX="50%" glowY="50%" glowColor={G} accent="#6B21A8" opacity={0.15}/>
@@ -930,7 +962,7 @@ function SuiteBanner({ w = 860, h = 320 } = {}) {
       <div style={{position:'absolute',left:48,top:0,bottom:0,width:248,
         display:'flex',flexDirection:'column',justifyContent:'center',gap:6}}>
         <div style={{fontFamily:FM,fontSize:7.5,letterSpacing:'0.28em',color:MDIM,marginBottom:8}}>
-          WORLD OF WARCRAFT · TBC CLASSIC
+          {F.eyebrow}
         </div>
         <div style={{display:'inline-flex',flexDirection:'column',alignItems:'stretch',marginBottom:14}}>
           <WickWordmark size={56}/>
@@ -943,7 +975,7 @@ function SuiteBanner({ w = 860, h = 320 } = {}) {
           A suite of precision addons.<br/>One voice. One chrome.
         </div>
         <div style={{fontFamily:FU,fontSize:9,color:MDIM,lineHeight:1.6,maxWidth:220}}>
-          Built for serious TBC Classic raiders.
+          {F.blurb}
         </div>
       </div>
       {/* Vertical divider */}
@@ -952,7 +984,7 @@ function SuiteBanner({ w = 860, h = 320 } = {}) {
           to fit 8 cards comfortably (was sized for 5-7). */}
       <div style={{position:'absolute',left:320,right:10,top:24,bottom:50,
         display:'flex',gap:5,overflow:'hidden'}}>
-        {SUITE_ADDONS.map(a => (
+        {F.addons.map(a => (
           <div key={a.key} style={{flex:1,minWidth:0,display:'flex',flexDirection:'column',
             background:'rgba(13,10,20,0.5)',
             border:`1px solid ${BR}`,
@@ -970,13 +1002,15 @@ function SuiteBanner({ w = 860, h = 320 } = {}) {
             <div style={{fontFamily:FD,fontWeight:700,fontSize:8.5,color:TX,
               textAlign:'center',lineHeight:1.25,minHeight:22,
               wordBreak:'normal',hyphens:'none'}}>
-              <span style={{color:G}}>Wick's</span><br/>
-              {a.short || a.name}
+              {/* WickCore is not "Wick's Core", and the kits card stands
+                  for several products rather than naming one. */}
+              {a.bare ? null : <><span style={{color:G}}>Wick's</span><br/></>}
+              {a.bare ? <span style={{color:G}}>{a.short || a.name}</span> : (a.short || a.name)}
             </div>
             {/* Slash */}
             <div style={{fontFamily:FM,fontSize:6.5,color:a.accent,
               textAlign:'center',marginTop:3,letterSpacing:'0.08em'}}>
-              {a.slash}
+              {a.slash === '/w__' ? 'one per class' : a.slash}
             </div>
           </div>
         ))}
@@ -986,10 +1020,10 @@ function SuiteBanner({ w = 860, h = 320 } = {}) {
         borderTop:`1px solid ${BR}44`,background:'rgba(13,10,20,0.7)',
         display:'flex',alignItems:'center',paddingLeft:48,paddingRight:20,justifyContent:'space-between'}}>
         <span style={{fontFamily:FM,fontSize:7.5,color:DIM,letterSpacing:'0.12em'}}>
-          Wick · TBC Classic · MIT licensed code · Trademark protected brand
+          {F.footer}
         </span>
         <div style={{display:'flex',gap:6}}>
-          {['TBC Classic','v2.5.5','Open Source'].map(t=>(
+          {F.badges.map(t=>(
             <span key={t} style={{fontFamily:FM,fontSize:6.5,color:G,border:`1px solid ${G}`,padding:'1px 6px',opacity:0.55,letterSpacing:'0.1em'}}>{t}</span>
           ))}
         </div>
@@ -1104,8 +1138,12 @@ function Artboard({ id, label, w, h, Component }) {
 // Render-only mode: ?only=banner|suite|cd|bis|trade renders a single artboard at its native
 // size with zero body chrome. Used for headless Chrome screenshot export.
 const ONLY_COMPONENTS = {
-  banner:   { Comp: SuiteBanner,                            w: 860,  h: 320 },
-  banner850:{ Comp: () => <SuiteBanner w={850}  h={316}/>,  w: 850,  h: 316 },
+  // The front page is Forever, so the plain names are Forever. /tbc
+  // still needs a banner of its own, hence the -tbc pair.
+  banner:      { Comp: SuiteBanner,                                        w: 860, h: 320 },
+  banner850:   { Comp: () => <SuiteBanner w={850} h={316}/>,               w: 850, h: 316 },
+  bannertbc:   { Comp: () => <SuiteBanner flavour="tbc"/>,                 w: 860, h: 320 },
+  bannertbc850:{ Comp: () => <SuiteBanner w={850} h={316} flavour="tbc"/>, w: 850, h: 316 },
   social:   { Comp: SocialCover,                            w: 1200, h: 630 },
   suite:    { Comp: SuiteThumb,                             w: 460,  h: 260 },
   cd:       { Comp: CDThumb,            w: 460, h: 260 },
