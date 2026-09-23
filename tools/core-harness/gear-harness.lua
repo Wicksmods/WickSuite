@@ -234,6 +234,19 @@ check(shownRows() > 4, "opening one lists what it makes")
 ns.UI:SetSource("quests")
 check(shownRows() == #ns.QUESTS_ORDER, "quests list a row per zone, got " .. shownRows())
 
+-- The draw records what it produced, so an empty view can say whether
+-- it had nothing to draw or drew nothing.
+ns.UI:SetSource("crafted")
+ns.UI:FillBrowse()
+local f = ns.UI.lastFill
+check(f and f.source == "crafted", "the last draw knows its source: " .. tostring(f and f.source))
+check(f.groups == 4, "and how many groups it had: " .. tostring(f.groups))
+check(f.rows == 4, "and how many rows it drew: " .. tostring(f.rows))
+
+-- Put the source back: the next check measures quests first.
+ns.UI:SetSource("quests")
+
+
 -- Search spans whichever source is showing, which is why it was built
 -- before the sources were. Matched on the slot rather than the item
 -- name: the stub answers GetItemInfo for every id, so the shipped name
