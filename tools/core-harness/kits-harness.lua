@@ -462,6 +462,68 @@ for _, name in ipairs({ "WicksTotemsAndThings", "WicksDemonsAndThings", "WicksFo
     end
 end
 
+io.write("== the bar tracks rather than casts ==\n")
+do
+    local entry = WickCore.Launcher.entries["WicksTotemsAndThings"]
+    local bar = entry and entry.addon and entry.addon.cooldowns
+    -- The frame is built lazily, so ask for it rather than hoping
+    -- something earlier in the run has opened the bar.
+    bar:Build()
+    bar:Reset()
+    bar:Rebuild()
+    local b = bar.buttons and bar.buttons[1]
+    check(b ~= nil, "the bar built some icons")
+
+    -- The point of dropping the secure template. A protected button
+    -- cannot take an attribute in combat, so a bar built out of them
+    -- could not be rebuilt during the fight it exists to help with.
+    check(b and b.__template == nil, "icons are plain frames, not secure buttons")
+    check(b and b.__attr == nil, "and carry no action attributes")
+
+    -- So a rebuild mid-fight has to be uneventful.
+    COMBAT = true
+    local okCombat, whyCombat = pcall(function() bar:Add("Stormstrike"); bar:Rebuild() end)
+    check(okCombat, "the bar rebuilds in combat: " .. tostring(whyCombat))
+    COMBAT = false
+end
+
+io.write("== the row wraps and scales ==\n")
+do
+    local entry = WickCore.Launcher.entries["WicksTotemsAndThings"]
+    local bar = entry and entry.addon and entry.addon.cooldowns
+    bar:Build()
+    bar:Reset()
+    local n = #bar:List()
+    check(n >= 4, "enough default spells to wrap, got " .. n)
+
+    bar:SetPerRow(0)
+    local oneRowH = bar.frame:GetHeight()
+    bar:SetPerRow(2)
+    check(bar.frame:GetHeight() > oneRowH, "wrapping to two per row makes it taller")
+    local wide = bar.frame:GetWidth()
+    bar:SetPerRow(0)
+    check(bar.frame:GetWidth() > wide, "back to one row, back to wide")
+
+    -- Out of range is a typo, not a reason to go silent.
+    check(bar:SetScale(9) == 2.5, "an absurd scale is clamped, not refused")
+    check(bar:SetScale(0.1) == 0.5, "and so is a tiny one")
+    check(bar:SetScale("nonsense") == nil, "but a non-number says no")
+
+    -- A frame's offsets are read in its own scale, so rescaling moves
+    -- it unless the offsets are converted. The bar has to stay put.
+    bar:SetScale(1)
+    bar.frame:ClearAllPoints()
+    bar.frame:SetPoint("CENTER", UIParent, "CENTER", 200, -100)
+    bar:SetScale(2)
+    local point, _, _, x, y = bar.frame:GetPoint()
+    check(bar.frame:GetScale() == 2, "the scale took, got " .. tostring(bar.frame:GetScale()))
+    check(point == "CENTER", "the anchor is unchanged: " .. tostring(point))
+    check(math.abs(x * 2 - 200) < 0.01 and math.abs(y * 2 - -100) < 0.01,
+        "and it sits where it did: " .. tostring(x) .. "," .. tostring(y))
+    bar:SetScale(1)
+    bar:Reset()
+end
+
 -- A lock is there to stop an accidental nudge while you click the bar,
 -- not to stop you moving it on purpose. Hunting for the unlock checkbox
 -- every time is worse than the accident, so shift always moves it. One

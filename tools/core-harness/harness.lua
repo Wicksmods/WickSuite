@@ -141,8 +141,19 @@ check(panel.content and panel.title and panel.close and panel.grip and panel.bra
 check(Chrome:TitleMarkup("Wick's Test"):find("4FC778") and Chrome:TitleMarkup("Wick's Test"):find("D4C8A1"), "two-tone title")
 panel:Show(); panel:Toggle()
 check(panel:IsShown() == false, "Toggle")
+-- Put it somewhere known and check the trip out and back, rather than
+-- whatever the frame happened to be anchored at.
+panel:ClearAllPoints()
+panel:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 40, -60)
 Chrome:SavePosition(panel, win)
-check(win.point == "CENTER" and win.x == 12 and win.width == 300, "SavePosition")
+check(win.point == "TOPLEFT" and win.relPoint == "TOPLEFT" and win.x == 40 and win.y == -60
+      and win.width == 300, "SavePosition records the anchor and the size")
+panel:ClearAllPoints()
+panel:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+Chrome:RestorePosition(panel, win)
+local rp, _, rrp, rx, ry = panel:GetPoint()
+check(rp == "TOPLEFT" and rrp == "TOPLEFT" and rx == 40 and ry == -60,
+      "RestorePosition puts it back: " .. tostring(rp) .. " " .. tostring(rx) .. "," .. tostring(ry))
 local flag = false
 local cb = Chrome:Check(panel.content, "Lock", function() return flag end, function(v) flag = v end)
 cb.__scripts.OnClick()
@@ -233,7 +244,10 @@ do
     bar:Build()
     bar:SetShown(true)
     check(bar.frame:IsShown(), "bar shows")
-    check(#bar.buttons > 0 and bar.buttons[1]:GetAttribute("spell") ~= nil, "a secure cast button per spell")
+    -- An icon per spell, and nothing protected: the bar tracks, it does
+    -- not cast, which is what lets it be rebuilt during a fight.
+    check(#bar.buttons > 0, "an icon per spell")
+    check(bar.buttons[1].__template == nil, "and none of them is a secure button")
     local before = #bar:List()
     check(bar:Add("Arcane Shot") and #bar:List() == before + 1, "add a spell by name")
     check(not bar:Add("Arcane Shot"), "the same spell is not added twice")

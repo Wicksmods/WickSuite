@@ -89,17 +89,47 @@ local function newMock(kind, name)
         elseif k == "GetCenter" then return function() return 0, 0 end
         elseif k == "GetLeft" or k == "GetBottom" then return function() return 0 end
         elseif k == "GetRight" or k == "GetTop" then return function() return 100 end
-        elseif k == "GetEffectiveScale" or k == "GetScale" then return function() return 1 end
-        elseif k == "GetPoint" then return function() return "CENTER", nil, "CENTER", 12, -34 end
+        -- Scale is recorded rather than shrugged off, because point
+        -- offsets are read in the frame's own scale: code that rescales
+        -- a frame and does not correct for it walks the frame across
+        -- the screen, and a stub that always answers 1 cannot show it.
+        elseif k == "SetScale" then return function(_, v) t.__scale = tonumber(v) or 1 end
+        elseif k == "GetEffectiveScale" or k == "GetScale" then return function() return t.__scale or 1 end
+        elseif k == "ClearAllPoints" then return function() t.__points = {} end
+        elseif k == "GetPoint" then return function()
+                local pts = t.__points
+                local p = pts and pts[#pts]
+                -- Nothing anchored yet: the old fixed answer, so the
+                -- checks written against it still mean what they did.
+                if not p then return "CENTER", nil, "CENTER", 12, -34 end
+                return p[1], p[2], p[3], p[4], p[5]
+            end
         elseif k == "SetPoint" then return function(_, point, rel, ...)
+                -- SetPoint has three shapes and they have to be stored
+                -- as one, or GetPoint hands back the arguments of
+                -- whichever shape was used last.
                 -- Retail rule: a protected frame (secure templates) may anchor
                 -- only to frames, never to a texture or font string.
                 if MODERN and t.__template and t.__template:find("^Secure") and type(rel) == "table"
                    and (rel.__kind == "Texture" or rel.__kind == "FontString" or rel.__kind == "CreateTexture" or rel.__kind == "CreateFontString") then
                     error("Action[SetPoint] failed because[Cannot anchor protected frames to regions]: attempted from: Button:SetPoint.", 2)
                 end
+                local a, b, c = ...
+                local relPoint, x, y
+                if rel == nil or type(rel) == "number" then
+                    -- SetPoint(point), SetPoint(point, x, y)
+                    relPoint, x, y, rel = point, rel, a, t.__parent
+                elseif type(a) == "string" then
+                    -- SetPoint(point, relativeTo, relativePoint, x, y).
+                    -- The string is what tells the two apart: the other
+                    -- shape has a number in that slot.
+                    relPoint, x, y = a, b, c
+                else
+                    -- SetPoint(point, relativeTo, x, y)
+                    relPoint, x, y = point, a, b
+                end
                 t.__points = t.__points or {}
-                t.__points[#t.__points + 1] = { point, rel, ... }
+                t.__points[#t.__points + 1] = { point, rel, relPoint, x, y }
             end
         elseif k == "GetNumPoints" then return function() return 1 end
         elseif k == "SetText" then return function(_, s, r, g, b, a, wrap)
@@ -146,7 +176,16 @@ local function newMock(kind, name)
         elseif k == "NumLines" then return function() return 1 end
         elseif k == "GetCursorPosition" then return function() return 0 end
         elseif k == "IsEnabled" then return function() return true end
-        elseif k == "SetAttribute" then return function(_, a, v) t.__attr = t.__attr or {}; t.__attr[a] = v end
+        elseif k == "SetAttribute" then return function(_, a, v)
+                -- A protected frame's attributes are locked for the
+                -- duration of a fight. Anything that wants to change
+                -- what it does mid-combat has to not be secure.
+                if COMBAT and t.__template and t.__template:find("Secure") then
+                    error("Interface action failed because of an AddOn", 2)
+                end
+                t.__attr = t.__attr or {}
+                t.__attr[a] = v
+            end
         elseif k == "GetAttribute" then return function(_, a) return t.__attr and t.__attr[a] end
         elseif k == "SetStatusBarColor" then return function(_, r, g, b, a) t.__color = { r, g, b, a } end
         elseif k == "SetStatusBarTexture" then return function(_, tex) t.__statusTex = tex end
