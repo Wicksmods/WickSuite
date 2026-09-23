@@ -122,12 +122,6 @@ WHAT IS NEW SINCE THE LAST PACKAGE
   guessing. And a reader for the trade channel that keeps one line per
   person per subject, sorted into selling, buying, enchanting, crafting
   and travel, instead of the scroll. It reads chat and never posts.
-* New: Wick's Beasts and Things has a bestiary. Every animal you have
-  had out, with what it eats, how far it got and how long ago you called
-  it, and what its family brings. Food can be pinned per animal, which
-  matters the moment you own two pets that eat different things. /wbt
-  bestiary. An animal in the stable reads nothing to the client, so it
-  is written down while the pet is with you.
 * New: Wick's Stances and Things, the warrior kit. Three stances and a
   smart key in one row: bind an ability and the key puts you in the
   stance it needs, then uses it. Plus a shout and stance checklist,
