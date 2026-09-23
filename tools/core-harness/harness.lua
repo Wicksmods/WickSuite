@@ -686,6 +686,8 @@ S.CHAT = {}
 SlashCmdList.WICK_WICKCORE("store")
 check(#S.CHAT >= 3, "/wickcore store reports")
 
+
+
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
 if fails > 0 then error(MODE .. ": " .. fails .. " check(s) failed", 0) end
 io.write("PASS\n")

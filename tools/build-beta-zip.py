@@ -18,7 +18,7 @@ import zipfile
 ADDONS = "C:/Program Files (x86)/World of Warcraft/_classic_beta_/Interface/AddOns"
 OUT = "C:/Users/jspli/Projects/Wick/Wicksmods.github.io/download/WicksMods-Forever-beta.zip"
 FOLDERS = [
-    "WickCore", "WicksBags", "WicksComforts", "WicksGear",
+    "WickCore", "WicksBags", "WicksComforts", "WicksGear", "WicksTradeHall",
     "WicksTotemsAndThings", "WicksDemonsAndThings", "WicksFormsAndThings",
     "WicksBeastsAndThings", "WicksPoisonsAndThings", "WicksConjuresAndThings",
     "WicksStancesAndThings",
@@ -79,6 +79,8 @@ Wick's Gear      What to chase while levelling, scored for your class
                  against what you have on; a browser for what drops
                  where, twenty-one dungeons; and a paperdoll to try
                  pieces on and see the stat changes. /wgear
+Wick's Trade     What a run earned, and what the trade channel is
+Hall             offering, in one window. /wth
 
 Class kits, one per class. Each has talents, a pre-pull checklist,
 racials and a cooldown bar:
@@ -114,6 +116,18 @@ fixes the client, it notices and stays out of the way.
 
 WHAT IS NEW SINCE THE LAST PACKAGE
 ----------------------------------
+* New: Wick's Trade Hall. Two things in one window. A session tracker
+  that says what a run earned and what that is an hour, valuing loot at
+  its vendor price and marking anything it cannot price rather than
+  guessing. And a reader for the trade channel that keeps one line per
+  person per subject, sorted into selling, buying, enchanting, crafting
+  and travel, instead of the scroll. It reads chat and never posts.
+* New: Wick's Beasts and Things has a bestiary. Every animal you have
+  had out, with what it eats, how far it got and how long ago you called
+  it, and what its family brings. Food can be pinned per animal, which
+  matters the moment you own two pets that eat different things. /wbt
+  bestiary. An animal in the stable reads nothing to the client, so it
+  is written down while the pet is with you.
 * New: Wick's Stances and Things, the warrior kit. Three stances and a
   smart key in one row: bind an ability and the key puts you in the
   stance it needs, then uses it. Plus a shout and stance checklist,
@@ -144,6 +158,15 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 
 Fixed since the last package
 ----------------------------
+* Comforts: automatic repair had never once worked. The cost was read in
+  a way that dropped the answer to "can this be repaired", so it always
+  read no and went home. Selling junk was never affected.
+* Bags: right-clicking an item in the bag stopped working. The cooldown
+  swirl was fixed in the same pass, and having finally appeared it was
+  sitting over the whole button taking the click meant for the item.
+* Gear: most items would not shift-click into chat. An item link is a
+  fixed shape on a given build and ours was one field long. It now reads
+  the shape off the gear on your back and matches it.
 * The /who panel opened with its close button and side tabs drawn and
   nothing in the middle. Comforts was claiming a frame name before the
   group finder had loaded, so Blizzard could not build the real one.
@@ -157,8 +180,15 @@ Fixed since the last package
 KNOWN ISSUES
 ------------
 * Wick's Bags can show "blocked from an action" when right-clicking an
-  item. Click Ignore. Still being worked on. /wbags bank prints what
-  the client says if the bank looks wrong.
+  item, most often at the bank. Click Ignore; the click still works.
+  This is the cost of hiding Blizzard's own bank window, so /wbags
+  defaultbank turns that off and stops it, at the cost of seeing their
+  window. /wbags bank prints what the client says if the bank looks
+  wrong.
+
+* Wick's Trade Hall values loot at its vendor price, because the auction
+  addons it reads on TBC do not exist here yet. Anything the client will
+  not price counts as nothing and is marked as such.
 
 * The shaman and warlock kits have not been run on a character of
   their own class yet. Expect rough edges and please report them.

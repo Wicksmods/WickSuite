@@ -1365,6 +1365,53 @@ S.CHAT = {}
 SlashCmdList.WICK_WICKSCOMFORTS("status")
 check(#S.CHAT >= 1, "/wcomfort status prints")
 
+-- ============================================================
+-- WickCore missing
+-- ============================================================
+--
+-- Every addon used to declare WickCore with Dependencies, which is a hard
+-- one: with WickCore absent the client refuses to load the addon at all, so
+-- none of our code runs and the player gets a greyed line in the AddOns list
+-- and nothing else. The assert each addon carried could never fire.
+--
+-- They ask with OptionalDeps now and say so themselves. This loads two of
+-- them with no WickCore in sight and checks they come up quietly, then speak
+-- once, together, with somewhere to go.
+io.write("== WickCore missing ==\n")
+do
+    local keepCore, keepLib = WickCore, LibStub
+    WickCore, _G.WickCore = nil, nil
+    _G.WicksNeedCore = nil
+    S.CHAT = {}
+
+    local ok1 = pcall(S.loadAddon, ADDONS_DIR .. "/WicksBeastsAndThings", "WicksBeastsAndThings",
+        { "Core.lua", "Pet.lua", "Ammo.lua", "Beasts.lua", "Bestiary.lua", "UI.lua" })
+    check(ok1, "Wick's Beasts and Things loads with no WickCore rather than erroring")
+    local ok2 = pcall(S.loadAddon, ADDONS_DIR .. "/WicksTradeHall", "WicksTradeHall",
+        { "Core.lua", "Prices.lua", "Ledger.lua", "Board.lua", "UI.lua" })
+    check(ok2, "so does Wick's Trade Hall")
+
+    local need = _G.WicksNeedCore
+    check(type(need) == "table" and #need == 2,
+        "both put their name down, got " .. tostring(need and #need))
+
+    -- Nothing is said at load: the chat frame is not up yet, and one line
+    -- per addon would be a wall with the whole suite installed.
+    check(#S.CHAT == 0, "and nothing is said before the player is in the world")
+
+    S.fire("PLAYER_LOGIN")
+    local said = table.concat(S.CHAT, " | ")
+    check(#S.CHAT == 1, "one line for the lot of them, got " .. #S.CHAT)
+    check(said:find("Wick's Beasts and Things", 1, true) and said:find("Wick's Trade Hall", 1, true),
+        "naming each: " .. said:sub(1, 110))
+    check(said:find("wicksmods.com", 1, true) ~= nil, "with somewhere to get it")
+    check(said:find("need", 1, true) ~= nil, "and reading as plural for two of them")
+
+    WickCore, _G.WickCore, LibStub = keepCore, keepCore, keepLib
+    _G.WicksNeedCore = nil
+end
+
+
 io.write("== missing globals reached during the run ==\n")
 io.write("  ", table.concat(S.missingReport(), " "), "\n")
 io.write("\n", MODE, ": ", passes, " passed, ", fails, " failed\n")
