@@ -671,9 +671,38 @@ S.UNKNOWN = S.UNKNOWN or {}
 S.UNKNOWN[11111] = true
 Lg:AddLoot("You receive loot: |cffffffff|Hitem:11111::::::::20:::::::::|h[Something]|h|r.")
 check(Lg.loot["11111"].source == "unknown", "an unpriceable item is marked, not guessed at")
+
 local conf, known, total = P:Confidence(Lg.loot)
 -- Three kinds, not four: the two greys merged into one junk row.
 check(known == 2 and total == 3, "and the confidence says how much of the total is real: " .. known .. "/" .. total)
+
+-- It has to put the question, not just wait for the answer. The ledger
+-- listened for GET_ITEM_INFO_RECEIVED and repriced on it from the start,
+-- but nothing ever asked the client to go and fetch the item, so for a
+-- fresh drop the answer never came and the loot sat at zero all session.
+S.UNCACHED = S.UNCACHED or {}
+S.UNCACHED[22222] = true
+S.ITEMS = S.ITEMS or {}
+S.REQUESTED = 0
+P:ForgetAsked()
+Lg:AddLoot("You receive loot: |cffffffff|Hitem:22222::::::::20:::::::::|h[Unmet Thing]|h|r.")
+if MODERN then
+    check(S.REQUESTED >= 1, "an item the client has not met is asked for, got " .. tostring(S.REQUESTED))
+else
+    -- The older dialect has no request call: asking for the item info is
+    -- itself what makes the client go and fetch it.
+    check(S.REQUESTED == 0, "the older dialect has nothing to ask with, and does not pretend to")
+end
+local askedOnce = S.REQUESTED
+P:Get(22222)
+check(S.REQUESTED == askedOnce, "and asked once, not on every look")
+
+-- When the answer arrives the ledger reprices off it, which is the half
+-- that already worked.
+S.ITEMS[22222] = { name = "Unmet Thing", sellPrice = 500, icon = 1, quality = 1 }
+S.fire("GET_ITEM_INFO_RECEIVED", 22222)
+check(Lg.loot["22222"] and Lg.loot["22222"].source == "vendor",
+    "and it is priced once the client answers: " .. tostring(Lg.loot["22222"] and Lg.loot["22222"].source))
 
 -- When the server answers late it is repriced, not left wrong.
 S.UNKNOWN[11111] = nil
@@ -747,6 +776,27 @@ check(Bd:Handle("WTS Deadmines boost, raid geared", "Booster", 2), "but a boost 
 local before = #Bd.listings
 check(not Bd:Handle("WTS everything cheap", "Spammer", 5), "a channel we do not watch is ignored")
 check(#Bd.listings == before, "and nothing lands")
+
+-- The board reads as a board, not a chat log. The TBC one gave a listing
+-- a badge, the icon of the first item it named, the player, the message
+-- and an age that faded; the port had two labels, which is why it was a
+-- step down. Filtering and search came back with them.
+Bd:Clear()
+Bd:Handle("WTS |cffffffff|Hitem:2589::::::::20:::::::::|h[Linen Cloth]|h|r x20 cheap", "Seller-Realm", 2)
+Bd:Handle("Enchanting in Undercity", "Ench-Realm", 2)
+Bd:Handle("WTB arcanite bar paying well", "Buyer-Realm", 2)
+check(#Bd.listings == 3, "three listings to sort through, got " .. #Bd.listings)
+
+local link, itemID = Bd:FirstItem(Bd.listings[3].raw)
+check(link ~= nil and itemID == 2589, "the item a listing names is found: " .. tostring(itemID))
+check(Bd:FirstItem("no items here") == nil, "and a listing naming none says so")
+
+check(#Bd:Filter("WTS") == 1, "filtering by category narrows it, got " .. #Bd:Filter("WTS"))
+check(#Bd:Filter(nil) == 3, "and no category is everything")
+check(#Bd:Filter(nil, "arcanite") == 1, "search finds it in the message")
+check(#Bd:Filter(nil, "ench") == 1, "and in the player name or the message either way")
+check(#Bd:Filter("WTS", "arcanite") == 0, "the two narrow together, not apart")
+check(#Bd:Filter(nil, "") == 3, "an empty search is not a filter")
 
 -- An item link reads as the item name, not the markup.
 Bd:Clear()
