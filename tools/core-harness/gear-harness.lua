@@ -624,6 +624,47 @@ S.TOOLTIP_LINES_FOR = nil
 S.EQUIPPED_IDS = {}
 S.EQUIPPED_IDS = {}
 
+-- Every score in Upgrades carries a sign, and none of them is "-0".
+-- "%+.0f" prints that for anything between minus a half and zero, which
+-- reads as a downgrade that is not one.
+ns.UI:Select("upgrades")
+ns.UI:FillUpgrades()
+local signed, bare, negZero = 0, 0, 0
+for _, r in ipairs(ns.UI.panes.upgrades.rows or {}) do
+    if r:IsShown() then
+        local t = tostring(r.right:GetText() or "")
+        if t ~= "" then
+            if t == "-0" then negZero = negZero + 1
+            elseif t:match("^[%+%-]%d") then signed = signed + 1
+            else bare = bare + 1 end
+        end
+    end
+end
+check(negZero == 0, "no score reads as minus zero, got " .. negZero)
+check(bare == 0, "every score carries a sign, unsigned ones: " .. bare)
+check(signed > 0, "and there are scores to check, got " .. signed)
+ns.UI:Select("browse")
+
+-- Rows are pooled, so a group header has to undo every mark the dimming
+-- leaves, not most of them. One that had been an unusable item kept its
+-- grey on the name and the level range, and that dungeon looked
+-- disabled for no reason.
+ns.UI:SetSource("dungeons")
+ns.UI.panes.browse.open["The Deadmines"] = true
+ns.UI:FillBrowse()
+local dimmedOne
+for _, r in ipairs(ns.UI.panes.browse.rows) do
+    if r:IsShown() and r.dimmed then dimmedOne = r break end
+end
+check(dimmedOne ~= nil, "the list has a dimmed item to reuse")
+ns.UI.panes.browse.open["The Deadmines"] = false
+ns.UI:FillBrowse()
+local allHeadersLit = true
+for _, r in ipairs(ns.UI.panes.browse.rows) do
+    if r:IsShown() and r.dimmed then allHeadersLit = false end
+end
+check(allHeadersLit, "every header is lit again once the items are gone")
+
 -- A two-hander takes the off hand with it. Without that the compare
 -- counted a two-hander and a shield at once, which is not something you
 -- can wear, so every number it produced was too high.
