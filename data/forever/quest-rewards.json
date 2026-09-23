@@ -1,0 +1,2048 @@
+{
+ "source": "wowhead.com/forever zone pages, quest-rewards listviews",
+ "collected": "2026-09-23",
+ "note": "outdoor zones only; the dungeon scrape already holds instance quest rewards",
+ "minQuality": 3,
+ "zones": {
+  "Duskwood": {
+   "zoneId": 10,
+   "rewards": [
+    {
+     "id": 6832,
+     "name": "Cloak of Blight",
+     "quality": 3,
+     "slotId": 16,
+     "ilvl": 42,
+     "reqLevel": 37,
+     "cls": 4,
+     "sub": -6
+    },
+    {
+     "id": 11265,
+     "name": "Cragwood Maul",
+     "quality": 3,
+     "slotId": 17,
+     "ilvl": 42,
+     "reqLevel": 37,
+     "cls": 2,
+     "sub": 5
+    }
+   ]
+  },
+  "Dustwallow Marsh": {
+   "zoneId": 15,
+   "rewards": [
+    {
+     "id": 18585,
+     "name": "Band of Allegiance",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 35,
+     "reqLevel": 30,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 18586,
+     "name": "Lonetree's Circle",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 35,
+     "reqLevel": 30,
+     "cls": 4,
+     "sub": -2
+    }
+   ]
+  },
+  "Azshara": {
+   "zoneId": 16,
+   "rewards": [
+    {
+     "id": 21526,
+     "name": "Band of Icy Depths",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 77,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21527,
+     "name": "Darkwater Robes",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 77,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 21326,
+     "name": "Defender of the Timbermaw",
+     "quality": 4,
+     "slotId": 12,
+     "ilvl": 62,
+     "reqLevel": 45,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 18399,
+     "name": "Ocean's Breeze",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 63,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 18398,
+     "name": "Tidal Loop",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 63,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -2
+    }
+   ]
+  },
+  "The Barrens": {
+   "zoneId": 17,
+   "rewards": [
+    {
+     "id": 277286,
+     "name": "Encroacher's Claim",
+     "quality": 3,
+     "slotId": 17,
+     "ilvl": 23,
+     "reqLevel": 18,
+     "cls": 2,
+     "sub": 1
+    },
+    {
+     "id": 277288,
+     "name": "Pathfinder's Clearway",
+     "quality": 3,
+     "slotId": 21,
+     "ilvl": 23,
+     "reqLevel": 18,
+     "cls": 2,
+     "sub": 0
+    },
+    {
+     "id": 10658,
+     "name": "Quagmire Galoshes",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 25,
+     "reqLevel": 10,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 10657,
+     "name": "Talbar Mantle",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 26,
+     "reqLevel": 10,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 277289,
+     "name": "Traveler's Shawl",
+     "quality": 3,
+     "slotId": 16,
+     "ilvl": 23,
+     "reqLevel": 18,
+     "cls": 4,
+     "sub": -6
+    }
+   ]
+  },
+  "Western Plaguelands": {
+   "zoneId": 28,
+   "rewards": [
+    {
+     "id": 15413,
+     "name": "Ornate Adamantium Breastplate",
+     "quality": 3,
+     "slotId": 5,
+     "ilvl": 63,
+     "reqLevel": 52,
+     "cls": 4,
+     "sub": 4
+    }
+   ]
+  },
+  "Northern Stranglethorn": {
+   "zoneId": 33,
+   "rewards": [
+    {
+     "id": 12185,
+     "name": "Bloodsail Admiral's Hat",
+     "quality": 3,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": 5
+    }
+   ]
+  },
+  "Eastern Plaguelands": {
+   "zoneId": 139,
+   "rewards": [
+    {
+     "id": 22657,
+     "name": "Amulet of the Dawn",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 22667,
+     "name": "Bracers of Hope",
+     "quality": 4,
+     "slotId": 9,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22668,
+     "name": "Bracers of Subterfuge",
+     "quality": 4,
+     "slotId": 9,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22659,
+     "name": "Medallion of the Dawn",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 22678,
+     "name": "Talisman of Ascendance",
+     "quality": 4,
+     "slotId": 12,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 22656,
+     "name": "The Purifier",
+     "quality": 4,
+     "slotId": 15,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 2,
+     "sub": 3
+    },
+    {
+     "id": 15856,
+     "name": "Archlight Talisman",
+     "quality": 3,
+     "slotId": 2,
+     "ilvl": 60,
+     "reqLevel": 50,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 22681,
+     "name": "Band of Piety",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 66,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 22680,
+     "name": "Band of Resolution",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 66,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 16996,
+     "name": "Gorewood Bow",
+     "quality": 3,
+     "slotId": 15,
+     "ilvl": 62,
+     "reqLevel": 56,
+     "cls": 2,
+     "sub": 2
+    },
+    {
+     "id": 22690,
+     "name": "Leggings of the Plague Hunter",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 15857,
+     "name": "Magebane Scion",
+     "quality": 3,
+     "slotId": 23,
+     "ilvl": 60,
+     "reqLevel": 50,
+     "cls": 4,
+     "sub": -5
+    },
+    {
+     "id": 15855,
+     "name": "Ring of Protection",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 60,
+     "reqLevel": 50,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 16998,
+     "name": "Sacred Protector",
+     "quality": 3,
+     "slotId": 14,
+     "ilvl": 62,
+     "reqLevel": 56,
+     "cls": 4,
+     "sub": 6
+    },
+    {
+     "id": 22689,
+     "name": "Sanctified Leather Helm",
+     "quality": 3,
+     "slotId": 1,
+     "ilvl": 66,
+     "reqLevel": 55,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 16997,
+     "name": "Stormrager",
+     "quality": 3,
+     "slotId": 15,
+     "ilvl": 62,
+     "reqLevel": 56,
+     "cls": 2,
+     "sub": 19
+    },
+    {
+     "id": 22679,
+     "name": "Supply Bag",
+     "quality": 3,
+     "slotId": 18,
+     "ilvl": 60,
+     "reqLevel": 55,
+     "cls": 1,
+     "sub": 0
+    },
+    {
+     "id": 22688,
+     "name": "Verimonde's Last Resort",
+     "quality": 3,
+     "slotId": 21,
+     "ilvl": 66,
+     "reqLevel": 55,
+     "cls": 2,
+     "sub": 15
+    }
+   ]
+  },
+  "Darkshore": {
+   "zoneId": 148,
+   "rewards": [
+    {
+     "id": 281291,
+     "name": "Mathystra Channeling Orb",
+     "quality": 3,
+     "slotId": 23,
+     "ilvl": 21,
+     "reqLevel": 17,
+     "cls": 4,
+     "sub": -5
+    },
+    {
+     "id": 281292,
+     "name": "Onu's Patience",
+     "quality": 3,
+     "slotId": 23,
+     "ilvl": 21,
+     "reqLevel": 17,
+     "cls": 4,
+     "sub": -5
+    }
+   ]
+  },
+  "Ashenvale": {
+   "zoneId": 331,
+   "rewards": [
+    {
+     "id": 16977,
+     "name": "Warsong Boots",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 27,
+     "reqLevel": 22,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 16978,
+     "name": "Warsong Gauntlets",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 27,
+     "reqLevel": 22,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 16975,
+     "name": "Warsong Sash",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 27,
+     "reqLevel": 22,
+     "cls": 4,
+     "sub": 1
+    }
+   ]
+  },
+  "Tanaris": {
+   "zoneId": 440,
+   "rewards": [
+    {
+     "id": 21517,
+     "name": "Gnomish Turban of Psychic Might",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 75,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 21206,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 60,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21196,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 60,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21201,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 60,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21207,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21197,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21202,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21203,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 70,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21208,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 70,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21198,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 70,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21204,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 75,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21209,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 75,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21199,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 75,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21205,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 80,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21200,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 80,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21210,
+     "name": "Signet Ring of the Bronze Dragonflight",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 80,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    }
+   ]
+  },
+  "Moonglade": {
+   "zoneId": 493,
+   "rewards": [
+    {
+     "id": 21531,
+     "name": "Drake Tooth Necklace",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 77,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 21532,
+     "name": "Drudge Boots",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 77,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 2
+    }
+   ]
+  },
+  "Winterspring": {
+   "zoneId": 618,
+   "rewards": [
+    {
+     "id": 12631,
+     "name": "Fiery Plate Gauntlets",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 58,
+     "reqLevel": 53,
+     "cls": 4,
+     "sub": 4
+    }
+   ]
+  },
+  "Silithus": {
+   "zoneId": 1377,
+   "rewards": [
+    {
+     "id": 21184,
+     "name": "Deeprock Bracers",
+     "quality": 4,
+     "slotId": 9,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 21185,
+     "name": "Earthcalm Orb",
+     "quality": 4,
+     "slotId": 23,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -5
+    },
+    {
+     "id": 21180,
+     "name": "Earthstrike",
+     "quality": 4,
+     "slotId": 12,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 21523,
+     "name": "Fang of Korialstrasz",
+     "quality": 4,
+     "slotId": 21,
+     "ilvl": 76,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 15
+    },
+    {
+     "id": 21188,
+     "name": "Fist of Cenarius",
+     "quality": 4,
+     "slotId": 17,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 5
+    },
+    {
+     "id": 21189,
+     "name": "Might of Cenarius",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21520,
+     "name": "Ravencrest's Legacy",
+     "quality": 4,
+     "slotId": 13,
+     "ilvl": 76,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 7
+    },
+    {
+     "id": 21186,
+     "name": "Rockfury Bracers",
+     "quality": 4,
+     "slotId": 9,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 21521,
+     "name": "Runesword of the Red",
+     "quality": 4,
+     "slotId": 21,
+     "ilvl": 76,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 7
+    },
+    {
+     "id": 21522,
+     "name": "Shadowsong's Sorrow",
+     "quality": 4,
+     "slotId": 13,
+     "ilvl": 76,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 15
+    },
+    {
+     "id": 21190,
+     "name": "Wrath of Cenarius",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 22725,
+     "name": "Band of Cenarius",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 70,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21182,
+     "name": "Band of Earthen Might",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 21179,
+     "name": "Band of Earthen Wrath",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 20703,
+     "name": "Cenarion Reservist's Leggings",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 20704,
+     "name": "Cenarion Reservist's Leggings",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 20702,
+     "name": "Cenarion Reservist's Legguards",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 20701,
+     "name": "Cenarion Reservist's Legguards",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 20699,
+     "name": "Cenarion Reservist's Legplates",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 20700,
+     "name": "Cenarion Reservist's Legplates",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 20707,
+     "name": "Cenarion Reservist's Pants",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 20705,
+     "name": "Cenarion Reservist's Pants",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 20710,
+     "name": "Crystal Encrusted Greaves",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 20711,
+     "name": "Crystal Lined Greaves",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 20717,
+     "name": "Desert Bloom Gloves",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 20713,
+     "name": "Desertstalkers's Gauntlets",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22348,
+     "name": "Doomulus Prime",
+     "quality": 3,
+     "slotId": 17,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 5
+    },
+    {
+     "id": 20715,
+     "name": "Dunestalker's Boots",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 21183,
+     "name": "Earthpower Vest",
+     "quality": 3,
+     "slotId": 5,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 21187,
+     "name": "Earthweave Cloak",
+     "quality": 3,
+     "slotId": 16,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -6
+    },
+    {
+     "id": 22347,
+     "name": "Fahrad's Reloading Repeater",
+     "quality": 3,
+     "slotId": 15,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 18
+    },
+    {
+     "id": 21178,
+     "name": "Gloves of Earthen Power",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 62,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 21181,
+     "name": "Grace of Earth",
+     "quality": 3,
+     "slotId": 12,
+     "ilvl": 66,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 22378,
+     "name": "Ravenholdt Slicer",
+     "quality": 3,
+     "slotId": 13,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 7
+    },
+    {
+     "id": 20714,
+     "name": "Sandstorm Boots",
+     "quality": 3,
+     "slotId": 8,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 20716,
+     "name": "Sandworm Skin Gloves",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22379,
+     "name": "Shivsprocket's Shiv",
+     "quality": 3,
+     "slotId": 21,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 15
+    },
+    {
+     "id": 22380,
+     "name": "Simone's Cultivating Hammer",
+     "quality": 3,
+     "slotId": 21,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 4
+    },
+    {
+     "id": 22377,
+     "name": "The Thunderwood Poker",
+     "quality": 3,
+     "slotId": 13,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 2,
+     "sub": 15
+    },
+    {
+     "id": 20712,
+     "name": "Wastewalker's Gauntlets",
+     "quality": 3,
+     "slotId": 10,
+     "ilvl": 63,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    }
+   ]
+  },
+  "Stormwind City": {
+   "zoneId": 1519,
+   "rewards": [
+    {
+     "id": 18403,
+     "name": "Dragonslayer's Signet",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 19383,
+     "name": "Master Dragonslayer's Medallion",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 19366,
+     "name": "Master Dragonslayer's Orb",
+     "quality": 4,
+     "slotId": 23,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -5
+    },
+    {
+     "id": 19384,
+     "name": "Master Dragonslayer's Ring",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 18406,
+     "name": "Onyxia Blood Talisman",
+     "quality": 4,
+     "slotId": 12,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 18404,
+     "name": "Onyxia Tooth Pendant",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 2933,
+     "name": "Seal of Wrynn",
+     "quality": 3,
+     "slotId": 11,
+     "ilvl": 31,
+     "reqLevel": 16,
+     "cls": 4,
+     "sub": -2
+    }
+   ]
+  },
+  "Orgrimmar": {
+   "zoneId": 1637,
+   "rewards": [
+    {
+     "id": 22061,
+     "name": "Beastmaster's Boots",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22013,
+     "name": "Beastmaster's Cap",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22015,
+     "name": "Beastmaster's Gloves",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22060,
+     "name": "Beastmaster's Tunic",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 21995,
+     "name": "Boots of Heroism",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22096,
+     "name": "Boots of The Five Thunders",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 21997,
+     "name": "Breastplate of Heroism",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22097,
+     "name": "Coif of The Five Thunders",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22003,
+     "name": "Darkmantle Boots",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22005,
+     "name": "Darkmantle Cap",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22006,
+     "name": "Darkmantle Gloves",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22009,
+     "name": "Darkmantle Tunic",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22074,
+     "name": "Deathmist Mask",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22075,
+     "name": "Deathmist Robe",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22076,
+     "name": "Deathmist Sandals",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22077,
+     "name": "Deathmist Wraps",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 18403,
+     "name": "Dragonslayer's Signet",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 22107,
+     "name": "Feralheart Boots",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22109,
+     "name": "Feralheart Cowl",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22110,
+     "name": "Feralheart Gloves",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22113,
+     "name": "Feralheart Vest",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 21998,
+     "name": "Gauntlets of Heroism",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22099,
+     "name": "Gauntlets of The Five Thunders",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 21999,
+     "name": "Helm of Heroism",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 19383,
+     "name": "Master Dragonslayer's Medallion",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 19366,
+     "name": "Master Dragonslayer's Orb",
+     "quality": 4,
+     "slotId": 23,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -5
+    },
+    {
+     "id": 19384,
+     "name": "Master Dragonslayer's Ring",
+     "quality": 4,
+     "slotId": 11,
+     "ilvl": 83,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -2
+    },
+    {
+     "id": 18406,
+     "name": "Onyxia Blood Talisman",
+     "quality": 4,
+     "slotId": 12,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -4
+    },
+    {
+     "id": 18404,
+     "name": "Onyxia Tooth Pendant",
+     "quality": 4,
+     "slotId": 2,
+     "ilvl": 65,
+     "reqLevel": 60,
+     "cls": 4,
+     "sub": -3
+    },
+    {
+     "id": 22064,
+     "name": "Sorcerer's Boots",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22065,
+     "name": "Sorcerer's Crown",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22066,
+     "name": "Sorcerer's Gloves",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22069,
+     "name": "Sorcerer's Robes",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22102,
+     "name": "Vest of The Five Thunders",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22080,
+     "name": "Virtuous Crown",
+     "quality": 4,
+     "slotId": 1,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22081,
+     "name": "Virtuous Gloves",
+     "quality": 4,
+     "slotId": 10,
+     "ilvl": 55,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22083,
+     "name": "Virtuous Robe",
+     "quality": 4,
+     "slotId": 5,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22084,
+     "name": "Virtuous Sandals",
+     "quality": 4,
+     "slotId": 8,
+     "ilvl": 60,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 15424,
+     "name": "Axe of Orgrimmar",
+     "quality": 3,
+     "slotId": 17,
+     "ilvl": 18,
+     "reqLevel": 9,
+     "cls": 2,
+     "sub": 1
+    },
+    {
+     "id": 22010,
+     "name": "Beastmaster's Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22011,
+     "name": "Beastmaster's Bindings",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22016,
+     "name": "Beastmaster's Mantle",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22017,
+     "name": "Beastmaster's Pants",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 21994,
+     "name": "Belt of Heroism",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22095,
+     "name": "Bindings of The Five Thunders",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 21996,
+     "name": "Bracers of Heroism",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22098,
+     "name": "Cord of The Five Thunders",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22002,
+     "name": "Darkmantle Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22004,
+     "name": "Darkmantle Bracers",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22007,
+     "name": "Darkmantle Pants",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22008,
+     "name": "Darkmantle Spaulders",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22070,
+     "name": "Deathmist Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22071,
+     "name": "Deathmist Bracers",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22072,
+     "name": "Deathmist Leggings",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22073,
+     "name": "Deathmist Mantle",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22106,
+     "name": "Feralheart Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22108,
+     "name": "Feralheart Bracers",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22111,
+     "name": "Feralheart Kilt",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 22112,
+     "name": "Feralheart Spaulders",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 2
+    },
+    {
+     "id": 15445,
+     "name": "Hammer of Orgrimmar",
+     "quality": 3,
+     "slotId": 21,
+     "ilvl": 18,
+     "reqLevel": 9,
+     "cls": 2,
+     "sub": 4
+    },
+    {
+     "id": 22100,
+     "name": "Kilt of The Five Thunders",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 15443,
+     "name": "Kris of Orgrimmar",
+     "quality": 3,
+     "slotId": 13,
+     "ilvl": 18,
+     "reqLevel": 9,
+     "cls": 2,
+     "sub": 15
+    },
+    {
+     "id": 22000,
+     "name": "Legplates of Heroism",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 22101,
+     "name": "Pauldrons of The Five Thunders",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 3
+    },
+    {
+     "id": 22062,
+     "name": "Sorcerer's Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22063,
+     "name": "Sorcerer's Bindings",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22067,
+     "name": "Sorcerer's Leggings",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22068,
+     "name": "Sorcerer's Mantle",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22001,
+     "name": "Spaulders of Heroism",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 4
+    },
+    {
+     "id": 15444,
+     "name": "Staff of Orgrimmar",
+     "quality": 3,
+     "slotId": 17,
+     "ilvl": 18,
+     "reqLevel": 9,
+     "cls": 2,
+     "sub": 10
+    },
+    {
+     "id": 22078,
+     "name": "Virtuous Belt",
+     "quality": 3,
+     "slotId": 6,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22079,
+     "name": "Virtuous Bracers",
+     "quality": 3,
+     "slotId": 9,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22082,
+     "name": "Virtuous Mantle",
+     "quality": 3,
+     "slotId": 3,
+     "ilvl": 65,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    },
+    {
+     "id": 22085,
+     "name": "Virtuous Skirt",
+     "quality": 3,
+     "slotId": 7,
+     "ilvl": 66,
+     "reqLevel": 58,
+     "cls": 4,
+     "sub": 1
+    }
+   ]
+  }
+ },
+ "index": {
+  "6832": "Duskwood",
+  "11265": "Duskwood",
+  "18585": "Dustwallow Marsh",
+  "18586": "Dustwallow Marsh",
+  "21526": "Azshara",
+  "21527": "Azshara",
+  "21326": "Azshara",
+  "18399": "Azshara",
+  "18398": "Azshara",
+  "277286": "The Barrens",
+  "277288": "The Barrens",
+  "10658": "The Barrens",
+  "10657": "The Barrens",
+  "277289": "The Barrens",
+  "15413": "Western Plaguelands",
+  "12185": "Northern Stranglethorn",
+  "22657": "Eastern Plaguelands",
+  "22667": "Eastern Plaguelands",
+  "22668": "Eastern Plaguelands",
+  "22659": "Eastern Plaguelands",
+  "22678": "Eastern Plaguelands",
+  "22656": "Eastern Plaguelands",
+  "15856": "Eastern Plaguelands",
+  "22681": "Eastern Plaguelands",
+  "22680": "Eastern Plaguelands",
+  "16996": "Eastern Plaguelands",
+  "22690": "Eastern Plaguelands",
+  "15857": "Eastern Plaguelands",
+  "15855": "Eastern Plaguelands",
+  "16998": "Eastern Plaguelands",
+  "22689": "Eastern Plaguelands",
+  "16997": "Eastern Plaguelands",
+  "22679": "Eastern Plaguelands",
+  "22688": "Eastern Plaguelands",
+  "281291": "Darkshore",
+  "281292": "Darkshore",
+  "16977": "Ashenvale",
+  "16978": "Ashenvale",
+  "16975": "Ashenvale",
+  "21517": "Tanaris",
+  "21206": "Tanaris",
+  "21196": "Tanaris",
+  "21201": "Tanaris",
+  "21207": "Tanaris",
+  "21197": "Tanaris",
+  "21202": "Tanaris",
+  "21203": "Tanaris",
+  "21208": "Tanaris",
+  "21198": "Tanaris",
+  "21204": "Tanaris",
+  "21209": "Tanaris",
+  "21199": "Tanaris",
+  "21205": "Tanaris",
+  "21200": "Tanaris",
+  "21210": "Tanaris",
+  "21531": "Moonglade",
+  "21532": "Moonglade",
+  "12631": "Winterspring",
+  "21184": "Silithus",
+  "21185": "Silithus",
+  "21180": "Silithus",
+  "21523": "Silithus",
+  "21188": "Silithus",
+  "21189": "Silithus",
+  "21520": "Silithus",
+  "21186": "Silithus",
+  "21521": "Silithus",
+  "21522": "Silithus",
+  "21190": "Silithus",
+  "22725": "Silithus",
+  "21182": "Silithus",
+  "21179": "Silithus",
+  "20703": "Silithus",
+  "20704": "Silithus",
+  "20702": "Silithus",
+  "20701": "Silithus",
+  "20699": "Silithus",
+  "20700": "Silithus",
+  "20707": "Silithus",
+  "20705": "Silithus",
+  "20710": "Silithus",
+  "20711": "Silithus",
+  "20717": "Silithus",
+  "20713": "Silithus",
+  "22348": "Silithus",
+  "20715": "Silithus",
+  "21183": "Silithus",
+  "21187": "Silithus",
+  "22347": "Silithus",
+  "21178": "Silithus",
+  "21181": "Silithus",
+  "22378": "Silithus",
+  "20714": "Silithus",
+  "20716": "Silithus",
+  "22379": "Silithus",
+  "22380": "Silithus",
+  "22377": "Silithus",
+  "20712": "Silithus",
+  "18403": "Orgrimmar",
+  "19383": "Orgrimmar",
+  "19366": "Orgrimmar",
+  "19384": "Orgrimmar",
+  "18406": "Orgrimmar",
+  "18404": "Orgrimmar",
+  "2933": "Stormwind City",
+  "22061": "Orgrimmar",
+  "22013": "Orgrimmar",
+  "22015": "Orgrimmar",
+  "22060": "Orgrimmar",
+  "21995": "Orgrimmar",
+  "22096": "Orgrimmar",
+  "21997": "Orgrimmar",
+  "22097": "Orgrimmar",
+  "22003": "Orgrimmar",
+  "22005": "Orgrimmar",
+  "22006": "Orgrimmar",
+  "22009": "Orgrimmar",
+  "22074": "Orgrimmar",
+  "22075": "Orgrimmar",
+  "22076": "Orgrimmar",
+  "22077": "Orgrimmar",
+  "22107": "Orgrimmar",
+  "22109": "Orgrimmar",
+  "22110": "Orgrimmar",
+  "22113": "Orgrimmar",
+  "21998": "Orgrimmar",
+  "22099": "Orgrimmar",
+  "21999": "Orgrimmar",
+  "22064": "Orgrimmar",
+  "22065": "Orgrimmar",
+  "22066": "Orgrimmar",
+  "22069": "Orgrimmar",
+  "22102": "Orgrimmar",
+  "22080": "Orgrimmar",
+  "22081": "Orgrimmar",
+  "22083": "Orgrimmar",
+  "22084": "Orgrimmar",
+  "15424": "Orgrimmar",
+  "22010": "Orgrimmar",
+  "22011": "Orgrimmar",
+  "22016": "Orgrimmar",
+  "22017": "Orgrimmar",
+  "21994": "Orgrimmar",
+  "22095": "Orgrimmar",
+  "21996": "Orgrimmar",
+  "22098": "Orgrimmar",
+  "22002": "Orgrimmar",
+  "22004": "Orgrimmar",
+  "22007": "Orgrimmar",
+  "22008": "Orgrimmar",
+  "22070": "Orgrimmar",
+  "22071": "Orgrimmar",
+  "22072": "Orgrimmar",
+  "22073": "Orgrimmar",
+  "22106": "Orgrimmar",
+  "22108": "Orgrimmar",
+  "22111": "Orgrimmar",
+  "22112": "Orgrimmar",
+  "15445": "Orgrimmar",
+  "22100": "Orgrimmar",
+  "15443": "Orgrimmar",
+  "22000": "Orgrimmar",
+  "22101": "Orgrimmar",
+  "22062": "Orgrimmar",
+  "22063": "Orgrimmar",
+  "22067": "Orgrimmar",
+  "22068": "Orgrimmar",
+  "22001": "Orgrimmar",
+  "15444": "Orgrimmar",
+  "22078": "Orgrimmar",
+  "22079": "Orgrimmar",
+  "22082": "Orgrimmar",
+  "22085": "Orgrimmar"
+ }
+}
