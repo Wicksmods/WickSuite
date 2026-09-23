@@ -116,6 +116,24 @@ fixes the client, it notices and stays out of the way.
 
 WHAT IS NEW SINCE THE LAST PACKAGE
 ----------------------------------
+* Wick's Gear browses four sources, not one. Dungeons as before, plus
+  what the four gear professions make, quest rewards worth crossing a
+  zone for, and everything grouped by the set it belongs to. A search
+  box spans whichever you are looking at, matching the item, the boss or
+  profession, the slot, and where it is from.
+* Gear: sets say how much of one you are wearing and which bonuses that
+  has earned, read from the client's own tooltip rather than a database,
+  so it is this build's numbers and not a guess at them.
+* Gear: click a row to try it on in the compare view, ctrl-click to open
+  it in the dressing room, shift-click to put it in chat. An Equippable
+  toggle hides what your class cannot wear, which matters once a list is
+  a profession's four hundred pieces rather than a dungeon's nine.
+* Comforts: arrow keys move the cursor in chat. This client hands the
+  chat box the old behaviour, where the arrows steer your character.
+  Off until you turn it on.
+* Trade Hall: the board reads as a board. Category badges, the icon of
+  the first item a listing names, filters, a search box, and an age that
+  fades. Right-click to whisper, shift-click to link.
 * New: Wick's Trade Hall. Two things in one window. A session tracker
   that says what a run earned and what that is an hour, valuing loot at
   its vendor price and marking anything it cannot price rather than
@@ -166,6 +184,10 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 
 Fixed since the last package
 ----------------------------
+* Your theme no longer resets. A login that read the setting before it
+  had arrived fell back to Fel and then saved Fel over your real choice.
+* Trade Hall: a taxi or a summon reads as travel rather than Misc, and
+  the session total no longer counts most loot as nothing.
 * Your theme no longer resets. A login that read the setting before it
   had arrived fell back to Fel and then saved Fel over your real
   choice, so one early read lost it for good.
