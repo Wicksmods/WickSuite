@@ -22,7 +22,11 @@ C_UnitAuras = C_UnitAuras or {}
 -- buff is not there.
 C_UnitAuras.GetCooldownAuraBySpellID = function()
     if not AURA_UP then return nil end
-    return { duration = COMBAT and SECRET or 21, expirationTime = COMBAT and SECRET or 100 }
+    -- The nested table is what the real aura tables carry, and its
+    -- address is new on every call. If that reaches the signature,
+    -- nothing ever deduplicates.
+    return { duration = COMBAT and SECRET or 21, expirationTime = COMBAT and SECRET or 100,
+             points = {} }
 end
 C_UnitAuras.GetPlayerAuraBySpellID = function() return nil end
 C_UnitAuras.GetUnitAuraBySpellID = function() return nil end
@@ -101,6 +105,12 @@ want(upSample ~= nil, "in combat with the buff up the route returns something")
 S.CHAT = {}
 SlashCmdList["WICKSPROBE"]("aura stop")
 want(table.concat(S.CHAT):find("stopped", 1, true) ~= nil, "stop says so")
+
+-- Four states were visited, so four rows. A volatile pointer inside a
+-- returned table must not turn every sample into its own row.
+local rows = 0
+for _ in text:gmatch("%[%d+%]") do rows = rows + 1 end
+want(rows == 4, "one row per distinct answer, got " .. rows)
 
 if fails > 0 then error(fails .. " failed", 0) end
 io.write("PASS\n")
