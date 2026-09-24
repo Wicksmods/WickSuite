@@ -561,6 +561,50 @@ end
 -- rule, asked of WickCore, rather than each bar deciding for itself.
 io.write("== a lock yields to shift ==\n")
 local Chrome = WickCore.Chrome
+-- Both of these kept their own palette: the same numbers as WickCore's,
+-- in their own tables. Chrome remembers a region by the identity of the
+-- table it was painted with, so a copy never entered the registry and
+-- nothing in either addon repainted on a theme change. They looked
+-- right only because the numbers matched the default.
+io.write("== the kits answer to a theme ==" .. string.char(10))
+if MODERN then
+    local Chrome = WickCore.Chrome
+    local was = Chrome.activeTheme
+    for _, name in ipairs({ "WicksDemonsAndThings", "WicksTotemsAndThings" }) do
+        local entry = WickCore.Launcher.entries[name]
+        local addon = entry and entry.addon
+        if addon and addon.Toggle then pcall(function() addon:Toggle(); addon:Toggle() end) end
+    end
+
+    Chrome:SetTheme("fel")
+    -- Asked per addon, by the file that painted the region. Both of
+    -- these kept their own copy of the palette for a long time, which
+    -- Chrome cannot recognise, so every bar and border in them sat out
+    -- theme changes and looked right only while the theme was the
+    -- default one.
+    for _, name in ipairs({ "WicksDemonsAndThings", "WicksTotemsAndThings" }) do
+        local watched = {}
+        for _, r in ipairs(S.regions) do
+            if r.__color and r.__src and r.__src:find(name, 1, true) then
+                watched[#watched + 1] = r
+            end
+        end
+        check(#watched > 0, name .. " paints regions of its own, got " .. #watched)
+
+        local before = {}
+        for i, r in ipairs(watched) do before[i] = table.concat(r.__color, ",") end
+        Chrome:SetTheme("mage")
+        local moved = 0
+        for i, r in ipairs(watched) do
+            if table.concat(r.__color, ",") ~= before[i] then moved = moved + 1 end
+        end
+        check(moved > 0, name .. " repaints on a theme change: " .. moved .. " of " .. #watched)
+        Chrome:SetTheme("fel")
+    end
+    Chrome:SetTheme(was or "fel")
+end
+
+
 local realShift = IsShiftKeyDown
 IsShiftKeyDown = function() return false end
 check(Chrome:DragAllowed(false) == true, "an unlocked frame drags")

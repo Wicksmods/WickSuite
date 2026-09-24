@@ -75,6 +75,7 @@ local function eventValid(e) return type(e) == "string" and e:match("^[A-Z][A-Z0
 
 local ALL_FRAMES = {}
 S.frames = ALL_FRAMES
+S.regions = {}
 
 local function newMock(kind, name)
     local self = { __kind = kind, __name = name, __scripts = {}, __events = {}, __w = 100, __h = 100,
@@ -94,7 +95,19 @@ local function newMock(kind, name)
                 t.__scripts[n] = function(...) if prev then prev(...) end fn(...) end
             end
         elseif k == "GetScript" then return function(_, n) return t.__scripts[n] end
-        elseif k == "CreateTexture" or k == "CreateFontString" or k == "CreateLine" then return function() return newMock(k) end
+        -- Regions are tracked like frames. Only frames were, so a check
+        -- about what a theme repaints had nothing to look at: the
+        -- things that carry a colour are textures and font strings.
+        elseif k == "CreateTexture" or k == "CreateFontString" or k == "CreateLine" then
+            return function()
+                local r = newMock(k)
+                -- Which file painted it, so a check can ask about one
+                -- addon rather than about every region at once.
+                local info = debug.getinfo(2, "S")
+                r.__src = info and info.short_src or "?"
+                S.regions[#S.regions + 1] = r
+                return r
+            end
         -- Whether a frame takes mouse input decides whether it swallows a
         -- click meant for what is underneath it, so it is worth recording.
         elseif k == "SetAltArrowKeyMode" then return function(_, v) t.__altArrow = v and true or false end
