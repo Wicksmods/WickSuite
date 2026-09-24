@@ -96,22 +96,27 @@ Wick's Stances and Things    Warrior  /wst
 
 KEEPING YOUR SETTINGS
 ---------------------
-On this beta the game writes every addon's settings at logout and
-hands back nothing at load, so anything you configure is normally gone
-next time. That is the client, and it affects every addon you have.
+Settings are kept the normal way. Nothing to do.
 
-WickCore can keep your Wick settings anyway, in a handful of macros
-named WickCfg01, WickCfg02 and so on. Macros live on Blizzard's
-servers, so they survive a reload, a relog, a full restart and a
-different PC. Nothing is written until you ask:
+For most of the beta the client wrote every addon's settings at logout
+and handed back nothing at load, so anything you configured was gone
+next time. That was the client and it affected every addon you had.
+The patch on 24 September fixed it.
 
-    /wickcore store on      keep settings in macros from now on
-    /wickcore store off     remove those macros and stop
-    /wickcore store         say what it is doing
+IF YOU USED THE MACRO WORKAROUND
+--------------------------------
+WickCore could keep your settings in macros named WickCfg01, WickCfg02
+and so on while the client could not. It checks at every login and has
+stood itself down now that the client does the job, so those macros are
+sitting there unused. To get the macro slots back:
 
-It only stores what you changed from the defaults, so it is a few
-macros, not dozens. Your own macros are never touched. If Blizzard
-fixes the client, it notices and stays out of the way.
+    /wickcore store off     remove them
+
+WickCore will say the same thing once at login while they are still
+there. If you never turned it on, you have no such macros and there is
+nothing to clear.
+
+    /wickcore store         say what it is doing, either way
 
 
 WHAT IS NEW SINCE THE LAST PACKAGE
@@ -138,10 +143,15 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 
 Fixed since the last package
 ----------------------------
+* Settings are kept by the client again, as of its 24 September patch,
+  so the macro workaround is no longer doing anything. If you turned it
+  on, WickCore says so once at login and /wickcore store off gives you
+  the macro slots back.
 * Settings you change outside the options page are kept. Picking a theme
   or dragging a window wrote the setting and never told the part of
-  WickCore that survives a restart, so your theme came back to the old
-  one. This is the fix for themes not sticking.
+  WickCore that survived a restart, so your theme came back to the old
+  one. That mattered while the client was broken and is still the right
+  behaviour now.
 * Wick's Trade Hall no longer fills your chat with errors. The client
   hands an addon the text of a chat line as something it is not allowed
   to read while you are fighting, and the board was reading it. Lines
@@ -281,11 +291,13 @@ were doing. Issues: github.com/Wicksmods
 """
 
 
-# The 2x art exists for CurseForge and the og tags, which fetch from the
-# repo, not from here. In the package it is 2.6 MB a player downloads and
-# never sees: the addon code is under half a megabyte.
+# Marketing art exists for CurseForge, the og tags and the social posts,
+# all of which fetch from the repo rather than from here. In the package
+# it is megabytes a player downloads and never sees: the addon code is
+# under half a megabyte. The 2x art was already out; the 1200x630 social
+# cards joined the repos later and have exactly the same problem.
 def is_marketing_2x(name):
-    return "-2x." in name
+    return "-2x." in name or name.lower().startswith("wick-social-")
 
 
 def allowed(name):
