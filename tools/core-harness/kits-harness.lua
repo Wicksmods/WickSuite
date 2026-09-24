@@ -150,6 +150,37 @@ check(not macro:find("Flight"), "no flight clause in a non-flyable zone")
 if MODERN then check(F.bestFlightForm() == nil, "no flight form on Forever")
 else check(F.bestFlightForm() == "Flight Form", "flight form found via spellbook on legacy") end
 check(F.predictForm() == "Travel Form", "predicted form outdoors: " .. tostring(F.predictForm()))
+
+-- The resource bars have to answer to a theme. Chrome remembers a
+-- region by the identity of the colour table it was painted with, so a
+-- file holding its own copies of the palette registers nothing and
+-- repaints never. That is exactly what happened here: one bar stayed
+-- blue on a green UI because its colour was a hardcoded mana blue that
+-- no theme could reach.
+do
+    local Chrome = WickCore.Chrome
+    local host = _G.WicksTravelFormBarHost
+    check(host ~= nil and host.priTrack ~= nil and host.manaTrack ~= nil,
+        "the bar host has both tracks")
+    if host and host.priTrack then
+        local fill = host.priTrack.__statusTex
+        check(fill ~= nil, "the primary bar has a fill texture")
+        if fill then
+            local was = fill.__color
+            check(was ~= nil, "and the fill was painted with a colour")
+            local before = was and table.concat(was, ",")
+            Chrome:SetTheme("shaman")
+            local after = fill.__color and table.concat(fill.__color, ",")
+            check(after ~= before,
+                "the fill repaints on a theme change: " .. tostring(before) .. " -> " .. tostring(after))
+            -- The two bars still have to be told apart after a repaint.
+            local mana = host.manaTrack.__statusTex
+            check(mana and mana.__color and table.concat(mana.__color, ",") ~= after,
+                "and the mana bar stays a different colour from the primary")
+            Chrome:SetTheme("fel")
+        end
+    end
+end
 -- A fresh druid knows no forms at all: the key must offer nothing rather
 -- than cast spells they do not have.
 do
