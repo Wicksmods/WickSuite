@@ -669,11 +669,71 @@ check(prog.worn == need, "wearing " .. need .. " of them: " .. prog.worn)
 check(#prog.earned >= 1, "earns the bonus, got " .. #prog.earned)
 check(prog.earned[1].pieces <= need, "and it is one the count actually reaches")
 
+-- Where the bonus is shown. It used to be rows in the list, in a column
+-- sized for one line of item name, carrying three lines of bonus text;
+-- it wrapped into the row beneath and looked broken. An earned bonus is
+-- a thing you are currently getting, so it reads with the stats.
+do
+    local got = ns.Score:EquippedSetBonuses()
+    check(#got >= 1, "the gear on your back reports its earned bonuses, got " .. #got)
+    check(got[1].set == setName and got[1].text ~= nil,
+        "naming the set and what it gives: " .. tostring(got[1].set))
+    check(got[1].worn == need, "with what you are wearing of it: " .. tostring(got[1].worn))
+
+    -- Only the earned ones. What a set would give at four pieces when
+    -- you have two is not a readout of your character.
+    for _, g in ipairs(got) do
+        check(g.pieces <= need, "nothing unearned is listed: " .. tostring(g.pieces))
+    end
+
+    -- And the list is out of the business.
+    ns.UI:SetSource("sets")
+    ns.UI.panes.browse.open[setName] = true
+    ns.UI:FillBrowse()
+    local leaked
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and tostring(r.left:GetText() or ""):find("pieces:", 1, true) then
+            leaked = r.left:GetText()
+        end
+    end
+    check(leaked == nil, "no bonus rows in the list: " .. tostring(leaked))
+
+    -- The doll prints them beside the stats.
+    if ns.Doll:Ensure() then ns.Doll:Refresh() end
+    check(ns.Doll.setInfo ~= nil, "the column has somewhere to put them")
+    local shown = ns.Doll.setInfo and ns.Doll.setInfo:GetText() or ""
+    check(shown:find(setName, 1, true) ~= nil,
+        "and prints the set there: " .. tostring(shown):sub(1, 70))
+end
+
+-- An item the client has never seen gets our tooltip, which said
+-- nothing about sets at all. Those are exactly the items it will draw.
+do
+    local id = setIds[1]
+    S.CACHED = S.CACHED or {}
+    local tt = S.newTooltip and S.newTooltip() or nil
+    if tt == nil then
+        tt = { lines = {} }
+        function tt:SetText(t) self.lines = { tostring(t) } end
+        function tt:AddLine(t) self.lines[#self.lines + 1] = tostring(t) end
+        function tt:AddDoubleLine(a, b) self.lines[#self.lines + 1] = tostring(a) .. " " .. tostring(b) end
+        function tt:SetHyperlink() self.hyper = true end
+        function tt:Show() end
+    end
+    ns.Score:FillTooltip(tt, id, nil)
+    local body = table.concat(tt.lines or {}, " | ")
+    check(tt.hyper or body:find(setName, 1, true) ~= nil,
+        "our own tooltip names the set: " .. body:sub(1, 90))
+end
+
 -- The client's own tooltip beats the scrape, because the tooltip is this
 -- build and Classic's numbers are only a guess at it. Both wordings are
 -- accepted, since the phrasing has moved across expansions.
 S.TOOLTIP_LINES_FOR = { "Some Armour", "(2) Set: +10 Forever Bonus.",
                         "4 pieces: +20 Forever Bonus." }
+-- What the client will say has just changed, which is the same thing
+-- that happens in game when item data finally arrives.
+ns.Score:ForgetSetCache()
 local other
 for _, e in pairs(ns.ENTRY) do
     if e.set and e.set ~= setName then other = e.set break end
