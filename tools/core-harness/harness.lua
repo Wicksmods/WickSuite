@@ -203,6 +203,26 @@ Chrome:SetTheme("shaman")
 check(Chrome.activeTheme == "shaman" and WickCoreDB.global.theme == "shaman", "SetTheme persists")
 check(Chrome:SavedThemeSetting() == "shaman", "saved setting readable back")
 
+-- A hover wash is the accent at a low alpha. Registering it against the
+-- accent token would repaint it at the token's alpha, which turns a 6%
+-- wash into a solid block, so these stayed literal and stayed green
+-- under every theme.
+do
+    Chrome:SetTheme("fel")
+    local wash = Chrome:Wash("fel", 0.06)
+    check(wash[1] == Chrome.Colors.fel[1] and wash[4] == 0.06, "a wash is the token at its own alpha")
+
+    local t = Chrome:Texture(panel.content, "ARTWORK", wash)
+    check(t.__color[4] == 0.06, "and paints at that alpha, got " .. tostring(t.__color[4]))
+
+    Chrome:SetTheme("mage")
+    check(wash[1] == Chrome.Colors.fel[1] and wash[2] == Chrome.Colors.fel[2],
+          "the wash follows the accent through a theme change")
+    check(t.__color[1] == Chrome.Colors.fel[1], "the region painted with it follows too")
+    check(t.__color[4] == 0.06, "still at 6%, not the token's alpha: " .. tostring(t.__color[4]))
+    Chrome:SetTheme("shaman")
+end
+
 -- On this client the game writes saved variables and never reads them
 -- back, so a setting survives only if the macro store writes it, and the
 -- store writes when something marks it dirty. The options page marked
