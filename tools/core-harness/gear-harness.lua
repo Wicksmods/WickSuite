@@ -967,6 +967,49 @@ S.TOOLTIP_LINES_FOR = nil
 S.EQUIPPED_IDS = {}
 S.EQUIPPED_IDS = {}
 
+-- A piece you are already wearing is not an upgrade on itself. It can
+-- still be the best thing in the data for its slot, which is exactly
+-- how it came to be suggested back to you.
+do
+    S.EQUIPPED_IDS = {}
+    ns.UI:Select("upgrades")
+    ns.UI:FillUpgrades()
+    local first, firstSlot
+    for _, r in ipairs(ns.UI.panes.upgrades.rows or {}) do
+        if r:IsShown() and r.itemID and not first then
+            first = r.itemID
+            firstSlot = (ns.Score:Info(r.itemID) or {}).slot
+        end
+    end
+    check(first ~= nil, "Upgrades suggests something to start with")
+
+    -- Put that very piece on. It should stop being a suggestion.
+    S.EQUIPPED_IDS = { [firstSlot] = first }
+    ns.UI:FillUpgrades()
+    local stillThere, slotRow = false, nil
+    for _, r in ipairs(ns.UI.panes.upgrades.rows or {}) do
+        if r:IsShown() and r.itemID then
+            if r.itemID == first then stillThere = true end
+            if (ns.Score:Info(r.itemID) or {}).slot == firstSlot then slotRow = r.itemID end
+        end
+    end
+    check(not stillThere, "wearing it takes it out of Upgrades")
+    -- And the slot falls to the next best rather than going quiet: the
+    -- point is what to chase, not what you already have.
+    check(slotRow == nil or slotRow ~= first,
+        "the slot offers something else, or nothing: " .. tostring(slotRow))
+
+    -- A ring worn in the second ring slot is still a ring you own.
+    S.EQUIPPED_IDS = { [12] = first }
+    ns.UI:FillUpgrades()
+    local viaOtherSlot = false
+    for _, r in ipairs(ns.UI.panes.upgrades.rows or {}) do
+        if r:IsShown() and r.itemID == first then viaOtherSlot = true end
+    end
+    check(not viaOtherSlot, "and it is asked of the character, not of one slot")
+    S.EQUIPPED_IDS = {}
+end
+
 -- Every score in Upgrades carries a sign, and none of them is "-0".
 -- "%+.0f" prints that for anything between minus a half and zero, which
 -- reads as a downgrade that is not one.
