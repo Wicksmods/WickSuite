@@ -909,6 +909,54 @@ const FLAVOURS = {
   },
 };
 
+// Copy for the social cards, from wick.json: an addon registered
+// there gets a card without anything being written here by hand.
+const SOCIAL = {
+  core: { label: 'CORE', title: false, tagline: 'The floor everything else stands on.', features: ['Brand chrome, profiles and themes', 'One options panel for the suite', 'Client dialect shim and restriction guard', 'Minimap launcher and version broadcast'] },
+  comforts: { label: 'COMFORTS', title: true, tagline: 'Small comforts, each one off until you turn it on.', features: ['Square minimap in Wick chrome', 'Richer unit tooltips', 'Auto loot, auto repair, junk selling', 'Auto quest accept and hand in'] },
+  beasts: { label: 'BEASTS', title: true, tagline: 'The hunter kit: pet care, ammo and a beast atlas.', features: ['Pet happiness, loyalty and training', 'One key feeding from your own bags', 'Ammo read as shots against the quiver', 'Atlas of what each beast family brings'] },
+  bags: { label: 'BAGS', title: true, tagline: 'Bags and bank in one window, sorted the way you say.', features: ['Auto-categorize by class + subclass', 'Masonry layout, resizable', 'Bank panel with buy-slot button'] },
+  trade: { label: 'TRADE', title: true, tagline: 'What a run earned, and what trade chat is offering.', features: ['Session earnings with gold per hour', 'Loot valued at vendor price, marked when unknown', 'The trade channel as a board', 'Badges, item icons, filters and search'] },
+  gear: { label: 'GEAR', title: true, tagline: 'What to chase while levelling, and where it drops.', features: ['Upgrades scored against what you wear', 'Dungeons, crafted, quest rewards and sets', 'Live set bonuses read from the client', 'Try on, dressing room, link in chat'] },
+};
+
+// 1200x630, which is what Facebook asks for and what a boosted post
+// wants. The announce used to attach the 460x260 thumbnail, so every
+// post was an upscale of a small picture.
+function AddonSocial({ which }) {
+  const s = SOCIAL[which] || { label: '', tagline: '', features: [] };
+  return (
+    <div style={{width:1200,height:630,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
+      <DungeonBg width={1200} height={630} glowX="22%" glowY="45%" glowColor={G} accent="#6B21A8" opacity={0.18}/>
+      <Brackets size={20} thick={3}/>
+      <div style={{position:'absolute',left:64,top:64,bottom:64,width:380,
+        display:'flex',flexDirection:'column',justifyContent:'flex-start',gap:22}}>
+        <div style={{display:'inline-flex',flexDirection:'column',alignItems:'stretch'}}>
+          <WickWordmark size={62}/>
+          <div style={{fontFamily:FM,fontSize:17,letterSpacing:'0.34em',color:G,marginTop:4,textAlign:'right'}}>
+            {s.label}
+          </div>
+        </div>
+        <div style={{height:1,width:'100%',background:BR}}/>
+        <div style={{fontFamily:FU,fontSize:22,color:TX,lineHeight:1.45,fontWeight:500}}>
+          {s.tagline}
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:10,marginTop:'auto'}}>
+          {(s.features || []).map(f=>(
+            <div key={f} style={{display:'flex',alignItems:'center',gap:9}}>
+              <div style={{width:5,height:5,borderRadius:'50%',background:G,flexShrink:0}}/>
+              <span style={{fontFamily:FM,fontSize:12,color:MDIM,letterSpacing:'0.04em'}}>{f}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{position:'absolute',right:48,top:48,bottom:48,left:470}}>
+        <Shot which={which} size="contain" origin="center" glowAt="50% 50%"/>
+      </div>
+    </div>
+  );
+}
+
 function SuiteThumb({ flavour = 'forever' } = {}) {
   const F = FLAVOURS[flavour] || FLAVOURS.forever;
   // A 240px column divided by a long roster leaves rows shorter than
@@ -1167,6 +1215,12 @@ const ONLY_COMPONENTS = {
   socialtbc:   { Comp: () => <SocialCover flavour="tbc"/>,                 w: 1200, h: 630 },
   suite:       { Comp: SuiteThumb,                                         w: 460, h: 260 },
   suitetbc:    { Comp: () => <SuiteThumb flavour="tbc"/>,                  w: 460, h: 260 },
+  social_core: { Comp: () => <AddonSocial which="core"/>, w: 1200, h: 630 },
+  social_comforts: { Comp: () => <AddonSocial which="comforts"/>, w: 1200, h: 630 },
+  social_beasts: { Comp: () => <AddonSocial which="beasts"/>, w: 1200, h: 630 },
+  social_bags: { Comp: () => <AddonSocial which="bags"/>, w: 1200, h: 630 },
+  social_trade: { Comp: () => <AddonSocial which="trade"/>, w: 1200, h: 630 },
+  social_gear: { Comp: () => <AddonSocial which="gear"/>, w: 1200, h: 630 },
   cd:       { Comp: CDThumb,            w: 460, h: 260 },
   bis:      { Comp: BISThumb,           w: 460, h: 260 },
   trade:    { Comp: TradeThumb,         w: 460, h: 260 },

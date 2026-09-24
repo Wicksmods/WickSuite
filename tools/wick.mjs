@@ -193,12 +193,26 @@ function extractChangelogEntry(changelogPath, version) {
   return text;
 }
 
-// Find the per-addon thumb PNG in the addon's images/ folder, if present.
+// The picture to attach to a social post.
+//
+// A social card first: 1200x630, which is the size Facebook draws a feed
+// image at and the ratio a boosted post wants. The thumbnail is 460x260
+// and was being upscaled about 1.7 times, which is why posts looked
+// soft. The thumbnail is still the fallback for an addon that has no
+// card yet, since a soft picture beats no picture.
+//
+// -2x files stay out of attachments either way. That rule was about
+// picking between two sizes of the same thumbnail; this is a third
+// image with its own job.
 function findAddonThumb(addonDir) {
   const imgDir = path.join(addonDir, "images");
   if (!fs.existsSync(imgDir)) return null;
-  const matches = fs.readdirSync(imgDir).filter(f => /^wick-thumb-[a-z0-9-]+\.png$/i.test(f) && !/-2x\.png$/i.test(f));
-  return matches.length ? path.join(imgDir, matches[0]) : null;
+  const files = fs.readdirSync(imgDir);
+  const pick = (re) => {
+    const m = files.filter(f => re.test(f) && !/-2x\.png$/i.test(f));
+    return m.length ? path.join(imgDir, m[0]) : null;
+  };
+  return pick(/^wick-social-[a-z0-9-]+\.png$/i) || pick(/^wick-thumb-[a-z0-9-]+\.png$/i);
 }
 
 // FB doesn't render markdown, so strip the syntax that would otherwise show up
