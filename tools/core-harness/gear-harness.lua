@@ -595,6 +595,35 @@ do
         end
     end
     check(withNote ~= nil, "a set header still says what the next bonus needs: " .. tostring(withNote))
+
+    -- A group has to look like a group, and an item like an item.
+    ns.UI.panes.browse.open["Devilsaur Armor"] = nil
+    ns.UI:SetSource("dungeons")
+    ns.UI.panes.browse.open["The Deadmines"] = true
+    ns.UI:FillBrowse()
+    local head, item
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() then
+            if r.itemID then item = item or r else head = head or r end
+        end
+    end
+    check(head ~= nil and item ~= nil, "the list has both a header and an item")
+    check(head.headBg:IsShown() and head.headRule:IsShown(), "the header wears its bar")
+    check(not head.iconEdge:IsShown(), "and no icon frame, having no icon")
+    check(item.iconEdge:IsShown(), "the item wears the icon frame")
+    check(not item.headBg:IsShown(), "and not the header bar")
+
+    -- Banding is per item, so a header does not take a turn and leave
+    -- two same-shaded rows touching underneath it.
+    local seen, alt = 0, true
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID then
+            seen = seen + 1
+            if r.stripe:IsShown() ~= (seen % 2 == 1) then alt = false end
+        end
+    end
+    check(seen > 2, "enough item rows to band, got " .. seen)
+    check(alt, "and they alternate")
 end
 
 -- Once the doll holds several pieces, nothing in the list said which.
