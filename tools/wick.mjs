@@ -1183,9 +1183,13 @@ switch (sub) {
     const folder = rest[0], ver = rest[1];
     if (!folder || !ver) die("usage: wick announce <folder> <version>");
     const cfg = readConfig();
-    const a = cfg.addons.find(x => x.folder === folder);
-    if (!a) die(`addon not found in wick.json: ${folder}`);
-    const dir = path.join(cfg.addons_root_local, folder);
+    // The same resolution release uses. This used to join the TBC root
+    // for everything, so announcing a Forever addon looked in a folder
+    // that does not exist: no thumbnail was found, the post went out
+    // without a picture, and writing the marker then threw.
+    const a = resolveAddon(cfg, folder, rest.slice(2));
+    const dir = path.join(rootOf(cfg, a), a.folder);
+    if (!fs.existsSync(dir)) die(`addon folder not found: ${dir}`);
     announceFB(a, ver, dir, cfg);
     announceDiscord(a, ver, dir, cfg);
     break;
