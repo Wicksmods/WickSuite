@@ -876,9 +876,18 @@ const FOREVER_ADDONS = [
   { key:'comforts',  name:'Comforts',   short:'Comforts',   mono:'CO',  accent:G, slash:'/wcomfort',  tag:'the small client fixes' },
   { key:'gear',      name:'Gear',       short:'Gear',       mono:'GR',  accent:G, slash:'/wgear',     tag:'what to chase while levelling' },
   { key:'trade',     name:'Trade Hall', short:'Trade Hall', mono:'TH',  accent:G, slash:'/wth',       tag:'earnings and the trade board' },
-  { key:'kit',       name:'Class Kits', short:'Class Kits', mono:'KIT', accent:G, slash:'/w__',       tag:'one per class', bare:true },
+  { key:'kit',       name:'Class Kits', short:'Class Kits', mono:'KIT', accent:G, slash:null,         tag:'one per class', bare:true },
   { key:'survivors', name:'Survivors',  short:'Survivors',  mono:'SV',  accent:G, slash:'/survivors', tag:'wave survival minigame' },
 ];
+
+// WickCore is not "Wick's Core", and the class-kits card stands for
+// several products rather than naming one. Three artboards render an
+// addon name, so the rule lives here rather than in each of them.
+function AddonName({ a, short }) {
+  const label = short ? (a.short || a.name) : a.name;
+  if (a.bare) return <span style={{color:G}}>{label}</span>;
+  return <><span style={{color:G}}>Wick's</span>{short ? <br/> : ' '}{label}</>;
+}
 
 // Everything that differs between the two clients, in one place.
 const FLAVOURS = {
@@ -887,6 +896,7 @@ const FLAVOURS = {
     blurb: 'Built for serious TBC Classic raiders.',
     footer: 'Wick \u00b7 TBC Classic \u00b7 MIT licensed code \u00b7 Trademark protected brand',
     badges: ['TBC Classic', 'v2.5.5', 'Open Source'],
+    badgesShort: ['TBC Classic', 'v2.5.5', 'MIT'],
     addons: SUITE_ADDONS,
   },
   forever: {
@@ -894,11 +904,18 @@ const FLAVOURS = {
     blurb: 'Rebuilt for Forever on a shared core.',
     footer: 'Wick \u00b7 World of Warcraft: Forever \u00b7 MIT licensed code \u00b7 Trademark protected brand',
     badges: ['Forever', 'Beta', 'Open Source'],
+    badgesShort: ['Forever', 'Beta', 'MIT'],
     addons: FOREVER_ADDONS,
   },
 };
 
-function SuiteThumb() {
+function SuiteThumb({ flavour = 'forever' } = {}) {
+  const F = FLAVOURS[flavour] || FLAVOURS.forever;
+  // A 240px column divided by a long roster leaves rows shorter than
+  // the two lines of text in them, and they overlap into an unreadable
+  // stack. Past eight, the row keeps the name and drops the command and
+  // the description, which are unreadable at that size anyway.
+  const dense = F.addons.length > 8;
   return (
     <div style={{width:460,height:260,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
       <DungeonBg width={460} height={260} glowX="35%" glowY="55%" glowColor={G} accent="#6B21A8" opacity={0.18}/>
@@ -916,7 +933,7 @@ function SuiteThumb() {
           A suite of precision addons.<br/>One voice. One chrome.
         </div>
         <div style={{display:'flex',flexDirection:'column',gap:3,marginTop:6}}>
-          {['TBC Classic','v2.5.5','MIT'].map(t=>(
+          {F.badgesShort.map(t=>(
             <span key={t} style={{fontFamily:FM,fontSize:6.5,color:G,border:`1px solid ${G}`,
               padding:'1px 6px',opacity:0.55,alignSelf:'flex-start',letterSpacing:'0.1em'}}>{t}</span>
           ))}
@@ -925,7 +942,7 @@ function SuiteThumb() {
       {/* Right roster — 7 stacked mini-cards, one per addon */}
       <div style={{position:'absolute',right:14,top:10,bottom:10,left:172,
         display:'flex',flexDirection:'column',gap:3}}>
-        {SUITE_ADDONS.map(a => (
+        {F.addons.map(a => (
           <div key={a.key} style={{flex:1,minHeight:0,display:'flex',alignItems:'center',gap:8,
             background:'rgba(13,10,20,0.55)',border:`1px solid ${BR}`,padding:'0 8px',
             position:'relative'}}>
@@ -936,13 +953,17 @@ function SuiteThumb() {
               alt={a.mono}
               style={{width:24,height:24,display:'block',flexShrink:0,
                 imageRendering:'auto'}}/>
-            <div style={{flex:1,display:'flex',flexDirection:'column',gap:1}}>
-              <div style={{fontFamily:FD,fontSize:10,fontWeight:700,color:TX,letterSpacing:'0.01em'}}>
-                <span style={{color:G}}>Wick's</span> {a.name}
+            <div style={{flex:1,minWidth:0,display:'flex',flexDirection:'column',gap:1,
+              justifyContent:'center'}}>
+              <div style={{fontFamily:FD,fontSize:dense ? 8.5 : 10,fontWeight:700,color:TX,
+                letterSpacing:'0.01em',whiteSpace:'nowrap',overflow:'hidden'}}>
+                <AddonName a={a}/>
               </div>
-              <div style={{fontFamily:FM,fontSize:6.5,color:MDIM,letterSpacing:'0.12em'}}>
-                {a.slash}<span style={{color:DIM,margin:'0 4px'}}>·</span>{a.tag}
-              </div>
+              {dense ? null : (
+                <div style={{fontFamily:FM,fontSize:6.5,color:MDIM,letterSpacing:'0.12em'}}>
+                  {a.slash ? <>{a.slash}<span style={{color:DIM,margin:'0 4px'}}>·</span></> : null}{a.tag}
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -1002,15 +1023,12 @@ function SuiteBanner({ w = 860, h = 320, flavour = 'forever' } = {}) {
             <div style={{fontFamily:FD,fontWeight:700,fontSize:8.5,color:TX,
               textAlign:'center',lineHeight:1.25,minHeight:22,
               wordBreak:'normal',hyphens:'none'}}>
-              {/* WickCore is not "Wick's Core", and the kits card stands
-                  for several products rather than naming one. */}
-              {a.bare ? null : <><span style={{color:G}}>Wick's</span><br/></>}
-              {a.bare ? <span style={{color:G}}>{a.short || a.name}</span> : (a.short || a.name)}
+              <AddonName a={a} short/>
             </div>
             {/* Slash */}
             <div style={{fontFamily:FM,fontSize:6.5,color:a.accent,
               textAlign:'center',marginTop:3,letterSpacing:'0.08em'}}>
-              {a.slash === '/w__' ? 'one per class' : a.slash}
+              {a.slash || a.tag}
             </div>
           </div>
         ))}
@@ -1061,7 +1079,8 @@ function FbCover() {
 // 1200×630 social cover — boost-friendly 1.91:1 ratio for FB/X/LinkedIn link cards.
 // Dedicated layout (not a SuiteBanner stretch) — uses the extra vertical space for
 // a full 7-addon roster with breathing room.
-function SocialCover() {
+function SocialCover({ flavour = 'forever' } = {}) {
+  const F = FLAVOURS[flavour] || FLAVOURS.forever;
   return (
     <div style={{width:1200,height:630,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
       <DungeonBg width={1200} height={630} glowX="32%" glowY="55%" glowColor={G} accent="#6B21A8" opacity={0.18}/>
@@ -1071,7 +1090,7 @@ function SocialCover() {
       <div style={{position:'absolute',left:64,top:64,bottom:64,width:480,
         display:'flex',flexDirection:'column',justifyContent:'center'}}>
         <div style={{fontFamily:FM,fontSize:11,letterSpacing:'0.32em',color:MDIM,marginBottom:22}}>
-          WORLD OF WARCRAFT · TBC CLASSIC
+          {F.eyebrow}
         </div>
         <div style={{display:'inline-flex',flexDirection:'column',alignItems:'stretch',marginBottom:24}}>
           <WickWordmark size={104}/>
@@ -1087,10 +1106,10 @@ function SocialCover() {
           A suite of precision addons.<br/>One voice. One chrome.
         </div>
         <div style={{fontFamily:FU,fontSize:13,color:MDIM,lineHeight:1.6,maxWidth:420,marginBottom:22}}>
-          Built for serious TBC Classic raiders.
+          {F.blurb}
         </div>
         <div style={{display:'flex',gap:8}}>
-          {['TBC Classic','v2.5.5','MIT'].map(t=>(
+          {F.badgesShort.map(t=>(
             <span key={t} style={{fontFamily:FM,fontSize:9,color:G,border:`1px solid ${G}`,
               padding:'3px 10px',opacity:0.6,letterSpacing:'0.18em'}}>{t}</span>
           ))}
@@ -1103,7 +1122,7 @@ function SocialCover() {
       {/* Right addon roster — 7 stacked cards, generous spacing */}
       <div style={{position:'absolute',left:620,right:64,top:64,bottom:64,
         display:'flex',flexDirection:'column',gap:6}}>
-        {SUITE_ADDONS.map(a => (
+        {F.addons.map(a => (
           <div key={a.key} style={{flex:1,minHeight:0,display:'flex',alignItems:'center',gap:14,
             background:'rgba(13,10,20,0.55)',border:`1px solid ${BR}`,padding:'0 16px',
             position:'relative'}}>
@@ -1113,10 +1132,10 @@ function SocialCover() {
               style={{width:44,height:44,display:'block',flexShrink:0,imageRendering:'auto'}}/>
             <div style={{flex:1,display:'flex',flexDirection:'column',gap:2}}>
               <div style={{fontFamily:FD,fontSize:17,fontWeight:700,color:TX,letterSpacing:'0.01em'}}>
-                <span style={{color:G}}>Wick's</span> {a.name}
+                <AddonName a={a}/>
               </div>
               <div style={{fontFamily:FM,fontSize:10,color:MDIM,letterSpacing:'0.14em'}}>
-                {a.slash}<span style={{color:DIM,margin:'0 6px'}}>·</span>{a.tag}
+                {a.slash ? <>{a.slash}<span style={{color:DIM,margin:'0 6px'}}>·</span></> : null}{a.tag}
               </div>
             </div>
           </div>
@@ -1144,8 +1163,10 @@ const ONLY_COMPONENTS = {
   banner850:   { Comp: () => <SuiteBanner w={850} h={316}/>,               w: 850, h: 316 },
   bannertbc:   { Comp: () => <SuiteBanner flavour="tbc"/>,                 w: 860, h: 320 },
   bannertbc850:{ Comp: () => <SuiteBanner w={850} h={316} flavour="tbc"/>, w: 850, h: 316 },
-  social:   { Comp: SocialCover,                            w: 1200, h: 630 },
-  suite:    { Comp: SuiteThumb,                             w: 460,  h: 260 },
+  social:      { Comp: SocialCover,                                        w: 1200, h: 630 },
+  socialtbc:   { Comp: () => <SocialCover flavour="tbc"/>,                 w: 1200, h: 630 },
+  suite:       { Comp: SuiteThumb,                                         w: 460, h: 260 },
+  suitetbc:    { Comp: () => <SuiteThumb flavour="tbc"/>,                  w: 460, h: 260 },
   cd:       { Comp: CDThumb,            w: 460, h: 260 },
   bis:      { Comp: BISThumb,           w: 460, h: 260 },
   trade:    { Comp: TradeThumb,         w: 460, h: 260 },
