@@ -704,6 +704,54 @@ do
     local shown = ns.Doll.setInfo and ns.Doll.setInfo:GetText() or ""
     check(shown:find(setName, 1, true) ~= nil,
         "and prints the set there: " .. tostring(shown):sub(1, 70))
+
+    -- The column exists to show what a change would do, so a bonus the
+    -- change would earn is exactly what it should say. Two pieces tried
+    -- on and no two-piece bonus shown was the whole complaint.
+    S.EQUIPPED_IDS = {}
+    ns.Doll:ClearAll()
+    if ns.Doll:Ensure() then ns.Doll:Refresh() end
+    check((ns.Doll.setInfo:GetText() or "") == "",
+        "wearing none of the set and trying none on, nothing is claimed")
+
+    -- The set pieces are ids out of the shipped data, which the stub
+    -- client knows nothing about, so the doll cannot place them. Give
+    -- them slots this class can wear, one each, so the preview has
+    -- something real to hold.
+    local LOCS = { "INVTYPE_CHEST", "INVTYPE_LEGS", "INVTYPE_HEAD",
+                   "INVTYPE_FEET", "INVTYPE_HAND", "INVTYPE_WAIST" }
+    for n, id in ipairs(setIds) do
+        S.ITEMS[id] = { equipLoc = LOCS[n] or "INVTYPE_CHEST",
+                        classID = 4, subClassID = 2, stats = {} }
+    end
+    ns.Score:ForgetSetCache()
+
+    -- Distinct slots: two pieces of a set can be the same slot, and one
+    -- would simply replace the other on the doll.
+    local put = 0
+    for _, id in ipairs(setIds) do
+        if put < need then
+            local info = ns.Score:Info(id)
+            if info and info.slot and not ns.Doll.trying[info.slot] then
+                ns.Doll.trying[info.slot] = { id = id, link = ns.Score:LinkFor(id) }
+                put = put + 1
+            end
+        end
+    end
+    check(put == need, "put " .. need .. " pieces into the preview, got " .. put)
+    ns.Doll:Refresh()
+    local previewed = ns.Doll.setInfo:GetText() or ""
+    check(previewed:find(setName, 1, true) ~= nil,
+        "the previewed pieces earn the bonus: " .. previewed:sub(1, 70))
+    check(previewed:find("would gain", 1, true) ~= nil,
+        "and it is marked as something you would gain, not something you have")
+
+    -- And SetProgress on its own counts what it is handed.
+    local prev = ns.Score:SetProgress(setName, ns.Doll:Wearing())
+    check(prev.worn == need, "progress counts the preview: " .. tostring(prev.worn))
+    local bare = ns.Score:SetProgress(setName)
+    check(bare.worn == 0, "while the equipped count is untouched: " .. tostring(bare.worn))
+    ns.Doll:ClearAll()
 end
 
 -- An item the client has never seen gets our tooltip, which said
