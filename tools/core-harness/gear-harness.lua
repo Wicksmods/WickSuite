@@ -566,6 +566,71 @@ check(wearRow ~= nil, "and one this class can actually wear")
 check(itemRow.__scripts.OnClick == ns.UI.RowClick,
     "an item row carries the item handler, not a header toggle")
 
+-- Rows are pooled, so one drawing a group header was an item a moment
+-- ago. A font string is not clipped by its frame, so an item's stats
+-- and source lines carried on drawing past the bottom of a 22 point
+-- header and into the header below: every collapsed set had somebody
+-- else's armour values stacked underneath it.
+do
+    ns.UI:SetSource("sets")
+    ns.UI.panes.browse.open = {}
+    ns.UI:FillBrowse()
+    local heads, dirty = 0, nil
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and not r.itemID then
+            heads = heads + 1
+            local st = tostring(r.stats:GetText() or "")
+            local md = tostring(r.mid:GetText() or "")
+            if st ~= "" or md ~= "" then dirty = st .. " / " .. md end
+        end
+    end
+    check(heads > 0, "collapsed groups draw headers, got " .. heads)
+    check(dirty == nil, "and no header carries an item's lines: " .. tostring(dirty))
+
+    -- What a header does have to say goes on its own line.
+    local withNote
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and not r.itemID and tostring(r.note2:GetText() or "") ~= "" then
+            withNote = r.note2:GetText()
+        end
+    end
+    check(withNote ~= nil, "a set header still says what the next bonus needs: " .. tostring(withNote))
+end
+
+-- Once the doll holds several pieces, nothing in the list said which.
+do
+    ns.UI:SetSource("dungeons")
+    ns.UI.panes.browse.open["The Deadmines"] = true
+    ns.Doll:ClearAll()
+    ns.UI:FillBrowse()
+    local target
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID then
+            local info = ns.Score:Info(r.itemID)
+            if info and info.slot and ns.Score:Usable(info) and not target then target = r end
+        end
+    end
+    check(target ~= nil, "found a wearable row to preview")
+    check(target.previewed == false, "nothing is lit before anything is tried on")
+
+    local id = target.itemID
+    ns.Doll:TryOn(id)
+    ns.UI:FillBrowse()
+    local lit
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID == id then lit = r.previewed end
+    end
+    check(lit == true, "the previewed row is lit: " .. tostring(lit))
+
+    ns.Doll:ClearAll()
+    ns.UI:FillBrowse()
+    local still
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID == id then still = r.previewed end
+    end
+    check(still == false, "and goes out when it comes off: " .. tostring(still))
+end
+
 -- Plain click: our own viewer, which sits beside the list rather than
 -- behind a tab. The point of the split is that the list does not move
 -- under you while you work down it.
