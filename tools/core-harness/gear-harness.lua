@@ -676,6 +676,26 @@ do
         if r:IsShown() and r.itemID == id then afterOne = r.previewed end
     end
     check(afterOne == false, "clearing one slot clears its row too: " .. tostring(afterOne))
+
+    -- The row lights to say the piece is on the doll, so clicking a lit
+    -- row is how you take it off. It used to do nothing: TryOn put the
+    -- same item in the same slot again and nothing changed.
+    local row
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID == id then row = r end
+    end
+    check(row ~= nil, "found the row again")
+    row.__scripts.OnClick(row, "LeftButton")
+    check(ns.Doll:IsTrying(id), "one click puts it on")
+    row.__scripts.OnClick(row, "LeftButton")
+    check(not ns.Doll:IsTrying(id), "and a second click takes it off")
+    local after
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID == id then after = r.previewed end
+    end
+    check(after == false, "with the highlight going out: " .. tostring(after))
+
+    ns.Doll:ClearAll()
 end
 
 -- Plain click: our own viewer, which sits beside the list rather than
@@ -985,6 +1005,17 @@ ns.Doll:TryOn(91002)
 check(ns.Doll.trying[17] ~= nil and ns.Doll.trying[17].id == 91002, "the off hand goes on")
 check(ns.Doll.trying[16] ~= nil and ns.Doll.trying[16].empty == true,
     "and the two-hander comes off")
+
+-- Taking a two-hander off gives the off hand back. Putting it on is
+-- what emptied that slot, so leaving the slot bare afterwards would
+-- have the compare counting a hand you are not actually missing.
+ns.Doll:ClearAll()
+ns.Doll:TryOn(91001)
+check(ns.Doll.trying[17] ~= nil and ns.Doll.trying[17].empty == true,
+    "the two-hander emptied the off hand")
+check(ns.Doll:Untry(91001), "and it can be taken off again")
+check(ns.Doll.trying[16] == nil, "the weapon slot is clear")
+check(ns.Doll.trying[17] == nil, "and the off hand is given back, not left bare")
 
 -- A one-hander leaves the off hand alone.
 S.ITEMS[91003] = { name = "A Sword", equipLoc = "INVTYPE_WEAPON", classID = 2, subClassID = 7 }
