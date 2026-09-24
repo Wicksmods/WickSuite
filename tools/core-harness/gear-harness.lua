@@ -330,13 +330,12 @@ S.LINK_TO_ID["|Hitem:old|h"] = 8888
 S.ITEMS[8888] = { equipLoc = "INVTYPE_LEGS", classID = 4, subClassID = 2,
                   stats = { ITEM_MOD_AGILITY_SHORT = 4 } }
 
--- Right-clicking a row can ask to try something on before the Compare
--- tab has ever been drawn, so there is no paperdoll yet to put it in.
--- That is the order a real person hits first and it used to throw.
-check(ns.Doll.pane == nil, "nothing is built until the tab is needed")
+-- Trying something on has to work whether or not the doll has been
+-- drawn yet. It is built on the first refresh now that the column is
+-- always up, but a click can still arrive first.
 local okEarly, errEarly = pcall(function() return ns.Doll:TryOn(7719) end)
-check(okEarly, "trying a piece on before the tab exists does not error: " .. tostring(errEarly))
-check(ns.Doll.pane ~= nil, "it builds the paperdoll on demand instead")
+check(okEarly, "trying a piece on does not error: " .. tostring(errEarly))
+check(ns.Doll.pane ~= nil, "and the paperdoll exists to put it in")
 ns.Doll:ClearAll()
 
 ns.UI:Select("compare")
@@ -548,19 +547,67 @@ check(true, "/wgear browse does not error")
 ns.UI:SetSource("dungeons")
 ns.UI.panes.browse.open["The Deadmines"] = true
 ns.UI:FillBrowse()
-local itemRow
+local itemRow, wearRow
 for _, r in ipairs(ns.UI.panes.browse.rows) do
-    if r:IsShown() and r.itemID then itemRow = r break end
+    if r:IsShown() and r.itemID then
+        itemRow = itemRow or r
+        -- Not every row in the data has an equip slot, and the doll
+        -- rightly refuses what you cannot wear, so the try-on check
+        -- needs a row that is actually a piece of gear.
+        -- The doll refuses what you cannot wear and what your class
+        -- cannot use, both rightly, so the try-on check needs a row
+        -- that clears both.
+        local info = ns.Score:Info(r.itemID)
+        if info and info.slot and ns.Score:Usable(info) and not wearRow then wearRow = r end
+    end
 end
 check(itemRow ~= nil, "found an item row to click")
+check(wearRow ~= nil, "and one this class can actually wear")
 check(itemRow.__scripts.OnClick == ns.UI.RowClick,
     "an item row carries the item handler, not a header toggle")
 
--- Plain click: our own viewer, and the tab with it.
+-- Plain click: our own viewer, which sits beside the list rather than
+-- behind a tab. The point of the split is that the list does not move
+-- under you while you work down it.
 ns.UI:Select("browse")
 S.DRESSED = nil
-itemRow.__scripts.OnClick(itemRow, "LeftButton")
-check(ns.UI.active == "compare", "clicking a row opens our viewer: " .. tostring(ns.UI.active))
+ns.Doll:ClearAll()
+wearRow.__scripts.OnClick(wearRow, "LeftButton")
+check(next(ns.Doll.trying) ~= nil, "clicking a row tries it on")
+check(ns.UI.active == "browse",
+    "and leaves you in the list: " .. tostring(ns.UI.active))
+check(ns.UI.panes.compare:IsShown(), "the compare column is up regardless")
+
+-- The stacked doll has to fit the column it now lives in. It ran eight
+-- points past the bottom at the first height tried, straight through
+-- the "Take it all off" button.
+do
+    local cmp = ns.UI.panes.compare
+    local D = ns.Doll
+    check(D.model ~= nil and D.summary ~= nil, "the doll is built in the column")
+    local w = tonumber(cmp:GetWidth()) or 0
+    check(w > 0 and w < 260, "the column is a third of the window, not the whole of it: " .. tostring(w))
+
+    -- Nothing may hang off the right edge: that was the whitespace
+    -- complaint in reverse.
+    local mw = tonumber(D.model:GetWidth()) or 0
+    check(mw > 0 and mw <= w - 8, "the model fits the column: " .. tostring(mw) .. " in " .. tostring(w))
+
+    -- And the bottom. The column's own height comes from anchors, which
+    -- the stub does not resolve, so it is worked out from the window
+    -- and the header the way the real frame will be.
+    local y = 0
+    for _, pt in ipairs(D.derived.__points or {}) do
+        if type(pt[5]) == "number" then y = pt[5] end
+    end
+    local panelH = tonumber(ns.UI.panel:GetHeight()) or 0
+    local tabH = tonumber(ns.UI.tabs.browse:GetHeight()) or 0
+    local avail = panelH - WickCore.Chrome.HEADER_H - tabH - 4 - 10
+    -- derived is 26 tall and the button owns the bottom 24.
+    check(avail > 0 and (-y + 26 + 24) <= avail,
+        "the doll clears the button at the bottom: needs " .. tostring(-y + 50)
+        .. " of " .. tostring(avail))
+end
 check(S.DRESSED == nil, "and does not open the dressing room")
 
 -- Ctrl-click: the game's dressing room, and not our tab.
