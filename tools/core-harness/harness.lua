@@ -202,6 +202,45 @@ local titleFS = Chrome:Text(panel.content, 11, Chrome.Colors.text)
 Chrome:SetTheme("shaman")
 check(Chrome.activeTheme == "shaman" and WickCoreDB.global.theme == "shaman", "SetTheme persists")
 check(Chrome:SavedThemeSetting() == "shaman", "saved setting readable back")
+
+-- On this client the game writes saved variables and never reads them
+-- back, so a setting survives only if the macro store writes it, and the
+-- store writes when something marks it dirty. The options page marked
+-- its own check boxes and nothing else did: a theme is picked from a
+-- list somewhere else entirely, so the choice was gone at the next
+-- login and the logout write was the only reason it ever came back.
+do
+    local Store = Core.Store
+    check(Store ~= nil, "the store is there to be told")
+    -- Put back whatever the run was using: the checks below this one
+    -- read the client class colours, and switching the source is one of
+    -- the things being checked here.
+    local wasColours = Chrome.classColorSet
+    Store.enabled = true
+    Store.dirtyToken = 0
+    Chrome:SetTheme("mage")
+    check((Store.dirtyToken or 0) > 0, "picking a theme marks the store dirty")
+
+    Store.dirtyToken = 0
+    Chrome:SetClassColorSet("classic")
+    check((Store.dirtyToken or 0) > 0, "and so does changing the class colour source")
+
+    -- Where a window sits is a setting too.
+    Store.dirtyToken = 0
+    local win2 = {}
+    local moved = Chrome:NewPanel("WicksDirtyFrame", { title = "Moved", width = 300, height = 200, db = win2 })
+    Chrome:SavePosition(moved, win2)
+    check((Store.dirtyToken or 0) > 0, "and so does moving a window")
+
+    -- A store switched off is not woken up by any of it.
+    Store.enabled = false
+    Store.dirtyToken = 0
+    Chrome:SetTheme("rogue")
+    check((Store.dirtyToken or 0) == 0, "with the store off, nothing is scheduled")
+    Store.enabled = true
+    Chrome:SetClassColorSet(wasColours)
+    Chrome:SetTheme("shaman")
+end
 WickCoreDB.global.theme = "wiped by something else"
 Core.self.db = nil                                  -- profile unbound, as if init never ran
 Chrome:SetTheme("druid")
