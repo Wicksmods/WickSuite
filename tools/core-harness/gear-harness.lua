@@ -832,10 +832,13 @@ do
 
     -- The doll prints them beside the stats.
     if ns.Doll:Ensure() then ns.Doll:Refresh() end
-    check(ns.Doll.setInfo ~= nil, "the column has somewhere to put them")
-    local shown = ns.Doll.setInfo and ns.Doll.setInfo:GetText() or ""
-    check(shown:find(setName, 1, true) ~= nil,
-        "and prints the set there: " .. tostring(shown):sub(1, 70))
+    -- Read as rows rather than as one formatted string: the count and
+    -- the sentence are separate columns now, so a wrapped sentence
+    -- lands under the sentence instead of under the count.
+    local shownRows = ns.Doll:BonusRows()
+    local named
+    for _, r in ipairs(shownRows) do if r.set == setName then named = true end end
+    check(named == true, "the set reaches the column, rows: " .. #shownRows)
 
     -- The column exists to show what a change would do, so a bonus the
     -- change would earn is exactly what it should say. Two pieces tried
@@ -843,7 +846,7 @@ do
     S.EQUIPPED_IDS = {}
     ns.Doll:ClearAll()
     if ns.Doll:Ensure() then ns.Doll:Refresh() end
-    check((ns.Doll.setInfo:GetText() or "") == "",
+    check(#ns.Doll:BonusRows() == 0,
         "wearing none of the set and trying none on, nothing is claimed")
 
     -- The set pieces are ids out of the shipped data, which the stub
@@ -872,15 +875,41 @@ do
     end
     check(put == need, "put " .. need .. " pieces into the preview, got " .. put)
     ns.Doll:Refresh()
-    local previewed = ns.Doll.setInfo:GetText() or ""
-    check(previewed:find(setName, 1, true) ~= nil,
-        "the previewed pieces earn the bonus: " .. previewed:sub(1, 70))
-    -- Each bonus reads as the count it needs, not as how much of the
-    -- set you have on: four bonuses of one set all printed 4/8 before.
-    check(previewed:find("/" .. tostring(prog.total), 1, true) ~= nil,
-        "the line carries a threshold over the set total: " .. previewed:sub(1, 80))
-    check(previewed:find("4FC778", 1, true) ~= nil,
-        "and a bonus the preview would earn is green, like the stat deltas")
+    local rows = ns.Doll:BonusRows()
+    local header, bonus
+    for _, r in ipairs(rows) do
+        if r.kind == "set" and r.set == setName then header = r end
+        if r.kind == "bonus" and r.set == setName then bonus = bonus or r end
+    end
+    check(header ~= nil, "the previewed pieces earn the bonus, rows: " .. #rows)
+    check(bonus ~= nil, "with a bonus line under the set line")
+    -- Each bonus carries the count it needs, not how much of the set is
+    -- on: four bonuses of one set all read 4/8 before.
+    check(bonus and bonus.pieces <= need and bonus.total == prog.total,
+        "the line carries its own threshold over the set total: "
+        .. tostring(bonus and bonus.pieces) .. "/" .. tostring(bonus and bonus.total))
+    check(bonus and bonus.have == false,
+        "and is flagged as one the preview would earn, not one you have")
+
+    -- Drawn as two columns, so a sentence that wraps lands under the
+    -- sentence and not under the count. One font string for both is
+    -- what put the second line back at the left margin.
+    ns.Doll:DrawBonuses()
+    local drawn
+    for _, r in ipairs(ns.Doll.setRows or {}) do
+        if r:IsShown() and tostring(r.num:GetText() or "") ~= "" then drawn = r end
+    end
+    check(drawn ~= nil, "a bonus row is drawn")
+    if drawn then
+        check(tostring(drawn.num:GetText()):find("/", 1, true) ~= nil,
+            "the count has its own field: " .. tostring(drawn.num:GetText()))
+        check(tostring(drawn.text:GetText() or "") ~= "", "and the sentence its own")
+        local tw = tonumber(drawn.text:GetWidth()) or 0
+        local rw = tonumber(drawn:GetWidth()) or 0
+        check(tw > 0 and tw < rw,
+            "the sentence wraps inside its own column, not the whole row: "
+            .. tostring(tw) .. " of " .. tostring(rw))
+    end
 
     -- And SetProgress on its own counts what it is handed.
     local prev = ns.Score:SetProgress(setName, ns.Doll:Wearing())
