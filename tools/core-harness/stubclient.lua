@@ -26,7 +26,34 @@ IN_GROUP = false
 BANK_OPEN = false
 OPENED = nil
 
-S.SECRET = setmetatable({}, { __tostring = function() return "<secret>" end })
+-- A secret value, modelled on what the live client does with one.
+--
+-- It can be passed along and rendered, and nothing else. Reading a
+-- method off it, concatenating it, measuring it or ordering it all
+-- raise the way the client raises, with the client's wording, so a
+-- harness check reproduces the error a player would actually see.
+--
+-- What cannot be modelled: `secret == "x"`. Lua only consults __eq when
+-- both operands are tables, so a comparison against a string literal
+-- returns false here and raises in game. That is the exact shape of the
+-- bug that spammed the chat frame from Board.lua, so code handling an
+-- event payload is expected to ask issecretvalue first and not to lean
+-- on this stub noticing.
+local function secretRefusal(op)
+    return function()
+        error("attempt to " .. op .. " a secret string value, while execution "
+            .. "tainted by an AddOn", 2)
+    end
+end
+
+S.SECRET = setmetatable({}, {
+    __tostring = function() return "<secret>" end,
+    __index    = secretRefusal("index"),
+    __concat   = secretRefusal("concatenate"),
+    __len      = secretRefusal("get length of"),
+    __lt       = secretRefusal("compare"),
+    __le       = secretRefusal("compare"),
+})
 local SECRET = S.SECRET
 
 -- Any read of an undefined global is recorded, so a harness can print what the

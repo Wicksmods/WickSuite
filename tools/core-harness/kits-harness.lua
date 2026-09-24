@@ -938,6 +938,38 @@ check(Bd:Watching(1) == false and Bd:Watching(5) == false, "General and LookingF
 
 Bd:Clear()
 check(Bd:Handle("WTS [Copper Bar] x20 cheap pst", "Seller-Realm", 2), "a sell advert is taken")
+
+-- A chat payload reaches a tainted addon as a secret string while the
+-- client's restrictions are up. This is what spammed the chat frame in
+-- Wailing Caverns: the board compared the message to the empty string
+-- and the client refused. Nothing here can read a secret, so the line
+-- has to be dropped quietly rather than erroring on every word spoken.
+--
+-- Modern only. TBC has no issecretvalue and no secrets to guard
+-- against, so firing one at it would be testing a state that cannot
+-- happen rather than the addon's handling of one that can.
+if MODERN then
+    local before = #Bd.listings
+    local okSecret, whySecret = pcall(function()
+        Bd:Handle(S.SECRET, "Somebody", 2)
+    end)
+    check(okSecret, "a secret chat line does not raise: " .. tostring(whySecret))
+    check(#Bd.listings == before, "and is not listed, since it cannot be read")
+
+    -- The author can be secret on its own.
+    local okAuthor = pcall(function() Bd:Handle("WTS something", S.SECRET, 2) end)
+    check(okAuthor, "a secret author does not raise either")
+    check(#Bd.listings == before, "and is not listed")
+
+    -- The ledger reads loot lines the same way. It needs a running
+    -- session or AddLoot returns before it touches the text, which
+    -- would make this check say nothing.
+    local wasActive = Lg.active
+    Lg.active = true
+    local okLoot, whyLoot = pcall(function() Lg:AddLoot(S.SECRET) end)
+    check(okLoot, "a secret loot line does not raise: " .. tostring(whyLoot))
+    Lg.active = wasActive
+end
 check(Bd.listings[1] and Bd.listings[1].category == "WTS", "and read as selling: " .. tostring(Bd.listings[1] and Bd.listings[1].category))
 check(Bd.listings[1].name == "Seller", "with the realm stripped off the name")
 check(not Bd:Handle("WTS [Copper Bar] x20 cheap pst", "Seller-Realm", 2), "the same person repeating it is one listing, not two")
