@@ -116,6 +116,42 @@ fixes the client, it notices and stays out of the way.
 
 WHAT IS NEW SINCE THE LAST PACKAGE
 ----------------------------------
+* Wick's Gear is two columns. The lists keep the left side and their
+  tabs; the paperdoll and the stats hold the right and are always on, so
+  trying something on no longer costs you your place in the list. Click
+  a row to put it on, click it again to take it off, and anything on the
+  doll is marked in the list.
+* Gear: a row is three lines now. The name in its quality colour, what
+  the piece gives, and where it comes from, with an icon big enough to
+  find things by.
+* Gear: set bonuses read beside the stats rather than in the list, and
+  they count what you are trying on. Two pieces of a set in the preview
+  shows you the two-piece bonus, in green because you would be gaining
+  it. Each line says the count it needs: 2/5, 3/5, 4/5, 5/5.
+* Mages: portals and teleports in one panel. Left-click a destination to
+  teleport, right-click to open the portal for the group. The list comes
+  from your own spellbook, so it is the cities you actually know and
+  never the other faction's, with rune counts along the top.
+* The cooldown bar tracks rather than casts, and has a scale and a row
+  width. Anything on cooldown dims, so the bar answers the question it
+  exists for at a glance.
+
+Fixed since the last package
+----------------------------
+* Settings you change outside the options page are kept. Picking a theme
+  or dragging a window wrote the setting and never told the part of
+  WickCore that survives a restart, so your theme came back to the old
+  one. This is the fix for themes not sticking.
+* Wick's Trade Hall no longer fills your chat with errors. The client
+  hands an addon the text of a chat line as something it is not allowed
+  to read while you are fighting, and the board was reading it. Lines
+  said during a fight are skipped now instead.
+* Druids: both resource bars follow your theme. They were painted with
+  colours that no theme could reach, so one bar stayed blue on a green
+  UI whatever you picked.
+* Wick's Gear: the window opens at its proper size. It was coming up at
+  whatever size it had been before the layout changed, which squeezed
+  the list and ran the paperdoll through the button underneath it.
 * Mages: portals and teleports in one panel. Left-click a destination
   to teleport, right-click to open the portal for the group. The list
   comes from your own spellbook, so it is the cities you actually know
