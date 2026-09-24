@@ -241,6 +241,32 @@ do
     Chrome:SetClassColorSet(wasColours)
     Chrome:SetTheme("shaman")
 end
+
+-- The store stands in for a client that writes saved variables and
+-- never reads them back. When the client starts handing them over it
+-- has to stand down, and say so: a player who opted in is otherwise
+-- left with macros that are no longer used and no word about why.
+do
+    local Store = Core.Store
+    local db = Core.self.db
+    local wasHanded, wasEnabled = db.handedOver, Store.enabled
+    local wasAnnounced, wasReason = Store.announced, Store.reason
+
+    db.handedOver = true
+    Store.enabled = nil
+    local needed, why = Store:Needed()
+    check(needed == false, "with the client keeping settings, the store is not needed")
+    check(tostring(why):find("handed", 1, true) ~= nil, "and says why: " .. tostring(why))
+    check(Store:Decide() == false, "so it decides itself off")
+
+    -- And it must not put macro contents back over settings the client
+    -- has just handed over.
+    check(Store:RestoreFor(Core.self) == false,
+        "and restores nothing over what the client handed over")
+
+    db.handedOver, Store.enabled = wasHanded, wasEnabled
+    Store.announced, Store.reason = wasAnnounced, wasReason
+end
 WickCoreDB.global.theme = "wiped by something else"
 Core.self.db = nil                                  -- profile unbound, as if init never ran
 Chrome:SetTheme("druid")
