@@ -586,7 +586,10 @@ do
     local D = ns.Doll
     check(D.model ~= nil and D.summary ~= nil, "the doll is built in the column")
     local w = tonumber(cmp:GetWidth()) or 0
-    check(w > 0 and w < 260, "the column is a third of the window, not the whole of it: " .. tostring(w))
+    local panelW = tonumber(ns.UI.panel:GetWidth()) or 0
+    local share = panelW > 0 and (w / panelW) or 0
+    check(share > 0.33 and share < 0.45,
+        ("the column is the smaller share of the window: %d of %d"):format(w, panelW))
 
     -- Nothing may hang off the right edge: that was the whitespace
     -- complaint in reverse.

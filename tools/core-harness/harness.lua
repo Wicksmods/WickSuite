@@ -154,6 +154,37 @@ Chrome:RestorePosition(panel, win)
 local rp, _, rrp, rx, ry = panel:GetPoint()
 check(rp == "TOPLEFT" and rrp == "TOPLEFT" and rx == 40 and ry == -60,
       "RestorePosition puts it back: " .. tostring(rp) .. " " .. tostring(rx) .. "," .. tostring(ry))
+
+-- A size saved under an old layout must not outlive it. Where a window
+-- is put is the player's; how big it is is only theirs when they can
+-- drag it. Wick's Gear grew a second column and opened at its old width
+-- with the paperdoll running through the button underneath, because the
+-- saved size was believed over the code's.
+do
+    local fixedDB = { point = "CENTER", relPoint = "CENTER", x = 0, y = 0,
+                      width = 300, height = 200 }
+    local fixed = Chrome:NewPanel("WicksSizeFixed", { title = "Fixed", width = 520, height = 420 })
+    Chrome:RestorePosition(fixed, fixedDB)
+    check(fixed:GetWidth() == 520 and fixed:GetHeight() == 420,
+        "a panel sized in code ignores an old saved size: "
+        .. tostring(fixed:GetWidth()) .. "x" .. tostring(fixed:GetHeight()))
+    Chrome:SavePosition(fixed, fixedDB)
+    check(fixedDB.width == nil and fixedDB.height == nil,
+        "and stops storing one, so it cannot be believed later")
+    check(fixedDB.point == "CENTER", "while its position is still kept")
+
+    -- A panel with a grip is the opposite: the size is the player's.
+    local gripDB = { point = "CENTER", relPoint = "CENTER", x = 0, y = 0,
+                     width = 640, height = 300 }
+    local grip = Chrome:NewPanel("WicksSizeGrip", { title = "Grip", width = 400, height = 240,
+                                                   resizable = true })
+    Chrome:RestorePosition(grip, gripDB)
+    check(grip:GetWidth() == 640 and grip:GetHeight() == 300,
+        "a resizable panel keeps the size the player dragged it to: "
+        .. tostring(grip:GetWidth()) .. "x" .. tostring(grip:GetHeight()))
+    Chrome:SavePosition(grip, gripDB)
+    check(gripDB.width == 640, "and goes on storing it")
+end
 local flag = false
 local cb = Chrome:Check(panel.content, "Lock", function() return flag end, function(v) flag = v end)
 cb.__scripts.OnClick()
