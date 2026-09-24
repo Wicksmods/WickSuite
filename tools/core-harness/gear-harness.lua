@@ -596,6 +596,26 @@ do
     local mw = tonumber(D.model:GetWidth()) or 0
     check(mw > 0 and mw <= w - 8, "the model fits the column: " .. tostring(mw) .. " in " .. tostring(w))
 
+    -- The search box and the Equippable toggle belong to the list, not
+    -- the window. Anchored to the panel they sat on top of the compare
+    -- column, over the paperdoll's own slots.
+    local br = ns.UI.panes.browse
+    for _, part in ipairs({ { br.search, "the search box" },
+                            { br.equippable, "the Equippable toggle" } }) do
+        local fr, label = part[1], part[2]
+        check(fr ~= nil, label .. " exists")
+        if fr then
+            local rel
+            for _, pt in ipairs(fr.__points or {}) do rel = pt[2] or rel end
+            check(rel == br, label .. " follows the list pane, not the window")
+        end
+    end
+    for key, b in pairs(br.sourceBtns or {}) do
+        local rel
+        for _, pt in ipairs(b.__points or {}) do rel = pt[2] or rel end
+        check(rel == br, "the " .. tostring(key) .. " button follows the list pane too")
+    end
+
     -- And the bottom. The column's own height comes from anchors, which
     -- the stub does not resolve, so it is worked out from the window
     -- and the header the way the real frame will be.
