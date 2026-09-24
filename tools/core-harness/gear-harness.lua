@@ -628,6 +628,12 @@ end
 
 -- Once the doll holds several pieces, nothing in the list said which.
 do
+    -- Through the real path: Refresh does nothing while the window is
+    -- closed, so a check that fills the list by hand would never notice
+    -- ClearAll failing to redraw it.
+    ns.UI:Build()
+    ns.UI.panel:Show()
+    ns.UI:Select("browse")
     ns.UI:SetSource("dungeons")
     ns.UI.panes.browse.open["The Deadmines"] = true
     ns.Doll:ClearAll()
@@ -644,20 +650,32 @@ do
 
     local id = target.itemID
     ns.Doll:TryOn(id)
-    ns.UI:FillBrowse()
     local lit
     for _, r in ipairs(ns.UI.panes.browse.rows) do
         if r:IsShown() and r.itemID == id then lit = r.previewed end
     end
     check(lit == true, "the previewed row is lit: " .. tostring(lit))
 
+    -- Taking it off has to clear the list by itself. ClearAll redrew
+    -- the doll and not the list, so "Take it all off" left every row
+    -- still lit until something else happened to redraw it.
     ns.Doll:ClearAll()
-    ns.UI:FillBrowse()
     local still
     for _, r in ipairs(ns.UI.panes.browse.rows) do
         if r:IsShown() and r.itemID == id then still = r.previewed end
     end
-    check(still == false, "and goes out when it comes off: " .. tostring(still))
+    check(still == false, "and goes out when it comes off, with no extra redraw: "
+        .. tostring(still))
+
+    -- One slot at a time, the same way.
+    ns.Doll:TryOn(id)
+    local info = ns.Score:Info(id)
+    ns.Doll:Clear(info.slot)
+    local afterOne
+    for _, r in ipairs(ns.UI.panes.browse.rows) do
+        if r:IsShown() and r.itemID == id then afterOne = r.previewed end
+    end
+    check(afterOne == false, "clearing one slot clears its row too: " .. tostring(afterOne))
 end
 
 -- Plain click: our own viewer, which sits beside the list rather than
@@ -837,8 +855,12 @@ do
     local previewed = ns.Doll.setInfo:GetText() or ""
     check(previewed:find(setName, 1, true) ~= nil,
         "the previewed pieces earn the bonus: " .. previewed:sub(1, 70))
-    check(previewed:find("would gain", 1, true) ~= nil,
-        "and it is marked as something you would gain, not something you have")
+    -- Each bonus reads as the count it needs, not as how much of the
+    -- set you have on: four bonuses of one set all printed 4/8 before.
+    check(previewed:find("/" .. tostring(prog.total), 1, true) ~= nil,
+        "the line carries a threshold over the set total: " .. previewed:sub(1, 80))
+    check(previewed:find("4FC778", 1, true) ~= nil,
+        "and a bonus the preview would earn is green, like the stat deltas")
 
     -- And SetProgress on its own counts what it is handed.
     local prev = ns.Score:SetProgress(setName, ns.Doll:Wearing())
