@@ -143,6 +143,10 @@ WHAT IS NEW SINCE THE LAST PACKAGE
 
 Fixed since the last package
 ----------------------------
+* Gear no longer suggests pieces you are already wearing. Upgrades
+  picked the best-scoring item in the data for each slot and never
+  asked whether it was on your back, so your own gear could win its own
+  slot and be recommended back to you.
 * Settings are kept by the client again, as of its 24 September patch,
   so the macro workaround is no longer doing anything. If you turned it
   on, WickCore says so once at login and /wickcore store off gives you
