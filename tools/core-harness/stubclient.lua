@@ -111,6 +111,10 @@ local function newMock(kind, name)
         -- Whether a frame takes mouse input decides whether it swallows a
         -- click meant for what is underneath it, so it is worth recording.
         elseif k == "SetAltArrowKeyMode" then return function(_, v) t.__altArrow = v and true or false end
+        elseif k == "SetFacing" then return function(_, v) t.__facing = v end
+        -- Putting a unit on a model puts it back to front-on, which is
+        -- the reason anything that redresses has to turn it back.
+        elseif k == "SetUnit" then return function() t.__facing = 0 end
         elseif k == "SetFrameStrata" then return function(_, v) t.__strata = v end
         elseif k == "GetFrameStrata" then return function() return t.__strata end
         elseif k == "EnableMouse" then return function(_, v) t.__mouseEnabled = v and true or false end

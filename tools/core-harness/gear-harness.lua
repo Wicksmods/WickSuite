@@ -482,6 +482,51 @@ do
     check(ns.Doll.setOn == nil, "and the set with them")
 end
 
+io.write("== turning the model ==\n")
+do
+    local m = ns.Doll.model
+    ns.Doll:Face(0)
+
+    -- Drag across the model. The cursor is read twice per step, so it
+    -- is moved between the calls the way a hand would move it.
+    local realCursor = GetCursorPosition
+    local at = 100
+    GetCursorPosition = function() return at, 0 end
+    m.__scripts.OnMouseDown(m, "LeftButton")
+    at = 160
+    m.__scripts.OnUpdate(m)
+    check(ns.Doll.facing > 0, "dragging right turns the character: " .. tostring(ns.Doll.facing))
+    check(m.__facing == ns.Doll.facing, "and the model is the thing told, not just our own note")
+
+    -- A drag the other way comes back, so the two are the same handle
+    -- rather than one that only winds up.
+    local wasAt = ns.Doll.facing
+    at = 40
+    m.__scripts.OnUpdate(m)
+    check(ns.Doll.facing < wasAt, "and dragging back turns it the other way")
+
+    -- Let go, and the model stops following the cursor.
+    m.__scripts.OnMouseUp(m, "LeftButton")
+    local held = ns.Doll.facing
+    at = 900
+    m.__scripts.OnUpdate(m)
+    check(ns.Doll.facing == held, "letting go stops it following the cursor")
+
+    -- The one that bites: redressing calls SetUnit, which puts the
+    -- character back to front-on, and the column redresses every time
+    -- you try a piece on.
+    ns.Doll:Face(2.5)
+    ns.Doll:TryOn(7719)
+    check(ns.Doll.facing == 2.5, "trying a piece on does not straighten it")
+    check(m.__facing == 2.5, "and the model is turned back after the redress: "
+        .. tostring(m.__facing))
+    ns.Doll:ClearAll()
+
+    m.__scripts.OnDoubleClick(m)
+    check(ns.Doll.facing == 0, "double-click puts it back to front-on")
+    GetCursorPosition = realCursor
+end
+
 
 -- On this beta the client only knows an item the character has actually
 -- met. Asking it for a tooltip on any other one gives "Retrieving item
