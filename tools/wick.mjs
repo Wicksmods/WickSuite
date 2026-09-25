@@ -935,6 +935,12 @@ async function cmdRelease(folder, newVer, ...flags) {
   if (!noX) {
     const cfUrl = `https://www.curseforge.com/wow/addons/${addon.cf_slug}`;
     const tagline = addon.short_tagline || addon.tagline || "";
+    // The tags follow the client this release is for. Every post
+    // said TBC Classic, the Forever ones included, which is the
+    // wrong audience to put it in front of.
+    const tags = (addon.client || "tbc") === "forever"
+      ? "#WoWForever #Warcraft"
+      : "#WoWClassic #TBCClassic";
     const xText = [
       `${addon.title} v${newVer} is live on CurseForge.`,
       "",
@@ -942,7 +948,7 @@ async function cmdRelease(folder, newVer, ...flags) {
       "",
       cfUrl,
       "",
-      "#WoWClassic #TBCClassic",
+      tags,
     ].join("\n");
     const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}`;
     log(`\nX (click to compose):\n  ${xUrl}`);
