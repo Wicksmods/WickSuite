@@ -522,8 +522,13 @@ do
         .. tostring(m.__facing))
     ns.Doll:ClearAll()
 
-    m.__scripts.OnDoubleClick(m)
-    check(ns.Doll.facing == 0, "double-click puts it back to front-on")
+    m.__scripts.OnMouseDown(m, "RightButton")
+    check(ns.Doll.facing == 0, "right-click puts it back to front-on")
+
+    -- A model is not a frame and will not take a click handler. Asking
+    -- for one raises in the game, which is how this was found.
+    local okDbl = pcall(m.SetScript, m, "OnDoubleClick", function() end)
+    check(not okDbl, "and a model still refuses a double-click handler")
     GetCursorPosition = realCursor
 end
 

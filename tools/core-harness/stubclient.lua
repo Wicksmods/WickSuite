@@ -73,6 +73,14 @@ local INVALID_EVENTS = MODERN
           ACTIVE_COMBAT_CONFIG_CHANGED = true, CURRENCY_DISPLAY_UPDATE = true }
 local function eventValid(e) return type(e) == "string" and e:match("^[A-Z][A-Z0-9_]+$") ~= nil and not INVALID_EVENTS[e] end
 
+-- Widgets built on Model rather than on Frame, and the scripts they
+-- will not take. Learned from the game, which raises on the assignment.
+local MODEL_KINDS = {
+    Model = true, DressUpModel = true, PlayerModel = true,
+    CinematicModel = true, ModelScene = true,
+}
+local NOT_ON_MODEL = { OnDoubleClick = true, OnClick = true }
+
 local ALL_FRAMES = {}
 S.frames = ALL_FRAMES
 S.regions = {}
@@ -89,7 +97,17 @@ local function newMock(kind, name)
             end
         elseif k == "UnregisterEvent" then return function(_, e) t.__events[e] = nil end
         elseif k == "UnregisterAllEvents" then return function() t.__events = {} end
-        elseif k == "SetScript" then return function(_, n, fn) t.__scripts[n] = fn end
+        elseif k == "SetScript" then return function(_, n, fn)
+                -- A model widget does not inherit the click handlers a
+                -- frame has, and the client raises rather than ignoring
+                -- one. Taking it quietly is how a line that cannot run
+                -- in the game stayed green here.
+                if MODEL_KINDS[t.__kind] and NOT_ON_MODEL[n] then
+                    error(t.__kind .. ":SetScript(): Cannot assign script handler for '"
+                        .. n:lower() .. "' (script type not supported by this object)", 2)
+                end
+                t.__scripts[n] = fn
+            end
         elseif k == "HookScript" then return function(_, n, fn)
                 local prev = t.__scripts[n]
                 t.__scripts[n] = function(...) if prev then prev(...) end fn(...) end
