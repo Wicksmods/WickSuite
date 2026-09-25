@@ -484,6 +484,17 @@ function GetCritChanceFromStat(index, value)
     return 0
 end
 function GetSpellCritChanceFromStat(index, value) return value / 600 end
+
+-- The totals the character sheet shows, as against the conversions
+-- above, which say what a change to a stat is worth. Attack power comes
+-- back in three parts, the way the client gives it.
+function UnitAttackPower()
+    if S.AP_SECRET then return SECRET, SECRET, SECRET end
+    return 120, 40, -10
+end
+function UnitRangedAttackPower() return 80, 0, 0 end
+function GetCritChance() return 14.2 end
+function GetSpellCritChance() return 5.3 end
 function UnitHPPerStamina() return 10 end
 STAMINA_BREAK = 20
 INTELLECT_BREAK = 20

@@ -355,11 +355,21 @@ check(d.sta == 4, "and stamina counts too, the old pair had none: " .. tostring(
 -- Derived numbers come from the client's own conversions rather than
 -- formulas of ours, so they have to move with the stats.
 ns.Doll:RefreshStats()
-local text = ns.Doll.derived:GetText() or ""
-check(text:find("Attack power") ~= nil, "attack power is derived: " .. text:gsub("\n", " | "):sub(1, 60))
-check(text:find("Health") ~= nil, "and health, from the client's stamina conversion")
-check(text:find("%+5") ~= nil or text:find("Attack power %+5") ~= nil,
-    "five agility is five attack power at this stub's rate")
+local function derived(label)
+    for _, r in ipairs(ns.Doll:DerivedRows()) do
+        if r.label == label then return r end
+    end
+end
+local ap = derived("Attack power")
+check(ap ~= nil, "attack power is derived")
+check(ap and ap.delta == "+5",
+    "five agility is five attack power at this stub's rate: " .. tostring(ap and ap.delta))
+check(derived("Health") ~= nil, "and health, from the client's stamina conversion")
+-- The total beside the change is the client's own reading. Ours would
+-- be health from stamina, which is not the same number as your health.
+check(ap and ap.value == "150",
+    "the total beside it is what the unit says, in all three parts: " .. tostring(ap and ap.value))
+check(derived("Health").value == "500", "and health reads the unit rather than our conversion")
 
 -- This client hands some unit values back as secrets: they can be shown
 -- but not added to, and the addition throws in our name. That is exactly
@@ -372,14 +382,17 @@ local secret = setmetatable({}, {
 })
 UnitStat = function() return secret, secret, 0, 0 end
 UnitArmor = function() return secret, secret, 0, 0, 0 end
+-- A stat being withheld means the total built from it is withheld too.
+S.AP_SECRET = true
 local okSecret, errSecret = pcall(ns.Doll.RefreshStats, ns.Doll)
 check(okSecret, "secret stats do not throw: " .. tostring(errSecret))
-local stext = ns.Doll.derived:GetText() or ""
-check(stext:find("Attack power") ~= nil,
-    "and the derived change still comes out, from the delta alone: "
-    .. stext:gsub("\n", " | "):sub(1, 60))
-check(stext:find("Attack power %+5") ~= nil,
-    "with the same answer the readable path gave")
+local sap = derived("Attack power")
+check(sap ~= nil, "and the derived change still comes out, from the delta alone")
+check(sap and sap.delta == "+5", "with the same answer the readable path gave: "
+    .. tostring(sap and sap.delta))
+check(sap and sap.value == "-", "while the total says so rather than guessing: "
+    .. tostring(sap and sap.value))
+S.AP_SECRET = nil
 local shown
 for i, key in ipairs(ns.Score.STAT_ORDER) do
     if key == "agi" then shown = ns.Doll.statRows[i] end
@@ -390,6 +403,85 @@ check(shown and not (shown.value:GetText() or ""):find("table"),
     "and no raw table leaks into the total: " .. tostring(shown and shown.value:GetText()))
 UnitStat, UnitArmor = realStat, realArmor
 ns.Doll:RefreshStats()
+
+io.write("== the wardrobe ==\n")
+do
+    ns.Doll:ClearAll()
+    -- On the real client GetItemInfoInstant answers for any id, cached
+    -- or not. The stub answers only for what a check has staged, so
+    -- stage a whole set: a wardrobe holding one piece is not the thing
+    -- being checked here.
+    for id, loc in pairs({ [10399] = "INVTYPE_CHEST", [10402] = "INVTYPE_FEET",
+                           [10401] = "INVTYPE_HAND",  [10400] = "INVTYPE_LEGS",
+                           [10403] = "INVTYPE_WAIST" }) do
+        S.ITEMS[id] = { equipLoc = loc, classID = 4, subClassID = 2 }
+    end
+    ns.Score:ForgetSetCache()
+    local sets = ns.Score:WearableSets()
+    local all = ns.Score:SetGroups()
+    check(#sets > 0, "there are sets to page through, got " .. #sets)
+    -- A rogue is not paging past plate. The list of sets the class can
+    -- wear is shorter than the list of sets.
+    check(#sets < #all, "and it is only the ones a rogue can wear: "
+        .. #sets .. " of " .. #all)
+
+    -- One redraw for the set, not one per piece: TryOn is called with
+    -- the quiet flag and Changed comes after the loop.
+    local redraws = 0
+    local realRefresh = ns.UI.Refresh
+    ns.UI.Refresh = function(self) redraws = redraws + 1 return realRefresh(self) end
+    local worn = ns.Doll:WearSet(sets[1])
+    ns.UI.Refresh = realRefresh
+    check(worn > 1, "wearing a set puts several pieces on, got " .. worn)
+    check(redraws == 1, "and redraws the window once, not once per piece: " .. redraws)
+
+    local slots, pieces = {}, 0
+    for slotId, t in pairs(ns.Doll.trying) do
+        if not t.empty then
+            pieces = pieces + 1
+            check(slots[slotId] == nil, "one piece per slot")
+            slots[slotId] = true
+            local info = ns.Score:Info(t.id)
+            check(info and ns.Score:Usable(info),
+                "and nothing the class cannot wear: " .. tostring(t.id))
+        end
+    end
+    check(pieces == worn, "every piece it counted is on the doll: "
+        .. pieces .. " against " .. worn)
+
+    check(ns.Doll.setOn == sets[1], "the column knows which set that was")
+    local label = ns.Doll.setLabel:GetText() or ""
+    check(label:find(sets[1], 1, true) ~= nil, "and says so over the model: " .. label)
+    check(label:find("1 of " .. #sets, 1, true) ~= nil,
+        "with where it sits in the list: " .. label)
+
+    -- Stepping back from the first wraps to the last rather than
+    -- stopping, so the arrows never do nothing.
+    ns.Doll:StepSet(-1)
+    check(ns.Doll.setOn == sets[#sets], "stepping back from the first wraps to the last: "
+        .. tostring(ns.Doll.setOn))
+    ns.Doll:StepSet(1)
+    check(ns.Doll.setOn == sets[1], "and forward comes back round")
+
+    -- The readings under the model are about the whole set now.
+    local d = ns.Doll:Deltas()
+    local moved = 0
+    for _ in pairs(d) do moved = moved + 1 end
+    check(moved > 0, "the readings move for a set, not just a piece: " .. moved .. " stats")
+
+    -- Picking something by hand is no longer that set, and the label
+    -- has to stop claiming it is.
+    ns.Doll:TryOn(7719)
+    check(ns.Doll.setOn == nil, "trying a piece on by hand drops the set name")
+    ns.Doll:RefreshStats()
+    check((ns.Doll.setLabel:GetText() or ""):find("Pick a set") ~= nil,
+        "and the label says so: " .. tostring(ns.Doll.setLabel:GetText()))
+
+    ns.Doll:ClearAll()
+    check(next(ns.Doll.trying) == nil, "taking it all off clears the pieces")
+    check(ns.Doll.setOn == nil, "and the set with them")
+end
+
 
 -- On this beta the client only knows an item the character has actually
 -- met. Asking it for a tooltip on any other one gives "Retrieving item
@@ -750,17 +842,21 @@ do
 
     -- And the bottom. The column's own height comes from anchors, which
     -- the stub does not resolve, so it is worked out from the window
-    -- and the header the way the real frame will be.
+    -- and the header the way the real frame will be. Everything above
+    -- the set bonuses sits at a fixed offset; the bonuses take what is
+    -- left and scroll inside it, so what has to hold is that there is
+    -- something left worth having.
     local y = 0
-    for _, pt in ipairs(D.derived.__points or {}) do
+    for _, pt in ipairs(D.summary.__points or {}) do
         if type(pt[5]) == "number" then y = pt[5] end
     end
     local panelH = tonumber(ns.UI.panel:GetHeight()) or 0
     local tabH = tonumber(ns.UI.tabs.browse:GetHeight()) or 0
     local avail = panelH - WickCore.Chrome.HEADER_H - tabH - 4 - 10
-    -- derived is 26 tall and the button owns the bottom 24.
-    check(avail > 0 and (-y + 26 + 24) <= avail,
-        "the doll clears the button at the bottom: needs " .. tostring(-y + 50)
+    -- The summary owns the 30 above the bonus scroll, and four lines of
+    -- bonuses is the least worth drawing before it has to scroll.
+    check(avail > 0 and (-y + 30 + 60) <= avail,
+        "the bonuses have room under the readings: needs " .. tostring(-y + 90)
         .. " of " .. tostring(avail))
 end
 check(S.DRESSED == nil, "and does not open the dressing room")
