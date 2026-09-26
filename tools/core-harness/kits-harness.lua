@@ -731,6 +731,18 @@ do
     COMBAT = true
     local okTick = pcall(function() ns.UI:RefreshSwap() end)
     check(okTick, "the strip can redraw the swap block in combat")
+
+    -- And does it on its own. The swap keys work mid-fight, so the mark
+    -- has to follow them mid-fight; it used to sit behind the same
+    -- guard that stops the macro being rewritten.
+    check(sk.live:IsShown(), "the slow weapon is marked before the swap")
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = DAGGER, SWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(st.live:IsShown() and not sk.live:IsShown(),
+        "a swap made in combat moves the mark without waiting for the fight to end")
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(sk.live:IsShown(), "and back again")
     COMBAT = false
 end
 
