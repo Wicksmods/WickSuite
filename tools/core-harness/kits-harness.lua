@@ -520,14 +520,40 @@ do
 
     local stealth = ns.swap.macro.stealth
     local strike = ns.swap.macro.strike
-    check(stealth:find("/equipslot 16 item:" .. DAGGER, 1, true) ~= nil,
-        "stealth puts the dagger in the main hand: " .. stealth:gsub("\n", " | "))
-    check(stealth:find("/equipslot 17 item:" .. SWORD, 1, true) ~= nil,
+    check(stealth:find("[nostealth,nocombat] 16 item:" .. DAGGER, 1, true) ~= nil,
+        "stealth puts the dagger in the main hand on the way in: "
+        .. stealth:gsub(string.char(10), " | "))
+    check(stealth:find("[nostealth,nocombat] 17 item:" .. SWORD, 1, true) ~= nil,
         "and the slow one in the off hand")
-    check(strike:find("/equipslot 16 item:" .. SWORD, 1, true) ~= nil,
-        "the strike key puts the slow one back: " .. strike:gsub("\n", " | "))
-    check(strike:find("/equipslot 17 item:" .. DAGGER, 1, true) ~= nil,
+    -- The reported bug: dropping stealth put the dagger back, because
+    -- the key did not know you were on the way out.
+    check(stealth:find("[stealth] 16 item:" .. SWORD, 1, true) ~= nil,
+        "and pressed while stealthed it gives the slow weapon back instead")
+    check(stealth:find("[stealth] 17 item:" .. DAGGER, 1, true) ~= nil,
+        "putting the dagger in the off hand on the way out")
+    check(strike:find("[nostealth] 16 item:" .. SWORD, 1, true) ~= nil,
+        "the strike key puts the slow one back: " .. strike:gsub(string.char(10), " | "))
+    check(strike:find("[nostealth] 17 item:" .. DAGGER, 1, true) ~= nil,
         "and the dagger back to the off hand")
+
+    -- Nothing may move a weapon without asking where you are standing
+    -- first. This is the check the bug would have failed.
+    for _, m in ipairs({ stealth, strike }) do
+        for line in m:gmatch("[^" .. string.char(10) .. "]+") do
+            if line:find("/equipslot", 1, true) then
+                check(line:find("%[") ~= nil,
+                    "every equip asks about your stance first: " .. line)
+            end
+        end
+    end
+    -- The strike key must not touch your hands from stealth, or it
+    -- strips the dagger you are opening with.
+    check(strike:find("[stealth]", 1, true) == nil,
+        "the strike key leaves your hands alone while stealthed")
+    -- And the stealth key must not move anything in a fight, where
+    -- Stealth will not cast anyway.
+    check(select(2, stealth:gsub("nocombat", "")) == 2,
+        "the stealth key holds off in combat, on both hands")
     check(stealth:find("/cast Stealth", 1, true) ~= nil,
         "the stealth key stealths, so it is one key rather than two")
     check(strike:find("/cast Sinister Strike", 1, true) ~= nil,
@@ -571,7 +597,7 @@ do
     S.EQUIPPED_IDS[17] = NEWDAGGER
     S.fire("PLAYER_EQUIPMENT_CHANGED")
     check(ns.swap.pair.dagger == NEWDAGGER, "a new dagger is picked up the same way")
-    check(ns.swap.macro.stealth:find("/equipslot 16 item:" .. NEWDAGGER, 1, true) ~= nil,
+    check(ns.swap.macro.stealth:find("16 item:" .. NEWDAGGER, 1, true) ~= nil,
         "and it is the one the stealth key reaches for")
     check(ns.swap.macro.stealth:find("item:" .. DAGGER, 1, true) == nil,
         "with the old one gone from the macro entirely")
