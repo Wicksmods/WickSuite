@@ -554,6 +554,31 @@ do
     -- Stealth will not cast anyway.
     check(select(2, stealth:gsub("nocombat", "")) == 2,
         "the stealth key holds off in combat, on both hands")
+
+    -- Stealth has a cooldown and a macro cannot ask about one, so the
+    -- lines that would put the dagger up have to be left out while it
+    -- is down. Otherwise the weapons swap and the cast goes nowhere.
+    S.ON_COOLDOWN = S.ON_COOLDOWN or {}
+    S.ON_COOLDOWN[1784] = true
+    S.fire("SPELL_UPDATE_COOLDOWN")
+    local down = ns.swap.macro.stealth
+    check(ns.swap.stealthReady == false, "it notices Stealth is on cooldown")
+    check(down:find("nostealth", 1, true) == nil,
+        "and stops putting the dagger up while it is: " .. down:gsub(string.char(10), " | "))
+    check(down:find("[stealth] 16 item:" .. SWORD, 1, true) ~= nil,
+        "while getting back out of stealth still works, which a cooldown should not block")
+    check(down:find("/cast Stealth", 1, true) ~= nil,
+        "and the cast is still attempted, so the key is not silently dead")
+    -- The strike key has nothing to do with Stealth's cooldown.
+    check(ns.swap.macro.strike:find("[nostealth] 16 item:" .. SWORD, 1, true) ~= nil,
+        "the strike key is untouched by it")
+
+    S.ON_COOLDOWN[1784] = false
+    S.fire("SPELL_UPDATE_COOLDOWN")
+    check(ns.swap.stealthReady == true, "and it comes back when the cooldown does")
+    check(ns.swap.macro.stealth:find("[nostealth,nocombat] 16 item:" .. DAGGER, 1, true) ~= nil,
+        "with the dagger lines back in: " .. ns.swap.macro.stealth:gsub(string.char(10), " | "))
+    local stealth = ns.swap.macro.stealth
     check(stealth:find("/cast Stealth", 1, true) ~= nil,
         "the stealth key stealths, so it is one key rather than two")
     check(strike:find("/cast Sinister Strike", 1, true) ~= nil,
