@@ -81,6 +81,8 @@ local MODEL_KINDS = {
 }
 local NOT_ON_MODEL = { OnDoubleClick = true, OnClick = true }
 
+S.SPELL_NAMES = { [1784] = "Stealth", [1752] = "Sinister Strike" }
+
 local ALL_FRAMES = {}
 S.frames = ALL_FRAMES
 S.regions = {}
@@ -995,7 +997,9 @@ if MODERN then
     }
     C_Spell = {
         GetSpellInfo = function(id) return { name = "Fireball", iconID = 135812, originalIconID = 135812, castTime = 3500, minRange = 0, maxRange = 35, spellID = 133 } end,
-        GetSpellName = function() return "Fireball" end,
+        -- A name per id where a check needs to tell two apart, and
+        -- the old single answer for everything else.
+        GetSpellName = function(id) return (S.SPELL_NAMES or {})[id] or "Fireball" end,
         GetSpellTexture = function() return 135812 end,
         -- The live client keeps isActive and isEnabled as plain
         -- booleans under combat restrictions while the times go
@@ -1197,7 +1201,10 @@ else
     function GetPetFoodTypes() return unpack(PET.diet) end
     function GetSpellInfo(id)
         if S.UNKNOWN_SPELLS and S.UNKNOWN_SPELLS[id] then return nil end
-        return "Fireball", "Rank 1", "Interface\\Icons\\Spell_Fire_FlameBolt", 3500, 0, 35, 133
+        -- The same names the modern path gives, so a check about which
+        -- spell a macro casts means the same thing on both clients.
+        return (S.SPELL_NAMES or {})[id] or "Fireball",
+               "Rank 1", "Interface\\Icons\\Spell_Fire_FlameBolt", 3500, 0, 35, 133
     end
     function GetSpellTexture() return "Interface\\Icons\\Spell_Fire_FlameBolt" end
     function GetSpellCooldown(id)

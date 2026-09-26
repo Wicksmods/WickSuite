@@ -382,7 +382,7 @@ end
 
 io.write("== Poisons and Things ==\n")
 CLASS = "ROGUE"
-S.loadAddon(ADDONS_DIR .. "/WicksPoisonsAndThings", "WicksPoisonsAndThings", { "Core.lua", "Poisons.lua", "Combo.lua", "UI.lua" })
+local PNS = S.loadAddon(ADDONS_DIR .. "/WicksPoisonsAndThings", "WicksPoisonsAndThings", { "Core.lua", "Poisons.lua", "Combo.lua", "Swap.lua", "UI.lua" })
 S.fire("ADDON_LOADED", "WicksPoisonsAndThings")
 S.fire("PLAYER_LOGIN")
 dumpErrors()
@@ -498,6 +498,127 @@ S.fire("PLAYER_TARGET_CHANGED")
 S.HAS_TARGET = false
 S.fire("PLAYER_TARGET_CHANGED")
 check(not combo:IsShown(), "losing the target hides it again")
+local ns = PNS
+io.write("== the weapon swap keys ==\n")
+do
+    -- A slow main hand and a dagger off hand, which is the setup the
+    -- keys exist for.
+    local SWORD, DAGGER = 871, 13505
+    S.ITEMS[SWORD]  = { equipLoc = "INVTYPE_WEAPONMAINHAND", classID = 2, subClassID = 7,
+                        name = "Felstriker" }
+    S.ITEMS[DAGGER] = { equipLoc = "INVTYPE_WEAPONOFFHAND",  classID = 2, subClassID = 15,
+                        name = "Core Hound Tooth" }
+    S.EQUIPPED_IDS = S.EQUIPPED_IDS or {}
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, DAGGER
+    ns.swap:Update()
+
+    local pair = ns.swap.pair
+    check(pair ~= nil, "a pair is read off your hands" .. (pair and "" or ": " .. tostring(ns.swap.why)))
+    check(pair and pair.dagger == DAGGER, "the dagger is picked by subclass, not by slot")
+    check(pair and pair.other == SWORD, "and the other hand is the one that comes back")
+    check(pair and pair.daggerInMain == false, "it knows the dagger is in the off hand now")
+
+    local stealth = ns.swap.macro.stealth
+    local strike = ns.swap.macro.strike
+    check(stealth:find("/equipslot 16 item:" .. DAGGER, 1, true) ~= nil,
+        "stealth puts the dagger in the main hand: " .. stealth:gsub("\n", " | "))
+    check(stealth:find("/equipslot 17 item:" .. SWORD, 1, true) ~= nil,
+        "and the slow one in the off hand")
+    check(strike:find("/equipslot 16 item:" .. SWORD, 1, true) ~= nil,
+        "the strike key puts the slow one back: " .. strike:gsub("\n", " | "))
+    check(strike:find("/equipslot 17 item:" .. DAGGER, 1, true) ~= nil,
+        "and the dagger back to the off hand")
+    check(stealth:find("/cast Stealth", 1, true) ~= nil,
+        "the stealth key stealths, so it is one key rather than two")
+    check(strike:find("/cast Sinister Strike", 1, true) ~= nil,
+        "and the other strikes: " .. strike:gsub(string.char(10), " | "))
+
+    -- Addressed by id, not name: two blades called the same thing are
+    -- the reason.
+    check(stealth:find("Core Hound Tooth", 1, true) == nil,
+        "weapons are named by id rather than by name")
+
+    -- The macro is on the button, not just in our own table.
+    local sb = _G.WicksPoisonsStealthButton
+    check(sb ~= nil, "the stealth key has a secure button")
+    check(sb.__attr and sb.__attr.macrotext == stealth,
+        "carrying the macro text")
+    check(sb.__attr.type == "macro", "as a macro, which is what a secure button will run")
+
+    -- Wearing it the other way round has to give the mirror image, or
+    -- pressing stealth while already stealth-handed would undo itself.
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = DAGGER, SWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.pair.daggerInMain == true, "swapping the hands over is noticed")
+    check(ns.swap.macro.stealth == stealth,
+        "and the stealth macro is the same text, because it names where things go")
+    check(ns.swap.macro.strike == strike, "as is the strike one")
+
+    -- A new weapon needs nothing done to it.
+    local NEWSWORD = 12784
+    S.ITEMS[NEWSWORD] = { equipLoc = "INVTYPE_WEAPONMAINHAND", classID = 2, subClassID = 7,
+                          name = "Arcanite Reaper" }
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = NEWSWORD, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.macro.strike:find("item:" .. NEWSWORD, 1, true) ~= nil,
+        "a new weapon rewrites the keys on its own: " .. ns.swap.macro.strike:gsub("\n", " | "))
+
+    -- Two daggers is already the stealth setup, and no dagger has
+    -- nothing to open with. Neither should leave a macro that moves
+    -- weapons around for no reason.
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = DAGGER, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.pair == nil and ns.swap.macro.stealth == "",
+        "two daggers leaves the keys empty: " .. tostring(ns.swap.why))
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, NEWSWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.pair == nil and ns.swap.macro.strike == "",
+        "and so does carrying no dagger at all: " .. tostring(ns.swap.why))
+
+    -- Back to the real setup for the rest.
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+
+    -- A secure attribute cannot be written in combat. The change has to
+    -- wait rather than be dropped.
+    COMBAT = true
+    S.EQUIPPED_IDS[16] = NEWSWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.macro.strike:find("item:" .. SWORD, 1, true) ~= nil,
+        "a weapon change in combat does not rewrite the key")
+    COMBAT = false
+    S.fire("PLAYER_REGEN_ENABLED")
+    check(ns.swap.macro.strike:find("item:" .. NEWSWORD, 1, true) ~= nil,
+        "and it catches up once combat drops: " .. ns.swap.macro.strike:gsub("\n", " | "))
+    S.EQUIPPED_IDS[16] = SWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+
+    -- Riding a different ability, for a rogue who opens the second
+    -- round with something else.
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSPOISONSANDTHINGS("swap strike Ghostly Strike")
+    check(ns.swap.macro.strike:find("/cast Ghostly Strike", 1, true) ~= nil,
+        "the ability the swap back rides on can be changed")
+    SlashCmdList.WICK_WICKSPOISONSANDTHINGS("swap strike")
+    check(ns.swap.macro.strike:find("Ghostly Strike", 1, true) == nil,
+        "and put back to the default")
+
+    -- Off means off: an empty macro rather than a key that still moves
+    -- your weapons.
+    SlashCmdList.WICK_WICKSPOISONSANDTHINGS("swap off")
+    check(ns.swap.macro.stealth == "" and ns.swap.macro.strike == "",
+        "switching them off empties both keys")
+    check(sb.__attr.macrotext == "", "including the one on the button")
+    SlashCmdList.WICK_WICKSPOISONSANDTHINGS("swap on")
+    check(ns.swap.macro.stealth ~= "", "and on puts them back")
+
+    S.CHAT = {}
+    SlashCmdList.WICK_WICKSPOISONSANDTHINGS("swap")
+    local rep = table.concat(S.CHAT, " | ")
+    check(rep:find("Felstriker", 1, true) ~= nil and rep:find("equipslot", 1, true) ~= nil,
+        "/wpt swap says what it worked out and what it wrote: " .. rep:sub(1, 80))
+end
+
 S.CHAT = {}
 SlashCmdList.WICK_WICKSPOISONSANDTHINGS("combo")
 local creport = table.concat(S.CHAT, " | ")
