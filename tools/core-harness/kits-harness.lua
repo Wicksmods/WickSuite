@@ -563,6 +563,21 @@ do
     check(ns.swap.macro.strike:find("item:" .. NEWSWORD, 1, true) ~= nil,
         "a new weapon rewrites the keys on its own: " .. ns.swap.macro.strike:gsub("\n", " | "))
 
+    -- And the same for a new dagger, which is the half this had only
+    -- covered from the other side.
+    local NEWDAGGER = 19874
+    S.ITEMS[NEWDAGGER] = { equipLoc = "INVTYPE_WEAPONOFFHAND", classID = 2, subClassID = 15,
+                           name = "Perdition's Blade" }
+    S.EQUIPPED_IDS[17] = NEWDAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    check(ns.swap.pair.dagger == NEWDAGGER, "a new dagger is picked up the same way")
+    check(ns.swap.macro.stealth:find("/equipslot 16 item:" .. NEWDAGGER, 1, true) ~= nil,
+        "and it is the one the stealth key reaches for")
+    check(ns.swap.macro.stealth:find("item:" .. DAGGER, 1, true) == nil,
+        "with the old one gone from the macro entirely")
+    S.EQUIPPED_IDS[17] = DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+
     -- Two daggers is already the stealth setup, and no dagger has
     -- nothing to open with. Neither should leave a macro that moves
     -- weapons around for no reason.
