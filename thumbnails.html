@@ -1127,6 +1127,57 @@ function FbCover() {
 // 1200×630 social cover — boost-friendly 1.91:1 ratio for FB/X/LinkedIn link cards.
 // Dedicated layout (not a SuiteBanner stretch) — uses the extra vertical space for
 // a full 7-addon roster with breathing room.
+/* Milestone card. The figure is the one on wicksmods.com, which reads
+   it from data/downloads.json, so the post and the site agree. Edit
+   MILESTONE and render when the next one goes by. */
+const MILESTONE = {
+  n: 5011,
+  eyebrow: 'DOWNLOADED AND IN USE',
+  label: 'DOWNLOADS \u00b7 CURSEFORGE',
+};
+
+function Milestone({ n = MILESTONE.n, eyebrow = MILESTONE.eyebrow,
+                     label = MILESTONE.label } = {}) {
+  // The counter purple from the site: the locked muted purple lifted to
+  // about half lightness, so it sits behind the cream wordmark rather
+  // than competing with it.
+  const PUR = '#7568a3';
+  const rule = (
+    <span style={{width:26,height:1,background:G,opacity:0.7,display:'inline-block'}}/>
+  );
+  return (
+    <div style={{width:1200,height:630,position:'relative',overflow:'hidden',fontFamily:FU,background:BG}}>
+      <DungeonBg width={1200} height={630} glowX="50%" glowY="42%" glowColor={G} accent="#6B21A8" opacity={0.18}/>
+      <Brackets size={20} thick={3}/>
+      <div style={{position:'absolute',left:0,right:0,top:0,bottom:0,display:'flex',
+        flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+        <div style={{fontFamily:FM,fontSize:13,letterSpacing:'0.34em',color:G,
+          display:'flex',alignItems:'center',gap:14}}>
+          {rule}{eyebrow}{rule}
+        </div>
+        <div style={{fontFamily:FD,fontWeight:900,fontSize:212,lineHeight:0.95,
+          letterSpacing:'-0.03em',color:PUR,margin:'20px 0 12px',
+          textShadow:`0 0 40px ${PUR}3d, 0 0 96px ${BR}30`}}>
+          {n.toLocaleString('en-US')}
+        </div>
+        <div style={{fontFamily:FM,fontSize:13,letterSpacing:'0.3em',color:MDIM}}>
+          {label}
+        </div>
+        <div style={{height:1,background:BR,width:320,position:'relative',margin:'34px 0 24px'}}>
+          <div style={{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',
+            width:6,height:6,background:G,borderRadius:'50%'}}/>
+        </div>
+        <div style={{display:'inline-flex',flexDirection:'column',alignItems:'stretch'}}>
+          <WickWordmark size={54}/>
+          <div style={{fontFamily:FM,fontSize:11,letterSpacing:'0.5em',color:G,marginTop:4,textAlign:'right'}}>
+            SUITE
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SocialCover({ flavour = 'forever' } = {}) {
   const F = FLAVOURS[flavour] || FLAVOURS.forever;
   return (
@@ -1221,6 +1272,7 @@ const ONLY_COMPONENTS = {
   social_bags: { Comp: () => <AddonSocial which="bags"/>, w: 1200, h: 630 },
   social_trade: { Comp: () => <AddonSocial which="trade"/>, w: 1200, h: 630 },
   social_gear: { Comp: () => <AddonSocial which="gear"/>, w: 1200, h: 630 },
+  milestone:   { Comp: Milestone,                                          w: 1200, h: 630 },
   cd:       { Comp: CDThumb,            w: 460, h: 260 },
   bis:      { Comp: BISThumb,           w: 460, h: 260 },
   trade:    { Comp: TradeThumb,         w: 460, h: 260 },

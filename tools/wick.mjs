@@ -24,6 +24,7 @@
 import { execSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 
 // ── paths ─────────────────────────────────────────────────────────────────
@@ -1172,6 +1173,181 @@ function cmdAuditSecrets() {
   process.exitCode = 1;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// milestone — post the download counter crossing a round number
+// ════════════════════════════════════════════════════════════════════════════
+
+// The card says the true count, the words say the round number. That is
+// how a milestone is told: you cross five thousand, not five thousand
+// and eleven.
+function milestoneCopy(exact) {
+  const round = Math.floor(exact / 1000) * 1000;
+  const r = round.toLocaleString("en-US");
+  const fb = [
+    `${r} downloads.`,
+    ``,
+    `The counter went past it this week, so here is the ceremony.`,
+    ``,
+    `Every one of these addons started as something missing from my own UI. That other people ended up running them is still the strange and good part. Thank you for installing them, for the bug reports, and for telling me when something looked wrong.`,
+    ``,
+    `Precision addons for TBC Classic, and a growing set being built for the Forever beta ahead of launch.`,
+    ``,
+    `https://wicksmods.com`,
+  ].join("\n");
+  const x = [
+    `${r} downloads across the suite.`,
+    ``,
+    `Every one of these started as something missing from my own UI. Thank you for installing them, and for telling me when something looked wrong.`,
+    ``,
+    `https://wicksmods.com`,
+    ``,
+    `#WoWClassic #WoWForever`,
+  ].join("\n");
+  const discord = [
+    `The counter went past ${r} this week.`,
+    ``,
+    `Every one of these addons started as something missing from my own UI. Thank you for installing them, for the bug reports, and for telling me when something looked wrong.`,
+    ``,
+    `Exact count at the time of posting: ${exact.toLocaleString("en-US")}.`,
+  ].join("\n");
+  return { round, r, fb, x, discord };
+}
+
+function milestonesFile(config) {
+  return path.join(config.project_home, "Wicksmods.github.io", "data", "milestones-hit.json");
+}
+
+function readMilestones(config) {
+  const f = milestonesFile(config);
+  if (!fs.existsSync(f)) return [];
+  try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch (_) { return []; }
+}
+
+async function cmdMilestone(nArg, ...flags) {
+  const exact = parseInt(String(nArg || "").replace(/[^0-9]/g, ""), 10);
+  if (!exact) die("usage: wick milestone <count> [--no-fb] [--no-discord] [--force]");
+  const config = readConfig();
+  const { round, r, fb, x, discord } = milestoneCopy(exact);
+  if (!round) die(`${exact} has not crossed a thousand yet`);
+
+  const dry = flags.includes("--dry-run");
+  const hit = readMilestones(config);
+  const highest = hit.length ? Math.max(...hit) : 0;
+  if (!flags.includes("--force")) {
+    // At or below one already announced. The exact-match check alone
+    // let `milestone 2500` through, because it floors to 2000 and only
+    // 2500 was in the list, and a two thousand post went out after a
+    // two and a half thousand one.
+    if (round <= highest) {
+      die(`${r} is not past ${highest.toLocaleString("en-US")}, which has already been announced`
+        + ` (pass --force if you really mean to post it again)`);
+    }
+  }
+
+  // Rendered by `wick render`, from the Milestone artboard in
+  // thumbnails.html. Rendering it here would mean a browser launch for
+  // a card that is usually already correct.
+  const card = path.join(SUITE_DIR, "images", "suite", "milestone.png");
+  if (!fs.existsSync(card)) {
+    die(`no milestone card at ${card} — set MILESTONE in thumbnails.html and run: wick render`);
+  }
+
+  const tmp = os.tmpdir();
+  const captionPath = path.join(tmp, "wick-milestone-caption.txt");
+
+  // ── Facebook ──
+  if (dry) {
+    log(`\n── Facebook ──\n${fb}`);
+    log(`\n── Discord ──\n${discord}`);
+    log(`\n── X ──\n${x}`);
+    log(`\ncard: ${card}`);
+    log(`\n(dry run: nothing posted, nothing recorded)`);
+    return;
+  }
+
+  if (!flags.includes("--no-fb")) {
+    const token = resolveFBPageToken(config);
+    const pageId = config.social?.fb_page_id;
+    const v = config.social?.fb_graph_version || "v21.0";
+    if (!token || !pageId) {
+      log(`  (FB: no page token or page id; skipping)`);
+    } else {
+      fs.writeFileSync(captionPath, fb);
+      log(`\nPosting to Facebook (${config.social.fb_page_name}) with the milestone card ...`);
+      let resp = "";
+      try {
+        resp = runCapture([
+          `curl -s -X POST`,
+          `-F "source=@${card}"`,
+          `-F "caption=<${captionPath}"`,
+          `-F "access_token=${token}"`,
+          `"https://graph.facebook.com/${v}/${pageId}/photos"`,
+        ].join(" "));
+      } catch (e) { log(`  (FB: curl failed: ${e.message})`); }
+      try { fs.rmSync(captionPath); } catch (_) {}
+      let parsed = null;
+      try { parsed = JSON.parse(resp); } catch (_) {}
+      if (parsed && parsed.post_id) ok(`FB: posted (post id ${parsed.post_id})`);
+      else if (parsed && parsed.id) ok(`FB: posted (id ${parsed.id})`);
+      else log(`  (FB: unexpected response: ${String(resp).slice(0, 200)})`);
+    }
+  }
+
+  // ── Discord ──
+  if (!flags.includes("--no-discord")) {
+    const token = resolveDiscordBotToken();
+    const channelId = token && resolveDiscordAnnouncementsChannel(config, token);
+    if (!channelId) {
+      log(`  (Discord: no bot token or channel; skipping)`);
+    } else {
+      // The card rides along as an attachment and the embed points at
+      // it, so the post carries the picture rather than a bare link.
+      const payload = JSON.stringify({
+        embeds: [{
+          title: `${r} downloads`,
+          description: discord,
+          color: 0x4FC778,
+          url: "https://wicksmods.com",
+          image: { url: "attachment://milestone.png" },
+        }],
+      });
+      const payloadPath = path.join(tmp, "wick-milestone-discord.json");
+      fs.writeFileSync(payloadPath, payload);
+      log(`\nPosting to Discord #announcements ...`);
+      let resp = "";
+      try {
+        resp = runCapture([
+          `curl -s -X POST`,
+          `-H "Authorization: Bot ${token}"`,
+          `-F "payload_json=<${payloadPath}"`,
+          `-F "files[0]=@${card};type=image/png"`,
+          `"https://discord.com/api/v10/channels/${channelId}/messages"`,
+        ].join(" "));
+      } catch (e) { log(`  (Discord: curl failed: ${e.message})`); }
+      try { fs.rmSync(payloadPath); } catch (_) {}
+      let parsed = null;
+      try { parsed = JSON.parse(resp); } catch (_) {}
+      if (parsed && parsed.id) ok(`Discord: posted (message id ${parsed.id})`);
+      else log(`  (Discord: unexpected response: ${String(resp).slice(0, 200)})`);
+    }
+  }
+
+  // ── record it, so a second run says so rather than posting twice ──
+  const f = milestonesFile(config);
+  if (fs.existsSync(path.dirname(f))) {
+    const list = readMilestones(config);
+    if (!list.includes(round)) {
+      list.push(round);
+      list.sort((a, b) => a - b);
+      fs.writeFileSync(f, JSON.stringify(list, null, 2) + "\n");
+      ok(`recorded ${r} in milestones-hit.json`);
+    }
+  }
+
+  log(`\nX (click to compose):\n  https://twitter.com/intent/tweet?text=${encodeURIComponent(x)}`);
+  log(`\n✓ Milestone posted.`);
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Dispatch
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1183,6 +1359,7 @@ switch (sub) {
   case "render":   cmdRender(); break;
   case "release":       await cmdRelease(rest[0], rest[1], ...rest.slice(2)); break;
   case "audit-secrets": cmdAuditSecrets(); break;
+  case "milestone":     await cmdMilestone(rest[0], ...rest.slice(1)); break;
   case "announce": {
     // Manually re-post a release announcement (e.g., if --no-announce was used,
     // or a token wasn't set at release time, or you want to re-post).
@@ -1215,6 +1392,11 @@ usage:
                                            and post a release announcement to FB + Discord
   wick announce <folder> <ver>             re-post a release announcement to FB + Discord
                                            (idempotent; writes marker files to dedupe)
+  wick milestone <count> [--dry-run] [--no-fb] [--no-discord] [--force]
+                                           post the download counter crossing a round
+                                           number, with the milestone card; records it
+                                           in the landing site's milestones-hit.json.
+                                           --dry-run prints the copy and posts nothing
   wick audit-secrets                       scan all suite repos (working tree + full history)
                                            for accidentally committed secrets; exits 1 if found
 
