@@ -619,6 +619,56 @@ do
         "/wpt swap says what it worked out and what it wrote: " .. rep:sub(1, 80))
 end
 
+io.write("== the swap block on the strip ==" .. string.char(10))
+do
+    local SWORD, DAGGER = 871, 13505
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    ns.UI:RefreshStrip()
+
+    local st, sk = pstrip.swapStealth, pstrip.swapStrike
+    check(st ~= nil and sk ~= nil, "a button per key on the end of the strip")
+    check(pstrip:GetWidth() > 199, "the strip is wider for them: " .. tostring(pstrip:GetWidth()))
+
+    -- Clicking one has to do what the key does, which means the same
+    -- macro rather than a second copy of the logic.
+    check(st:GetAttribute("macrotext") == ns.swap.macro.stealth,
+        "the stealth button carries the stealth key's own macro")
+    check(sk:GetAttribute("macrotext") == ns.swap.macro.strike,
+        "and the strike button the strike key's")
+
+    -- The edge marks the weapon already in your main hand, which is the
+    -- one not worth pressing.
+    check(sk.live:IsShown(), "the slow weapon is marked as the one you are holding")
+    check(not st.live:IsShown(), "and the dagger is not")
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = DAGGER, SWORD
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    ns.UI:RefreshStrip()
+    check(st.live:IsShown() and not sk.live:IsShown(),
+        "swapping your hands over moves the mark")
+
+    -- A pair it cannot read greys out. Hiding a protected frame in a
+    -- fight is refused, and a strip that changes shape mid-pull is its
+    -- own problem.
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = DAGGER, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    ns.UI:RefreshStrip()
+    check(ns.swap.pair == nil, "two daggers is a pair it cannot use")
+    check(st:IsShown() and sk:IsShown(), "the buttons stay up rather than vanishing")
+    check(st.icon.__desaturated == true, "greyed instead: " .. tostring(st.icon.__desaturated))
+    check(not st.live:IsShown() and not sk.live:IsShown(), "and neither is marked live")
+
+    -- Refreshing mid-fight touches nothing protected, which is what the
+    -- twenty second ticker does.
+    S.EQUIPPED_IDS[16], S.EQUIPPED_IDS[17] = SWORD, DAGGER
+    S.fire("PLAYER_EQUIPMENT_CHANGED")
+    COMBAT = true
+    local okTick = pcall(function() ns.UI:RefreshSwap() end)
+    check(okTick, "the strip can redraw the swap block in combat")
+    COMBAT = false
+end
+
+
 S.CHAT = {}
 SlashCmdList.WICK_WICKSPOISONSANDTHINGS("combo")
 local creport = table.concat(S.CHAT, " | ")
