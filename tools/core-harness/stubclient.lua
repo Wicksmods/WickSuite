@@ -574,6 +574,7 @@ C_NamePlate = {
 
 function UnitPowerMax(_, powerType)
     if powerType == 4 then return S.POWER_SECRET and SECRET or 5 end
+    if powerType == 3 then return S.POWER_SECRET and SECRET or (S.ENERGY_MAX or 100) end
     return 1000
 end
 function GetComboPoints() return S.POWER_SECRET and SECRET or (S.COMBO or 0) end
@@ -700,6 +701,10 @@ function GetTotemInfo(slot)
 end
 function UnitPower(unit, ptype)
     if ptype == 7 then return 0 end
+    -- Energy follows the same switch the combo count does, so a check
+    -- can see both a readable pool and a withheld one. Everything else
+    -- on this client is secret and stays that way.
+    if ptype == 3 then return S.POWER_SECRET and SECRET or (S.ENERGY or 100) end
     if MODERN then return SECRET end
     return 650
 end

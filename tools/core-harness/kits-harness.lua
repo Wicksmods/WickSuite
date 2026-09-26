@@ -433,15 +433,61 @@ check(combo.pips[4].__min == 3 and combo.pips[4].__max == 4, "the fourth pip cov
 S.fire("UNIT_POWER_UPDATE", "player", "COMBO_POINTS")
 check(combo.pips[1]:GetValue() == 3, "the raw count goes into every pip")
 
+-- The energy to spend the points on. The pips answer how close the
+-- finisher is; this answers whether you can pay for it.
+S.ENERGY = 62
+S.fire("UNIT_POWER_UPDATE", "player", "ENERGY")
+check(combo.energy ~= nil, "there is an energy bar")
+check(combo.energy:IsShown(), "on by default")
+check(combo.energy:GetValue() == 62, "carrying the reading: " .. tostring(combo.energy:GetValue()))
+check(combo.energy.__min == 0 and combo.energy.__max == 100,
+    "over the whole pool rather than a point of it: "
+    .. tostring(combo.energy.__min) .. " to " .. tostring(combo.energy.__max))
+
+-- It owns the bottom of the row, not the underside of the pips. Above
+-- the name the row grows upward from a fixed bottom edge, so a bar
+-- pinned under the pips would be drawn over the name.
+local ebottom
+for _, pt in ipairs(combo.energy.__points or {}) do
+    if pt[1] == "BOTTOMLEFT" then ebottom = pt[2] end
+end
+check(ebottom == combo, "anchored to the row's own bottom, whichever way it is placed")
+local pipTop
+for _, pt in ipairs(combo.pips[1].__points or {}) do
+    if pt[1] == "TOPLEFT" then pipTop = pt[2] end
+end
+check(pipTop == combo, "and the pips to its top")
+check(combo:GetHeight() > 9, "the row is taller for it, got " .. tostring(combo:GetHeight()))
+
+-- A talent that moves the pool moves the bar with it.
+S.ENERGY_MAX = 110
+S.fire("UNIT_MAXPOWER", "player", "ENERGY")
+check(combo.energy.__max == 110, "a bigger pool widens the range: " .. tostring(combo.energy.__max))
+S.ENERGY_MAX = nil
+S.fire("UNIT_MAXPOWER", "player", "ENERGY")
+
+-- Switched off, the row goes back to the height of the pips alone.
+PA.db.profile.comboEnergy = false
+S.fire("UNIT_MAXPOWER", "player", "ENERGY")
+check(not combo.energy:IsShown(), "the option hides it")
+check(combo:GetHeight() == 9, "and gives the row its height back: " .. tostring(combo:GetHeight()))
+PA.db.profile.comboEnergy = true
+S.fire("UNIT_MAXPOWER", "player", "ENERGY")
+check(combo.energy:IsShown(), "and back on without a reload")
+
 -- Now with the client refusing to say. Nothing may compare, and nothing
 -- may error; the pips just take the secret.
 S.POWER_SECRET = true
 local okSecret = pcall(function()
     S.fire("UNIT_MAXPOWER", "player", "COMBO_POINTS")
     S.fire("UNIT_POWER_UPDATE", "player", "COMBO_POINTS")
+    S.fire("UNIT_POWER_UPDATE", "player", "ENERGY")
 end)
 check(okSecret, "a secret combo count does not throw")
 check(combo.count == 5, "and falls back to five pips when the maximum is secret too")
+check(combo.energy.__max == 100,
+    "nor does a secret energy pool become a range: " .. tostring(combo.energy.__max))
+check(combo.energy:IsShown(), "and the bar stays up rather than vanishing mid-fight")
 S.POWER_SECRET = false
 
 PA.db.profile.comboOnPlate = false
