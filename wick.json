@@ -33,7 +33,7 @@
       "cf_slug": "wicks-tbc-bis-tracker",
       "cf_project_id": 1502804,
       "features": [
-        "Every class · every spec",
+        "Every class \u00b7 every spec",
         "All TBC phases",
         "SoftRes integration"
       ],
@@ -45,14 +45,14 @@
       "title": "Wick's CD Tracker",
       "short": "CD Tracker",
       "slash": "/wcdt",
-      "tagline": "Live party and raid cooldown tracker. Kicks, saves, offensives, utility — all in one tight panel.",
+      "tagline": "Live party and raid cooldown tracker. Kicks, saves, offensives, utility \u2014 all in one tight panel.",
       "short_tagline": "Live party and raid cooldown tracker",
       "accent": "#4FC778",
       "accent_name": "fel-green",
       "cf_slug": "wicks-cd-tracker",
       "cf_project_id": 1519243,
       "features": [
-        "Kicks · saves · offensives",
+        "Kicks \u00b7 saves \u00b7 offensives",
         "Class-colored rows",
         "Per-spell settings"
       ],
@@ -225,14 +225,14 @@
       "title": "Wick's Travel Form",
       "short": "Travel Form",
       "slash": "/wstf",
-      "tagline": "One druid keybind. Flight, Travel, Aquatic, or Cat — picked by where you are right now. Works around the broken TBC IsFlyableArea API.",
+      "tagline": "One druid keybind. Flight, Travel, Aquatic, or Cat \u2014 picked by where you are right now. Works around the broken TBC IsFlyableArea API.",
       "short_tagline": "Smart shapeshift binding for druids",
       "accent": "#4FC778",
       "accent_name": "fel-green",
       "cf_slug": "wicks-travel-form",
       "cf_project_id": 1538543,
       "features": [
-        "Flight · Travel · Aquatic · Cat",
+        "Flight \u00b7 Travel \u00b7 Aquatic \u00b7 Cat",
         "Outland flyable-zone whitelist",
         "Contextual icon preview"
       ],
@@ -265,7 +265,7 @@
       "title": "Wick's Wardrobe",
       "short": "Wardrobe",
       "slash": "/wwd",
-      "tagline": "Browse every TBC tier set and weapon on your own character. Click any item to preview it inline — no vendor required.",
+      "tagline": "Browse every TBC tier set and weapon on your own character. Click any item to preview it inline \u2014 no vendor required.",
       "short_tagline": "Tier set and weapon preview browser",
       "accent": "#4FC778",
       "accent_name": "fel-green",
@@ -472,6 +472,27 @@
         "Talents, pre-pull checklist, racials and a cooldown bar"
       ],
       "repo": "WicksConjuresAndThings"
+    },
+    {
+      "folder": "WicksPoisonsAndThings",
+      "title": "Wick's Poisons and Things",
+      "short": "Poisons",
+      "client": "forever",
+      "slash": "/wpt",
+      "tagline": "The rogue kit: blade watch, one-key coating, combo points and weapon swaps.",
+      "short_tagline": "The rogue kit: coatings, combo points and weapon swaps.",
+      "accent": "#4FC778",
+      "accent_name": "Fel Green",
+      "cf_slug": "wicks-poisons-and-things",
+      "cf_project_id": null,
+      "features": [
+        "What coats each blade, and how long is left",
+        "One key per hand to recoat, pinned or best carried",
+        "Combo points over the target, energy under them",
+        "Weapon swap keys for a dagger opener",
+        "Talents, checklist and racials"
+      ],
+      "repo": "WicksPoisonsAndThings"
     },
     {
       "folder": "WicksBags",
